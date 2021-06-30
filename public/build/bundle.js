@@ -35915,7 +35915,8 @@ var app = (function () {
     function create_fragment(ctx) {
     	let current_block_type_index;
     	let if_block;
-    	let if_block_anchor;
+    	let t;
+    	let title_value;
     	let current;
     	const if_block_creators = [create_if_block, create_else_block];
     	const if_blocks = [];
@@ -35928,17 +35929,21 @@ var app = (function () {
     	current_block_type_index = select_block_type(ctx);
     	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 
+    	document.title = title_value = /*$project*/ ctx[0] != null
+    	? /*$project*/ ctx[0].name
+    	: "CSBuilder";
+
     	const block = {
     		c: function create() {
     			if_block.c();
-    			if_block_anchor = empty();
+    			t = space();
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			if_blocks[current_block_type_index].m(target, anchor);
-    			insert_dev(target, if_block_anchor, anchor);
+    			insert_dev(target, t, anchor);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
@@ -35965,7 +35970,13 @@ var app = (function () {
     				}
 
     				transition_in(if_block, 1);
-    				if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				if_block.m(t.parentNode, t);
+    			}
+
+    			if ((!current || dirty & /*$project*/ 1) && title_value !== (title_value = /*$project*/ ctx[0] != null
+    			? /*$project*/ ctx[0].name
+    			: "CSBuilder")) {
+    				document.title = title_value;
     			}
     		},
     		i: function intro(local) {
@@ -35979,7 +35990,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if_blocks[current_block_type_index].d(detaching);
-    			if (detaching) detach_dev(if_block_anchor);
+    			if (detaching) detach_dev(t);
     		}
     	};
 

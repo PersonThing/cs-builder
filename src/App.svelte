@@ -4,6 +4,10 @@
   <Router {routes} />
 {/if}
 
+<svelte:head>
+  <title>{$project != null ? $project.name : 'CSBuilder'}</title>
+</svelte:head>
+
 <script>
   import Router from 'svelte-spa-router'
   import ArtBuilder from './pages/ArtBuilder.svelte'
