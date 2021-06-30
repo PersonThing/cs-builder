@@ -1,0 +1,28 @@
+$grey1: #efefef;
+$grey2: #ddd;
+$primary: #4193eb;
+$success: #28a745;
+
+@mixin _box-shadow($s1, $s2: null) {
+  @if ($s2) {
+    -webkit-box-shadow: $s1, $s2;
+    -moz-box-shadow: $s1, $s2;
+    box-shadow: $s1, $s2;
+  } @else {
+    -webkit-box-shadow: $s1;
+    -moz-box-shadow: $s1;
+    box-shadow: $s1;
+  }
+}
+
+@mixin box-shadow() {
+  @include _box-shadow(0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 2px 1px rgba(0, 0, 0, 0.08));
+}
+
+@mixin med-box-shadow() {
+  @include _box-shadow(0 1px 10px 4px rgba(0, 0, 0, 0.08));
+}
+
+@mixin big-box-shadow() {
+  @include _box-shadow(0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 15px 4px rgba(0, 0, 0, 0.14));
+}

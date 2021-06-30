@@ -1,0 +1,40 @@
+{
+  "editor.cursorStyle": "line-thin",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.insertSpaces": true,
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "explorer.autoReveal": false,
+  "explorer.incrementalNaming": "smart",
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "formatContextMenu.closeAfterSave": true,
+  "formatContextMenu.saveAfterFormat": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+  "zenMode.centerLayout": false,
+  "svelte.language-server.runtime": "C:\\Program Files\\nodejs\\node.exe",
+  "[html]": {
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "[json]": {
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "[markdown]": {
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  }
+}
