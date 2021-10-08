@@ -5,7 +5,7 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="grow">
+  <div class="grow p1">
     <Form on:submit={save} {hasChanges}>
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
       <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>

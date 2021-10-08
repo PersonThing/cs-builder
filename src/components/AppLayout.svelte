@@ -117,6 +117,18 @@
         z-index: 0;
         position: relative;
       }
+
+      :global(.rows) {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      :global(.columns) {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+      }
     }
 
     .footer {

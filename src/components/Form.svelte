@@ -1,12 +1,9 @@
 <form on:submit|preventDefault>
   <div class="form">
+    <slot />
     <div class="form-buttons">
-      <SaveBtn disabled={!hasChanges} />
       <slot name="buttons" />
-    </div>
-
-    <div class="form-content">
-      <slot />
+      <SaveBtn disabled={!hasChanges} />
     </div>
   </div>
 </form>

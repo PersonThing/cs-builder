@@ -119,6 +119,22 @@
     padding: 30px;
   }
 
+  .g05 {
+    gap: 5px;
+  }
+
+  .g1 {
+    gap: 10px;
+  }
+
+  .g2 {
+    gap: 20px;
+  }
+
+  .g3 {
+    gap: 30px;
+  }
+
   .strong {
     font-weight: bold;
   }

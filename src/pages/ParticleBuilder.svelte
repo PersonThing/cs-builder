@@ -5,7 +5,7 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="grow">Form fields</div>
+  <div class="grow p1">Form fields</div>
   <div class="col2">Preview effect</div>
 </AppLayout>
 

@@ -1,5 +1,5 @@
 <AppLayout active="project">
-  <div class="grow">
+  <div class="grow p1">
     <Form on:submit={save} {hasChanges}>
       <FieldRadioGroup name="game-type" bind:value={input.gameType} options={gameTypeOptions} let:option>Game type</FieldRadioGroup>
       <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={1}>Pixel size</FieldNumber>

@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "carbon-components-svelte": "^0.38.1",
-    "pixi.js": "^6.0.4",
     "sirv-cli": "^1.0.0",
     "svelte-awesome": "^2.3.2"
   }

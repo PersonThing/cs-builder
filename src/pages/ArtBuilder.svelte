@@ -1,4 +1,4 @@
-<svelte:window on:keyup={onKeyUp} on:paste={onPaste} on:mouseup={onDrawMouseUp} />
+<svelte:window on:keyup={onKeyUp} on:paste={onPaste} on:mouseup={onDrawPointerUp} />
 
 <AppLayout active="art">
   <div class="col1">
@@ -7,183 +7,195 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="col2">
-    <Form on:submit={save} {hasChanges}>
-      <div slot="buttons" class="flex">
-        <input type="text" class="form-control width-auto" id="name" name="name" bind:value={input.name} placeholder="Type a name..." />
-        {#if !isAdding}
-          <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-        {/if}
-      </div>
-    </Form>
-    <div class="art-actions">
-      <button type="button" class="btn btn-light btn-sm mr1" on:click={reset}>Start over</button>
-
-      <ColorPicker bind:value={selectedColor} on:change={() => (mode = mode == 'erase' ? 'paint' : mode)} dropdownClass="below right" />
-      <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-{mode == 'paint' ? 'primary' : 'light'}" on:click={() => (mode = 'paint')} title="Paint brush">
-          <Icon data={paintIcon} />
-        </button>
-        <button type="button" class="btn btn-sm btn-{mode == 'fill' ? 'primary' : 'light'}" on:click={() => (mode = 'fill')} title="Paint bucket">
-          <Icon data={fillIcon} />
-        </button>
-        <button type="button" class="btn btn-sm btn-{mode == 'erase' ? 'primary' : 'light'}" on:click={() => (mode = 'erase')} title="Eraser">
-          <Icon data={eraseIcon} />
-        </button>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" disabled={undos.length == 0} class="btn btn-default btn-sm" on:click={undo}>
-          <Icon data={undoIcon} />
-          {undos.length > 0 ? undos.length : ''}
-        </button>
-        <button type="button" disabled={redos.length == 0} class="btn btn-default btn-sm" on:click={redo}>
-          <Icon data={undoIcon} flip="horizontal" />
-          {redos.length > 0 ? redos.length : ''}
-        </button>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-light btn-sm" on:click={flipX} title="Flip horizontal">
-          <Icon data={flipIcon} />
-        </button>
-        <button type="button" class="btn btn-light btn-sm" on:click={flipY} title="Flip vertical">
-          <Icon data={flipIcon} style="transform: rotate(90deg);" />
-        </button>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-light btn-sm" on:click={moveLeft} title="Move left">
-          <Icon data={arrowLeftIcon} />
-        </button>
-        <button type="button" class="btn btn-light btn-sm" on:click={moveRight} title="Move right">
-          <Icon data={arrowRightIcon} />
-        </button>
-        <button type="button" class="btn btn-light btn-sm" on:click={moveUp} title="Move up">
-          <Icon data={arrowUpIcon} />
-        </button>
-        <button type="button" class="btn btn-light btn-sm" on:click={moveDown} title="Move down">
-          <Icon data={arrowDownIcon} />
-        </button>
-      </div>
-
-      <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below right">
-        <form on:submit|preventDefault={applyChangeSize}>
-          <div class="p1">
-            W
-            <input type="number" min={1} max={1500} bind:value={changeSize.width} />
-            <strong>x</strong>
-            H
-            <input type="number" min={1} max={1500} bind:value={changeSize.height} />
-            <button type="submit" class="btn btn-info btn-sm">Apply</button>
-          </div>
-        </form>
-      </QuickDropdown>
-
-      <div>
-        <button type="button" class="btn btn-light btn-sm" on:click={scaleDown} title="Scale down">
-          <Icon data={minusIcon} />
-          Half size
-        </button>
-
-        <button type="button" class="btn btn-light btn-sm" on:click={scaleUp} title="Scale up">
-          <Icon data={plusIcon} />
-          Double size
-        </button>
-      </div>
-
-      <InputSelect sm placeholder="Zoom" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>
-        <Icon data={zoomIcon} />
-        {option.value}
-      </InputSelect>
-      <div>
-        <label>
-          <input type="checkbox" bind:checked={showGrid} />
-          Show grid
-        </label>
-      </div>
-
-      <InputSelect
-        disabled={$autoSaveStore[input.name] == null}
-        options={$autoSaveStore[input.name]}
-        bind:value={selectedAutoSave}
-        on:change={e => loadAutoSave(e.detail)}
-        let:option
-        placeholder="Auto-saves"
-        inline
-        sm
-        right
-      >
-        {option.name}
-        <img src={option.png} height="40" alt="" />
-      </InputSelect>
+  <div class="grow rows">
+    <div>
+      <Form on:submit={save} {hasChanges}>
+        <div slot="buttons" class="flex g1">
+          <input type="text" class="form-control width-auto" id="name" name="name" bind:value={input.name} placeholder="Type a name..." />
+          {#if !isAdding}
+            <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+          {/if}
+        </div>
+      </Form>
     </div>
-  </div>
-  <div class="grow canvas-container">
-    <canvas class="draw-canvas" bind:this={drawCanvas} />
-    <canvas
-      class="grid-canvas"
-      bind:this={gridCanvas}
-      class:paint-cursor={mode == 'paint'}
-      class:fill-cursor={mode == 'fill'}
-      class:erase-cursor={mode == 'erase'}
-      on:mousedown|preventDefault={onDrawMouseDown}
-      on:mouseup|preventDefault={onDrawMouseUp}
-      on:mousemove|preventDefault={onDrawMouseMove}
-      on:contextmenu|preventDefault
-    />
-  </div>
 
-  <div class="col2">
-    <div class="p2">
-      <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>Animated?</FieldCheckbox>
+    <div class="grow columns">
+      <div class="col1">
+        <div class="art-actions">
+          <button type="button" class="btn btn-light btn-sm mr1" on:click={reset}>Start over</button>
 
-      <div class="preview flex">
-        {#if input.animated}
-          <div>
-            <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>Frame width</FieldNumber>
-            <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>Frame rate</FieldNumber>
-            <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>Loop back?</FieldCheckbox>
-
-            <div class="flex-column">
-              <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} />
-              <div class="frame-editor">
-                <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="preview frame splits" />
-                {#each [...Array(numFrames)] as x, frameNumber}
-                  <div class="frame" style="left: {frameNumber * input.frameWidth * artScale}px; width: {input.frameWidth * artScale}px;">
-                    <a href="#/" on:click|preventDefault={() => removeFrame(frameNumber)} class="text-danger">
-                      <Icon data={deleteIcon} />
-                    </a>
-                    <a href="#/" on:click|preventDefault={() => copyFrame(frameNumber)} class="text-info">
-                      <Icon data={copyIcon} />
-                    </a>
-                  </div>
-                {/each}
-              </div>
-            </div>
+          <ColorPicker bind:value={selectedColor} on:change={() => (mode = mode == 'erase' ? 'paint' : mode)} dropdownClass="below left" />
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-sm btn-{mode == 'paint' ? 'primary' : 'light'}"
+              on:click={() => (mode = 'paint')}
+              title="Paint brush"
+            >
+              <Icon data={paintIcon} />
+            </button>
+            <button type="button" class="btn btn-sm btn-{mode == 'fill' ? 'primary' : 'light'}" on:click={() => (mode = 'fill')} title="Paint bucket">
+              <Icon data={fillIcon} />
+            </button>
+            <button type="button" class="btn btn-sm btn-{mode == 'erase' ? 'primary' : 'light'}" on:click={() => (mode = 'erase')} title="Eraser">
+              <Icon data={eraseIcon} />
+            </button>
           </div>
-        {/if}
+
+          <div class="btn-group">
+            <button type="button" disabled={undos.length == 0} class="btn btn-default btn-sm" on:click={undo}>
+              <Icon data={undoIcon} />
+              {undos.length > 0 ? undos.length : ''}
+            </button>
+            <button type="button" disabled={redos.length == 0} class="btn btn-default btn-sm" on:click={redo}>
+              <Icon data={undoIcon} flip="horizontal" />
+              {redos.length > 0 ? redos.length : ''}
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-light btn-sm" on:click={flipX} title="Flip horizontal">
+              <Icon data={flipIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={flipY} title="Flip vertical">
+              <Icon data={flipIcon} style="transform: rotate(90deg);" />
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-light btn-sm" on:click={moveLeft} title="Move left">
+              <Icon data={arrowLeftIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={moveRight} title="Move right">
+              <Icon data={arrowRightIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={moveUp} title="Move up">
+              <Icon data={arrowUpIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={moveDown} title="Move down">
+              <Icon data={arrowDownIcon} />
+            </button>
+          </div>
+
+          <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
+            <form on:submit|preventDefault={applyChangeSize}>
+              <div class="p1">
+                W
+                <input type="number" min={1} max={1500} bind:value={changeSize.width} />
+                <strong>x</strong>
+                H
+                <input type="number" min={1} max={1500} bind:value={changeSize.height} />
+                <button type="submit" class="btn btn-info btn-sm">Apply</button>
+              </div>
+            </form>
+          </QuickDropdown>
+
+          <div>
+            <button type="button" class="btn btn-light btn-sm" on:click={scaleDown} title="Scale down">
+              <Icon data={minusIcon} />
+              Half size
+            </button>
+
+            <button type="button" class="btn btn-light btn-sm" on:click={scaleUp} title="Scale up">
+              <Icon data={plusIcon} />
+              Double size
+            </button>
+          </div>
+
+          <InputSelect sm placeholder="Zoom" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>
+            <Icon data={zoomIcon} />
+            {option.value}
+          </InputSelect>
+          <div>
+            <label>
+              <input type="checkbox" bind:checked={showGrid} />
+              Show grid
+            </label>
+          </div>
+
+          <InputSelect
+            disabled={$autoSaveStore[input.name] == null}
+            options={$autoSaveStore[input.name]}
+            bind:value={selectedAutoSave}
+            on:change={e => loadAutoSave(e.detail)}
+            let:option
+            placeholder="Auto-saves"
+            inline
+            sm
+            right
+          >
+            {option.name}
+            <img src={option.png} height="40" alt="" />
+          </InputSelect>
+        </div>
+      </div>
+      <div class="grow canvas-container">
+        <canvas class="draw-canvas" bind:this={drawCanvas} />
+        <canvas
+          class="grid-canvas"
+          bind:this={gridCanvas}
+          class:paint-cursor={mode == 'paint'}
+          class:fill-cursor={mode == 'fill'}
+          class:erase-cursor={mode == 'erase'}
+          on:pointerdown|preventDefault={onDrawPointerDown}
+          on:pointerup|preventDefault={onDrawPointerUp}
+          on:pointermove|preventDefault={onDrawPointerMove}
+          on:contextmenu|preventDefault
+        />
       </div>
 
-      <!-- if block size, show repeated in x and y-->
-      {#if isBlockSize}
-        <div class="ml-2">
-          Block tiling preview
-          {#each [0, 0] as r}
-            <div class="flex">
-              {#each [0, 0, 0] as margin}
-                {#if input.animated}
-                  <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} simple />
-                {:else}
-                  <img src={input.png} alt="block repeating preview" width={input.width * artScale} height={input.height * artScale} />
-                {/if}
+      <div class="col2">
+        <div class="p2">
+          <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>Animated?</FieldCheckbox>
+
+          <div class="preview flex">
+            {#if input.animated}
+              <div>
+                <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>Frame width</FieldNumber>
+                <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>Frame rate</FieldNumber>
+                <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>Loop back?</FieldCheckbox>
+
+                <div class="flex-column">
+                  <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} />
+                  <div class="frame-editor">
+                    <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="preview frame splits" />
+                    {#each [...Array(numFrames)] as x, frameNumber}
+                      <div class="frame" style="left: {frameNumber * input.frameWidth * artScale}px; width: {input.frameWidth * artScale}px;">
+                        <a href="#/" on:click|preventDefault={() => removeFrame(frameNumber)} class="text-danger">
+                          <Icon data={deleteIcon} />
+                        </a>
+                        <a href="#/" on:click|preventDefault={() => copyFrame(frameNumber)} class="text-info">
+                          <Icon data={copyIcon} />
+                        </a>
+                      </div>
+                    {/each}
+                  </div>
+                </div>
+              </div>
+            {/if}
+          </div>
+
+          <!-- if block size, show repeated in x and y-->
+          {#if isBlockSize}
+            <div class="ml-2">
+              Block tiling preview
+              {#each [0, 0] as r}
+                <div class="flex">
+                  {#each [0, 0, 0] as margin}
+                    {#if input.animated}
+                      <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} simple />
+                    {:else}
+                      <img src={input.png} alt="block repeating preview" width={input.width * artScale} height={input.height * artScale} />
+                    {/if}
+                  {/each}
+                </div>
               {/each}
             </div>
-          {/each}
+          {:else if !input.animated}
+            <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="" />
+          {/if}
         </div>
-      {:else if !input.animated}
-        <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="" />
-      {/if}
+      </div>
     </div>
   </div>
 </AppLayout>
@@ -329,7 +341,7 @@
     redraw()
   }
 
-  function onDrawMouseDown(e) {
+  function onDrawPointerDown(e) {
     const { x, y } = getScaledEventCoordinates(e)
     const color = getColorAt(x, y)
     if (e.altKey || e.button !== 0) {
@@ -343,21 +355,30 @@
     } else {
       addUndoState()
       mouseDown = true
-      onDrawMouseMove(e)
+      onDrawPointerMove(e)
     }
   }
 
-  function onDrawMouseUp(e) {
+  function onDrawPointerUp(e) {
     mouseDown = false
+    // lastDrawnCoordinates = null
   }
 
-  function onDrawMouseMove(e) {
+  let lastDrawnCoordinates = null
+  function onDrawPointerMove(e) {
     if (!mouseDown) return
 
     const { x, y } = getScaledEventCoordinates(e)
     if (y != null && x != null) {
-      if (mode == 'erase') setColor(x, y, 'transparent')
-      else setColor(x, y, selectedColor)
+      if (mode == 'erase') setPixel(x, y, 'transparent')
+      else setPixel(x, y, selectedColor)
+
+      if (lastDrawnCoordinates != null) {
+        // connect the last drawn coordinates to the new coordinates
+        // so we don't get spotty drawing if they're moving cursor too fast for an event to happen for every pixel
+        connectPixels(lastDrawnCoordinates.x, lastDrawnCoordinates.y, x, y, selectedColor)
+      }
+      lastDrawnCoordinates = { x, y }
     }
   }
 
@@ -449,7 +470,7 @@
     redraw()
   }
 
-  function setColor(x, y, color, recursing = false) {
+  function setPixel(x, y, color, recursing = false) {
     const oldColor = getColorAt(x, y)
     drawSquare(pngContext, x, y, 1, color)
     drawSquare(drawContext, x * zoom, y * zoom, zoom, color)
@@ -471,7 +492,7 @@
         if (c.yn < 0 || c.yn > input.height - 1 || c.xn < 0 || c.xn > input.width - 1) continue
 
         const currentColor = getColorAt(c.xn, c.yn)
-        if (currentColor == oldColor) setColor(c.xn, c.yn, color, true)
+        if (currentColor == oldColor) setPixel(c.xn, c.yn, color, true)
       }
 
       // for (let xn = x - 1; xn <= x + 1; xn += 1) {
@@ -484,6 +505,29 @@
     }
 
     if (!recursing) setInputFromCanvas()
+  }
+
+  function connectPixels(x1, y1, x2, y2, color) {
+    const xDiff = Math.abs(x1 - x2)
+    const yDiff = Math.abs(y1 - y2)
+
+    if (xDiff > yDiff) {
+      if (x1 > x2) [x1, x2] = [x2, x1]
+
+      for (let x = x1; x < x2; x++) {
+        // const y = ((x - x1) / Math.abs(y2 - y1)) * (y2 - y1) + y1
+        setPixel(x, y1, color, true)
+      }
+    } else {
+      if (y1 > y2) [y1, y2] = [y2, y1]
+
+      for (let y = y1; y < y2; y++) {
+        // const x = ((y - y1) / Math.abs(x2 - x1)) * (x2 - x1) + x1
+        setPixel(x1, y, color, true)
+      }
+    }
+
+    setInputFromCanvas()
   }
 
   function drawSquare(context, x, y, size, color) {
@@ -730,10 +774,12 @@
       position: absolute;
       left: 0;
       top: 0;
+      touch-action: none;
     }
 
     .draw-canvas {
       background: repeating-linear-gradient(-45deg, transparent, #eee 10px);
+      touch-action: none;
       @include med-box-shadow();
     }
   }
