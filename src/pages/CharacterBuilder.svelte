@@ -5,16 +5,78 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="grow p1">Form fields</div>
+  <div class="grow p1">
+    <Form on:submit={save} {hasChanges}>
+      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+      <FieldArtPicker bind:value={input.graphics.still}>Graphic</FieldArtPicker>
+
+      <span slot="buttons">
+        {#if !isAdding}
+          <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+        {/if}
+      </span>
+    </Form>
+  </div>
   <div class="col2">Preview maybe?</div>
 </AppLayout>
 
 <script>
   import AppLayout from '../components/AppLayout.svelte'
   import ArtThumb from '../components/ArtThumb.svelte'
+  import FieldArtPicker from '../components/FieldArtPicker.svelte'
+  import FieldText from '../components/FieldText.svelte'
+  import Form from '../components/Form.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
   import project from '../stores/active-project-store'
+  import validator from '../services/validator'
+  import { push } from 'svelte-spa-router'
+  import { getNextId } from '../stores/project-store'
 
   export let params = {}
+  let input = createDefaultInput()
+
   $: paramId = decodeURIComponent(params.id) || 'new'
+  $: paramId == 'new' ? create() : edit(paramId)
+  $: isAdding = input.id == null
+  $: hasChanges = input != null && !validator.equals(input, $project.characters[input.id])
+
+  function createDefaultInput() {
+    return {
+      name: '',
+      graphics: {
+        still: null,
+      },
+      abilities: [],
+    }
+  }
+
+  function create() {
+    input = createDefaultInput()
+  }
+
+  function edit(name) {
+    if (!$project.characters.hasOwnProperty(name)) return
+    input = {
+      ...createDefaultInput(),
+      ...JSON.parse(JSON.stringify($project.characters[name])),
+    }
+  }
+
+  function save() {
+    if (validator.empty(input.name)) {
+      document.getElementById('name').focus()
+      return
+    }
+    if (isAdding) input.id = getNextId($project.characters)
+    $project.characters[input.id] = JSON.parse(JSON.stringify(input))
+    push(`/characters/${encodeURIComponent(input.id)}`)
+  }
+
+  function del() {
+    if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
+      delete $project.characters[input.id]
+      $project.characters = $project.characters
+      push(`/characters/new`)
+    }
+  }
 </script>

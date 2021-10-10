@@ -66,6 +66,7 @@
   import FieldEnemyPicker from '../components/FieldEnemyPicker.svelte'
   import validator from '../services/validator'
   import { getNextId } from '../stores/project-store'
+  import { push } from 'svelte-spa-router'
 
   export let params = {}
   let input = createDefaultInput()
