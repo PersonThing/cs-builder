@@ -683,7 +683,6 @@
     "levels": {
       "1": {
         "name": "level 3",
-        "playableCharacters": [1],
         "background": "rgba(96, 96, 96, 255)",
         "blocks": [
           [1, 0, 1],
@@ -984,7 +983,6 @@
       },
       "2": {
         "name": "level 4",
-        "playableCharacters": [1],
         "background": "rgba(111, 111, 111, 255)",
         "blocks": [
           [1, 0, 2],
@@ -1748,7 +1746,6 @@
       },
       "4": {
         "name": "level 6",
-        "playableCharacters": [1],
         "background": "rgba(91, 91, 91, 255)",
         "blocks": [
           [1, 0, 108],
@@ -2506,7 +2503,6 @@
       },
       "5": {
         "name": "level 1",
-        "playableCharacters": [1],
         "background": "rgba(82, 82, 82, 255)",
         "blocks": [
           [1, 0, 2],
@@ -2650,7 +2646,6 @@
       },
       "6": {
         "name": "level 2",
-        "playableCharacters": [1],
         "background": "rgba(101, 101, 101, 255)",
         "blocks": [
           [1, 0, 1],
@@ -2802,7 +2797,6 @@
       },
       "7": {
         "name": "level 5",
-        "playableCharacters": [1],
         "background": "rgba(91, 91, 91, 255)",
         "blocks": [
           [1, 0, 1],
@@ -3565,7 +3559,6 @@
     "levels": {
       "1": {
         "name": "level 1",
-        "playableCharacters": [1],
         "background": "rgba(96, 96, 96, 255)",
         "blocks": [
           [1, 0, 2],
@@ -4143,7 +4136,6 @@
     "levels": {
       "1": {
         "name": "level 1",
-        "playableCharacters": [1, 2],
         "background": "rgba(198, 244, 255, 255)",
         "blocks": [
           [1, 0, 3],

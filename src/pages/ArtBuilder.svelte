@@ -376,7 +376,7 @@
       if (lastDrawnCoordinates != null) {
         // connect the last drawn coordinates to the new coordinates
         // so we don't get spotty drawing if they're moving cursor too fast for an event to happen for every pixel
-        connectPixels(lastDrawnCoordinates.x, lastDrawnCoordinates.y, x, y, selectedColor)
+        // connectPixels(lastDrawnCoordinates.x, lastDrawnCoordinates.y, x, y, selectedColor)
       }
       lastDrawnCoordinates = { x, y }
     }

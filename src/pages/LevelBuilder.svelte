@@ -6,108 +6,133 @@
       </div>
     </ItemListNav>
   </div>
-  <div class="grow">
-    <div
-      bind:this={pixiContainer}
-      on:pointerdown|preventDefault={onPointerDown}
-      on:pointerup|preventDefault={onPointerUp}
-      on:pointermove|preventDefault={onPointerMove}
-      on:contextmenu|preventDefault
-    />
-  </div>
-  <div class="col2 rows">
-    <div class="grow">
-      <!-- Name, background, other settings -->
-      <div>
-        <label>Background color</label>
-        <ColorPicker bind:value={backgroundColor} dropdownClass="below right" />
-      </div>
 
-      <div>
-        <label>Block to draw</label>
-        <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
-          <ArtThumb id={option.graphic} />
-          {option.name}
-        </InputSelect>
-      </div>
+  {#if input}
+    <div class="grow">
+      <LevelRenderer level={input} on:pointerdown={onPointerDown} on:pointerup={onPointerUp} on:pointermove={onPointerMove} />
     </div>
-    <div class="grow">Properties of selected item, if any</div>
-  </div>
+
+    <div class="col2 rows">
+      <div class="grow">
+        <Form on:submit={save} {hasChanges}>
+          <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+          <div class="form-group">
+            <label>Background color</label>
+            <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
+          </div>
+
+          <span slot="buttons">
+            {#if !isAdding}
+              <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+            {/if}
+          </span>
+
+          <div class="form-group">
+            <label>Block to draw</label>
+            <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
+              {#if option.graphic != null}
+                <ArtThumb id={option.graphic} />
+              {/if}
+              {option.name}
+            </InputSelect>
+          </div>
+        </Form>
+      </div>
+      <div class="grow">Properties of selected item, if any</div>
+    </div>
+  {/if}
 </AppLayout>
 
 <script>
-  import { onMount } from 'svelte'
-  import { rgbaStringToHex } from '../services/rgba-to-hex.js'
+  import { getNextId } from '../stores/project-store'
+  import { push } from 'svelte-spa-router'
   import { sortByName } from '../services/object-utils'
+  import { tick } from 'svelte'
   import AppLayout from '../components/AppLayout.svelte'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ColorPicker from '../components/ColorPicker.svelte'
+  import FieldText from '../components/FieldText.svelte'
+  import Form from '../components/Form.svelte'
   import InputSelect from '../components/InputSelect.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
+  import LevelRenderer from './LevelBuilder.Renderer.svelte'
   import project from '../stores/active-project-store'
+  import validator from '../services/validator'
 
   export let params = {}
+  let input = createDefaultInput()
+
   $: paramId = decodeURIComponent(params.id) || 'new'
+  $: paramId == 'new' ? create() : edit(paramId)
+  $: isAdding = input?.id == null
+  $: hasChanges = input != null && !validator.equals(input, $project.levels[input.id])
 
-  let backgroundColor = 'rgba(0,0,0,1)'
-
-  let selectedBlockId = 0
-  $: blockOptions = Object.values($project.blocks)
-    .map(b => ({
-      ...b,
-      value: b.id,
-    }))
-    .sort(sortByName)
-
-  let sampleLevel = {
-    blocks: [
-      { x: 0, y: 0, blockId: 0 },
-      { x: 1, y: 1, blockId: 0 },
-      // { x: 0, y: 3, blockId: 0 },
-      // { x: 2, y: 4, blockId: 0 },
-      // { x: 3, y: 5, blockId: 0 },
-      // { x: 4, y: 6, blockId: 1 },
-      // { x: 1, y: 1, blockId: 1 },
-      // { x: 1, y: 2, blockId: 1 },
-    ],
-    enemies: [],
+  function createDefaultInput() {
+    return {
+      name: '',
+      backgroundColor: 'rgba(0,0,0,1)',
+      blocks: [],
+      enemies: [],
+    }
   }
 
-  let pixiContainer
-  let pixiApp
+  let selectedBlockId = 0
+  $: blockOptions = [
+    { value: null, name: 'Eraser' },
+    ...Object.values($project.blocks)
+      .map(b => ({
+        ...b,
+        value: b.id,
+      }))
+      .sort(sortByName),
+  ]
 
-  onMount(() => {
-    pixiApp = new PIXI.Application()
-    pixiContainer.appendChild(pixiApp.view)
-  })
+  function create() {
+    input = createDefaultInput()
+  }
 
-  $: if (pixiApp) renderLevel(sampleLevel, rgbaStringToHex(backgroundColor))
+  async function edit(name) {
+    if (!$project.levels.hasOwnProperty(name)) return
+    input = null
+    await tick()
+    input = {
+      ...createDefaultInput(),
+      ...JSON.parse(JSON.stringify($project.levels[name])),
+    }
+  }
 
-  function renderLevel(level, bgColor) {
-    pixiApp.renderer.backgroundColor = bgColor
-    pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
+  function save() {
+    if (validator.empty(input.name)) {
+      document.getElementById('name').focus()
+      return
+    }
+    if (isAdding) input.id = getNextId($project.levels)
+    $project.levels[input.id] = JSON.parse(JSON.stringify(input))
+    push(`/levels/${encodeURIComponent(input.id)}`)
+  }
 
-    for (const blockConfig of level.blocks) {
-      const block = $project.blocks[blockConfig.blockId]
-      const art = $project.art[block.graphic]
-      let blockSprite = PIXI.Sprite.from(art.png)
-      blockSprite.x = blockConfig.x * art.width
-      blockSprite.y = blockConfig.y * art.height
-      pixiApp.stage.addChild(blockSprite)
+  function del() {
+    if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
+      delete $project.levels[input.id]
+      $project.levels = $project.levels
+      push(`/levels/new`)
     }
   }
 
   let pointerIsDown = false
-  let isErasing = false
   function onPointerDown(event) {
-    pointerIsDown = true
-    isErasing = event.button != 0
-    drawAtEvent(event)
+    // if they do anything but left click, select the block at the current position (or eraser if null)
+    if (event.button != 0) {
+      const { x, y } = getBlockCoordsFromEvent(event)
+      selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.blockId
+    } else {
+      pointerIsDown = true
+      drawAtEvent(event)
+    }
   }
 
   function onPointerUp(event) {
     pointerIsDown = false
-    isErasing = false
   }
 
   function onPointerMove(event) {
@@ -117,14 +142,20 @@
   }
 
   function drawAtEvent(event) {
-    const x = Math.floor(event.offsetX / 40)
-    const y = Math.floor(event.offsetY / 40)
-    const blocksMinusAnyAtThisXY = sampleLevel.blocks.filter(b => b.x != x || b.y != y)
-    if (isErasing) {
-      sampleLevel.blocks = blocksMinusAnyAtThisXY
+    const { x, y } = getBlockCoordsFromEvent(event)
+    const blocksMinusAnyAtThisXY = input.blocks.filter(b => b.x != x || b.y != y)
+    if (selectedBlockId == null) {
+      input.blocks = blocksMinusAnyAtThisXY
     } else {
       const newBlock = { x, y, blockId: selectedBlockId }
-      sampleLevel.blocks = [...blocksMinusAnyAtThisXY, newBlock]
+      input.blocks = [...blocksMinusAnyAtThisXY, newBlock]
+    }
+  }
+
+  function getBlockCoordsFromEvent(event) {
+    return {
+      x: Math.floor(event.offsetX / 40),
+      y: Math.floor(event.offsetY / 40),
     }
   }
 </script>

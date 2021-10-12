@@ -1,9 +1,12 @@
 <form on:submit|preventDefault>
   <div class="form">
-    <slot />
     <div class="form-buttons">
       <slot name="buttons" />
       <SaveBtn disabled={!hasChanges} />
+    </div>
+
+    <div class="form-content">
+      <slot />
     </div>
   </div>
 </form>
@@ -12,6 +15,8 @@
   import SaveBtn from './SaveBtn.svelte'
 
   export let hasChanges = true
+  let className
+  export { className as class }
 </script>
 
 <style>
@@ -20,11 +25,6 @@
     padding: 10px;
   }
   .form-buttons {
-    position: sticky;
-    top: 0px;
-    z-index: 10;
-    background: #fff;
-    border-bottom: 1px solid #ced4da;
     display: flex;
     flex-direction: row;
     gap: 5px;

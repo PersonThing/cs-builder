@@ -131,10 +131,10 @@
       }
     }
 
-    .footer {
-      height: 100px;
-      background: $grey1;
-      border-top: 1px solid $grey2;
-    }
+    // .footer {
+    //   height: 100px;
+    //   background: $grey1;
+    //   border-top: 1px solid $grey2;
+    // }
   }
 </style>
