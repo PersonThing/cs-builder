@@ -113,14 +113,14 @@
     }
     if (isAdding) input.id = getNextId($project.blocks)
     $project.blocks[input.id] = JSON.parse(JSON.stringify(input))
-    push(`/${$project.name}/build/blocks/${encodeURIComponent(input.id)}`)
+    push(`/blocks/${encodeURIComponent(input.id)}`)
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
       delete $project.blocks[input.id]
       $project.blocks = $project.blocks
-      push(`/${$project.name}/build/blocks/new`)
+      push(`/blocks/new`)
     }
   }
 </script>

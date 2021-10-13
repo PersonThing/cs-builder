@@ -203,6 +203,10 @@
     background-color: $primary;
   }
 
+  .btn-danger {
+    background-color: $danger;
+  }
+
   .btn-group {
     display: flex;
     flex-direction: row;

@@ -7,7 +7,7 @@
   </InputSelect>
 </div>
 {#if value != null}
-  <a href="#/{$project.name}/build/particles/{value}" class="ml-1">Edit {$project.particles[value].name} particles</a>
+  <a href="#/particles/{value}" class="ml-1">Edit {$project.particles[value].name} particles</a>
 {/if}
 
 <script>

@@ -9,7 +9,7 @@
     </InputSelect>
   </div>
   {#if value != null}
-    <a href="#/{$project.name}/build/art/{value}" class="ml-1">Edit {$project.art[value].name} art</a>
+    <a href="#/art/{value}" class="ml-1">Edit {$project.art[value].name} art</a>
   {/if}
 </div>
 

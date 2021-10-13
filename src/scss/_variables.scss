@@ -2,6 +2,7 @@ $grey1: #efefef;
 $grey2: #ddd;
 $primary: #4193eb;
 $success: #28a745;
+$danger: #d34646;
 
 @mixin _box-shadow($s1, $s2: null) {
   @if ($s2) {

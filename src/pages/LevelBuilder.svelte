@@ -9,23 +9,28 @@
 
   {#if input}
     <div class="grow">
-      <LevelRenderer level={input} on:pointerdown={onPointerDown} on:pointerup={onPointerUp} on:pointermove={onPointerMove} />
+      <LevelRenderer level={input} {screenTarget} on:pointerdown={onPointerDown} on:pointerup={onPointerUp} on:pointermove={onPointerMove} />
     </div>
 
     <div class="col2 rows">
+      <div class="btn-group">
+        <button type="button" class="btn {!isDrawing ? 'btn-success' : ''}" on:click={() => (isDrawing = false)}>Play</button>
+        <button type="button" class="btn {isDrawing ? 'btn-success' : ''}" on:click={() => (isDrawing = true)}>Edit</button>
+      </div>
+
       <div class="grow">
         <Form on:submit={save} {hasChanges}>
-          <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-          <div class="form-group">
-            <label>Background color</label>
-            <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
-          </div>
-
           <span slot="buttons">
             {#if !isAdding}
               <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
             {/if}
           </span>
+
+          <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+          <div class="form-group">
+            <label>Background color</label>
+            <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
+          </div>
 
           <div class="form-group">
             <label>Block to draw</label>
@@ -61,6 +66,9 @@
 
   export let params = {}
   let input = createDefaultInput()
+
+  let isDrawing = false
+  let screenTarget = { x: 0, y: 0 }
 
   $: paramId = decodeURIComponent(params.id) || 'new'
   $: paramId == 'new' ? create() : edit(paramId)
@@ -121,13 +129,18 @@
 
   let pointerIsDown = false
   function onPointerDown(event) {
-    // if they do anything but left click, select the block at the current position (or eraser if null)
-    if (event.button != 0) {
-      const { x, y } = getBlockCoordsFromEvent(event)
-      selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.blockId
+    pointerIsDown = true
+
+    if (isDrawing) {
+      // if they do anything but left click, select the block at the current position (or eraser if null)
+      if (event.button != 0) {
+        const { x, y } = getBlockCoordsFromEvent(event)
+        selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.blockId
+      } else {
+        drawAtEvent(event)
+      }
     } else {
-      pointerIsDown = true
-      drawAtEvent(event)
+      movePlayerToEvent(event)
     }
   }
 
@@ -136,8 +149,19 @@
   }
 
   function onPointerMove(event) {
-    if (pointerIsDown) {
+    if (!pointerIsDown) return
+
+    if (isDrawing) {
       drawAtEvent(event)
+    } else {
+      movePlayerToEvent(event)
+    }
+  }
+
+  function getBlockCoordsFromEvent(event) {
+    return {
+      x: Math.floor(event.offsetX / 40),
+      y: Math.floor(event.offsetY / 40),
     }
   }
 
@@ -152,10 +176,10 @@
     }
   }
 
-  function getBlockCoordsFromEvent(event) {
-    return {
-      x: Math.floor(event.offsetX / 40),
-      y: Math.floor(event.offsetY / 40),
+  function movePlayerToEvent(event) {
+    screenTarget = {
+      x: event.offsetX,
+      y: event.offsetY,
     }
   }
 </script>
