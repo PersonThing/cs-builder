@@ -7,6 +7,7 @@
   on:contextmenu|preventDefault
 />
 
+<!-- <div style="position: absolute; top: 10px; left: 10px; color: red;">{debugInfo}</div> -->
 <script>
   import { onMount } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
@@ -51,7 +52,7 @@
     renderPlayer()
   }
 
-  PIXI.Sprite.prototype.bringToFront = function () {
+  PIXI.Container.prototype.bringToFront = function () {
     if (this.parent) {
       const parent = this.parent
       parent.removeChild(this)
@@ -59,6 +60,8 @@
     }
   }
 
+  let stillSprite
+  let movingSprite
   function renderPlayer() {
     if (player) {
       player.bringToFront()
@@ -66,12 +69,38 @@
     }
 
     const playerConfig = $project.characters[0]
-    const playerArt = $project.art[playerConfig.graphics.still]
-    player = PIXI.Sprite.from(playerArt.png)
+    stillSprite = makeArtSprite(playerConfig.graphics.still)
+    stillSprite.anchor.set(0.5)
+    movingSprite = makeArtSprite(playerConfig.graphics.moving)
+    movingSprite.anchor.set(0.5)
+    player = new PIXI.Container()
+    player.addChild(stillSprite)
+
     player.x = 0
     player.y = 0
-    player.anchor.set(0.5)
     pixiApp.stage.addChild(player)
+  }
+
+  function makeArtSprite(artId) {
+    const art = $project.art[artId]
+    const texture = PIXI.Texture.from(art.png)
+    if (art.animated) {
+      let frameX = 0
+      let textureFrames = []
+      while (frameX < art.width) {
+        const textureFrame = texture.clone()
+        textureFrame.frame = new PIXI.Rectangle(frameX, 0, art.frameWidth, art.height)
+        textureFrame.updateUvs()
+        textureFrames.push(textureFrame)
+        frameX += art.frameWidth
+      }
+      const animation = new PIXI.AnimatedSprite(textureFrames)
+      animation.animationSpeed = art.frameRate / 60
+      animation.play()
+      return animation
+    } else {
+      return new PIXI.Sprite(texture)
+    }
   }
 
   const speed = 5
@@ -85,19 +114,19 @@
   $: if (screenTarget.x != 0 || screenTarget.y != 0) computePath()
 
   function computePath() {
-    // TODO:
-    // make it compute a path around any blocks in the way
-    // if no path available, get as close as possible to clicked point
-
-    // for now we're adding an extra target for the current player position to test that our target queue works
-    // this makes them move to the point we clicked, then move back to where they were before we clicked
     const worldCoordinatesClicked = {
       x: screenTarget.x - screenCenter.x + player?.x ?? 0,
       y: screenTarget.y - screenCenter.y + player?.y ?? 0,
     }
 
+    // TODO:
+    // make it compute a path around any blocks in the way
+    // if no path available, get as close as possible to clicked point
+
     queuedTargets = [
       worldCoordinatesClicked,
+
+      // uncomment to demonstrate target queue
       {
         x: player.x,
         y: player.y,
@@ -117,6 +146,9 @@
 
     if (target == null) targetNextInQueue()
     if (target != null) {
+      // change to moving texture
+      setPlayerMoving(true)
+
       // move player toward target
       const run = target.x - player.x
       const rise = target.y - player.y
@@ -138,12 +170,23 @@
 
       // if we're hitting our target on this frame, start moving toward the next target
       if (canHitTargetX && canHitTargetY) targetNextInQueue()
+    } else {
+      setPlayerMoving(false)
     }
 
-    pixiApp.stage.position.x = screenCenter.x
-    pixiApp.stage.position.y = screenCenter.y
-    pixiApp.stage.pivot.x = player.position.x
-    pixiApp.stage.pivot.y = player.position.y
+    pixiApp.stage.x = screenCenter.x
+    pixiApp.stage.y = screenCenter.y
+    pixiApp.stage.pivot.x = player.x
+    pixiApp.stage.pivot.y = player.y
+  }
+
+  const currentSprite = null
+  function setPlayerMoving(moving) {
+    const shouldBeSprite = moving ? movingSprite : stillSprite
+    if (shouldBeSprite != currentSprite) {
+      player.children.forEach(c => player.removeChild(c))
+      player.addChild(shouldBeSprite)
+    }
   }
 </script>
 

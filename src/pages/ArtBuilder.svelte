@@ -8,17 +8,6 @@
     </ItemListNav>
   </div>
   <div class="grow rows">
-    <div>
-      <Form on:submit={save} {hasChanges}>
-        <div slot="buttons" class="flex g1">
-          <input type="text" class="form-control width-auto" id="name" name="name" bind:value={input.name} placeholder="Type a name..." />
-          {#if !isAdding}
-            <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-          {/if}
-        </div>
-      </Form>
-    </div>
-
     <div class="grow columns">
       <div class="col1">
         <div class="art-actions">
@@ -145,7 +134,16 @@
       </div>
 
       <div class="col2">
-        <div class="p2">
+        <Form on:submit={save} {hasChanges}>
+          <div slot="buttons">
+            {#if !isAdding}
+              <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+            {/if}
+          </div>
+          <FieldText name="name" bind:value={input.name}>Name</FieldText>
+        </Form>
+
+        <div class="p1">
           <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>Animated?</FieldCheckbox>
 
           <div class="preview flex">
@@ -228,6 +226,7 @@
   import FieldNumber from '../components/FieldNumber.svelte'
   import Form from '../components/Form.svelte'
   import Icon from 'svelte-awesome'
+  import FieldText from '../components/FieldText.svelte'
   import InputSelect from '../components/InputSelect.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
   import project from '../stores/active-project-store'

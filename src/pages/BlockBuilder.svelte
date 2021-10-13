@@ -10,10 +10,14 @@
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
       <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
       <FieldParticles name="particles" bind:value={input.particles} />
-      <FieldCheckbox name="solid" bind:checked={input.solid}
-        >Solid?
-        <div class="help-text">If not checked, things will just move through it.</div></FieldCheckbox
-      >
+      <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
+        Can walk on?
+        <div class="help-text">Can players walk on or through this block?</div>
+      </FieldCheckbox>
+      <FieldCheckbox name="can-see" bind:checked={input.canSee}>
+        Can see through / across?
+        <div class="help-text">Can players and enemies see through / across this block?</div>
+      </FieldCheckbox>
       <FieldCheckbox name="consumable" bind:checked={input.consumable}>Consumable by player?</FieldCheckbox>
       {#if input.consumable}
         <div class="field-group">
@@ -79,7 +83,8 @@
   function createDefaultInput() {
     return {
       name: '',
-      solid: true,
+      canWalk: true,
+      canSee: true,
       throwOnTouch: false,
       teleportOnTouch: false,
       flipGravityOnTouch: false,
