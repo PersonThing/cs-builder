@@ -37,30 +37,106 @@ export default class LevelGrid {
         }
       }
     }
+
+    this.graph = new Graph(this.grid, { diagonal: true })
   }
 
+  /**
+   * return a path between {from} and {to} as an array of {x, y} coordinates
+   * @param {x, y coordinates} from
+   * @param {x, y coordinates} to
+   * @returns
+   */
   findPath(from, to) {
     const gridFrom = this.toGridCoordinates(from)
-    // TODO: translate to into the nearest grid coordinate if they clicked off the grid
-    // find closest walkable grid spot to [x,y] they clicked
-    // if (this.grid[gridTo.x] == null || this.grid[gridTo.x][gridTo.y] == null || this.grid[gridTo.x][gridTo.y] == 0) {
-    //   const gridWithDistance = this.grid
-    //     .map(g => {
-    //       return {
-    //         ...g,
-    //         distance: Math.sqrt(Math.pow(Math.abs(g.x - gridTo.x), 2) + Math.pow(Math.abs(g.y - gridTo.y), 2)),
-    //       }
-    //     })
-    //     .sort((a, b) => a.distance - b.distance)
-    //   gridTo = gridWithDistance[0]
-    // }
+    const gridTo = this.getNearestAvailablePointBetween(gridFrom, this.toGridCoordinates(to))
+    const roughResult = astar.search(this.graph, this.graph.grid[gridFrom.x][gridFrom.y], this.graph.grid[gridTo.x][gridTo.y])
 
-    let gridTo = this.toGridCoordinates(to)
-    const graph = new Graph(this.grid, { diagonal: true })
-    const result = astar.search(graph, graph.grid[gridFrom.x][gridFrom.y], graph.grid[gridTo.x][gridTo.y])
+    const smoothResult = this.smoothPath(roughResult)
+    // if (smoothResult[0].x == gridFrom.x && smoothResult[0].y == gridFrom.y) smoothResult.shift()
+    return smoothResult.map(gridNode => this.toGameCoordinates(gridNode))
+  }
 
-    // TODO: make the last node in the path the exact coordinates clicked if possible?  or just rely on everything always moving to center of grid spaces?
-    return result.map(gridNode => this.toGameCoordinates(gridNode))
+  /**
+   * if they click on something that isn't walkable / is outside grid, path to nearest walkable point on a line between current position and where they clicked
+   * @param {*} gridFrom
+   * @param {*} gridTo
+   * @returns
+   */
+  getNearestAvailablePointBetween(gridFrom, gridTo) {
+    return this.isWalkable(gridTo.x, gridTo.y)
+      ? gridTo
+      : this.lineBetween(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, (x, y) => !this.isWalkable(x, y)).pop()
+  }
+
+  isWalkable(x, y) {
+    return this.grid[x] != null && this.grid[x][y] == 1
+  }
+
+  /**
+   * smooth an a* generated path https://www.gamedeveloper.com/programming/toward-more-realistic-pathfinding
+   */
+  smoothPath(result) {
+    return result
+
+    // bit buggy yet
+    if (result.length < 2) return result
+
+    let lastUsefulPoint = result[0]
+    for (let i = 1; i < result.length - 1; i++) {
+      if (this.canWalk(lastUsefulPoint, result[i + 1])) {
+        result[i].redundant = true
+      } else {
+        lastUsefulPoint = result[i]
+      }
+    }
+
+    // we should always be able to skip the first target as it will always be where the thing started from
+    return result.filter(p => !p.redundant)
+  }
+
+  canWalk(p1, p2) {
+    const pointsBetween = this.lineBetween(p1.x, p1.y, p2.x, p2.y)
+    return pointsBetween.every(p => this.isWalkable(p.x, p.y))
+  }
+
+  lineBetween(x0, y0, x1, y1, shortCheck) {
+    const result = []
+
+    // diff between x
+    var dx = Math.abs(x1 - x0)
+    // diff between y
+    var dy = Math.abs(y1 - y0)
+    // x going up or down
+    var sx = x0 < x1 ? 1 : -1
+    // y going up or down
+    var sy = y0 < y1 ? 1 : -1
+    // ???
+    var err = dx - dy
+
+    while (true) {
+      // short if caller wants us to short on certain conditions (like point not in the grid)
+      if (shortCheck != null && shortCheck(x0, y0)) return result
+
+      // otherwise add current x,y to result
+      result.push({
+        x: x0,
+        y: y0,
+      })
+
+      if (x0 === x1 && y0 === y1) break
+      var e2 = 2 * err
+      if (e2 > -dy) {
+        err -= dy
+        x0 += sx
+      }
+      if (e2 < dx) {
+        err += dx
+        y0 += sy
+      }
+    }
+
+    return result
   }
 
   toGridCoordinates(coords) {

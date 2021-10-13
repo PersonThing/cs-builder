@@ -9,7 +9,14 @@
 
   {#if input}
     <div class="grow">
-      <LevelRenderer level={input} {screenTarget} on:pointerdown={onPointerDown} on:pointerup={onPointerUp} on:pointermove={onPointerMove} />
+      <LevelRenderer
+        level={input}
+        playable={!isDrawing}
+        {screenTarget}
+        on:pointerdown={onPointerDown}
+        on:pointerup={onPointerUp}
+        on:pointermove={onPointerMove}
+      />
     </div>
 
     <div class="col2 rows">

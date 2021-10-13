@@ -23,6 +23,7 @@
 
   export let level
   export let screenTarget
+  export let playable = false
 
   let mounted = false
   onMount(() => {
@@ -36,10 +37,7 @@
 
   $: if (mounted && level != null) renderLevel(level)
 
-  let levelGrid
-
   function renderLevel(level) {
-    console.log('render level')
     pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
     pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
 
@@ -55,12 +53,8 @@
 
     pixiApp.stage.addChild(world)
 
-    if (!player) {
-      player = new Player($project, $project.characters[0], 60, 60)
-      pixiApp.stage.addChild(player)
-    } else {
-      player.bringToFront()
-    }
+    player = new Player($project, $project.characters[0], 60, 60)
+    pixiApp.stage.addChild(player)
   }
 
   const screenCenter = {
@@ -80,13 +74,19 @@
   function onTick() {
     screenCenter.x = pixiApp.renderer.width / 2
     screenCenter.y = pixiApp.renderer.height / 2
-
     player.onTick()
 
-    pixiApp.stage.x = screenCenter.x
-    pixiApp.stage.y = screenCenter.y
-    pixiApp.stage.pivot.x = player.x
-    pixiApp.stage.pivot.y = player.y
+    if (playable) {
+      pixiApp.stage.x = screenCenter.x
+      pixiApp.stage.y = screenCenter.y
+      pixiApp.stage.pivot.x = player.x
+      pixiApp.stage.pivot.y = player.y
+    } else {
+      pixiApp.stage.x = 0
+      pixiApp.stage.y = 0
+      pixiApp.stage.pivot.x = 0
+      pixiApp.stage.pivot.y = 0
+    }
   }
 </script>
 
