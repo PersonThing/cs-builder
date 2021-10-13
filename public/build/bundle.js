@@ -35010,11 +35010,6 @@ var app = (function () {
     		screenCenter.x = pixiApp.renderer.width / 2;
     		screenCenter.y = pixiApp.renderer.height / 2;
 
-    		// if they click at 200,200
-    		// and screen center is 100,100
-    		// they're clicking bottom right
-    		// which is 100,100 from player current position
-    		// so we need to minus screen center from target x,y
     		// move player toward target
     		if (target.x != player.x || target.y != player.y) {
     			const run = target.x - player.x;
@@ -35024,25 +35019,22 @@ var app = (function () {
     			const yChange = rise / length * speed;
 
     			// change player position
-    			player.x = Math.abs(target.x - player.x) > xChange
-    			? player.x + xChange
-    			: target.x;
+    			const canHitTargetX = Math.abs(target.x - player.x) <= xChange;
 
-    			player.y = Math.abs(target.y - player.y) > yChange
-    			? player.y + yChange
-    			: target.y;
+    			const canHitTargetY = Math.abs(target.y - player.y) <= yChange;
+    			player.x = canHitTargetX ? target.x : player.x + xChange;
+    			player.y = canHitTargetY ? target.y : player.y + yChange;
 
-    			// rotate player sprite
-    			player.rotation = Math.atan2(rise / length, run / length) + 90 * Math.PI / 180;
+    			// if we're not going to hit target on this frame, rotate player sprite
+    			// without this check, it'll rotate the wrong direction if it hits the target in 1 axis but not the other
+    			if (!canHitTargetX && !canHitTargetY) {
+    				player.rotation = Math.atan2(rise / length, run / length) + 90 * Math.PI / 180;
+    			}
     		}
 
     		$$invalidate(3, pixiApp.stage.position.x = screenCenter.x, pixiApp);
     		$$invalidate(3, pixiApp.stage.position.y = screenCenter.y, pixiApp);
-
-    		// pixiApp.stage.scale.x = 2
-    		// pixiApp.stage.scale.y = 2
     		$$invalidate(3, pixiApp.stage.pivot.x = player.position.x, pixiApp);
-
     		$$invalidate(3, pixiApp.stage.pivot.y = player.position.y, pixiApp);
     	}
 
@@ -35119,7 +35111,7 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*screenTarget*/ 4) {
-    			if (screenTarget.x != 0) computeTarget();
+    			if (screenTarget.x != 0 || screenTarget.y != 0) computeTarget();
     		}
     	};
 
