@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "carbon-components-svelte": "^0.38.1",
+    "pathfinding": "^0.4.18",
     "sirv-cli": "^1.0.0",
     "svelte-awesome": "^2.3.2"
   }

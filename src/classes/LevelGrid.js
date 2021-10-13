@@ -1,44 +1,30 @@
-import { astar, Graph } from '../services/astar.js'
+import PF from 'pathfinding'
 
 export default class LevelGrid {
   constructor(project, level, gridSize) {
     this.gridSize = gridSize
-    this.blocks = level.blocks
+    const walkableBlocks = level.blocks
       .filter(b => project.blocks[b.blockId].canWalk)
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
 
-    // build a 2d array representing walkable space
-    // [0,0,0,1]
-    // [0,1,1,1]
-    // [1,1,0,0]
-    // 1 = walkable
-    // 0/empty/null = not walkable
+    const highestX = walkableBlocks.map(b => b.x).sort((a, b) => b - a)[0]
+    const highestY = walkableBlocks.map(b => b.y).sort((a, b) => b - a)[0]
 
-    this.grid = []
-    for (const b of this.blocks) {
-      if (this.grid[b.x] == null) {
-        this.grid[b.x] = []
-      }
-      this.grid[b.x][b.y] = 1
-    }
+    this.grid = new PF.Grid(highestX + 1, highestY + 1)
 
-    // fill in blanks
-    const highestX = this.blocks.map(b => b.x).sort((a, b) => b - a)[0]
-    const highestY = this.blocks.map(b => b.y).sort((a, b) => b - a)[0]
-    for (let x = 0; x < highestX; x++) {
-      // fill entire missing columns with 0
-      if (this.grid[x] == null) {
-        this.grid[x] = Array.from(Array(highestY)).map(n => 0)
-      } else {
-        // fill any missing y values in a row
-        for (let y = 0; y < highestY; y++) {
-          this.grid[x][y] = this.grid[x][y] == 1 ? 1 : 0
-        }
+    // make only walkable blocks work
+    for (let x = 0; x <= highestX; x++) {
+      for (let y = 0; y <= highestY; y++) {
+        this.grid.setWalkableAt(x, y, false)
       }
     }
+    walkableBlocks.forEach(b => this.grid.setWalkableAt(b.x, b.y, true))
 
-    this.graph = new Graph(this.grid, { diagonal: true })
+    this.finder = new PF.AStarFinder({
+      allowDiagonal: true,
+      dontCrossCorners: true,
+    })
   }
 
   /**
@@ -50,11 +36,14 @@ export default class LevelGrid {
   findPath(from, to) {
     const gridFrom = this.toGridCoordinates(from)
     const gridTo = this.getNearestAvailablePointBetween(gridFrom, this.toGridCoordinates(to))
-    const roughResult = astar.search(this.graph, this.graph.grid[gridFrom.x][gridFrom.y], this.graph.grid[gridTo.x][gridTo.y])
+    const roughResult = this.finder.findPath(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, this.grid.clone())
+    console.log(roughResult.map(([x, y]) => `(${x}, ${y})`))
 
-    const smoothResult = this.smoothPath(roughResult)
+    return roughResult.map(([x, y]) => this.toGameCoordinates({ x, y }))
+
+    // const smoothResult = this.smoothPath(roughResult)
     // if (smoothResult[0].x == gridFrom.x && smoothResult[0].y == gridFrom.y) smoothResult.shift()
-    return smoothResult.map(gridNode => this.toGameCoordinates(gridNode))
+    // return smoothResult.map(gridNode => this.toGameCoordinates(gridNode))
   }
 
   /**
@@ -64,13 +53,9 @@ export default class LevelGrid {
    * @returns
    */
   getNearestAvailablePointBetween(gridFrom, gridTo) {
-    return this.isWalkable(gridTo.x, gridTo.y)
+    return this.grid.isWalkableAt(gridTo.x, gridTo.y)
       ? gridTo
-      : this.lineBetween(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, (x, y) => !this.isWalkable(x, y)).pop()
-  }
-
-  isWalkable(x, y) {
-    return this.grid[x] != null && this.grid[x][y] == 1
+      : this.lineBetween(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, (x, y) => !this.grid.isWalkableAt(x, y)).pop()
   }
 
   /**
@@ -97,7 +82,7 @@ export default class LevelGrid {
 
   canWalk(p1, p2) {
     const pointsBetween = this.lineBetween(p1.x, p1.y, p2.x, p2.y)
-    return pointsBetween.every(p => this.isWalkable(p.x, p.y))
+    return pointsBetween.every(p => this.isWalkableAt(p.x, p.y))
   }
 
   lineBetween(x0, y0, x1, y1, shortCheck) {
