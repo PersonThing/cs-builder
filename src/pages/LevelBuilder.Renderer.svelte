@@ -75,35 +75,49 @@
   }
 
   const speed = 5
-  // let player = {
-  //   x: 0,
-  //   y: 0,
-  // }
-
-  const target = {
-    x: 0,
-    y: 0,
-  }
+  let queuedTargets = []
+  let target = null
   const screenCenter = {
     x: 0,
     y: 0,
   }
 
-  $: if (screenTarget.x != 0 || screenTarget.y != 0) computeTarget()
+  $: if (screenTarget.x != 0 || screenTarget.y != 0) computePath()
 
-  function computeTarget() {
-    // translate click targets into world position
-    target.x = screenTarget.x - screenCenter.x + player?.x ?? 0
-    target.y = screenTarget.y - screenCenter.y + player?.y ?? 0
-    console.log(target.x)
+  function computePath() {
+    // TODO:
+    // make it compute a path around any blocks in the way
+    // if no path available, get as close as possible to clicked point
+
+    // for now we're adding an extra target for the current player position to test that our target queue works
+    // this makes them move to the point we clicked, then move back to where they were before we clicked
+    const worldCoordinatesClicked = {
+      x: screenTarget.x - screenCenter.x + player?.x ?? 0,
+      y: screenTarget.y - screenCenter.y + player?.y ?? 0,
+    }
+
+    queuedTargets = [
+      worldCoordinatesClicked,
+      {
+        x: player.x,
+        y: player.y,
+      },
+    ]
+
+    targetNextInQueue()
+  }
+
+  function targetNextInQueue() {
+    target = queuedTargets.shift()
   }
 
   function onTick() {
     screenCenter.x = pixiApp.renderer.width / 2
     screenCenter.y = pixiApp.renderer.height / 2
 
-    // move player toward target
-    if (target.x != player.x || target.y != player.y) {
+    if (target == null) targetNextInQueue()
+    if (target != null) {
+      // move player toward target
       const run = target.x - player.x
       const rise = target.y - player.y
       const length = Math.sqrt(rise * rise + run * run)
@@ -121,6 +135,9 @@
       if (!canHitTargetX && !canHitTargetY) {
         player.rotation = Math.atan2(rise / length, run / length) + (90 * Math.PI) / 180
       }
+
+      // if we're hitting our target on this frame, start moving toward the next target
+      if (canHitTargetX && canHitTargetY) targetNextInQueue()
     }
 
     pixiApp.stage.position.x = screenCenter.x

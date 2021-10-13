@@ -172,7 +172,7 @@
       input.blocks = blocksMinusAnyAtThisXY
     } else {
       const newBlock = { x, y, blockId: selectedBlockId }
-      input.blocks = [...blocksMinusAnyAtThisXY, newBlock]
+      input.blocks = [...blocksMinusAnyAtThisXY, newBlock].sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
     }
   }
 
