@@ -8,6 +8,7 @@
   <div class="grow p1">
     <Form on:submit={save} {hasChanges}>
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+      <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
       <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
       <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
 
@@ -26,6 +27,7 @@
   import ArtThumb from '../components/ArtThumb.svelte'
   import FieldArtPicker from '../components/FieldArtPicker.svelte'
   import FieldText from '../components/FieldText.svelte'
+  import FieldNumber from '../components/FieldNumber.svelte'
   import Form from '../components/Form.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
   import project from '../stores/active-project-store'
