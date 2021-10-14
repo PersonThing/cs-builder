@@ -30,12 +30,13 @@
         version: PROJECT_VERSION,
         name,
         art: {},
-        particles: {},
-        projectiles: {},
         blocks: {},
         characters: {},
-        enemies: {},
         levels: {},
+        items: {},
+        particles: {},
+        projectiles: {},
+        enemies: {},
       }
       $projects = [...$projects, p]
       setProject(p)

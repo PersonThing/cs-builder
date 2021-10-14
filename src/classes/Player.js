@@ -7,6 +7,7 @@ export default class Player extends PIXI.Container {
     this.y = y
 
     this.config = config
+    this.speed = config.speed // so events can modify without affecting config
 
     this.stillSprite = makeArtSprite(project, config.graphics.still)
     this.stillSprite.anchor.set(0.5)
@@ -41,7 +42,7 @@ export default class Player extends PIXI.Container {
   setTarget(target) {
     // make it compute a path around any blocks in the way
     // if no path available, get as close as possible to clicked point
-    this.path = this.parent.levelGrid.findPath(this.position, target)
+    this.path = this.parent.levelGrid.findPath(this.position, target, this.config.smoothPathing)
     this.targetNextPathPoint()
   }
 
@@ -67,8 +68,8 @@ export default class Player extends PIXI.Container {
       const run = this.target.x - this.x
       const rise = this.target.y - this.y
       const length = Math.sqrt(rise * rise + run * run)
-      let xChange = (run / length) * this.config.speed
-      let yChange = (rise / length) * this.config.speed
+      let xChange = (run / length) * this.speed
+      let yChange = (rise / length) * this.speed
       if (isNaN(xChange)) xChange = 0
       if (isNaN(yChange)) yChange = 0
 

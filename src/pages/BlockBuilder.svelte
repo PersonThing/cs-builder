@@ -9,7 +9,7 @@
     <Form on:submit={save} {hasChanges}>
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
       <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
-      <FieldParticles name="particles" bind:value={input.particles} />
+      <!-- <FieldParticles name="particles" bind:value={input.particles} /> -->
       <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
         Can walk on?
         <div class="help-text">Can players walk on or through this block?</div>
@@ -18,6 +18,7 @@
         Can see through / across?
         <div class="help-text">Can players and enemies see through / across this block?</div>
       </FieldCheckbox>
+      <!--
       <FieldCheckbox name="consumable" bind:checked={input.consumable}>Consumable by player?</FieldCheckbox>
       {#if input.consumable}
         <div class="field-group">
@@ -44,6 +45,7 @@
         <div class="help-text">When players or enemies touch this block, how much damage should they take (per frame in contact)?</div>
       </FieldNumber>
       <FieldCheckbox name="winOnTouch" bind:checked={input.winOnTouch}>Win level if you touch the block?</FieldCheckbox>
+      -->
 
       <span slot="buttons">
         {#if !isAdding}

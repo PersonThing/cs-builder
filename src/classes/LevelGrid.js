@@ -3,13 +3,17 @@ import PF from 'pathfinding'
 export default class LevelGrid {
   constructor(project, level, gridSize) {
     this.gridSize = gridSize
+
     const walkableBlocks = level.blocks
       .filter(b => project.blocks[b.blockId].canWalk)
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
 
-    const highestX = walkableBlocks.map(b => b.x).sort((a, b) => b - a)[0]
-    const highestY = walkableBlocks.map(b => b.y).sort((a, b) => b - a)[0]
+    let highestX = walkableBlocks.map(b => b.x).sort((a, b) => b - a)[0]
+    let highestY = walkableBlocks.map(b => b.y).sort((a, b) => b - a)[0]
+
+    if (highestX == null) highestX = 10
+    if (highestY == null) highestY = 10
 
     this.grid = new PF.Grid(highestX + 1, highestY + 1)
 
@@ -33,15 +37,16 @@ export default class LevelGrid {
    * @param {x, y coordinates} to
    * @returns
    */
-  findPath(from, to) {
+  findPath(from, to, smoothPathing) {
     const gridFrom = this.toGridCoordinates(from)
-    const gridTo = this.getNearestAvailablePointBetween(gridFrom, this.toGridCoordinates(to))
+    let gridTo = this.toGridCoordinates(to)
+    gridTo = this.getNearestWalkablePointBetween(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1]) ?? gridFrom
     const grid = this.grid.clone()
-    const path = this.finder.findPath(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, grid)
-    const smoothPath = PF.Util.smoothenPath(this.grid, path) //this.grid.clone(), path)
+    const path = this.finder.findPath(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1], grid)
+    const smoothPath = smoothPathing ? PF.Util.smoothenPath(this.grid, path) : path
 
     // remove the first point if it's the same as gridFrom
-    if (smoothPath[0][0] == gridFrom.x && smoothPath[0][1] == gridFrom.y) smoothPath.shift()
+    if (smoothPath[0][0] == gridFrom[0] && smoothPath[0][1] == gridFrom[1]) smoothPath.shift()
 
     return smoothPath.map(([x, y]) => this.toGameCoordinates({ x, y }))
   }
@@ -52,56 +57,14 @@ export default class LevelGrid {
    * @param {*} gridTo
    * @returns
    */
-  getNearestAvailablePointBetween(gridFrom, gridTo) {
-    return this.grid.isWalkableAt(gridTo.x, gridTo.y)
-      ? gridTo
-      : this.lineBetween(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, (x, y) => !this.grid.isWalkableAt(x, y)).pop()
-  }
-
-  lineBetween(x0, y0, x1, y1, shortCheck) {
-    const result = []
-
-    // diff between x
-    var dx = Math.abs(x1 - x0)
-    // diff between y
-    var dy = Math.abs(y1 - y0)
-    // x going up or down
-    var sx = x0 < x1 ? 1 : -1
-    // y going up or down
-    var sy = y0 < y1 ? 1 : -1
-    // ???
-    var err = dx - dy
-
-    while (true) {
-      // short if caller wants us to short on certain conditions (like point not in the grid)
-      if (shortCheck != null && shortCheck(x0, y0)) return result
-
-      // otherwise add current x,y to result
-      result.push({
-        x: x0,
-        y: y0,
-      })
-
-      if (x0 === x1 && y0 === y1) break
-      var e2 = 2 * err
-      if (e2 > -dy) {
-        err -= dy
-        x0 += sx
-      }
-      if (e2 < dx) {
-        err += dx
-        y0 += sy
-      }
-    }
-
-    return result
+  getNearestWalkablePointBetween(x1, y1, x2, y2) {
+    return PF.Util.interpolate(x1, y1, x2, y2)
+      .filter(([x, y]) => this.grid.isWalkableAt(x, y))
+      .pop()
   }
 
   toGridCoordinates(coords) {
-    return {
-      x: Math.floor(coords.x / this.gridSize),
-      y: Math.floor(coords.y / this.gridSize),
-    }
+    return [Math.floor(coords.x / this.gridSize), Math.floor(coords.y / this.gridSize)]
   }
 
   /**

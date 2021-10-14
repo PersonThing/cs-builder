@@ -7,10 +7,11 @@
         <a href="/#/projects" class="strong" title="Change project" class:active={active == 'projects'}>{$project.name}</a>
         <a href="/#/project" class:active={active == 'project'}>Project settings</a>
         <a href="/#/art" class:active={active == 'art'}>Art</a>
-        <a href="/#/particles" class:active={active == 'particles'}>Particles</a>
         <a href="/#/blocks" class:active={active == 'blocks'}>Blocks</a>
+        <a href="/#/items" class:active={active == 'items'}>Items</a>
         <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
-        <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
+        <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a>
+        <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a> -->
         <a href="/#/levels" class:active={active == 'levels'}>Levels</a>
       </div>
     {/if}

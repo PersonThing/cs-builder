@@ -13,6 +13,7 @@
   import ArtBuilder from './pages/ArtBuilder.svelte'
   import ParticleBuilder from './pages/ParticleBuilder.svelte'
   import BlockBuilder from './pages/BlockBuilder.svelte'
+  import ItemBuilder from './pages/ItemBuilder.svelte'
   import CharacterBuilder from './pages/CharacterBuilder.svelte'
   import EnemyBuilder from './pages/EnemyBuilder.svelte'
   import LevelBuilder from './pages/LevelBuilder.svelte'
@@ -28,6 +29,7 @@
     '/art/:id?': ArtBuilder,
     '/particles/:id?': ParticleBuilder,
     '/blocks/:id?': BlockBuilder,
+    '/items/:id?': ItemBuilder,
     '/characters/:id?': CharacterBuilder,
     '/enemies/:id?': EnemyBuilder,
     '/levels/:id?': LevelBuilder,

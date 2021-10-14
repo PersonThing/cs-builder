@@ -16,6 +16,7 @@ export default function spriteFromArtId(project, id) {
     animation.play()
     return animation
   } else {
-    return new PIXI.Sprite(texture)
+    const sprite = new PIXI.Sprite(texture)
+    return sprite
   }
 }

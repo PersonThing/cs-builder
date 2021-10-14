@@ -24,6 +24,7 @@
   export let level
   export let screenTarget
   export let playable = false
+  export let gridSize
 
   let mounted = false
   onMount(() => {
@@ -40,9 +41,11 @@
   function renderLevel(level) {
     pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
     pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
+    // pixiApp.stage.scale.x = $project.pixelSize TODO: make scaling work with events... right now the challenge is input coordinates are really goofy
+    // pixiApp.stage.scale.y = $project.pixelSize
 
     // set level grid on stage so sprites can access it via hierarchy?
-    pixiApp.stage.levelGrid = new LevelGrid($project, level, 40)
+    pixiApp.stage.levelGrid = new LevelGrid($project, level, gridSize)
 
     world = new PIXI.Container()
 
@@ -53,7 +56,7 @@
 
     pixiApp.stage.addChild(world)
 
-    player = new Player($project, $project.characters[0], 60, 60)
+    player = new Player($project, $project.characters[0], 1.5 * gridSize, 1.5 * gridSize)
     pixiApp.stage.addChild(player)
   }
 

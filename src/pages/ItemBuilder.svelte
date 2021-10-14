@@ -1,6 +1,6 @@
-<AppLayout active="characters">
+<AppLayout active="items">
   <div class="col1">
-    <ItemListNav slug="characters" type="character" collection={$project.characters} active={paramId} let:item>
+    <ItemListNav slug="items" type="item" collection={$project.items} active={paramId} let:item>
       <ArtThumb id={item.graphics.still} />
       {item.name}
     </ItemListNav>
@@ -8,11 +8,9 @@
   <div class="grow p1">
     <Form on:submit={save} {hasChanges}>
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
       <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
-      <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
-      <FieldCheckbox bind:checked={input.smoothPathing}>Smooth pathing</FieldCheckbox>
 
+      <FieldScriptEditor bind:value={input.onCollision}>onCollision(item, sprite)</FieldScriptEditor>
       <span slot="buttons">
         {#if !isAdding}
           <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
@@ -28,14 +26,13 @@
   import ArtThumb from '../components/ArtThumb.svelte'
   import FieldArtPicker from '../components/FieldArtPicker.svelte'
   import FieldText from '../components/FieldText.svelte'
-  import FieldNumber from '../components/FieldNumber.svelte'
   import Form from '../components/Form.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
   import project from '../stores/active-project-store'
   import validator from '../services/validator'
   import { push } from 'svelte-spa-router'
   import { getNextId } from '../stores/project-store'
-  import FieldCheckbox from '../components/FieldCheckbox.svelte'
+  import FieldScriptEditor from '../components/FieldScriptEditor.svelte'
 
   export let params = {}
   let input = createDefaultInput()
@@ -43,17 +40,15 @@
   $: paramId = decodeURIComponent(params.id) || 'new'
   $: paramId == 'new' ? create() : edit(paramId)
   $: isAdding = input.id == null
-  $: hasChanges = input != null && !validator.equals(input, $project.characters[input.id])
+  $: hasChanges = input != null && !validator.equals(input, $project.items[input.id])
 
   function createDefaultInput() {
     return {
       name: '',
       graphics: {
         still: null,
-        moving: null,
       },
-      abilities: [],
-      smoothPathing: false,
+      onCollision: null,
     }
   }
 
@@ -62,10 +57,10 @@
   }
 
   function edit(name) {
-    if (!$project.characters.hasOwnProperty(name)) return
+    if (!$project.items.hasOwnProperty(name)) return
     input = {
       ...createDefaultInput(),
-      ...JSON.parse(JSON.stringify($project.characters[name])),
+      ...JSON.parse(JSON.stringify($project.items[name])),
     }
   }
 
@@ -74,16 +69,16 @@
       document.getElementById('name').focus()
       return
     }
-    if (isAdding) input.id = getNextId($project.characters)
-    $project.characters[input.id] = JSON.parse(JSON.stringify(input))
-    push(`/characters/${encodeURIComponent(input.id)}`)
+    if (isAdding) input.id = getNextId($project.items)
+    $project.items[input.id] = JSON.parse(JSON.stringify(input))
+    push(`/items/${encodeURIComponent(input.id)}`)
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      delete $project.characters[input.id]
-      $project.characters = $project.characters
-      push(`/characters/new`)
+      delete $project.items[input.id]
+      $project.items = $project.items
+      push(`/items/new`)
     }
   }
 </script>

@@ -13,6 +13,7 @@
         level={input}
         playable={!isDrawing}
         {screenTarget}
+        {gridSize}
         on:pointerdown={onPointerDown}
         on:pointerup={onPointerUp}
         on:pointermove={onPointerMove}
@@ -40,10 +41,20 @@
           </div>
 
           <div class="form-group">
-            <label>Block to draw</label>
+            <label>Place a block</label>
             <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
               {#if option.graphic != null}
                 <ArtThumb id={option.graphic} />
+              {/if}
+              {option.name}
+            </InputSelect>
+          </div>
+
+          <div class="form-group">
+            <label>Place an item</label>
+            <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+              {#if option.graphics?.still != null}
+                <ArtThumb id={option.graphics.still} />
               {/if}
               {option.name}
             </InputSelect>
@@ -77,21 +88,16 @@
   let isDrawing = false
   let screenTarget = { x: 0, y: 0 }
 
+  const gridSize = 40
+
   $: paramId = decodeURIComponent(params.id) || 'new'
   $: paramId == 'new' ? create() : edit(paramId)
   $: isAdding = input?.id == null
   $: hasChanges = input != null && !validator.equals(input, $project.levels[input.id])
 
-  function createDefaultInput() {
-    return {
-      name: '',
-      backgroundColor: 'rgba(0,0,0,1)',
-      blocks: [],
-      enemies: [],
-    }
-  }
-
   let selectedBlockId = 0
+  let selectedItemId = null
+
   $: blockOptions = [
     { value: null, name: 'Eraser' },
     ...Object.values($project.blocks)
@@ -102,8 +108,27 @@
       .sort(sortByName),
   ]
 
+  $: itemOptions = [
+    { value: null, name: 'Eraser' },
+    ...Object.values($project.items)
+      .map(i => ({
+        ...i,
+        value: i.id,
+      }))
+      .sort(sortByName),
+  ]
+
   function create() {
     input = createDefaultInput()
+  }
+
+  function createDefaultInput() {
+    return {
+      name: '',
+      backgroundColor: 'rgba(0,0,0,1)',
+      blocks: [],
+      enemies: [],
+    }
   }
 
   async function edit(name) {
@@ -167,8 +192,8 @@
 
   function getBlockCoordsFromEvent(event) {
     return {
-      x: Math.floor(event.offsetX / 40),
-      y: Math.floor(event.offsetY / 40),
+      x: Math.floor(event.offsetX / gridSize),
+      y: Math.floor(event.offsetY / gridSize),
     }
   }
 
