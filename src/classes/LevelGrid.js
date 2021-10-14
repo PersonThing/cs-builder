@@ -36,18 +36,18 @@ export default class LevelGrid {
   findPath(from, to) {
     const gridFrom = this.toGridCoordinates(from)
     const gridTo = this.getNearestAvailablePointBetween(gridFrom, this.toGridCoordinates(to))
-    const roughResult = this.finder.findPath(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, this.grid.clone())
-    console.log(roughResult.map(([x, y]) => `(${x}, ${y})`))
+    const grid = this.grid.clone()
+    const path = this.finder.findPath(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, grid)
+    const smoothPath = PF.Util.smoothenPath(this.grid, path) //this.grid.clone(), path)
 
-    return roughResult.map(([x, y]) => this.toGameCoordinates({ x, y }))
+    // remove the first point if it's the same as gridFrom
+    if (smoothPath[0][0] == gridFrom.x && smoothPath[0][1] == gridFrom.y) smoothPath.shift()
 
-    // const smoothResult = this.smoothPath(roughResult)
-    // if (smoothResult[0].x == gridFrom.x && smoothResult[0].y == gridFrom.y) smoothResult.shift()
-    // return smoothResult.map(gridNode => this.toGameCoordinates(gridNode))
+    return smoothPath.map(([x, y]) => this.toGameCoordinates({ x, y }))
   }
 
   /**
-   * if they click on something that isn't walkable / is outside grid, path to nearest walkable point on a line between current position and where they clicked
+   * if they click on something that isn't walkable / is outside grid, path to walkable point nearest the target on a line between current position and where they clicked
    * @param {*} gridFrom
    * @param {*} gridTo
    * @returns
@@ -56,33 +56,6 @@ export default class LevelGrid {
     return this.grid.isWalkableAt(gridTo.x, gridTo.y)
       ? gridTo
       : this.lineBetween(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, (x, y) => !this.grid.isWalkableAt(x, y)).pop()
-  }
-
-  /**
-   * smooth an a* generated path https://www.gamedeveloper.com/programming/toward-more-realistic-pathfinding
-   */
-  smoothPath(result) {
-    return result
-
-    // bit buggy yet
-    if (result.length < 2) return result
-
-    let lastUsefulPoint = result[0]
-    for (let i = 1; i < result.length - 1; i++) {
-      if (this.canWalk(lastUsefulPoint, result[i + 1])) {
-        result[i].redundant = true
-      } else {
-        lastUsefulPoint = result[i]
-      }
-    }
-
-    // we should always be able to skip the first target as it will always be where the thing started from
-    return result.filter(p => !p.redundant)
-  }
-
-  canWalk(p1, p2) {
-    const pointsBetween = this.lineBetween(p1.x, p1.y, p2.x, p2.y)
-    return pointsBetween.every(p => this.isWalkableAt(p.x, p.y))
   }
 
   lineBetween(x0, y0, x1, y1, shortCheck) {

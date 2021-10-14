@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -40591,7 +40591,7 @@ var app = (function () {
                 }
             }
             if (blocked) {
-                lastValidCoord = path[i - 1];
+                var lastValidCoord = path[i - 1];
                 newPath.push(lastValidCoord);
                 sx = lastValidCoord[0];
                 sy = lastValidCoord[1];
@@ -42254,7 +42254,7 @@ var app = (function () {
 
     var JumpPointFinder_1 = JumpPointFinder;
 
-    var PathFinding = {
+    var PathFinding$1 = {
         'Heap'                      : heap,
         'Node'                      : Node_1,
         'Grid'                      : Grid_1,
@@ -42273,7 +42273,7 @@ var app = (function () {
         'JumpPointFinder'           : JumpPointFinder_1,
     };
 
-    var pathfinding = PathFinding;
+    var PathFinding = PathFinding$1;
 
     class LevelGrid {
       constructor(project, level, gridSize) {
@@ -42286,7 +42286,7 @@ var app = (function () {
         const highestX = walkableBlocks.map(b => b.x).sort((a, b) => b - a)[0];
         const highestY = walkableBlocks.map(b => b.y).sort((a, b) => b - a)[0];
 
-        this.grid = new pathfinding.Grid(highestX + 1, highestY + 1);
+        this.grid = new PathFinding.Grid(highestX + 1, highestY + 1);
 
         // make only walkable blocks work
         for (let x = 0; x <= highestX; x++) {
@@ -42296,7 +42296,7 @@ var app = (function () {
         }
         walkableBlocks.forEach(b => this.grid.setWalkableAt(b.x, b.y, true));
 
-        this.finder = new pathfinding.AStarFinder({
+        this.finder = new PathFinding.AStarFinder({
           allowDiagonal: true,
           dontCrossCorners: true,
         });
@@ -42311,18 +42311,18 @@ var app = (function () {
       findPath(from, to) {
         const gridFrom = this.toGridCoordinates(from);
         const gridTo = this.getNearestAvailablePointBetween(gridFrom, this.toGridCoordinates(to));
-        const roughResult = this.finder.findPath(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, this.grid.clone());
-        console.log(roughResult.map(([x, y]) => `(${x}, ${y})`));
+        const grid = this.grid.clone();
+        const path = this.finder.findPath(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, grid);
+        const smoothPath = PathFinding.Util.smoothenPath(this.grid, path); //this.grid.clone(), path)
 
-        return roughResult.map(([x, y]) => this.toGameCoordinates({ x, y }))
+        // remove the first point if it's the same as gridFrom
+        if (smoothPath[0][0] == gridFrom.x && smoothPath[0][1] == gridFrom.y) smoothPath.shift();
 
-        // const smoothResult = this.smoothPath(roughResult)
-        // if (smoothResult[0].x == gridFrom.x && smoothResult[0].y == gridFrom.y) smoothResult.shift()
-        // return smoothResult.map(gridNode => this.toGameCoordinates(gridNode))
+        return smoothPath.map(([x, y]) => this.toGameCoordinates({ x, y }))
       }
 
       /**
-       * if they click on something that isn't walkable / is outside grid, path to nearest walkable point on a line between current position and where they clicked
+       * if they click on something that isn't walkable / is outside grid, path to walkable point nearest the target on a line between current position and where they clicked
        * @param {*} gridFrom
        * @param {*} gridTo
        * @returns
@@ -42331,18 +42331,6 @@ var app = (function () {
         return this.grid.isWalkableAt(gridTo.x, gridTo.y)
           ? gridTo
           : this.lineBetween(gridFrom.x, gridFrom.y, gridTo.x, gridTo.y, (x, y) => !this.grid.isWalkableAt(x, y)).pop()
-      }
-
-      /**
-       * smooth an a* generated path https://www.gamedeveloper.com/programming/toward-more-realistic-pathfinding
-       */
-      smoothPath(result) {
-        return result
-      }
-
-      canWalk(p1, p2) {
-        const pointsBetween = this.lineBetween(p1.x, p1.y, p2.x, p2.y);
-        return pointsBetween.every(p => this.isWalkableAt(p.x, p.y))
       }
 
       lineBetween(x0, y0, x1, y1, shortCheck) {
