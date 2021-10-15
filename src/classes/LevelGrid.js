@@ -2,6 +2,7 @@ import PF from 'pathfinding'
 
 export default class LevelGrid {
   constructor(project, level, gridSize) {
+    this.smoothPathing = level.smoothPathing
     this.gridSize = gridSize
 
     const walkableBlocks = level.blocks
@@ -37,13 +38,13 @@ export default class LevelGrid {
    * @param {x, y coordinates} to
    * @returns
    */
-  findPath(from, to, smoothPathing) {
+  findPath(from, to) {
     const gridFrom = this.toGridCoordinates(from)
     let gridTo = this.toGridCoordinates(to)
     gridTo = this.getNearestWalkablePointBetween(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1]) ?? gridFrom
     const grid = this.grid.clone()
     const path = this.finder.findPath(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1], grid)
-    const smoothPath = smoothPathing ? PF.Util.smoothenPath(this.grid, path) : path
+    const smoothPath = this.smoothPathing ? PF.Util.smoothenPath(this.grid, path) : PF.Util.compressPath(path)
 
     // remove the first point if it's the same as gridFrom
     if (smoothPath[0][0] == gridFrom[0] && smoothPath[0][1] == gridFrom[1]) smoothPath.shift()

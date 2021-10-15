@@ -11,7 +11,6 @@
       <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
       <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
       <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
-      <FieldCheckbox bind:checked={input.smoothPathing}>Smooth pathing</FieldCheckbox>
 
       <span slot="buttons">
         {#if !isAdding}
@@ -35,7 +34,6 @@
   import validator from '../services/validator'
   import { push } from 'svelte-spa-router'
   import { getNextId } from '../stores/project-store'
-  import FieldCheckbox from '../components/FieldCheckbox.svelte'
 
   export let params = {}
   let input = createDefaultInput()
@@ -53,7 +51,6 @@
         moving: null,
       },
       abilities: [],
-      smoothPathing: false,
     }
   }
 

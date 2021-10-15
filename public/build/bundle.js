@@ -32100,7 +32100,7 @@ var app = (function () {
     }
 
     // (105:10) <InputSelect              disabled={$autoSaveStore[input.name] == null}              options={$autoSaveStore[input.name]}              bind:value={selectedAutoSave}              on:change={e => loadAutoSave(e.detail)}              let:option              placeholder="Auto-saves"              inline              sm              right            >
-    function create_default_slot_7$1(ctx) {
+    function create_default_slot_7(ctx) {
     	let t0_value = /*option*/ ctx[95].name + "";
     	let t0;
     	let t1;
@@ -32138,7 +32138,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7$1.name,
+    		id: create_default_slot_7.name,
     		type: "slot",
     		source: "(105:10) <InputSelect              disabled={$autoSaveStore[input.name] == null}              options={$autoSaveStore[input.name]}              bind:value={selectedAutoSave}              on:change={e => loadAutoSave(e.detail)}              let:option              placeholder=\\\"Auto-saves\\\"              inline              sm              right            >",
     		ctx
@@ -32148,7 +32148,7 @@ var app = (function () {
     }
 
     // (143:10) <FieldText name="name" bind:value={input.name}>
-    function create_default_slot_6$2(ctx) {
+    function create_default_slot_6$3(ctx) {
     	let t;
 
     	const block = {
@@ -32165,7 +32165,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$2.name,
+    		id: create_default_slot_6$3.name,
     		type: "slot",
     		source: "(143:10) <FieldText name=\\\"name\\\" bind:value={input.name}>",
     		ctx
@@ -32186,7 +32186,7 @@ var app = (function () {
 
     	let fieldtext_props = {
     		name: "name",
-    		$$slots: { default: [create_default_slot_6$2] },
+    		$$slots: { default: [create_default_slot_6$3] },
     		$$scope: { ctx }
     	};
 
@@ -33587,7 +33587,7 @@ var app = (function () {
     		right: true,
     		$$slots: {
     			default: [
-    				create_default_slot_7$1,
+    				create_default_slot_7,
     				({ option }) => ({ 95: option }),
     				({ option }) => [0, 0, 0, option ? 4 : 0]
     			]
@@ -37010,7 +37010,7 @@ var app = (function () {
     const file$9 = "src\\pages\\BlockBuilder.svelte";
 
     // (3:4) <ItemListNav slug="blocks" type="block" collection={$project.blocks} active={paramId} let:item>
-    function create_default_slot_6$1(ctx) {
+    function create_default_slot_6$2(ctx) {
     	let artthumb;
     	let t0;
     	let t1_value = /*item*/ ctx[14].name + "";
@@ -37058,7 +37058,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$1.name,
+    		id: create_default_slot_6$2.name,
     		type: "slot",
     		source: "(3:4) <ItemListNav slug=\\\"blocks\\\" type=\\\"block\\\" collection={$project.blocks} active={paramId} let:item>",
     		ctx
@@ -37502,7 +37502,7 @@ var app = (function () {
     				active: /*paramId*/ ctx[1],
     				$$slots: {
     					default: [
-    						create_default_slot_6$1,
+    						create_default_slot_6$2,
     						({ item }) => ({ 14: item }),
     						({ item }) => item ? 16384 : 0
     					]
@@ -38815,15 +38815,15 @@ var app = (function () {
     const file$6 = "src\\pages\\CharacterBuilder.svelte";
 
     // (3:4) <ItemListNav slug="characters" type="character" collection={$project.characters} active={paramId} let:item>
-    function create_default_slot_7(ctx) {
+    function create_default_slot_6$1(ctx) {
     	let artthumb;
     	let t0;
-    	let t1_value = /*item*/ ctx[15].name + "";
+    	let t1_value = /*item*/ ctx[14].name + "";
     	let t1;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*item*/ ctx[15].graphics.still },
+    			props: { id: /*item*/ ctx[14].graphics.still },
     			$$inline: true
     		});
 
@@ -38841,9 +38841,9 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty & /*item*/ 32768) artthumb_changes.id = /*item*/ ctx[15].graphics.still;
+    			if (dirty & /*item*/ 16384) artthumb_changes.id = /*item*/ ctx[14].graphics.still;
     			artthumb.$set(artthumb_changes);
-    			if ((!current || dirty & /*item*/ 32768) && t1_value !== (t1_value = /*item*/ ctx[15].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*item*/ 16384) && t1_value !== (t1_value = /*item*/ ctx[14].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -38863,7 +38863,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7.name,
+    		id: create_default_slot_6$1.name,
     		type: "slot",
     		source: "(3:4) <ItemListNav slug=\\\"characters\\\" type=\\\"character\\\" collection={$project.characters} active={paramId} let:item>",
     		ctx
@@ -38873,7 +38873,7 @@ var app = (function () {
     }
 
     // (10:6) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_6(ctx) {
+    function create_default_slot_5$1(ctx) {
     	let t;
 
     	const block = {
@@ -38890,7 +38890,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6.name,
+    		id: create_default_slot_5$1.name,
     		type: "slot",
     		source: "(10:6) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
@@ -38900,7 +38900,7 @@ var app = (function () {
     }
 
     // (11:6) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
-    function create_default_slot_5$1(ctx) {
+    function create_default_slot_4$1(ctx) {
     	let t;
 
     	const block = {
@@ -38917,7 +38917,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$1.name,
+    		id: create_default_slot_4$1.name,
     		type: "slot",
     		source: "(11:6) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
     		ctx
@@ -38927,7 +38927,7 @@ var app = (function () {
     }
 
     // (12:6) <FieldArtPicker bind:value={input.graphics.still}>
-    function create_default_slot_4$1(ctx) {
+    function create_default_slot_3$2(ctx) {
     	let t;
 
     	const block = {
@@ -38944,7 +38944,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$1.name,
+    		id: create_default_slot_3$2.name,
     		type: "slot",
     		source: "(12:6) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
@@ -38954,7 +38954,7 @@ var app = (function () {
     }
 
     // (13:6) <FieldArtPicker bind:value={input.graphics.moving}>
-    function create_default_slot_3$2(ctx) {
+    function create_default_slot_2$2(ctx) {
     	let t;
 
     	const block = {
@@ -38971,36 +38971,9 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$2.name,
-    		type: "slot",
-    		source: "(13:6) <FieldArtPicker bind:value={input.graphics.moving}>",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (14:6) <FieldCheckbox bind:checked={input.smoothPathing}>
-    function create_default_slot_2$2(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = text("Smooth pathing");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
     		id: create_default_slot_2$2.name,
     		type: "slot",
-    		source: "(14:6) <FieldCheckbox bind:checked={input.smoothPathing}>",
+    		source: "(13:6) <FieldArtPicker bind:value={input.graphics.moving}>",
     		ctx
     	});
 
@@ -39020,9 +38993,6 @@ var app = (function () {
     	let t2;
     	let fieldartpicker1;
     	let updating_value_3;
-    	let t3;
-    	let fieldcheckbox;
-    	let updating_checked;
     	let current;
 
     	function fieldtext_value_binding(value) {
@@ -39032,7 +39002,7 @@ var app = (function () {
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_6] },
+    		$$slots: { default: [create_default_slot_5$1] },
     		$$scope: { ctx }
     	};
 
@@ -39050,7 +39020,7 @@ var app = (function () {
     	let fieldnumber_props = {
     		name: "speed",
     		placeholder: "Speed (pixels per frame)",
-    		$$slots: { default: [create_default_slot_5$1] },
+    		$$slots: { default: [create_default_slot_4$1] },
     		$$scope: { ctx }
     	};
 
@@ -39066,7 +39036,7 @@ var app = (function () {
     	}
 
     	let fieldartpicker0_props = {
-    		$$slots: { default: [create_default_slot_4$1] },
+    		$$slots: { default: [create_default_slot_3$2] },
     		$$scope: { ctx }
     	};
 
@@ -39086,7 +39056,7 @@ var app = (function () {
     	}
 
     	let fieldartpicker1_props = {
-    		$$slots: { default: [create_default_slot_3$2] },
+    		$$slots: { default: [create_default_slot_2$2] },
     		$$scope: { ctx }
     	};
 
@@ -39101,26 +39071,6 @@ var app = (function () {
 
     	binding_callbacks.push(() => bind(fieldartpicker1, "value", fieldartpicker1_value_binding));
 
-    	function fieldcheckbox_checked_binding(value) {
-    		/*fieldcheckbox_checked_binding*/ ctx[12](value);
-    	}
-
-    	let fieldcheckbox_props = {
-    		$$slots: { default: [create_default_slot_2$2] },
-    		$$scope: { ctx }
-    	};
-
-    	if (/*input*/ ctx[0].smoothPathing !== void 0) {
-    		fieldcheckbox_props.checked = /*input*/ ctx[0].smoothPathing;
-    	}
-
-    	fieldcheckbox = new FieldCheckbox({
-    			props: fieldcheckbox_props,
-    			$$inline: true
-    		});
-
-    	binding_callbacks.push(() => bind(fieldcheckbox, "checked", fieldcheckbox_checked_binding));
-
     	const block = {
     		c: function create() {
     			create_component(fieldtext.$$.fragment);
@@ -39130,8 +39080,6 @@ var app = (function () {
     			create_component(fieldartpicker0.$$.fragment);
     			t2 = space();
     			create_component(fieldartpicker1.$$.fragment);
-    			t3 = space();
-    			create_component(fieldcheckbox.$$.fragment);
     		},
     		m: function mount(target, anchor) {
     			mount_component(fieldtext, target, anchor);
@@ -39141,14 +39089,12 @@ var app = (function () {
     			mount_component(fieldartpicker0, target, anchor);
     			insert_dev(target, t2, anchor);
     			mount_component(fieldartpicker1, target, anchor);
-    			insert_dev(target, t3, anchor);
-    			mount_component(fieldcheckbox, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 32768) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39161,7 +39107,7 @@ var app = (function () {
     			fieldtext.$set(fieldtext_changes);
     			const fieldnumber_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 32768) {
     				fieldnumber_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39174,7 +39120,7 @@ var app = (function () {
     			fieldnumber.$set(fieldnumber_changes);
     			const fieldartpicker0_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 32768) {
     				fieldartpicker0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39187,7 +39133,7 @@ var app = (function () {
     			fieldartpicker0.$set(fieldartpicker0_changes);
     			const fieldartpicker1_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 32768) {
     				fieldartpicker1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39198,19 +39144,6 @@ var app = (function () {
     			}
 
     			fieldartpicker1.$set(fieldartpicker1_changes);
-    			const fieldcheckbox_changes = {};
-
-    			if (dirty & /*$$scope*/ 65536) {
-    				fieldcheckbox_changes.$$scope = { dirty, ctx };
-    			}
-
-    			if (!updating_checked && dirty & /*input*/ 1) {
-    				updating_checked = true;
-    				fieldcheckbox_changes.checked = /*input*/ ctx[0].smoothPathing;
-    				add_flush_callback(() => updating_checked = false);
-    			}
-
-    			fieldcheckbox.$set(fieldcheckbox_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -39218,7 +39151,6 @@ var app = (function () {
     			transition_in(fieldnumber.$$.fragment, local);
     			transition_in(fieldartpicker0.$$.fragment, local);
     			transition_in(fieldartpicker1.$$.fragment, local);
-    			transition_in(fieldcheckbox.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
@@ -39226,7 +39158,6 @@ var app = (function () {
     			transition_out(fieldnumber.$$.fragment, local);
     			transition_out(fieldartpicker0.$$.fragment, local);
     			transition_out(fieldartpicker1.$$.fragment, local);
-    			transition_out(fieldcheckbox.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -39237,8 +39168,6 @@ var app = (function () {
     			destroy_component(fieldartpicker0, detaching);
     			if (detaching) detach_dev(t2);
     			destroy_component(fieldartpicker1, detaching);
-    			if (detaching) detach_dev(t3);
-    			destroy_component(fieldcheckbox, detaching);
     		}
     	};
 
@@ -39253,7 +39182,7 @@ var app = (function () {
     	return block;
     }
 
-    // (17:8) {#if !isAdding}
+    // (16:8) {#if !isAdding}
     function create_if_block$2(ctx) {
     	let button;
     	let mounted;
@@ -39265,7 +39194,7 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$6, 17, 10, 899);
+    			add_location(button, file$6, 16, 10, 811);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -39287,14 +39216,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(17:8) {#if !isAdding}",
+    		source: "(16:8) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:6) 
+    // (15:6) 
     function create_buttons_slot$1(ctx) {
     	let span;
     	let if_block = !/*isAdding*/ ctx[3] && create_if_block$2(ctx);
@@ -39304,7 +39233,7 @@ var app = (function () {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "slot", "buttons");
-    			add_location(span, file$6, 15, 6, 841);
+    			add_location(span, file$6, 14, 6, 753);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -39334,7 +39263,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$1.name,
     		type: "slot",
-    		source: "(16:6) ",
+    		source: "(15:6) ",
     		ctx
     	});
 
@@ -39360,9 +39289,9 @@ var app = (function () {
     				active: /*paramId*/ ctx[1],
     				$$slots: {
     					default: [
-    						create_default_slot_7,
-    						({ item }) => ({ 15: item }),
-    						({ item }) => item ? 32768 : 0
+    						create_default_slot_6$1,
+    						({ item }) => ({ 14: item }),
+    						({ item }) => item ? 16384 : 0
     					]
     				},
     				$$scope: { ctx }
@@ -39399,7 +39328,7 @@ var app = (function () {
     			attr_dev(div1, "class", "grow p1");
     			add_location(div1, file$6, 7, 2, 264);
     			attr_dev(div2, "class", "col2");
-    			add_location(div2, file$6, 22, 2, 1031);
+    			add_location(div2, file$6, 21, 2, 943);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -39416,7 +39345,7 @@ var app = (function () {
     			if (dirty & /*$project*/ 4) itemlistnav_changes.collection = /*$project*/ ctx[2].characters;
     			if (dirty & /*paramId*/ 2) itemlistnav_changes.active = /*paramId*/ ctx[1];
 
-    			if (dirty & /*$$scope, item*/ 98304) {
+    			if (dirty & /*$$scope, item*/ 49152) {
     				itemlistnav_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39424,7 +39353,7 @@ var app = (function () {
     			const form_changes = {};
     			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
 
-    			if (dirty & /*$$scope, isAdding, input*/ 65545) {
+    			if (dirty & /*$$scope, isAdding, input*/ 32777) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39490,7 +39419,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const applayout_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, input, $project, paramId*/ 65567) {
+    			if (dirty & /*$$scope, hasChanges, isAdding, input, $project, paramId*/ 32799) {
     				applayout_changes.$$scope = { dirty, ctx };
     			}
 
@@ -39525,8 +39454,7 @@ var app = (function () {
     	return {
     		name: "",
     		graphics: { still: null, moving: null },
-    		abilities: [],
-    		smoothPathing: false
+    		abilities: []
     	};
     }
 
@@ -39608,13 +39536,6 @@ var app = (function () {
     		}
     	}
 
-    	function fieldcheckbox_checked_binding(value) {
-    		if ($$self.$$.not_equal(input.smoothPathing, value)) {
-    			input.smoothPathing = value;
-    			$$invalidate(0, input);
-    		}
-    	}
-
     	$$self.$$set = $$props => {
     		if ("params" in $$props) $$invalidate(7, params = $$props.params);
     	};
@@ -39631,7 +39552,6 @@ var app = (function () {
     		validator,
     		push,
     		getNextId,
-    		FieldCheckbox,
     		params,
     		input,
     		createDefaultInput: createDefaultInput$2,
@@ -39687,8 +39607,7 @@ var app = (function () {
     		fieldtext_value_binding,
     		fieldnumber_value_binding,
     		fieldartpicker0_value_binding,
-    		fieldartpicker1_value_binding,
-    		fieldcheckbox_checked_binding
+    		fieldartpicker1_value_binding
     	];
     }
 
@@ -40080,7 +39999,25 @@ var app = (function () {
       setTarget(target) {
         // make it compute a path around any blocks in the way
         // if no path available, get as close as possible to clicked point
-        this.path = this.parent.levelGrid.findPath(this.position, target, this.config.smoothPathing);
+        this.path = this.parent.levelGrid.findPath(this.position, target);
+
+        // show a preview of what the path looks like
+        // clear path line
+        if (this.pathLine == null) {
+          this.pathLine = new PIXI.Graphics();
+          this.pathLine.x = 0;
+          this.pathLine.y = 0;
+          this.parent.addChild(this.pathLine);
+        } else {
+          this.pathLine.clear();
+        }
+        this.pathLine.moveTo(this.x, this.y);
+        this.path.forEach(p => {
+          this.pathLine.lineStyle(5, 0xffffff, 0.5);
+          this.pathLine.lineTo(p.x, p.y);
+          this.pathLine.drawCircle(p.x, p.y, 5);
+        });
+
         this.targetNextPathPoint();
       }
 
@@ -42652,6 +42589,7 @@ var app = (function () {
 
     class LevelGrid {
       constructor(project, level, gridSize) {
+        this.smoothPathing = level.smoothPathing;
         this.gridSize = gridSize;
 
         const walkableBlocks = level.blocks
@@ -42687,13 +42625,13 @@ var app = (function () {
        * @param {x, y coordinates} to
        * @returns
        */
-      findPath(from, to, smoothPathing) {
+      findPath(from, to) {
         const gridFrom = this.toGridCoordinates(from);
         let gridTo = this.toGridCoordinates(to);
         gridTo = this.getNearestWalkablePointBetween(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1]) ?? gridFrom;
         const grid = this.grid.clone();
         const path = this.finder.findPath(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1], grid);
-        const smoothPath = smoothPathing ? PathFinding.Util.smoothenPath(this.grid, path) : path;
+        const smoothPath = this.smoothPathing ? PathFinding.Util.smoothenPath(this.grid, path) : PathFinding.Util.compressPath(path);
 
         // remove the first point if it's the same as gridFrom
         if (smoothPath[0][0] == gridFrom[0] && smoothPath[0][1] == gridFrom[1]) smoothPath.shift();
@@ -43029,9 +42967,9 @@ var app = (function () {
     const file$3 = "src\\pages\\LevelBuilder.svelte";
 
     // (3:4) <ItemListNav slug="levels" type="level" collection={$project.levels} active={paramId} let:item>
-    function create_default_slot_5(ctx) {
+    function create_default_slot_6(ctx) {
     	let div;
-    	let t_value = /*item*/ ctx[29].name + "";
+    	let t_value = /*item*/ ctx[30].name + "";
     	let t;
 
     	const block = {
@@ -43039,7 +42977,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "level-nav-item svelte-he9i7z");
-    			set_style(div, "background-image", "url(" + /*item*/ ctx[29].thumbnail + ")");
+    			set_style(div, "background-image", "url(" + /*item*/ ctx[30].thumbnail + ")");
     			add_location(div, file$3, 3, 6, 158);
     		},
     		m: function mount(target, anchor) {
@@ -43047,10 +42985,10 @@ var app = (function () {
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*item*/ 536870912 && t_value !== (t_value = /*item*/ ctx[29].name + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*item*/ 1073741824 && t_value !== (t_value = /*item*/ ctx[30].name + "")) set_data_dev(t, t_value);
 
-    			if (dirty & /*item*/ 536870912) {
-    				set_style(div, "background-image", "url(" + /*item*/ ctx[29].thumbnail + ")");
+    			if (dirty[0] & /*item*/ 1073741824) {
+    				set_style(div, "background-image", "url(" + /*item*/ ctx[30].thumbnail + ")");
     			}
     		},
     		d: function destroy(detaching) {
@@ -43060,7 +42998,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5.name,
+    		id: create_default_slot_6.name,
     		type: "slot",
     		source: "(3:4) <ItemListNav slug=\\\"levels\\\" type=\\\"level\\\" collection={$project.levels} active={paramId} let:item>",
     		ctx
@@ -43151,7 +43089,7 @@ var app = (function () {
     			attr_dev(div2, "class", "grow");
     			add_location(div2, file$3, 28, 6, 937);
     			attr_dev(div3, "class", "grow");
-    			add_location(div3, file$3, 63, 6, 2261);
+    			add_location(div3, file$3, 65, 6, 2355);
     			attr_dev(div4, "class", "col2 rows");
     			add_location(div4, file$3, 22, 4, 605);
     		},
@@ -43184,23 +43122,23 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const levelrenderer_changes = {};
-    			if (dirty & /*input*/ 1) levelrenderer_changes.level = /*input*/ ctx[0];
-    			if (dirty & /*isDrawing*/ 8) levelrenderer_changes.playable = !/*isDrawing*/ ctx[3];
-    			if (dirty & /*screenTarget*/ 16) levelrenderer_changes.screenTarget = /*screenTarget*/ ctx[4];
+    			if (dirty[0] & /*input*/ 1) levelrenderer_changes.level = /*input*/ ctx[0];
+    			if (dirty[0] & /*isDrawing*/ 8) levelrenderer_changes.playable = !/*isDrawing*/ ctx[3];
+    			if (dirty[0] & /*screenTarget*/ 16) levelrenderer_changes.screenTarget = /*screenTarget*/ ctx[4];
     			levelrenderer.$set(levelrenderer_changes);
 
-    			if (!current || dirty & /*isDrawing*/ 8 && button0_class_value !== (button0_class_value = "btn " + (!/*isDrawing*/ ctx[3] ? "btn-success" : ""))) {
+    			if (!current || dirty[0] & /*isDrawing*/ 8 && button0_class_value !== (button0_class_value = "btn " + (!/*isDrawing*/ ctx[3] ? "btn-success" : ""))) {
     				attr_dev(button0, "class", button0_class_value);
     			}
 
-    			if (!current || dirty & /*isDrawing*/ 8 && button1_class_value !== (button1_class_value = "btn " + (/*isDrawing*/ ctx[3] ? "btn-success" : ""))) {
+    			if (!current || dirty[0] & /*isDrawing*/ 8 && button1_class_value !== (button1_class_value = "btn " + (/*isDrawing*/ ctx[3] ? "btn-success" : ""))) {
     				attr_dev(button1, "class", button1_class_value);
     			}
 
     			const form_changes = {};
-    			if (dirty & /*hasChanges*/ 256) form_changes.hasChanges = /*hasChanges*/ ctx[8];
+    			if (dirty[0] & /*hasChanges*/ 256) form_changes.hasChanges = /*hasChanges*/ ctx[8];
 
-    			if (dirty & /*$$scope, isAdding, itemOptions, selectedItemId, blockOptions, selectedBlockId, input*/ 1073743585) {
+    			if (dirty[0] & /*isAdding, itemOptions, selectedItemId, blockOptions, selectedBlockId, input*/ 1761 | dirty[1] & /*$$scope*/ 1) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -43240,7 +43178,7 @@ var app = (function () {
     }
 
     // (37:10) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_4(ctx) {
+    function create_default_slot_5(ctx) {
     	let t;
 
     	const block = {
@@ -43257,7 +43195,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4.name,
+    		id: create_default_slot_5.name,
     		type: "slot",
     		source: "(37:10) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
@@ -43266,13 +43204,40 @@ var app = (function () {
     	return block;
     }
 
-    // (46:14) {#if option.graphic != null}
+    // (43:10) <FieldCheckbox bind:checked={input.smoothPathing}>
+    function create_default_slot_4(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Smooth pathing");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_4.name,
+    		type: "slot",
+    		source: "(43:10) <FieldCheckbox bind:checked={input.smoothPathing}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (48:14) {#if option.graphic != null}
     function create_if_block_3(ctx) {
     	let artthumb;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*option*/ ctx[28].graphic },
+    			props: { id: /*option*/ ctx[29].graphic },
     			$$inline: true
     		});
 
@@ -43286,7 +43251,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty & /*option*/ 268435456) artthumb_changes.id = /*option*/ ctx[28].graphic;
+    			if (dirty[0] & /*option*/ 536870912) artthumb_changes.id = /*option*/ ctx[29].graphic;
     			artthumb.$set(artthumb_changes);
     		},
     		i: function intro(local) {
@@ -43307,20 +43272,20 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(46:14) {#if option.graphic != null}",
+    		source: "(48:14) {#if option.graphic != null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (45:12) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
+    // (47:12) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
     function create_default_slot_3$1(ctx) {
     	let t0;
-    	let t1_value = /*option*/ ctx[28].name + "";
+    	let t1_value = /*option*/ ctx[29].name + "";
     	let t1;
     	let current;
-    	let if_block = /*option*/ ctx[28].graphic != null && create_if_block_3(ctx);
+    	let if_block = /*option*/ ctx[29].graphic != null && create_if_block_3(ctx);
 
     	const block = {
     		c: function create() {
@@ -43335,11 +43300,11 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*option*/ ctx[28].graphic != null) {
+    			if (/*option*/ ctx[29].graphic != null) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty & /*option*/ 268435456) {
+    					if (dirty[0] & /*option*/ 536870912) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -43358,7 +43323,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty & /*option*/ 268435456) && t1_value !== (t1_value = /*option*/ ctx[28].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[0] & /*option*/ 536870912) && t1_value !== (t1_value = /*option*/ ctx[29].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -43380,20 +43345,20 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$1.name,
     		type: "slot",
-    		source: "(45:12) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>",
+    		source: "(47:12) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (56:14) {#if option.graphics?.still != null}
+    // (58:14) {#if option.graphics?.still != null}
     function create_if_block_2(ctx) {
     	let artthumb;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*option*/ ctx[28].graphics.still },
+    			props: { id: /*option*/ ctx[29].graphics.still },
     			$$inline: true
     		});
 
@@ -43407,7 +43372,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty & /*option*/ 268435456) artthumb_changes.id = /*option*/ ctx[28].graphics.still;
+    			if (dirty[0] & /*option*/ 536870912) artthumb_changes.id = /*option*/ ctx[29].graphics.still;
     			artthumb.$set(artthumb_changes);
     		},
     		i: function intro(local) {
@@ -43428,20 +43393,20 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(56:14) {#if option.graphics?.still != null}",
+    		source: "(58:14) {#if option.graphics?.still != null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (55:12) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+    // (57:12) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
     function create_default_slot_2$1(ctx) {
     	let t0;
-    	let t1_value = /*option*/ ctx[28].name + "";
+    	let t1_value = /*option*/ ctx[29].name + "";
     	let t1;
     	let current;
-    	let if_block = /*option*/ ctx[28].graphics?.still != null && create_if_block_2(ctx);
+    	let if_block = /*option*/ ctx[29].graphics?.still != null && create_if_block_2(ctx);
 
     	const block = {
     		c: function create() {
@@ -43456,11 +43421,11 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*option*/ ctx[28].graphics?.still != null) {
+    			if (/*option*/ ctx[29].graphics?.still != null) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty & /*option*/ 268435456) {
+    					if (dirty[0] & /*option*/ 536870912) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -43479,7 +43444,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty & /*option*/ 268435456) && t1_value !== (t1_value = /*option*/ ctx[28].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[0] & /*option*/ 536870912) && t1_value !== (t1_value = /*option*/ ctx[29].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -43501,7 +43466,7 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$1.name,
     		type: "slot",
-    		source: "(55:12) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>",
+    		source: "(57:12) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>",
     		ctx
     	});
 
@@ -43519,15 +43484,18 @@ var app = (function () {
     	let colorpicker;
     	let updating_value_1;
     	let t3;
+    	let fieldcheckbox;
+    	let updating_checked;
+    	let t4;
     	let div1;
     	let label1;
-    	let t5;
+    	let t6;
     	let inputselect0;
     	let updating_value_2;
-    	let t6;
+    	let t7;
     	let div2;
     	let label2;
-    	let t8;
+    	let t9;
     	let inputselect1;
     	let updating_value_3;
     	let current;
@@ -43539,7 +43507,7 @@ var app = (function () {
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_4] },
+    		$$slots: { default: [create_default_slot_5] },
     		$$scope: { ctx }
     	};
 
@@ -43563,8 +43531,28 @@ var app = (function () {
     	colorpicker = new ColorPicker({ props: colorpicker_props, $$inline: true });
     	binding_callbacks.push(() => bind(colorpicker, "value", colorpicker_value_binding));
 
+    	function fieldcheckbox_checked_binding(value) {
+    		/*fieldcheckbox_checked_binding*/ ctx[21](value);
+    	}
+
+    	let fieldcheckbox_props = {
+    		$$slots: { default: [create_default_slot_4] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[0].smoothPathing !== void 0) {
+    		fieldcheckbox_props.checked = /*input*/ ctx[0].smoothPathing;
+    	}
+
+    	fieldcheckbox = new FieldCheckbox({
+    			props: fieldcheckbox_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(fieldcheckbox, "checked", fieldcheckbox_checked_binding));
+
     	function inputselect0_value_binding(value) {
-    		/*inputselect0_value_binding*/ ctx[21](value);
+    		/*inputselect0_value_binding*/ ctx[22](value);
     	}
 
     	let inputselect0_props = {
@@ -43572,8 +43560,8 @@ var app = (function () {
     		$$slots: {
     			default: [
     				create_default_slot_3$1,
-    				({ option }) => ({ 28: option }),
-    				({ option }) => option ? 268435456 : 0
+    				({ option }) => ({ 29: option }),
+    				({ option }) => [option ? 536870912 : 0]
     			]
     		},
     		$$scope: { ctx }
@@ -43591,7 +43579,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(inputselect0, "value", inputselect0_value_binding));
 
     	function inputselect1_value_binding(value) {
-    		/*inputselect1_value_binding*/ ctx[22](value);
+    		/*inputselect1_value_binding*/ ctx[23](value);
     	}
 
     	let inputselect1_props = {
@@ -43599,8 +43587,8 @@ var app = (function () {
     		$$slots: {
     			default: [
     				create_default_slot_2$1,
-    				({ option }) => ({ 28: option }),
-    				({ option }) => option ? 268435456 : 0
+    				({ option }) => ({ 29: option }),
+    				({ option }) => [option ? 536870912 : 0]
     			]
     		},
     		$$scope: { ctx }
@@ -43627,26 +43615,28 @@ var app = (function () {
     			t2 = space();
     			create_component(colorpicker.$$.fragment);
     			t3 = space();
+    			create_component(fieldcheckbox.$$.fragment);
+    			t4 = space();
     			div1 = element("div");
     			label1 = element("label");
     			label1.textContent = "Place a block";
-    			t5 = space();
-    			create_component(inputselect0.$$.fragment);
     			t6 = space();
+    			create_component(inputselect0.$$.fragment);
+    			t7 = space();
     			div2 = element("div");
     			label2 = element("label");
     			label2.textContent = "Place an item";
-    			t8 = space();
+    			t9 = space();
     			create_component(inputselect1.$$.fragment);
     			add_location(label0, file$3, 38, 12, 1348);
     			attr_dev(div0, "class", "form-group");
     			add_location(div0, file$3, 37, 10, 1310);
-    			add_location(label1, file$3, 43, 12, 1541);
+    			add_location(label1, file$3, 45, 12, 1635);
     			attr_dev(div1, "class", "form-group");
-    			add_location(div1, file$3, 42, 10, 1503);
-    			add_location(label2, file$3, 53, 12, 1901);
+    			add_location(div1, file$3, 44, 10, 1597);
+    			add_location(label2, file$3, 55, 12, 1995);
     			attr_dev(div2, "class", "form-group");
-    			add_location(div2, file$3, 52, 10, 1863);
+    			add_location(div2, file$3, 54, 10, 1957);
     		},
     		m: function mount(target, anchor) {
     			mount_component(fieldtext, target, anchor);
@@ -43656,25 +43646,27 @@ var app = (function () {
     			append_dev(div0, t2);
     			mount_component(colorpicker, div0, null);
     			insert_dev(target, t3, anchor);
+    			mount_component(fieldcheckbox, target, anchor);
+    			insert_dev(target, t4, anchor);
     			insert_dev(target, div1, anchor);
     			append_dev(div1, label1);
-    			append_dev(div1, t5);
+    			append_dev(div1, t6);
     			mount_component(inputselect0, div1, null);
-    			insert_dev(target, t6, anchor);
+    			insert_dev(target, t7, anchor);
     			insert_dev(target, div2, anchor);
     			append_dev(div2, label2);
-    			append_dev(div2, t8);
+    			append_dev(div2, t9);
     			mount_component(inputselect1, div2, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 1073741824) {
+    			if (dirty[1] & /*$$scope*/ 1) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value && dirty & /*input*/ 1) {
+    			if (!updating_value && dirty[0] & /*input*/ 1) {
     				updating_value = true;
     				fieldtext_changes.value = /*input*/ ctx[0].name;
     				add_flush_callback(() => updating_value = false);
@@ -43683,21 +43675,34 @@ var app = (function () {
     			fieldtext.$set(fieldtext_changes);
     			const colorpicker_changes = {};
 
-    			if (!updating_value_1 && dirty & /*input*/ 1) {
+    			if (!updating_value_1 && dirty[0] & /*input*/ 1) {
     				updating_value_1 = true;
     				colorpicker_changes.value = /*input*/ ctx[0].backgroundColor;
     				add_flush_callback(() => updating_value_1 = false);
     			}
 
     			colorpicker.$set(colorpicker_changes);
-    			const inputselect0_changes = {};
-    			if (dirty & /*blockOptions*/ 512) inputselect0_changes.options = /*blockOptions*/ ctx[9];
+    			const fieldcheckbox_changes = {};
 
-    			if (dirty & /*$$scope, option*/ 1342177280) {
+    			if (dirty[1] & /*$$scope*/ 1) {
+    				fieldcheckbox_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_checked && dirty[0] & /*input*/ 1) {
+    				updating_checked = true;
+    				fieldcheckbox_changes.checked = /*input*/ ctx[0].smoothPathing;
+    				add_flush_callback(() => updating_checked = false);
+    			}
+
+    			fieldcheckbox.$set(fieldcheckbox_changes);
+    			const inputselect0_changes = {};
+    			if (dirty[0] & /*blockOptions*/ 512) inputselect0_changes.options = /*blockOptions*/ ctx[9];
+
+    			if (dirty[0] & /*option*/ 536870912 | dirty[1] & /*$$scope*/ 1) {
     				inputselect0_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_2 && dirty & /*selectedBlockId*/ 32) {
+    			if (!updating_value_2 && dirty[0] & /*selectedBlockId*/ 32) {
     				updating_value_2 = true;
     				inputselect0_changes.value = /*selectedBlockId*/ ctx[5];
     				add_flush_callback(() => updating_value_2 = false);
@@ -43705,13 +43710,13 @@ var app = (function () {
 
     			inputselect0.$set(inputselect0_changes);
     			const inputselect1_changes = {};
-    			if (dirty & /*itemOptions*/ 1024) inputselect1_changes.options = /*itemOptions*/ ctx[10];
+    			if (dirty[0] & /*itemOptions*/ 1024) inputselect1_changes.options = /*itemOptions*/ ctx[10];
 
-    			if (dirty & /*$$scope, option*/ 1342177280) {
+    			if (dirty[0] & /*option*/ 536870912 | dirty[1] & /*$$scope*/ 1) {
     				inputselect1_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_3 && dirty & /*selectedItemId*/ 64) {
+    			if (!updating_value_3 && dirty[0] & /*selectedItemId*/ 64) {
     				updating_value_3 = true;
     				inputselect1_changes.value = /*selectedItemId*/ ctx[6];
     				add_flush_callback(() => updating_value_3 = false);
@@ -43723,6 +43728,7 @@ var app = (function () {
     			if (current) return;
     			transition_in(fieldtext.$$.fragment, local);
     			transition_in(colorpicker.$$.fragment, local);
+    			transition_in(fieldcheckbox.$$.fragment, local);
     			transition_in(inputselect0.$$.fragment, local);
     			transition_in(inputselect1.$$.fragment, local);
     			current = true;
@@ -43730,6 +43736,7 @@ var app = (function () {
     		o: function outro(local) {
     			transition_out(fieldtext.$$.fragment, local);
     			transition_out(colorpicker.$$.fragment, local);
+    			transition_out(fieldcheckbox.$$.fragment, local);
     			transition_out(inputselect0.$$.fragment, local);
     			transition_out(inputselect1.$$.fragment, local);
     			current = false;
@@ -43740,9 +43747,11 @@ var app = (function () {
     			if (detaching) detach_dev(div0);
     			destroy_component(colorpicker);
     			if (detaching) detach_dev(t3);
+    			destroy_component(fieldcheckbox, detaching);
+    			if (detaching) detach_dev(t4);
     			if (detaching) detach_dev(div1);
     			destroy_component(inputselect0);
-    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(t7);
     			if (detaching) detach_dev(div2);
     			destroy_component(inputselect1);
     		}
@@ -43863,9 +43872,9 @@ var app = (function () {
     				active: /*paramId*/ ctx[1],
     				$$slots: {
     					default: [
-    						create_default_slot_5,
-    						({ item }) => ({ 29: item }),
-    						({ item }) => item ? 536870912 : 0
+    						create_default_slot_6,
+    						({ item }) => ({ 30: item }),
+    						({ item }) => [item ? 1073741824 : 0]
     					]
     				},
     				$$scope: { ctx }
@@ -43895,10 +43904,10 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const itemlistnav_changes = {};
-    			if (dirty & /*$project*/ 4) itemlistnav_changes.collection = /*$project*/ ctx[2].levels;
-    			if (dirty & /*paramId*/ 2) itemlistnav_changes.active = /*paramId*/ ctx[1];
+    			if (dirty[0] & /*$project*/ 4) itemlistnav_changes.collection = /*$project*/ ctx[2].levels;
+    			if (dirty[0] & /*paramId*/ 2) itemlistnav_changes.active = /*paramId*/ ctx[1];
 
-    			if (dirty & /*$$scope, item*/ 1610612736) {
+    			if (dirty[0] & /*item*/ 1073741824 | dirty[1] & /*$$scope*/ 1) {
     				itemlistnav_changes.$$scope = { dirty, ctx };
     			}
 
@@ -43908,7 +43917,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty & /*input*/ 1) {
+    					if (dirty[0] & /*input*/ 1) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -43982,10 +43991,10 @@ var app = (function () {
     			mount_component(applayout, target, anchor);
     			current = true;
     		},
-    		p: function update(ctx, [dirty]) {
+    		p: function update(ctx, dirty) {
     			const applayout_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, itemOptions, selectedItemId, blockOptions, selectedBlockId, input, isDrawing, screenTarget, $project, paramId*/ 1073743871) {
+    			if (dirty[0] & /*hasChanges, isAdding, itemOptions, selectedItemId, blockOptions, selectedBlockId, input, isDrawing, screenTarget, $project, paramId*/ 2047 | dirty[1] & /*$$scope*/ 1) {
     				applayout_changes.$$scope = { dirty, ctx };
     			}
 
@@ -44022,6 +44031,7 @@ var app = (function () {
     	return {
     		name: "",
     		backgroundColor: "rgba(0,0,0,1)",
+    		smoothPathing: false,
     		blocks: [],
     		enemies: []
     	};
@@ -44157,6 +44167,13 @@ var app = (function () {
     		}
     	}
 
+    	function fieldcheckbox_checked_binding(value) {
+    		if ($$self.$$.not_equal(input.smoothPathing, value)) {
+    			input.smoothPathing = value;
+    			$$invalidate(0, input);
+    		}
+    	}
+
     	function inputselect0_value_binding(value) {
     		selectedBlockId = value;
     		$$invalidate(5, selectedBlockId);
@@ -44186,6 +44203,7 @@ var app = (function () {
     		LevelRenderer: LevelBuilder_Renderer,
     		project,
     		validator,
+    		FieldCheckbox,
     		params,
     		input,
     		isDrawing,
@@ -44233,30 +44251,30 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*params*/ 65536) {
+    		if ($$self.$$.dirty[0] & /*params*/ 65536) {
     			$$invalidate(1, paramId = decodeURIComponent(params.id) || "new");
     		}
 
-    		if ($$self.$$.dirty & /*paramId*/ 2) {
+    		if ($$self.$$.dirty[0] & /*paramId*/ 2) {
     			paramId == "new" ? create() : edit(paramId);
     		}
 
-    		if ($$self.$$.dirty & /*input*/ 1) {
+    		if ($$self.$$.dirty[0] & /*input*/ 1) {
     			$$invalidate(7, isAdding = input?.id == null);
     		}
 
-    		if ($$self.$$.dirty & /*input, $project*/ 5) {
+    		if ($$self.$$.dirty[0] & /*input, $project*/ 5) {
     			$$invalidate(8, hasChanges = input != null && !validator.equals(input, $project.levels[input.id]));
     		}
 
-    		if ($$self.$$.dirty & /*$project*/ 4) {
+    		if ($$self.$$.dirty[0] & /*$project*/ 4) {
     			$$invalidate(9, blockOptions = [
     				{ value: null, name: "Eraser" },
     				...Object.values($project.blocks).map(b => ({ ...b, value: b.id })).sort(sortByName)
     			]);
     		}
 
-    		if ($$self.$$.dirty & /*$project*/ 4) {
+    		if ($$self.$$.dirty[0] & /*$project*/ 4) {
     			$$invalidate(10, itemOptions = [
     				{ value: null, name: "Eraser" },
     				...Object.values($project.items).map(i => ({ ...i, value: i.id })).sort(sortByName)
@@ -44286,6 +44304,7 @@ var app = (function () {
     		click_handler_1,
     		fieldtext_value_binding,
     		colorpicker_value_binding,
+    		fieldcheckbox_checked_binding,
     		inputselect0_value_binding,
     		inputselect1_value_binding
     	];
@@ -44294,7 +44313,7 @@ var app = (function () {
     class LevelBuilder extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { params: 16 });
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { params: 16 }, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,

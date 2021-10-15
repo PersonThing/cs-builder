@@ -42,7 +42,25 @@ export default class Player extends PIXI.Container {
   setTarget(target) {
     // make it compute a path around any blocks in the way
     // if no path available, get as close as possible to clicked point
-    this.path = this.parent.levelGrid.findPath(this.position, target, this.config.smoothPathing)
+    this.path = this.parent.levelGrid.findPath(this.position, target)
+
+    // show a preview of what the path looks like
+    // clear path line
+    if (this.pathLine == null) {
+      this.pathLine = new PIXI.Graphics()
+      this.pathLine.x = 0
+      this.pathLine.y = 0
+      this.parent.addChild(this.pathLine)
+    } else {
+      this.pathLine.clear()
+    }
+    this.pathLine.moveTo(this.x, this.y)
+    this.path.forEach(p => {
+      this.pathLine.lineStyle(5, 0xffffff, 0.5)
+      this.pathLine.lineTo(p.x, p.y)
+      this.pathLine.drawCircle(p.x, p.y, 5)
+    })
+
     this.targetNextPathPoint()
   }
 

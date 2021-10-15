@@ -40,6 +40,8 @@
             <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
           </div>
 
+          <FieldCheckbox bind:checked={input.smoothPathing}>Smooth pathing</FieldCheckbox>
+
           <div class="form-group">
             <label>Place a block</label>
             <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
@@ -81,6 +83,7 @@
   import LevelRenderer from './LevelBuilder.Renderer.svelte'
   import project from '../stores/active-project-store'
   import validator from '../services/validator'
+  import FieldCheckbox from '../components/FieldCheckbox.svelte'
 
   export let params = {}
   let input = createDefaultInput()
@@ -126,6 +129,7 @@
     return {
       name: '',
       backgroundColor: 'rgba(0,0,0,1)',
+      smoothPathing: false,
       blocks: [],
       enemies: [],
     }
