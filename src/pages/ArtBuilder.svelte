@@ -177,7 +177,7 @@
           {#if isBlockSize}
             <div class="ml-2">
               Block tiling preview
-              {#each [0, 0] as r}
+              {#each [0, 0, 0] as r}
                 <div class="flex">
                   {#each [0, 0, 0] as margin}
                     {#if input.animated}

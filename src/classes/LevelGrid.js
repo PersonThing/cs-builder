@@ -39,29 +39,27 @@ export default class LevelGrid {
    * @returns
    */
   findPath(from, to) {
-    const gridFrom = this.toGridCoordinates(from)
-    let gridTo = this.toGridCoordinates(to)
-    gridTo = this.getNearestWalkablePointBetween(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1]) ?? gridFrom
-    const grid = this.grid.clone()
-    const path = this.finder.findPath(gridFrom[0], gridFrom[1], gridTo[0], gridTo[1], grid)
-    const smoothPath = this.smoothPathing ? PF.Util.smoothenPath(this.grid, path) : PF.Util.compressPath(path)
+    const [startX, startY] = this.toGridCoordinates(from)
+    const [goalX, goalY] = this.toGridCoordinates(to)
 
-    // remove the first point if it's the same as gridFrom
-    if (smoothPath[0][0] == gridFrom[0] && smoothPath[0][1] == gridFrom[1]) smoothPath.shift()
+    // find all points in a line between from and to
+    // filter to only walkable points
+    // loop walkable points backward, trying to find paths to them.  use the first path found.
+    const lineBetween = PF.Util.interpolate(startX, startY, goalX, goalY).filter(([x, y]) => this.grid.isWalkableAt(x, y))
+    let path = null
+    for (let i = lineBetween.length - 1; i >= 0; i--) {
+      let [x, y] = lineBetween[i]
+      path = this.finder.findPath(startX, startY, x, y, this.grid.clone())
+      if (path.length > 0) break
+    }
+    if (path == null || path.length == 0) return []
 
-    return smoothPath.map(([x, y]) => this.toGameCoordinates({ x, y }))
-  }
+    path = this.smoothPathing ? PF.Util.smoothenPath(this.grid, path) : PF.Util.compressPath(path)
 
-  /**
-   * if they click on something that isn't walkable / is outside grid, path to walkable point nearest the target on a line between current position and where they clicked
-   * @param {*} gridFrom
-   * @param {*} gridTo
-   * @returns
-   */
-  getNearestWalkablePointBetween(x1, y1, x2, y2) {
-    return PF.Util.interpolate(x1, y1, x2, y2)
-      .filter(([x, y]) => this.grid.isWalkableAt(x, y))
-      .pop()
+    // remove the first point if it's the same as start
+    if (path.length && path[0][0] == startX && path[0][1] == startY) path.shift()
+
+    return path.map(([x, y]) => this.toGameCoordinates({ x, y }))
   }
 
   toGridCoordinates(coords) {

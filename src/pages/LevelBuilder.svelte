@@ -44,7 +44,7 @@
 
           <div class="form-group">
             <label>Place a block</label>
-            <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
+            <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option on:change={() => setDrawMode(DrawMode.Blocks)}>
               {#if option.graphic != null}
                 <ArtThumb id={option.graphic} />
               {/if}
@@ -54,7 +54,7 @@
 
           <div class="form-group">
             <label>Place an item</label>
-            <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+            <InputSelect bind:value={selectedItemId} options={itemOptions} let:option on:change={() => setDrawMode(DrawMode.Items)}>
               {#if option.graphics?.still != null}
                 <ArtThumb id={option.graphics.still} />
               {/if}
@@ -101,8 +101,14 @@
   let selectedBlockId = 0
   let selectedItemId = null
 
+  const DrawMode = {
+    Blocks: 0,
+    Items: 1,
+  }
+  let drawMode = DrawMode.Blocks
+
   $: blockOptions = [
-    { value: null, name: 'Eraser' },
+    { value: null, name: 'None' },
     ...Object.values($project.blocks)
       .map(b => ({
         ...b,
@@ -112,7 +118,7 @@
   ]
 
   $: itemOptions = [
-    { value: null, name: 'Eraser' },
+    { value: null, name: 'None' },
     ...Object.values($project.items)
       .map(i => ({
         ...i,
@@ -131,7 +137,7 @@
       backgroundColor: 'rgba(0,0,0,1)',
       smoothPathing: false,
       blocks: [],
-      enemies: [],
+      items: [],
     }
   }
 
@@ -172,6 +178,9 @@
       if (event.button != 0) {
         const { x, y } = getBlockCoordsFromEvent(event)
         selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.blockId
+        selectedItemId = input.items.find(i => i.x == x && i.y == y)?.itemId
+
+        setDrawMode(selectedItemId == null ? DrawMode.Blocks : DrawMode.Items)
       } else {
         drawAtEvent(event)
       }
@@ -203,19 +212,41 @@
 
   function drawAtEvent(event) {
     const { x, y } = getBlockCoordsFromEvent(event)
-    const blocksMinusAnyAtThisXY = input.blocks.filter(b => b.x != x || b.y != y)
-    if (selectedBlockId == null) {
-      input.blocks = blocksMinusAnyAtThisXY
+    if (drawMode === DrawMode.Blocks) {
+      console.log('drawing blocks')
+      input.blocks = replaceAtCoord(input.blocks, x, y, selectedBlockId, 'blockId')
     } else {
-      const newBlock = { x, y, blockId: selectedBlockId }
-      input.blocks = [...blocksMinusAnyAtThisXY, newBlock].sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
+      console.log('drawing items')
+      input.items = replaceAtCoord(input.items, x, y, selectedItemId, 'itemId')
     }
+
+    console.log(input.items)
+  }
+
+  function replaceAtCoord(objects, x, y, selectedId, idPropertyName) {
+    const objectsMinusAnyAtThisXY = objects.filter(o => o.x != x || o.y != y)
+    if (selectedId == null) {
+      objects = objectsMinusAnyAtThisXY
+    } else {
+      const newObject = { x, y, [idPropertyName]: selectedId }
+      objects = [...objectsMinusAnyAtThisXY, newObject].sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
+    }
+    return objects
   }
 
   function movePlayerToEvent(event) {
     screenTarget = {
       x: event.offsetX,
       y: event.offsetY,
+    }
+  }
+
+  function setDrawMode(dm) {
+    drawMode = dm
+    if (dm === DrawMode.Blocks) {
+      selectedItemId = null
+    } else {
+      selectedBlockId = null
     }
   }
 </script>

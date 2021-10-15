@@ -21,6 +21,7 @@ export default class Player extends PIXI.Container {
 
     this.path = []
     this.target = null
+    this.zIndex = 2
   }
 
   bringToFront() {
@@ -44,23 +45,6 @@ export default class Player extends PIXI.Container {
     // if no path available, get as close as possible to clicked point
     this.path = this.parent.levelGrid.findPath(this.position, target)
 
-    // show a preview of what the path looks like
-    // clear path line
-    if (this.pathLine == null) {
-      this.pathLine = new PIXI.Graphics()
-      this.pathLine.x = 0
-      this.pathLine.y = 0
-      this.parent.addChild(this.pathLine)
-    } else {
-      this.pathLine.clear()
-    }
-    this.pathLine.moveTo(this.x, this.y)
-    this.path.forEach(p => {
-      this.pathLine.lineStyle(5, 0xffffff, 0.5)
-      this.pathLine.lineTo(p.x, p.y)
-      this.pathLine.drawCircle(p.x, p.y, 5)
-    })
-
     this.targetNextPathPoint()
   }
 
@@ -77,6 +61,9 @@ export default class Player extends PIXI.Container {
     if (this.target == null && this.path.length) {
       this.targetNextPathPoint()
     }
+
+    // show a preview of where we're going
+    this.drawPathLine()
 
     if (this.target) {
       // change to moving texture
@@ -104,5 +91,33 @@ export default class Player extends PIXI.Container {
     } else {
       this.setMoving(false)
     }
+  }
+
+  drawPathLine() {
+    if (this.pathLine == null) {
+      this.pathLine = new PIXI.Graphics()
+      this.pathLine.x = 0
+      this.pathLine.y = 0
+      this.pathLine.zIndex = 1
+      this.parent.addChild(this.pathLine)
+    } else {
+      this.pathLine.clear()
+    }
+
+    if (this.target == null) return
+
+    this.pathLine.moveTo(this.x, this.y)
+
+    // line to current target
+    this.pathLine.lineStyle(5, 0xffffff, 0.5)
+    this.pathLine.lineTo(this.target.x, this.target.y)
+    this.pathLine.drawCircle(this.target.x, this.target.y, 5)
+
+    // line to each subsequent target
+    this.pathLine.lineStyle(5, 0xffffff, 0.3)
+    this.path.forEach(p => {
+      this.pathLine.lineTo(p.x, p.y)
+      this.pathLine.drawCircle(p.x, p.y, 5)
+    })
   }
 }

@@ -14,6 +14,7 @@
   import project from '../stores/active-project-store'
   import Player from '../classes/Player.js'
   import Block from '../classes/Block.js'
+  import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
 
   let pixiContainer
@@ -50,11 +51,17 @@
     world = new PIXI.Container()
 
     for (const blockConfig of level.blocks) {
-      const block = new Block($project, blockConfig)
+      const block = new Block($project, blockConfig, gridSize)
       world.addChild(block)
     }
 
+    for (const itemConfig of level.items) {
+      const item = new Item($project, itemConfig, gridSize)
+      world.addChild(item)
+    }
+
     pixiApp.stage.addChild(world)
+    pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
 
     player = new Player($project, $project.characters[0], 1.5 * gridSize, 1.5 * gridSize)
     pixiApp.stage.addChild(player)
