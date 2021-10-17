@@ -127,6 +127,10 @@
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
       delete $project.blocks[input.id]
       $project.blocks = $project.blocks
+      $project.levels = $project.levels.map(l => {
+        l.blocks = l.blocks.filter(i => i.id != input.id)
+        return p
+      })
       push(`/blocks/new`)
     }
   }

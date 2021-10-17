@@ -10,8 +10,8 @@
         <a href="/#/blocks" class:active={active == 'blocks'}>Blocks</a>
         <a href="/#/items" class:active={active == 'items'}>Items</a>
         <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
-        <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a>
-        <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a> -->
+        <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->
+        <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
         <a href="/#/levels" class:active={active == 'levels'}>Levels</a>
       </div>
     {/if}

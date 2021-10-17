@@ -11,6 +11,7 @@
       <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
 
       <FieldScriptEditor bind:value={input.onCollision}>onCollision(item, sprite)</FieldScriptEditor>
+      <FieldCheckbox bind:checked={input.removeOnCollision}>Remove on collision</FieldCheckbox>
       <span slot="buttons">
         {#if !isAdding}
           <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
@@ -33,6 +34,7 @@
   import { push } from 'svelte-spa-router'
   import { getNextId } from '../stores/project-store'
   import FieldScriptEditor from '../components/FieldScriptEditor.svelte'
+  import FieldCheckbox from '../components/FieldCheckbox.svelte'
 
   export let params = {}
   let input = createDefaultInput()
@@ -49,6 +51,7 @@
         still: null,
       },
       onCollision: null,
+      removeOnCollision: true,
     }
   }
 
@@ -78,6 +81,10 @@
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
       delete $project.items[input.id]
       $project.items = $project.items
+      $project.levels = $project.levels.map(l => {
+        l.items = l.items.filter(i => i.id != input.id)
+        return l
+      })
       push(`/items/new`)
     }
   }

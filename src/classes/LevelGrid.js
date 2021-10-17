@@ -6,7 +6,7 @@ export default class LevelGrid {
     this.gridSize = gridSize
 
     const walkableBlocks = level.blocks
-      .filter(b => project.blocks[b.blockId].canWalk)
+      .filter(b => project.blocks[b.id].canWalk)
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
 

@@ -8,7 +8,7 @@
   </div>
 
   {#if input}
-    <div class="grow">
+    <div class="grow" style="position: relative;">
       <LevelRenderer
         level={input}
         playable={!isDrawing}
@@ -40,7 +40,8 @@
             <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
           </div>
 
-          <FieldCheckbox bind:checked={input.smoothPathing}>Smooth pathing</FieldCheckbox>
+          <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing">Smooth pathing</FieldCheckbox>
+          <FieldCheckbox bind:checked={input.showPaths} name="show-paths">Show paths</FieldCheckbox>
 
           <div class="form-group">
             <label>Place a block</label>
@@ -55,6 +56,16 @@
           <div class="form-group">
             <label>Place an item</label>
             <InputSelect bind:value={selectedItemId} options={itemOptions} let:option on:change={() => setDrawMode(DrawMode.Items)}>
+              {#if option.graphics?.still != null}
+                <ArtThumb id={option.graphics.still} />
+              {/if}
+              {option.name}
+            </InputSelect>
+          </div>
+
+          <div class="form-group">
+            <label>Place an enemy</label>
+            <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option on:change={() => setDrawMode(DrawMode.Enemies)}>
               {#if option.graphics?.still != null}
                 <ArtThumb id={option.graphics.still} />
               {/if}
@@ -100,10 +111,12 @@
 
   let selectedBlockId = 0
   let selectedItemId = null
+  let selectedEnemyId = null
 
   const DrawMode = {
     Blocks: 0,
     Items: 1,
+    Enemies: 2,
   }
   let drawMode = DrawMode.Blocks
 
@@ -127,6 +140,16 @@
       .sort(sortByName),
   ]
 
+  $: enemyOptions = [
+    { value: null, name: 'None' },
+    ...Object.values($project.enemies)
+      .map(i => ({
+        ...i,
+        value: i.id,
+      }))
+      .sort(sortByName),
+  ]
+
   function create() {
     input = createDefaultInput()
   }
@@ -136,6 +159,7 @@
       name: '',
       backgroundColor: 'rgba(0,0,0,1)',
       smoothPathing: false,
+      showPaths: true,
       blocks: [],
       items: [],
     }
@@ -177,10 +201,11 @@
       // if they do anything but left click, select the block at the current position (or eraser if null)
       if (event.button != 0) {
         const { x, y } = getBlockCoordsFromEvent(event)
-        selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.blockId
-        selectedItemId = input.items.find(i => i.x == x && i.y == y)?.itemId
+        selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id
+        selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
+        selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id
 
-        setDrawMode(selectedItemId == null ? DrawMode.Blocks : DrawMode.Items)
+        setDrawMode(selectedEnemyId != null ? DrawMode.Enemies : selectedItemId != null ? DrawMode.Items : DrawMode.Blocks)
       } else {
         drawAtEvent(event)
       }
@@ -212,23 +237,24 @@
 
   function drawAtEvent(event) {
     const { x, y } = getBlockCoordsFromEvent(event)
-    if (drawMode === DrawMode.Blocks) {
-      console.log('drawing blocks')
-      input.blocks = replaceAtCoord(input.blocks, x, y, selectedBlockId, 'blockId')
-    } else {
-      console.log('drawing items')
-      input.items = replaceAtCoord(input.items, x, y, selectedItemId, 'itemId')
+    switch (drawMode) {
+      case DrawMode.Blocks:
+        input.blocks = replaceAtCoord(input.blocks, x, y, selectedBlockId)
+        break
+      case DrawMode.Items:
+        input.items = replaceAtCoord(input.items, x, y, selectedItemId)
+        break
+      case DrawMode.Enemies:
+        input.enemies = replaceAtCoord(input.enemies, x, y, selectedEnemyId)
     }
-
-    console.log(input.items)
   }
 
-  function replaceAtCoord(objects, x, y, selectedId, idPropertyName) {
+  function replaceAtCoord(objects, x, y, id) {
     const objectsMinusAnyAtThisXY = objects.filter(o => o.x != x || o.y != y)
-    if (selectedId == null) {
+    if (id == null) {
       objects = objectsMinusAnyAtThisXY
     } else {
-      const newObject = { x, y, [idPropertyName]: selectedId }
+      const newObject = { x, y, id }
       objects = [...objectsMinusAnyAtThisXY, newObject].sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
     }
     return objects
@@ -243,10 +269,19 @@
 
   function setDrawMode(dm) {
     drawMode = dm
-    if (dm === DrawMode.Blocks) {
-      selectedItemId = null
-    } else {
-      selectedBlockId = null
+    switch (dm) {
+      case DrawMode.Blocks:
+        selectedItemId = null
+        selectedEnemyId = null
+        break
+      case DrawMode.Items:
+        selectedBlockId = null
+        selectedEnemyId = null
+        break
+      case DrawMode.Enemies:
+        selectedBlockId = null
+        selectedItemId = null
+        break
     }
   }
 </script>

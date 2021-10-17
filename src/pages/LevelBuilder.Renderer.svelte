@@ -13,14 +13,21 @@
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
   import project from '../stores/active-project-store'
   import Player from '../classes/Player.js'
+  import Enemy from '../classes/Enemy.js'
   import Block from '../classes/Block.js'
   import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
+  import isTouching from '../services/hit-test.js'
 
   let pixiContainer
   let pixiApp
   let world
   let player
+  let itemContainer
+  let blockContainer
+  let enemyContainer
+
+  let levelGrid
 
   export let level
   export let screenTarget
@@ -40,30 +47,51 @@
   $: if (mounted && level != null) renderLevel(level)
 
   function renderLevel(level) {
+    // set background color and clear stage whenever we re-render level (this should only be called once when playing levels, or any time the level is changed when editing levels)
     pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
     pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
-    // pixiApp.stage.scale.x = $project.pixelSize TODO: make scaling work with events... right now the challenge is input coordinates are really goofy
-    // pixiApp.stage.scale.y = $project.pixelSize
 
-    // set level grid on stage so sprites can access it via hierarchy?
-    pixiApp.stage.levelGrid = new LevelGrid($project, level, gridSize)
+    // level grid helper for pathing
+    levelGrid = new LevelGrid($project, level, gridSize)
 
+    // world contains everything but player
     world = new PIXI.Container()
 
+    // create blocks
+    blockContainer = new PIXI.Container()
     for (const blockConfig of level.blocks) {
       const block = new Block($project, blockConfig, gridSize)
-      world.addChild(block)
+      blockContainer.addChild(block)
     }
+    world.addChild(blockContainer)
 
+    // create items
+    itemContainer = new PIXI.Container()
     for (const itemConfig of level.items) {
       const item = new Item($project, itemConfig, gridSize)
-      world.addChild(item)
+      itemContainer.addChild(item)
     }
+    world.addChild(itemContainer)
+
+    enemyContainer = new PIXI.Container()
+    for (const enemyConfig of level.enemies) {
+      const enemy = new Enemy(
+        $project,
+        $project.enemies[enemyConfig.id],
+        enemyConfig.x * gridSize,
+        enemyConfig.y * gridSize,
+        levelGrid,
+        level.showPaths
+      )
+      enemyContainer.addChild(enemy)
+    }
+    world.addChild(enemyContainer)
 
     pixiApp.stage.addChild(world)
     pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
 
-    player = new Player($project, $project.characters[0], 1.5 * gridSize, 1.5 * gridSize)
+    // create player
+    player = new Player($project, $project.characters[0], 1.5 * gridSize, 1.5 * gridSize, levelGrid, level.showPaths)
     pixiApp.stage.addChild(player)
   }
 
@@ -81,10 +109,24 @@
     player.setTarget(worldCoordinates)
   }
 
+  let enemyFrames = 0
   function onTick() {
+    player.onTick()
+    centerViewOnPlayer()
+
+    enemyContainer.children
+      .filter(e => e.config != null)
+      .forEach(enemy => {
+        // shouldn't change target each frame.. should only do it if target position changed
+        enemy.setTarget(player)
+        enemy.onTick()
+      })
+    checkCollisions()
+  }
+
+  function centerViewOnPlayer() {
     screenCenter.x = pixiApp.renderer.width / 2
     screenCenter.y = pixiApp.renderer.height / 2
-    player.onTick()
 
     if (playable) {
       pixiApp.stage.x = screenCenter.x
@@ -97,6 +139,15 @@
       pixiApp.stage.pivot.x = 0
       pixiApp.stage.pivot.y = 0
     }
+  }
+
+  function checkCollisions() {
+    itemContainer.children.forEach(item => {
+      if (isTouching(item, player)) {
+        item.onCollision(player)
+        if (item.config.removeOnCollision) itemContainer.removeChild(item)
+      }
+    })
   }
 </script>
 
