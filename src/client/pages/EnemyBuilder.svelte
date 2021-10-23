@@ -79,19 +79,19 @@
       document.getElementById('name').focus()
       return
     }
-    if (isAdding) {
-      enemies.insert(input).then(item => {
-        input = item
-      })
-    } else {
-      enemies.update(input)
-    }
-    push(`/enemies/${encodeURIComponent(input.id)}`)
+    ;(isAdding
+      ? enemies.apiInsert(input).then(item => {
+          input = item
+        })
+      : enemies.apiUpdate(input)
+    ).then(() => {
+      push(`/enemies/${encodeURIComponent(input.id)}`)
+    })
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      enemies.delete(input.projectId, input.id)
+      enemies.apiDelete(input.projectId, input.id)
       push(`/enemies/new`)
     }
   }

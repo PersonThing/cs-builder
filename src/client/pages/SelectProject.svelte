@@ -38,10 +38,10 @@
   }
 
   function deleteProject(p) {
-    let name = p.name
-    if (prompt(`If you are sure you want to delete this project, type the project name:?`, '') !== name) return
-    projects.delete(p.id).then(() => {})
-    $project = {}
+    if (prompt(`If you are sure you want to delete this project, type the project name:`, '') !== p.name.trim()) return
+    projects.apiDelete(p.id).then(() => {
+      if ($project.id == p.id) $project = {}
+    })
   }
 </script>
 

@@ -327,19 +327,19 @@
       return
     }
 
-    if (isAdding) {
-      art.insert(input).then(item => {
-        input = item
-      })
-    } else {
-      art.update(input)
-    }
-    push(`/art/${encodeURIComponent(input.id)}`)
+    ;(isAdding
+      ? art.apiInsert(input).then(item => {
+          input = item
+        })
+      : art.apiUpdate(input)
+    ).then(() => {
+      push(`/art/${encodeURIComponent(input.id)}`)
+    })
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      art.delete(input.projectId, input.id)
+      art.apiDelete(input.projectId, input.id)
       push(`/art/new`)
     }
   }

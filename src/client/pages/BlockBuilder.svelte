@@ -112,19 +112,19 @@
       document.getElementById('name').focus()
       return
     }
-    if (isAdding) {
-      blocks.insert(input).then(item => {
-        input = item
-      })
-    } else {
-      blocks.update(input)
-    }
-    push(`/blocks/${encodeURIComponent(input.id)}`)
+    ;(isAdding
+      ? blocks.apiInsert(input).then(item => {
+          input = item
+        })
+      : blocks.apiUpdate(input)
+    ).then(() => {
+      push(`/blocks/${encodeURIComponent(input.id)}`)
+    })
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      blocks.delete(input.projectId, input.id)
+      blocks.apiDelete(input.projectId, input.id)
       push(`/blocks/new`)
     }
   }

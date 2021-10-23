@@ -189,19 +189,19 @@
       document.getElementById('name').focus()
       return
     }
-    if (isAdding) {
-      levels.insert(input).then(item => {
-        input = item
-      })
-    } else {
-      levels.update(input)
-    }
-    push(`/levels/${encodeURIComponent(input.id)}`)
+    ;(isAdding
+      ? levels.apiInsert(input).then(item => {
+          input = item
+        })
+      : levels.apiUpdate(input)
+    ).then(() => {
+      push(`/levels/${encodeURIComponent(input.id)}`)
+    })
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      levels.delete(input.projectId, input.id)
+      levels.apiDelete(input.projectId, input.id)
       push(`/levels/new`)
     }
   }

@@ -41,6 +41,6 @@
       pixelSize: input.pixelSize,
     }
     project.set(p)
-    projects.update(p)
+    projects.apiUpdate(p)
   }
 </script>

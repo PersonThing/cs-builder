@@ -79,19 +79,20 @@
       document.getElementById('name').focus()
       return
     }
-    if (isAdding) {
-      characters.insert(input).then(item => {
-        input = item
-      })
-    } else {
-      characters.update(input)
-    }
-    push(`/characters/${encodeURIComponent(input.id)}`)
+
+    ;(isAdding
+      ? characters.apiInsert(input).then(item => {
+          input = item
+        })
+      : characters.apiUpdate(input)
+    ).then(() => {
+      push(`/characters/${encodeURIComponent(input.id)}`)
+    })
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      characters.delete(input.projectId, input.id)
+      characters.apiDelete(input.projectId, input.id)
       push(`/characters/new`)
     }
   }

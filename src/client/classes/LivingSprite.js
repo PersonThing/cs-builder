@@ -9,14 +9,15 @@ export default class LivingSprite extends PIXI.Container {
     this.config = config
     this.speed = config.speed // so events can modify without affecting config
 
-    this.sprites = {}
+    this.sprites = new PIXI.Container()
+    this.addChild(this.sprites)
     this.sprites.still = makeArtSprite(graphics.still)
     this.sprites.still.anchor.set(0.5)
+    this.sprites.addChild(this.sprites.still)
     this.sprites.moving = makeArtSprite(graphics.moving)
     this.sprites.moving.anchor.set(0.5)
     this.sprites.moving.visible = false
-    this.addChild(this.sprites.still)
-    this.addChild(this.sprites.moving)
+    this.sprites.addChild(this.sprites.moving)
 
     this.isMoving = false
 
@@ -61,7 +62,7 @@ export default class LivingSprite extends PIXI.Container {
     this.target = this.path.shift()
     if (this.target == null) this.endTarget = null
     else {
-      this.rotation = Math.atan2(this.target.y - this.y, this.target.x - this.x) + (90 * Math.PI) / 180
+      this.sprites.rotation = Math.atan2(this.target.y - this.y, this.target.x - this.x) + (90 * Math.PI) / 180
     }
   }
 

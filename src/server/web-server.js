@@ -1,10 +1,13 @@
 import express from 'express'
+import { Server as SocketIO } from 'socket.io'
 import path from 'path'
-const app = express()
 import { Server } from 'http'
+
+const app = express()
 const http = Server(app)
 const staticPath = path.resolve('public')
-console.log(staticPath)
+const io = new SocketIO(http)
+
 app.use(express.static(staticPath))
 app.use(express.json())
 
@@ -58,6 +61,7 @@ repo.connect().then(() => {
 
       repo.insert('projects', item).then(dbres => {
         item._id = dbres.insertedid
+        io.emit('projects.insert', item)
         res.json(item)
       })
     })
@@ -68,7 +72,7 @@ repo.connect().then(() => {
     const project = req.body
     project.id = req.params.id
     repo.update('projects', { id: project.id }, project).then(() => {
-      // todo sockets.emit() to update others
+      io.emit('projects.update', project)
       res.json(project)
     })
   })
@@ -79,7 +83,7 @@ repo.connect().then(() => {
     repo.delete('projects', { id: req.params.id }).then(() => {
       // delete project items
       Promise.all(itemTypeNames.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
-        // todo sockets.emit() to update others
+        io.emit('projects.delete', req.params.id)
         res.json(true)
       })
     })
@@ -102,14 +106,14 @@ repo.connect().then(() => {
       repo.find(c, { projectId: req.params.projectId }).then(collection => {
         const item = req.body
         item.id = (
-          itemTypeNames
+          collection
             .map(c => parseInt(c.id))
             .sort((a, b) => (a < b ? -1 : 1))
             .pop() + 1
         ).toString()
         repo.insert(c, item).then(dbres => {
-          // todo sockets.emit() to update others working on same project
           item._id = dbres.insertedid
+          io.emit(`${c}.insert`, item)
           res.json(item)
         })
       })
@@ -122,7 +126,7 @@ repo.connect().then(() => {
       item.id = req.params.id
       console.log('updating', item)
       repo.update(c, { projectId: item.projectId, id: item.id }, item).then(() => {
-        // todo sockets.emit() to update others working on same project
+        io.emit(`${c}.update`, item)
         res.json(item)
       })
     })
@@ -130,26 +134,27 @@ repo.connect().then(() => {
     // delete
     app.delete(`/api/projects/:projectId/${c}/:id`, (req, res) => {
       repo.delete(c, { projectId: req.params.projectId, id: req.params.id }).then(() => {
-        // todo sockets.emit() to update others working on same project
+        io.emit(`${c}.delete`, {
+          projectId: req.params.projectId,
+          id: req.params.id,
+        })
         res.json(true)
       })
     })
   })
 
   /////// sockets ///////
-  // import SocketIO from 'socket.io'
-  // const io = SocketIO(httpServer)
-  // io.on('connection', socket => {
-  //   socket.on('login', (name, password) => {
-  //     socket.user = db.users.find(u => u.name == name && u.password == password) || { name: `Guest ${socket.id}` }
-  //   })
+  io.on('connection', socket => {
+    // socket.on('login', (name, password) => {
+    //   socket.user = db.users.find(u => u.name == name && u.password == password) || { name: `Guest ${socket.id}` }
+    // })
 
-  //   socket.on('disconnect', () => console.log(`${socket.user?.name} disconnected`))
-  //   // listen for socket events / send socket events
-  //   // socket.on('event-name', payload => { /* client sent something */ })
-  //   // socket.emit('event-name', payload) send to just this socket
-  //   // io.emit('event-name', payload) send to everyone
-  // })
+    socket.on('disconnect', () => console.log(`${socket.user?.name} disconnected`))
+    // listen for socket events / send socket events
+    // socket.on('event-name', payload => { /* client sent something */ })
+    // socket.emit('event-name', payload) send to just this socket
+    // io.emit('event-name', payload) send to everyone
+  })
 
   const port = process.env.PORT || 4999
   http.listen(port, () => console.log(`Server listening on *:${port}`))

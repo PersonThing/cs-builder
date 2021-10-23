@@ -80,19 +80,20 @@
       document.getElementById('name').focus()
       return
     }
-    if (isAdding) {
-      items.insert(input).then(item => {
-        input = item
-      })
-    } else {
-      items.update(input)
-    }
-    push(`/items/${encodeURIComponent(input.id)}`)
+
+    ;(isAdding
+      ? items.apiInsert(input).then(item => {
+          input = item
+        })
+      : items.apiUpdate(input)
+    ).then(() => {
+      push(`/items/${encodeURIComponent(input.id)}`)
+    })
   }
 
   function del() {
     if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      items.delete(input.projectId, input.id)
+      items.apiDelete(input.projectId, input.id)
       push(`/items/new`)
     }
   }
