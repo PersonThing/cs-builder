@@ -36,74 +36,91 @@
 
   let mounted = false
   onMount(() => {
-    pixiApp = new PIXI.Application({
-      resizeTo: pixiContainer,
-    })
-    pixiContainer.appendChild(pixiApp.view)
-    pixiApp.ticker.add(onTick)
     mounted = true
   })
 
   $: if (mounted && level != null && playable != null) renderLevel(level)
 
   function renderLevel(level) {
-    // set background color and clear stage whenever we re-render level (this should only be called once when playing levels, or any time the level is changed when editing levels)
-    pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
-    pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
+    pixiApp?.destroy()
+    pixiContainer.childNodes.forEach(c => pixiContainer.removeChild(c))
 
-    // level grid helper for pathing
-    levelGrid = new LevelGrid($blocks, level, gridSize)
+    /* preload all art pngs, then render the level */
+    preloadArt().then(() => {
+      pixiApp = new PIXI.Application({
+        resizeTo: pixiContainer,
+      })
+      pixiContainer.appendChild(pixiApp.view)
+      pixiApp.ticker.add(onTick)
 
-    // world contains everything but player
-    world = new PIXI.Container()
+      // set background color and clear stage whenever we re-render level (this should only be called once when playing levels, or any time the level is changed when editing levels)
+      pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
 
-    // create blocks
-    blockContainer = new PIXI.Container()
-    for (const blockConfig of level.blocks) {
-      const bc = $blocks.find(b => b.id == blockConfig.id)
-      if (bc == null) continue
+      // level grid helper for pathing
+      levelGrid = new LevelGrid($blocks, level, gridSize)
 
-      const block = new Block(
-        bc,
-        $art.find(a => a.id == bc.graphic),
-        blockConfig,
-        gridSize
-      )
-      blockContainer.addChild(block)
-    }
-    world.addChild(blockContainer)
+      // world contains everything but player
+      world = new PIXI.Container()
 
-    // create items
-    itemContainer = new PIXI.Container()
-    for (const itemConfig of level.items) {
-      const ic = $items.find(i => i.id == itemConfig.id)
-      const item = new Item(
-        ic,
-        $art.find(a => a.id == ic.graphics.still),
-        itemConfig,
-        gridSize
-      )
-      itemContainer.addChild(item)
-    }
-    world.addChild(itemContainer)
+      // create blocks
+      blockContainer = new PIXI.Container()
+      for (const blockConfig of level.blocks) {
+        const bc = $blocks.find(b => b.id == blockConfig.id)
+        if (bc == null) continue
 
-    enemyContainer = new PIXI.Container()
-    for (const enemyConfig of level.enemies) {
-      const e = $enemies.find(e => e.id == enemyConfig.id)
-      const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize, enemyConfig.y * gridSize, levelGrid, level.showPaths)
-      enemyContainer.addChild(enemy)
-    }
-    world.addChild(enemyContainer)
+        const block = new Block(
+          bc,
+          $art.find(a => a.id == bc.graphic),
+          blockConfig,
+          gridSize
+        )
+        blockContainer.addChild(block)
+      }
+      world.addChild(blockContainer)
 
-    pixiApp.stage.addChild(world)
-    pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
+      // create items
+      itemContainer = new PIXI.Container()
+      for (const itemConfig of level.items) {
+        const ic = $items.find(i => i.id == itemConfig.id)
+        const item = new Item(
+          ic,
+          $art.find(a => a.id == ic.graphics.still),
+          itemConfig,
+          gridSize
+        )
+        itemContainer.addChild(item)
+      }
+      world.addChild(itemContainer)
 
-    // create player
-    if ($characters.length > 0) {
-      const char = $characters[0]
-      player = new Player(buildGraphics(char.graphics), char, 1.5 * gridSize, 1.5 * gridSize, levelGrid, level.showPaths)
-      pixiApp.stage.addChild(player)
-    }
+      enemyContainer = new PIXI.Container()
+      for (const enemyConfig of level.enemies) {
+        const e = $enemies.find(e => e.id == enemyConfig.id)
+        const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize, enemyConfig.y * gridSize, levelGrid, level.showPaths)
+        enemyContainer.addChild(enemy)
+      }
+      world.addChild(enemyContainer)
+
+      pixiApp.stage.addChild(world)
+      pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
+
+      // create player
+      if ($characters.length > 0) {
+        const char = $characters[0]
+        player = new Player(buildGraphics(char.graphics), char, 1.5 * gridSize, 1.5 * gridSize, levelGrid, level.showPaths)
+        pixiApp.stage.addChild(player)
+      }
+    })
+  }
+
+  function preloadArt() {
+    return new Promise((resolve, reject) => {
+      const loader = new PIXI.Loader()
+      $art.forEach(a => {
+        loader.add(a.png)
+        loader.onError.add(err => console.log('art loader failed', err))
+      })
+      loader.load(resolve)
+    })
   }
 
   function buildGraphics(graphicIds) {
