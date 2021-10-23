@@ -1,9 +1,18 @@
 <div class="container">
   <div class="header">
-    <h1>CSBuilder</h1>
+    <div>
+      <h1>CSBuilder</h1>
+      <div class="px1">
+        <strong>
+          {$project.name}
+        </strong>
 
+        <a href="/#/" title="Change project" class:active={active == 'projects'}>
+          {$project?.name ? 'Change' : 'Select'} project
+        </a>
+      </div>
+    </div>
     <div class="nav">
-      <a href="/#/" class="strong" title="Change project" class:active={active == 'projects'}>{$project?.name ?? 'Select project'}</a>
       {#if $project?.name}
         <a href="/#/project" class:active={active == 'project'}>Project settings</a>
         <a href="/#/art" class:active={active == 'art'}>Art</a>
@@ -42,7 +51,6 @@
     height: 100%;
 
     .header {
-      height: 60px;
       border-bottom: 1px solid $grey2;
       display: flex;
       flex-direction: row;
@@ -64,11 +72,8 @@
 
         a {
           display: block;
-          height: 100%;
-          line-height: 60px;
-          padding: 0 20px;
+          padding: 22px;
           text-decoration: none;
-
           color: #666;
 
           &:hover {
@@ -77,6 +82,11 @@
 
           &.active {
             background: $grey2;
+          }
+
+          .small {
+            font-size: 0.8em;
+            font-weight: normal;
           }
         }
       }
@@ -90,7 +100,7 @@
 
       :global(> div) {
         overflow: auto;
-        height: 100%;
+        max-height: 100%;
       }
 
       :global(.col1),

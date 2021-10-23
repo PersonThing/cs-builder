@@ -7,7 +7,7 @@ const socket = io('/')
 const LAST_PROJECT_ID = 'last-project-id'
 
 const replaceInStore = (update, item) => update(items => items.map(i => (i.id == item.id ? item : i)))
-const addToStore = (update, item) => update(items => [...items, item])
+const addToStore = (update, item) => update(items => [...items.filter(i => i.id != item.id), item])
 const removeFromStore = (update, id) => update(items => items.filter(i => i.id != id))
 
 const itemTypeNames = ['art', 'blocks', 'characters', 'enemies', 'items', 'levels']
@@ -120,23 +120,22 @@ function createProjectsStore() {
     refresh,
 
     apiInsert(p) {
-      console.log('inserting', p)
       return api.projects.insert(p).then(res => {
-        insertProject(res)
+        addToStore(update, res)
         return res
       })
     },
 
     apiUpdate(p) {
       return api.projects.update(p).then(res => {
-        updateProject(res)
+        replaceInStore(update, res)
         return res
       })
     },
 
     apiDelete(id) {
       return api.projects.delete(id).then(() => {
-        deleteProject(id)
+        removeFromStore(update, id)
       })
     },
   }

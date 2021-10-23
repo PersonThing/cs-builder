@@ -9,21 +9,25 @@
 
   {#if input}
     <div class="grow" style="position: relative;">
-      <LevelRenderer
-        level={input}
-        playable={!isDrawing}
-        {screenTarget}
-        {gridSize}
-        on:pointerdown={onPointerDown}
-        on:pointerup={onPointerUp}
-        on:pointermove={onPointerMove}
-      />
+      {#if $isDrawing}
+        <LevelRenderer
+          level={input}
+          playable={false}
+          {gridSize}
+          bind:this={levelRenderer}
+          on:pointerdown={onDrawPointerDown}
+          on:pointerup={onDrawPointerUp}
+          on:pointermove={onDrawPointerMove}
+        />
+      {:else}
+        <LevelRenderer level={input} playable {gridSize} />
+      {/if}
     </div>
 
     <div class="col2 rows">
       <div class="btn-group">
-        <button type="button" class="btn {!isDrawing ? 'btn-success' : ''}" on:click={() => (isDrawing = false)}>Play</button>
-        <button type="button" class="btn {isDrawing ? 'btn-success' : ''}" on:click={() => (isDrawing = true)}>Edit</button>
+        <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play</button>
+        <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
       </div>
 
       <div class="grow">
@@ -80,26 +84,28 @@
 </AppLayout>
 
 <script>
+  import { project, blocks, enemies, items, levels } from '../stores/project-stores'
   import { push } from 'svelte-spa-router'
   import { sortByName } from '../services/object-utils'
   import { tick } from 'svelte'
   import AppLayout from '../components/AppLayout.svelte'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ColorPicker from '../components/ColorPicker.svelte'
+  import FieldCheckbox from '../components/FieldCheckbox.svelte'
   import FieldText from '../components/FieldText.svelte'
   import Form from '../components/Form.svelte'
   import InputSelect from '../components/InputSelect.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
   import LevelRenderer from './LevelBuilder.Renderer.svelte'
-  import { project, blocks, enemies, items, levels } from '../stores/project-stores'
+  import LocalStorageStore from '../stores/local-storage-store'
   import validator from '../services/validator'
-  import FieldCheckbox from '../components/FieldCheckbox.svelte'
+
+  let isDrawing = LocalStorageStore('is-drawing', false)
+
+  let levelRenderer
 
   export let params = {}
   let input = createDefaultInput()
-
-  let isDrawing = false
-  let screenTarget = { x: 0, y: 0 }
 
   const gridSize = 40
 
@@ -207,44 +213,34 @@
   }
 
   let pointerIsDown = false
-  function onPointerDown(event) {
+  function onDrawPointerDown(event) {
     pointerIsDown = true
+    // if they do anything but left click, select the block at the current position (or eraser if null)
+    if (event.detail.button != 0) {
+      const { x, y } = getBlockCoordsFromEvent(event)
+      selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id
+      selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
+      selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id
 
-    if (isDrawing) {
-      // if they do anything but left click, select the block at the current position (or eraser if null)
-      if (event.button != 0) {
-        const { x, y } = getBlockCoordsFromEvent(event)
-        selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id
-        selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
-        selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id
-
-        setDrawMode(selectedEnemyId != null ? DrawMode.Enemies : selectedItemId != null ? DrawMode.Items : DrawMode.Blocks)
-      } else {
-        drawAtEvent(event)
-      }
+      setDrawMode(selectedEnemyId != null ? DrawMode.Enemies : selectedItemId != null ? DrawMode.Items : DrawMode.Blocks)
     } else {
-      movePlayerToEvent(event)
-    }
-  }
-
-  function onPointerUp(event) {
-    pointerIsDown = false
-  }
-
-  function onPointerMove(event) {
-    if (!pointerIsDown) return
-
-    if (isDrawing) {
       drawAtEvent(event)
-    } else {
-      movePlayerToEvent(event)
     }
+  }
+
+  function onDrawPointerMove(event) {
+    if (!pointerIsDown) return
+    drawAtEvent(event)
+  }
+
+  function onDrawPointerUp(event) {
+    pointerIsDown = false
   }
 
   function getBlockCoordsFromEvent(event) {
     return {
-      x: Math.floor(event.offsetX / gridSize),
-      y: Math.floor(event.offsetY / gridSize),
+      x: Math.floor(event.detail.offsetX / gridSize),
+      y: Math.floor(event.detail.offsetY / gridSize),
     }
   }
 
@@ -253,12 +249,16 @@
     switch (drawMode) {
       case DrawMode.Blocks:
         input.blocks = replaceAtCoord(input.blocks, x, y, selectedBlockId)
+        levelRenderer.redrawBlocks()
         break
       case DrawMode.Items:
         input.items = replaceAtCoord(input.items, x, y, selectedItemId)
+        levelRenderer.redrawItems()
         break
       case DrawMode.Enemies:
         input.enemies = replaceAtCoord(input.enemies, x, y, selectedEnemyId)
+        levelRenderer.redrawEnemies()
+        break
     }
   }
 
@@ -271,13 +271,6 @@
       objects = [...objectsMinusAnyAtThisXY, newObject].sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
     }
     return objects
-  }
-
-  function movePlayerToEvent(event) {
-    screenTarget = {
-      x: event.offsetX,
-      y: event.offsetY,
-    }
   }
 
   function setDrawMode(dm) {

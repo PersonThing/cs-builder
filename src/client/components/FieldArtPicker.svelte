@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label>
+  <label for={name}>
     <slot />
   </label>
   <div>

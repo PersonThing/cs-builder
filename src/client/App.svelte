@@ -40,6 +40,23 @@
 <style lang="scss" global>
   @import './scss/variables';
 
+  @font-face {
+    font-family: 'SilkScreen';
+    src: url('/SilkScreen.ttf') format('truetype');
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'SilkScreen';
+    src: url('/SilkScreenBold.ttf') format('truetype');
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: 'pixelsc';
+    src: url('/pixelsc.ttf') format('truetype');
+  }
+
   html,
   body {
     position: relative;
@@ -47,13 +64,24 @@
     height: 100%;
   }
 
+  h1 {
+    font-family: 'pixelsc';
+  }
+
   body {
     color: #333;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-family: Wingdings;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    // letter-spacing: -0.15em;
+
+    // textarea,
+    // input,
+    // pre {
+    //   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    //   letter-spacing: normal;
+    // }
   }
 
   a {
@@ -121,6 +149,11 @@
     padding: 30px;
   }
 
+  .px1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .g05 {
     gap: 5px;
   }
@@ -175,7 +208,7 @@
   }
 
   .form-group label {
-    font-weight: 500;
+    font-weight: bold; //500;
   }
 
   .help-text {

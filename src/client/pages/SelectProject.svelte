@@ -33,14 +33,14 @@
         name,
         pixelSize: 1,
       }
-      projects.insert(p)
+      projects.apiInsert(p)
     }
   }
 
   function deleteProject(p) {
     if (prompt(`If you are sure you want to delete this project, type the project name:`, '') !== p.name.trim()) return
     projects.apiDelete(p.id).then(() => {
-      if ($project.id == p.id) $project = {}
+      if ($project?.id == p.id) $project = {}
     })
   }
 </script>

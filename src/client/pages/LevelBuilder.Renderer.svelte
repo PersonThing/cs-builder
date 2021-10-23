@@ -1,15 +1,15 @@
 <div
   bind:this={pixiContainer}
   class="pixi-container"
-  on:pointerdown|preventDefault
-  on:pointerup|preventDefault
-  on:pointermove|preventDefault
+  on:pointerdown|preventDefault={onPointerDown}
+  on:pointerup|preventDefault={onPointerUp}
+  on:pointermove|preventDefault={onPointerMove}
   on:contextmenu|preventDefault
 />
 
 <!-- <div style="position: absolute; top: 10px; left: 10px; color: red;">{debugInfo}</div> -->
 <script>
-  import { onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
   import { art, blocks, characters, enemies, items } from '../stores/project-stores.js'
   import Player from '../classes/Player.js'
@@ -18,6 +18,8 @@
   import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
   import isTouching from '../services/hit-test.js'
+
+  const dispatch = createEventDispatcher()
 
   let pixiContainer
   let pixiApp
@@ -29,30 +31,105 @@
 
   let levelGrid
 
+  let screenTarget = {
+    x: 0,
+    y: 0,
+  }
+
   export let level
-  export let screenTarget
   export let playable = false
   export let gridSize
 
-  let mounted = false
-  onMount(() => {
-    mounted = true
-  })
+  $: if (pixiContainer != null) startPixi()
 
-  $: if (mounted && level != null && playable != null) renderLevel(level)
+  ////// input
+  let pointerIsDown = false
+  function onPointerDown(event) {
+    pointerIsDown = true
+    if (playable) movePlayerToEvent(event)
+    dispatch('pointerdown', event)
+  }
 
-  function renderLevel(level) {
-    pixiApp?.destroy()
-    pixiContainer.childNodes.forEach(c => pixiContainer.removeChild(c))
+  function onPointerMove(event) {
+    if (playable && pointerIsDown) movePlayerToEvent(event)
+    dispatch('pointermove', event)
+  }
 
-    /* preload all art pngs, then render the level */
+  function onPointerUp(event) {
+    pointerIsDown = false
+    dispatch('pointerup', event)
+  }
+
+  function movePlayerToEvent(event) {
+    screenTarget = {
+      x: event.offsetX,
+      y: event.offsetY,
+    }
+  }
+  ////// end input
+
+  function startPixi() {
+    pixiApp = new PIXI.Application({
+      resizeTo: pixiContainer,
+    })
+    pixiContainer.appendChild(pixiApp.view)
+    pixiApp.ticker.add(onTick)
+
+    renderLevel()
+  }
+
+  export function redrawBlocks() {
+    emptyContainer(blockContainer)
+    for (const blockConfig of level.blocks) {
+      const bc = $blocks.find(b => b.id == blockConfig.id)
+      if (bc == null) continue
+
+      const block = new Block(
+        bc,
+        $art.find(a => a.id == bc.graphic),
+        blockConfig,
+        gridSize
+      )
+      blockContainer.addChild(block)
+    }
+  }
+
+  export function redrawItems() {
+    emptyContainer(itemContainer)
+    for (const itemConfig of level.items) {
+      const ic = $items.find(i => i.id == itemConfig.id)
+      const item = new Item(
+        ic,
+        $art.find(a => a.id == ic.graphics.still),
+        itemConfig,
+        gridSize
+      )
+      itemContainer.addChild(item)
+    }
+  }
+
+  export function redrawEnemies() {
+    emptyContainer(enemyContainer)
+    for (const enemyConfig of level.enemies) {
+      const e = $enemies.find(e => e.id == enemyConfig.id)
+      const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize, enemyConfig.y * gridSize, levelGrid, level.showPaths)
+      enemyContainer.addChild(enemy)
+    }
+  }
+
+  function emptyContainer(container) {
+    container?.children.forEach(c => {
+      c.destroy()
+      container.removeChild(c)
+    })
+  }
+
+  function renderLevel() {
+    // clear pixi stage to re-render everything
+    pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
+
+    // preload art
     preloadArt().then(() => {
-      pixiApp = new PIXI.Application({
-        resizeTo: pixiContainer,
-      })
-      pixiContainer.appendChild(pixiApp.view)
-      pixiApp.ticker.add(onTick)
-
       // set background color and clear stage whenever we re-render level (this should only be called once when playing levels, or any time the level is changed when editing levels)
       pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
 
@@ -62,43 +139,17 @@
       // world contains everything but player
       world = new PIXI.Container()
 
-      // create blocks
       blockContainer = new PIXI.Container()
-      for (const blockConfig of level.blocks) {
-        const bc = $blocks.find(b => b.id == blockConfig.id)
-        if (bc == null) continue
-
-        const block = new Block(
-          bc,
-          $art.find(a => a.id == bc.graphic),
-          blockConfig,
-          gridSize
-        )
-        blockContainer.addChild(block)
-      }
       world.addChild(blockContainer)
+      redrawBlocks()
 
-      // create items
       itemContainer = new PIXI.Container()
-      for (const itemConfig of level.items) {
-        const ic = $items.find(i => i.id == itemConfig.id)
-        const item = new Item(
-          ic,
-          $art.find(a => a.id == ic.graphics.still),
-          itemConfig,
-          gridSize
-        )
-        itemContainer.addChild(item)
-      }
       world.addChild(itemContainer)
+      redrawItems()
 
       enemyContainer = new PIXI.Container()
-      for (const enemyConfig of level.enemies) {
-        const e = $enemies.find(e => e.id == enemyConfig.id)
-        const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize, enemyConfig.y * gridSize, levelGrid, level.showPaths)
-        enemyContainer.addChild(enemy)
-      }
       world.addChild(enemyContainer)
+      redrawEnemies()
 
       pixiApp.stage.addChild(world)
       pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
@@ -151,7 +202,7 @@
     centerViewOnPlayer()
 
     if (playable) {
-      enemyContainer.children
+      enemyContainer?.children
         .filter(e => e.config != null)
         .forEach(enemy => {
           // if enemy can see player, target player
@@ -185,7 +236,7 @@
   }
 
   function checkCollisions() {
-    itemContainer.children.forEach(item => {
+    itemContainer?.children.forEach(item => {
       if (item.config.playersCanUse) {
         if (isTouching(item, player)) {
           item.onCollision(player)
