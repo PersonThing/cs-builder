@@ -45,7 +45,21 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites.moving.visible = isMoving
   }
 
+  canSee(target) {
+    return this.levelGrid.canSee(this.position, target)
+  }
+
+  clearPathAfterCurrentTarget() {
+    this.path = []
+  }
+
   setTarget(target) {
+    if (target == null) {
+      this.path = []
+      this.target = null
+      this.endTarget = null
+      return
+    }
     if (target.x == this.x && target.y == this.y) return
     // don't recompute path if target position hasn't changed
     // if (this.endTarget?.x == target.x && this.endTarget?.y == target.y) return

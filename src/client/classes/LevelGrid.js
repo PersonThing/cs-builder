@@ -62,6 +62,19 @@ export default class LevelGrid {
     return path.map(([x, y]) => this.toGameCoordinates({ x, y }))
   }
 
+  canSee(from, to) {
+    const [startX, startY] = this.toGridCoordinates(from)
+    const [goalX, goalY] = this.toGridCoordinates(to)
+    const line = PF.Util.interpolate(startX, startY, goalX, goalY)
+    const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y))
+    // console.log(
+    //   'cansee',
+    //   line.map(([x, y]) => `${x},${y},${this.grid.isWalkableAt(x, y)}`),
+    //   allwalkable
+    // )
+    return allwalkable
+  }
+
   toGridCoordinates(coords) {
     return [Math.floor(coords.x / this.gridSize), Math.floor(coords.y / this.gridSize)]
   }

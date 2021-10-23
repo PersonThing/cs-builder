@@ -129,7 +129,6 @@
     player.setTarget(worldCoordinates)
   }
 
-  let enemyFrames = 0
   function onTick() {
     player?.onTick()
     centerViewOnPlayer()
@@ -138,8 +137,13 @@
       enemyContainer.children
         .filter(e => e.config != null)
         .forEach(enemy => {
-          // shouldn't change target each frame.. should only do it if target position changed
-          enemy.setTarget(player)
+          // if enemy can see player, target player
+          // otherwise clear their target
+          if (enemy.canSee(player)) {
+            enemy.setTarget(player)
+          } else {
+            enemy.clearPathAfterCurrentTarget()
+          }
           enemy.onTick()
         })
       checkCollisions()
@@ -150,7 +154,7 @@
     screenCenter.x = pixiApp.renderer.width / 2
     screenCenter.y = pixiApp.renderer.height / 2
 
-    if (playable) {
+    if (playable && player) {
       pixiApp.stage.x = screenCenter.x
       pixiApp.stage.y = screenCenter.y
       pixiApp.stage.pivot.x = player.x
@@ -165,9 +169,20 @@
 
   function checkCollisions() {
     itemContainer.children.forEach(item => {
-      if (isTouching(item, player)) {
-        item.onCollision(player)
-        if (item.config.removeOnCollision) itemContainer.removeChild(item)
+      if (item.config.playersCanUse) {
+        if (isTouching(item, player)) {
+          item.onCollision(player)
+          if (item.config.removeOnCollision) itemContainer.removeChild(item)
+        }
+      }
+
+      if (item.config.enemiesCanUse) {
+        enemyContainer.children.forEach(enemy => {
+          if (isTouching(item, enemy)) {
+            item.onCollision(enemy)
+            if (item.config.removeOnCollision) itemContainer.removeChild(item)
+          }
+        })
       }
     })
   }

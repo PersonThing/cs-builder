@@ -98,7 +98,7 @@
   export let params = {}
   let input = createDefaultInput()
 
-  let isDrawing = true
+  let isDrawing = false
   let screenTarget = { x: 0, y: 0 }
 
   const gridSize = 40

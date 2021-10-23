@@ -11,7 +11,9 @@
       <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
 
       <FieldScriptEditor bind:value={input.onCollision}>onCollision(item, sprite)</FieldScriptEditor>
-      <FieldCheckbox bind:checked={input.removeOnCollision}>Remove on collision</FieldCheckbox>
+      <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
+      <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
+      <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
       <span slot="buttons">
         {#if !isAdding}
           <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
@@ -59,6 +61,8 @@
       },
       onCollision: null,
       removeOnCollision: true,
+      playersCanUse: true,
+      enemiesCanUse: false,
     }
   }
 
