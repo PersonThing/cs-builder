@@ -60,7 +60,7 @@
 
       h1 {
         font-weight: 400;
-        margin: 0 10px;
+        margin: 5px 10px;
         padding: 0;
       }
 
@@ -82,11 +82,6 @@
 
           &.active {
             background: $grey2;
-          }
-
-          .small {
-            font-size: 0.8em;
-            font-weight: normal;
           }
         }
       }

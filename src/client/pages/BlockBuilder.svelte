@@ -5,20 +5,21 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="grow p1">
-    <Form on:submit={save} {hasChanges}>
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
-      <!-- <FieldParticles name="particles" bind:value={input.particles} /> -->
-      <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
-        Can walk on?
-        <div class="help-text">Can players walk on or through this block?</div>
-      </FieldCheckbox>
-      <FieldCheckbox name="can-see" bind:checked={input.canSee}>
-        Can see through / across?
-        <div class="help-text">Can players and enemies see through / across this block?</div>
-      </FieldCheckbox>
-      <!--
+  {#if input}
+    <div class="grow p1">
+      <Form on:submit={save} {hasChanges}>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
+        <!-- <FieldParticles name="particles" bind:value={input.particles} /> -->
+        <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
+          Can walk on?
+          <div class="help-text">Can players walk on or through this block?</div>
+        </FieldCheckbox>
+        <FieldCheckbox name="can-see" bind:checked={input.canSee}>
+          Can see through / across?
+          <div class="help-text">Can players and enemies see through / across this block?</div>
+        </FieldCheckbox>
+        <!--
       <FieldCheckbox name="consumable" bind:checked={input.consumable}>Consumable by player?</FieldCheckbox>
       {#if input.consumable}
         <div class="field-group">
@@ -47,14 +48,15 @@
       <FieldCheckbox name="winOnTouch" bind:checked={input.winOnTouch}>Win level if you touch the block?</FieldCheckbox>
       -->
 
-      <span slot="buttons">
-        {#if !isAdding}
-          <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-        {/if}
-      </span>
-    </Form>
-  </div>
-  <div class="col2">Preview maybe?</div>
+        <span slot="buttons">
+          {#if !isAdding}
+            <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+          {/if}
+        </span>
+      </Form>
+    </div>
+    <div class="col2">Preview maybe?</div>
+  {/if}
 </AppLayout>
 
 <script>
@@ -70,13 +72,13 @@
   import validator from '../services/validator'
 
   export let params = {}
-  let input = createDefaultInput()
+  let input = null
 
   $: paramId = decodeURIComponent(params.id) || 'new'
-  $: if (paramId == 'new' || paramId == null || $blocks != null) {
-    paramId == 'new' || paramId == null ? create() : edit(paramId)
+  $: if (paramId == 'new' || $blocks != null) {
+    paramId == 'new' ? create() : edit(paramId)
   }
-  $: isAdding = input.id == null
+  $: isAdding = input?.id == null
   $: hasChanges =
     input != null &&
     !validator.equals(

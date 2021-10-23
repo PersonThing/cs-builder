@@ -5,8 +5,8 @@
     </div>
 
     <div class="form-buttons">
-      <slot name="buttons" />
       <SaveBtn disabled={!hasChanges} />
+      <slot name="buttons" />
     </div>
   </div>
 </form>
@@ -20,11 +20,11 @@
 </script>
 
 <style>
-  .form-content,
-  .form-buttons {
-    padding: 10px;
+  .form-content {
+    padding: 10px 10px 0 10px;
   }
   .form-buttons {
+    padding: 0px 10px 10px 10px;
     display: flex;
     flex-direction: row;
     gap: 5px;

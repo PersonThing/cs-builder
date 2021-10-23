@@ -6,10 +6,12 @@ export default class LivingSprite extends PIXI.Container {
     this.x = x
     this.y = y
 
+    this.sortableChildren = true
     this.config = config
     this.speed = config.speed // so events can modify without affecting config
 
     this.sprites = new PIXI.Container()
+    this.sprites.zIndex = 2
     this.addChild(this.sprites)
     this.sprites.still = makeArtSprite(graphics.still)
     this.sprites.still.anchor.set(0.5)
@@ -46,7 +48,19 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   canSee(target) {
-    return this.levelGrid.canSee(this.position, target)
+    // check distance between ourself and target
+    // a^2 + b^2 = c^2
+    // a = distance in x
+    const a = this.x - target.x
+
+    // b = distance in y
+    const b = this.y - target.y
+
+    // c = distance in straight line from x1,y1 to x2,y2
+    const c = Math.sqrt(a * a + b * b)
+
+    // check if we can find a visible path to target
+    return c <= this.config.sightRadius && this.levelGrid.canSee(this.position, target)
   }
 
   clearPathAfterCurrentTarget() {

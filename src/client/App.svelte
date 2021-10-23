@@ -57,6 +57,11 @@
     src: url('/pixelsc.ttf') format('truetype');
   }
 
+  @font-face {
+    font-family: 'pixels';
+    src: url('/pixels.ttf') format('truetype');
+  }
+
   html,
   body {
     position: relative;
@@ -73,15 +78,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: 'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     // letter-spacing: -0.15em;
 
-    // textarea,
-    // input,
-    // pre {
-    //   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    //   letter-spacing: normal;
-    // }
+    textarea,
+    input,
+    pre {
+      font-family: 'Lucida Console', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
+        sans-serif;
+      letter-spacing: normal;
+    }
   }
 
   a {
@@ -254,6 +260,16 @@
   .flex {
     display: flex;
     flex-direction: row;
+  }
+
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .flex-column {
+    display: flex;
+    flex-direction: column;
   }
 
   .grow {

@@ -30,7 +30,8 @@
       flex-direction: row;
       align-items: center;
       gap: 5px;
-      padding: 3px 1px;
+      padding: 3px;
+      min-height: 40px;
 
       &.active {
         background: $grey2;

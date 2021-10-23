@@ -5,21 +5,23 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="grow p1">
-    <Form on:submit={save} {hasChanges}>
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
-      <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
-      <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
+  {#if input}
+    <div class="grow p1">
+      <Form on:submit={save} {hasChanges}>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
+        <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
+        <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
 
-      <span slot="buttons">
-        {#if !isAdding}
-          <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-        {/if}
-      </span>
-    </Form>
-  </div>
-  <div class="col2">Preview maybe?</div>
+        <span slot="buttons">
+          {#if !isAdding}
+            <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+          {/if}
+        </span>
+      </Form>
+    </div>
+    <div class="col2">Preview maybe?</div>
+  {/if}
 </AppLayout>
 
 <script>
@@ -35,13 +37,13 @@
   import { push } from 'svelte-spa-router'
 
   export let params = {}
-  let input = createDefaultInput()
+  let input = null
 
   $: paramId = decodeURIComponent(params.id) || 'new'
-  $: if (paramId == 'new' || paramId == null || $characters != null) {
-    paramId == 'new' || paramId == null ? create() : edit(paramId)
+  $: if (paramId == 'new' || $characters != null) {
+    paramId == 'new' ? create() : edit(paramId)
   }
-  $: isAdding = input.id == null
+  $: isAdding = input?.id == null
   $: hasChanges =
     input != null &&
     !validator.equals(

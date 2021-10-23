@@ -112,7 +112,15 @@
     emptyContainer(enemyContainer)
     for (const enemyConfig of level.enemies) {
       const e = $enemies.find(e => e.id == enemyConfig.id)
-      const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize, enemyConfig.y * gridSize, levelGrid, level.showPaths)
+      const enemy = new Enemy(
+        buildGraphics(e.graphics),
+        e,
+        (enemyConfig.x + 1) * gridSize,
+        (enemyConfig.y + 1) * gridSize,
+        levelGrid,
+        level.showPaths,
+        level.showSightRadius
+      )
       enemyContainer.addChild(enemy)
     }
   }
@@ -214,6 +222,7 @@
           }
           enemy.onTick()
         })
+
       checkCollisions()
     }
   }

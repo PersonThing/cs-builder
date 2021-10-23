@@ -70,7 +70,15 @@ class Repo {
   }
 
   find(collectionName, filters = {}) {
-    return this.db.collection(collectionName).find(filters).toArray()
+    return (
+      this.db
+        .collection(collectionName)
+        .find(filters)
+        // sort case-insensitive
+        .collation({ locale: 'en' })
+        .sort({ name: 1 })
+        .toArray()
+    )
   }
 }
 

@@ -1,9 +1,13 @@
 <AppLayout active="levels">
   <div class="col1">
     <ItemListNav slug="levels" type="level" collection={$levels} active={paramId} let:item>
-      <div class="level-nav-item" style="background-image:url({item.thumbnail})">
+      {#if $characters?.length}
+        <ArtThumb id={$characters[0].graphics.still} />
+      {/if}
+      {item.name}
+      <!-- <div class="level-nav-item" style="background-image:url({item.thumbnail})">
         {item.name}
-      </div>
+      </div> -->
     </ItemListNav>
   </div>
 
@@ -20,7 +24,7 @@
           on:pointermove={onDrawPointerMove}
         />
       {:else}
-        <LevelRenderer level={input} playable {gridSize} />
+        <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
       {/if}
     </div>
 
@@ -46,35 +50,44 @@
 
           <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing">Smooth pathing</FieldCheckbox>
           <FieldCheckbox bind:checked={input.showPaths} name="show-paths">Show paths</FieldCheckbox>
+          <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius">Show sight radius</FieldCheckbox>
 
-          <div class="form-group">
-            <label>Place a block</label>
-            <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option on:change={() => setDrawMode(DrawMode.Blocks)}>
-              {#if option.graphic != null}
-                <ArtThumb id={option.graphic} />
-              {/if}
-              {option.name}
-            </InputSelect>
-          </div>
+          <div class="flex-column">
+            <div class="draw-option" class:selected={drawMode == DrawMode.Blocks} on:click={() => setDrawMode(DrawMode.Blocks)}>
+              <div class="form-group">
+                <label>Place a block</label>
+                <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
+                  {#if option.graphic != null}
+                    <ArtThumb id={option.graphic} />
+                  {/if}
+                  {option.name}
+                </InputSelect>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>Place an item</label>
-            <InputSelect bind:value={selectedItemId} options={itemOptions} let:option on:change={() => setDrawMode(DrawMode.Items)}>
-              {#if option.graphics?.still != null}
-                <ArtThumb id={option.graphics.still} />
-              {/if}
-              {option.name}
-            </InputSelect>
-          </div>
+            <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
+              <div class="form-group">
+                <label>Place an item</label>
+                <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+                  {#if option.graphics?.still != null}
+                    <ArtThumb id={option.graphics.still} />
+                  {/if}
+                  {option.name}
+                </InputSelect>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>Place an enemy</label>
-            <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option on:change={() => setDrawMode(DrawMode.Enemies)}>
-              {#if option.graphics?.still != null}
-                <ArtThumb id={option.graphics.still} />
-              {/if}
-              {option.name}
-            </InputSelect>
+            <div class="draw-option" class:selected={drawMode == DrawMode.Enemies} on:click={() => setDrawMode(DrawMode.Enemies)}>
+              <div class="form-group">
+                <label>Place an enemy</label>
+                <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
+                  {#if option.graphics?.still != null}
+                    <ArtThumb id={option.graphics.still} />
+                  {/if}
+                  {option.name}
+                </InputSelect>
+              </div>
+            </div>
           </div>
         </Form>
       </div>
@@ -84,7 +97,7 @@
 </AppLayout>
 
 <script>
-  import { project, blocks, enemies, items, levels } from '../stores/project-stores'
+  import { project, blocks, enemies, items, levels, characters } from '../stores/project-stores'
   import { push } from 'svelte-spa-router'
   import { sortByName } from '../services/object-utils'
   import { tick } from 'svelte'
@@ -105,13 +118,13 @@
   let levelRenderer
 
   export let params = {}
-  let input = createDefaultInput()
+  let input = null
 
   const gridSize = 40
 
   $: paramId = decodeURIComponent(params.id) || 'new'
-  $: if (paramId == 'new' || paramId == null || $levels != null) {
-    paramId == 'new' || paramId == null ? create() : edit(paramId)
+  $: if (paramId == 'new' || $levels != null) {
+    paramId == 'new' ? create() : edit(paramId)
   }
   $: isAdding = input?.id == null
   $: hasChanges =
@@ -133,7 +146,7 @@
   let drawMode = DrawMode.Blocks
 
   $: blockOptions = [
-    { value: null, name: 'None' },
+    { value: null, name: 'Erase blocks' },
     ...$blocks
       .map(b => ({
         ...b,
@@ -143,7 +156,7 @@
   ]
 
   $: itemOptions = [
-    { value: null, name: 'None' },
+    { value: null, name: 'Erase items' },
     ...$items
       .map(i => ({
         ...i,
@@ -153,7 +166,7 @@
   ]
 
   $: enemyOptions = [
-    { value: null, name: 'None' },
+    { value: null, name: 'Erase enemies' },
     ...$enemies
       .map(i => ({
         ...i,
@@ -173,6 +186,7 @@
       backgroundColor: 'rgba(0,0,0,1)',
       smoothPathing: false,
       showPaths: true,
+      showSightRadius: true,
       blocks: [],
       items: [],
       enemies: [],
@@ -218,11 +232,17 @@
     // if they do anything but left click, select the block at the current position (or eraser if null)
     if (event.detail.button != 0) {
       const { x, y } = getBlockCoordsFromEvent(event)
-      selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id
-      selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
-      selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id
-
-      setDrawMode(selectedEnemyId != null ? DrawMode.Enemies : selectedItemId != null ? DrawMode.Items : DrawMode.Blocks)
+      switch (drawMode) {
+        case DrawMode.Blocks:
+          selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id
+          break
+        case DrawMode.Items:
+          selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
+          break
+        case DrawMode.Enemies:
+          selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id
+          break
+      }
     } else {
       drawAtEvent(event)
     }
@@ -275,20 +295,6 @@
 
   function setDrawMode(dm) {
     drawMode = dm
-    switch (dm) {
-      case DrawMode.Blocks:
-        selectedItemId = null
-        selectedEnemyId = null
-        break
-      case DrawMode.Items:
-        selectedBlockId = null
-        selectedEnemyId = null
-        break
-      case DrawMode.Enemies:
-        selectedBlockId = null
-        selectedItemId = null
-        break
-    }
   }
 </script>
 
@@ -299,5 +305,25 @@
     background-size: contain;
     background-position: 10px 20px;
     background-repeat: no-repeat;
+  }
+
+  .draw-option {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    cursor: pointer;
+
+    &.selected {
+      border-color: rgb(0, 119, 255);
+      background: rgba(0, 119, 200, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 0;
+    }
   }
 </style>

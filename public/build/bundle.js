@@ -5536,7 +5536,7 @@ var app = (function () {
     	let if_block_anchor;
 
     	function select_block_type(ctx, dirty) {
-    		if (!/*simple*/ ctx[5]) return create_if_block_1$6;
+    		if (!/*simple*/ ctx[5]) return create_if_block_1$a;
     		return create_else_block$5;
     	}
 
@@ -5639,7 +5639,7 @@ var app = (function () {
     }
 
     // (7:2) {#if !simple}
-    function create_if_block_1$6(ctx) {
+    function create_if_block_1$a(ctx) {
     	let div3;
     	let div0;
     	let t0;
@@ -5721,7 +5721,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$6.name,
+    		id: create_if_block_1$a.name,
     		type: "if",
     		source: "(7:2) {#if !simple}",
     		ctx
@@ -6067,31 +6067,31 @@ var app = (function () {
     			a6 = element("a");
     			a6.textContent = "Levels";
     			attr_dev(a0, "href", "/#/project");
-    			attr_dev(a0, "class", "svelte-3zfguz");
+    			attr_dev(a0, "class", "svelte-174n1kp");
     			toggle_class(a0, "active", /*active*/ ctx[0] == "project");
     			add_location(a0, file$r, 16, 8, 401);
     			attr_dev(a1, "href", "/#/art");
-    			attr_dev(a1, "class", "svelte-3zfguz");
+    			attr_dev(a1, "class", "svelte-174n1kp");
     			toggle_class(a1, "active", /*active*/ ctx[0] == "art");
     			add_location(a1, file$r, 17, 8, 486);
     			attr_dev(a2, "href", "/#/blocks");
-    			attr_dev(a2, "class", "svelte-3zfguz");
+    			attr_dev(a2, "class", "svelte-174n1kp");
     			toggle_class(a2, "active", /*active*/ ctx[0] == "blocks");
     			add_location(a2, file$r, 18, 8, 550);
     			attr_dev(a3, "href", "/#/items");
-    			attr_dev(a3, "class", "svelte-3zfguz");
+    			attr_dev(a3, "class", "svelte-174n1kp");
     			toggle_class(a3, "active", /*active*/ ctx[0] == "items");
     			add_location(a3, file$r, 19, 8, 623);
     			attr_dev(a4, "href", "/#/characters");
-    			attr_dev(a4, "class", "svelte-3zfguz");
+    			attr_dev(a4, "class", "svelte-174n1kp");
     			toggle_class(a4, "active", /*active*/ ctx[0] == "characters");
     			add_location(a4, file$r, 20, 8, 693);
     			attr_dev(a5, "href", "/#/enemies");
-    			attr_dev(a5, "class", "svelte-3zfguz");
+    			attr_dev(a5, "class", "svelte-174n1kp");
     			toggle_class(a5, "active", /*active*/ ctx[0] == "enemies");
     			add_location(a5, file$r, 22, 8, 869);
     			attr_dev(a6, "href", "/#/levels");
-    			attr_dev(a6, "class", "svelte-3zfguz");
+    			attr_dev(a6, "class", "svelte-174n1kp");
     			toggle_class(a6, "active", /*active*/ ctx[0] == "levels");
     			add_location(a6, file$r, 23, 8, 945);
     		},
@@ -6212,24 +6212,24 @@ var app = (function () {
     			t7 = space();
     			div4 = element("div");
     			if (default_slot) default_slot.c();
-    			attr_dev(h1, "class", "svelte-3zfguz");
+    			attr_dev(h1, "class", "svelte-174n1kp");
     			add_location(h1, file$r, 3, 6, 63);
     			add_location(strong, file$r, 5, 8, 114);
     			attr_dev(a, "href", "/#/");
     			attr_dev(a, "title", "Change project");
-    			attr_dev(a, "class", "svelte-3zfguz");
+    			attr_dev(a, "class", "svelte-174n1kp");
     			toggle_class(a, "active", /*active*/ ctx[0] == "projects");
     			add_location(a, file$r, 9, 8, 176);
     			attr_dev(div0, "class", "px1");
     			add_location(div0, file$r, 4, 6, 88);
     			add_location(div1, file$r, 2, 4, 51);
-    			attr_dev(div2, "class", "nav svelte-3zfguz");
+    			attr_dev(div2, "class", "nav svelte-174n1kp");
     			add_location(div2, file$r, 14, 4, 348);
-    			attr_dev(div3, "class", "header svelte-3zfguz");
+    			attr_dev(div3, "class", "header svelte-174n1kp");
     			add_location(div3, file$r, 1, 2, 26);
-    			attr_dev(div4, "class", "main svelte-3zfguz");
+    			attr_dev(div4, "class", "main svelte-174n1kp");
     			add_location(div4, file$r, 28, 2, 1045);
-    			attr_dev(div5, "class", "container svelte-3zfguz");
+    			attr_dev(div5, "class", "container svelte-174n1kp");
     			add_location(div5, file$r, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -6383,7 +6383,7 @@ var app = (function () {
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block_1$5, create_else_block$4];
+    	const if_block_creators = [create_if_block_1$9, create_else_block$4];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -6495,7 +6495,7 @@ var app = (function () {
     }
 
     // (2:2) {#if _art.animated}
-    function create_if_block_1$5(ctx) {
+    function create_if_block_1$9(ctx) {
     	let div;
     	let animationpreview;
     	let current;
@@ -6547,7 +6547,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$5.name,
+    		id: create_if_block_1$9.name,
     		type: "if",
     		source: "(2:2) {#if _art.animated}",
     		ctx
@@ -7493,7 +7493,7 @@ var app = (function () {
     	let current;
     	let if_block0 = /*self*/ ctx[0].paths && create_if_block_3$3(ctx);
     	let if_block1 = /*self*/ ctx[0].polygons && create_if_block_2$4(ctx);
-    	let if_block2 = /*self*/ ctx[0].raw && create_if_block_1$4(ctx);
+    	let if_block2 = /*self*/ ctx[0].raw && create_if_block_1$8(ctx);
 
     	const block = {
     		c: function create() {
@@ -7568,7 +7568,7 @@ var app = (function () {
     						transition_in(if_block2, 1);
     					}
     				} else {
-    					if_block2 = create_if_block_1$4(ctx);
+    					if_block2 = create_if_block_1$8(ctx);
     					if_block2.c();
     					transition_in(if_block2, 1);
     					if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
@@ -7912,7 +7912,7 @@ var app = (function () {
     }
 
     // (15:6) {#if self.raw}
-    function create_if_block_1$4(ctx) {
+    function create_if_block_1$8(ctx) {
     	let raw;
     	let updating_data;
     	let current;
@@ -7965,7 +7965,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$4.name,
+    		id: create_if_block_1$8.name,
     		type: "if",
     		source: "(15:6) {#if self.raw}",
     		ctx
@@ -8654,7 +8654,7 @@ var app = (function () {
     }
 
     // (22:4) {#if !noCaret}
-    function create_if_block_1$3(ctx) {
+    function create_if_block_1$7(ctx) {
     	let icon;
     	let current;
 
@@ -8688,7 +8688,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$3.name,
+    		id: create_if_block_1$7.name,
     		type: "if",
     		source: "(22:4) {#if !noCaret}",
     		ctx
@@ -8782,7 +8782,7 @@ var app = (function () {
     	const label_slot_template = /*#slots*/ ctx[19].label;
     	const label_slot = create_slot(label_slot_template, ctx, /*$$scope*/ ctx[18], get_label_slot_context);
     	const label_slot_or_fallback = label_slot || fallback_block$3(ctx);
-    	let if_block0 = !/*noCaret*/ ctx[4] && create_if_block_1$3(ctx);
+    	let if_block0 = !/*noCaret*/ ctx[4] && create_if_block_1$7(ctx);
     	let if_block1 = /*isOpen*/ ctx[0] && create_if_block$a(ctx);
 
     	const block = {
@@ -8854,7 +8854,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_1$3(ctx);
+    					if_block0 = create_if_block_1$7(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(a, null);
@@ -10326,12 +10326,12 @@ var app = (function () {
     			attr_dev(input, "id", /*name*/ ctx[1]);
     			attr_dev(input, "type", "checkbox");
     			attr_dev(input, "class", "form-check-input");
-    			add_location(input, file$i, 2, 2, 55);
+    			add_location(input, file$i, 2, 4, 58);
     			attr_dev(label, "class", "form-check-label");
     			attr_dev(label, "for", /*name*/ ctx[1]);
-    			add_location(label, file$i, 3, 2, 139);
+    			add_location(label, file$i, 3, 4, 154);
     			attr_dev(div0, "class", "form-check");
-    			add_location(div0, file$i, 1, 1, 27);
+    			add_location(div0, file$i, 1, 2, 28);
     			attr_dev(div1, "class", "form-group");
     			add_location(div1, file$i, 0, 0, 0);
     		},
@@ -10353,7 +10353,11 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[4]);
+    				dispose = [
+    					listen_dev(input, "change", /*input_change_handler*/ ctx[5]),
+    					listen_dev(input, "change", /*change_handler*/ ctx[4], false, false, false)
+    				];
+
     				mounted = true;
     			}
     		},
@@ -10393,7 +10397,7 @@ var app = (function () {
     			if (detaching) detach_dev(div1);
     			if (default_slot) default_slot.d(detaching);
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -10419,6 +10423,10 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<FieldCheckbox> was created with unknown prop '${key}'`);
     	});
 
+    	function change_handler(event) {
+    		bubble.call(this, $$self, event);
+    	}
+
     	function input_change_handler() {
     		checked = this.checked;
     		$$invalidate(0, checked);
@@ -10441,7 +10449,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [checked, name, $$scope, slots, input_change_handler];
+    	return [checked, name, $$scope, slots, change_handler, input_change_handler];
     }
 
     class FieldCheckbox extends SvelteComponentDev {
@@ -10841,20 +10849,21 @@ var app = (function () {
     	let div0;
     	let t0;
     	let div1;
-    	let t1;
     	let savebtn;
+    	let t1;
     	let current;
     	let mounted;
     	let dispose;
     	const default_slot_template = /*#slots*/ ctx[3].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
-    	const buttons_slot_template = /*#slots*/ ctx[3].buttons;
-    	const buttons_slot = create_slot(buttons_slot_template, ctx, /*$$scope*/ ctx[2], get_buttons_slot_context);
 
     	savebtn = new SaveBtn({
     			props: { disabled: !/*hasChanges*/ ctx[0] },
     			$$inline: true
     		});
+
+    	const buttons_slot_template = /*#slots*/ ctx[3].buttons;
+    	const buttons_slot = create_slot(buttons_slot_template, ctx, /*$$scope*/ ctx[2], get_buttons_slot_context);
 
     	const block = {
     		c: function create() {
@@ -10864,12 +10873,12 @@ var app = (function () {
     			if (default_slot) default_slot.c();
     			t0 = space();
     			div1 = element("div");
-    			if (buttons_slot) buttons_slot.c();
-    			t1 = space();
     			create_component(savebtn.$$.fragment);
-    			attr_dev(div0, "class", "form-content svelte-1yi5j3x");
+    			t1 = space();
+    			if (buttons_slot) buttons_slot.c();
+    			attr_dev(div0, "class", "form-content svelte-makcpi");
     			add_location(div0, file$f, 2, 4, 59);
-    			attr_dev(div1, "class", "form-buttons svelte-1yi5j3x");
+    			attr_dev(div1, "class", "form-buttons svelte-makcpi");
     			add_location(div1, file$f, 6, 4, 121);
     			attr_dev(div2, "class", "form");
     			add_location(div2, file$f, 1, 2, 35);
@@ -10889,13 +10898,13 @@ var app = (function () {
 
     			append_dev(div2, t0);
     			append_dev(div2, div1);
+    			mount_component(savebtn, div1, null);
+    			append_dev(div1, t1);
 
     			if (buttons_slot) {
     				buttons_slot.m(div1, null);
     			}
 
-    			append_dev(div1, t1);
-    			mount_component(savebtn, div1, null);
     			current = true;
 
     			if (!mounted) {
@@ -10910,34 +10919,34 @@ var app = (function () {
     				}
     			}
 
+    			const savebtn_changes = {};
+    			if (dirty & /*hasChanges*/ 1) savebtn_changes.disabled = !/*hasChanges*/ ctx[0];
+    			savebtn.$set(savebtn_changes);
+
     			if (buttons_slot) {
     				if (buttons_slot.p && (!current || dirty & /*$$scope*/ 4)) {
     					update_slot(buttons_slot, buttons_slot_template, ctx, /*$$scope*/ ctx[2], !current ? -1 : dirty, get_buttons_slot_changes, get_buttons_slot_context);
     				}
     			}
-
-    			const savebtn_changes = {};
-    			if (dirty & /*hasChanges*/ 1) savebtn_changes.disabled = !/*hasChanges*/ ctx[0];
-    			savebtn.$set(savebtn_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(default_slot, local);
-    			transition_in(buttons_slot, local);
     			transition_in(savebtn.$$.fragment, local);
+    			transition_in(buttons_slot, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(default_slot, local);
-    			transition_out(buttons_slot, local);
     			transition_out(savebtn.$$.fragment, local);
+    			transition_out(buttons_slot, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(form);
     			if (default_slot) default_slot.d(detaching);
-    			if (buttons_slot) buttons_slot.d(detaching);
     			destroy_component(savebtn);
+    			if (buttons_slot) buttons_slot.d(detaching);
     			mounted = false;
     			dispose();
     		}
@@ -11167,8 +11176,8 @@ var app = (function () {
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
-    	child_ctx[42] = i;
+    	child_ctx[42] = list[i];
+    	child_ctx[44] = i;
     	return child_ctx;
     }
 
@@ -11176,23 +11185,23 @@ var app = (function () {
     	option: dirty[0] & /*filteredOptions*/ 16384
     });
 
-    const get_default_slot_context_1 = ctx => ({ option: /*option*/ ctx[40] });
+    const get_default_slot_context_1 = ctx => ({ option: /*option*/ ctx[42] });
 
     function get_each_context_1$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
-    	child_ctx[42] = i;
+    	child_ctx[42] = list[i];
+    	child_ctx[44] = i;
     	return child_ctx;
     }
 
     const get_default_slot_changes$1 = dirty => ({
-    	option: dirty[0] & /*selectedOptions*/ 131072
+    	option: dirty[0] & /*selectedOptions*/ 262144
     });
 
-    const get_default_slot_context$1 = ctx => ({ option: /*option*/ ctx[40] });
+    const get_default_slot_context$1 = ctx => ({ option: /*option*/ ctx[42] });
 
     // (14:6) {#if selectedOptions.length === 0 || (!multiple && selectedOptions[0].value)}
-    function create_if_block_6(ctx) {
+    function create_if_block_6$1(ctx) {
     	let t;
 
     	const block = {
@@ -11212,7 +11221,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_6.name,
+    		id: create_if_block_6$1.name,
     		type: "if",
     		source: "(14:6) {#if selectedOptions.length === 0 || (!multiple && selectedOptions[0].value)}",
     		ctx
@@ -11224,7 +11233,7 @@ var app = (function () {
     // (16:8) {#if multiple}
     function create_if_block_4$2(ctx) {
     	let if_block_anchor;
-    	let if_block = /*index*/ ctx[42] > 0 && create_if_block_5$1(ctx);
+    	let if_block = /*index*/ ctx[44] > 0 && create_if_block_5$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -11236,11 +11245,11 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*index*/ ctx[42] > 0) {
+    			if (/*index*/ ctx[44] > 0) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_5$1(ctx);
+    					if_block = create_if_block_5$2(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -11267,10 +11276,10 @@ var app = (function () {
     }
 
     // (17:10) {#if index > 0}
-    function create_if_block_5$1(ctx) {
+    function create_if_block_5$2(ctx) {
     	let t0;
 
-    	let t1_value = (/*inline*/ ctx[9] && /*index*/ ctx[42] == /*selectedOptions*/ ctx[17].length - 1
+    	let t1_value = (/*inline*/ ctx[9] && /*index*/ ctx[44] == /*selectedOptions*/ ctx[18].length - 1
     	? " and"
     	: "") + "";
 
@@ -11286,7 +11295,7 @@ var app = (function () {
     			insert_dev(target, t1, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*inline, selectedOptions*/ 131584 && t1_value !== (t1_value = (/*inline*/ ctx[9] && /*index*/ ctx[42] == /*selectedOptions*/ ctx[17].length - 1
+    			if (dirty[0] & /*inline, selectedOptions*/ 262656 && t1_value !== (t1_value = (/*inline*/ ctx[9] && /*index*/ ctx[44] == /*selectedOptions*/ ctx[18].length - 1
     			? " and"
     			: "") + "")) set_data_dev(t1, t1_value);
     		},
@@ -11298,7 +11307,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5$1.name,
+    		id: create_if_block_5$2.name,
     		type: "if",
     		source: "(17:10) {#if index > 0}",
     		ctx
@@ -11310,7 +11319,7 @@ var app = (function () {
     // (20:25)               
     function fallback_block_1(ctx) {
     	let html_tag;
-    	let raw_value = /*option*/ ctx[40].label + "";
+    	let raw_value = /*option*/ ctx[42].label + "";
     	let html_anchor;
 
     	const block = {
@@ -11324,7 +11333,7 @@ var app = (function () {
     			insert_dev(target, html_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*selectedOptions*/ 131072 && raw_value !== (raw_value = /*option*/ ctx[40].label + "")) html_tag.p(raw_value);
+    			if (dirty[0] & /*selectedOptions*/ 262144 && raw_value !== (raw_value = /*option*/ ctx[42].label + "")) html_tag.p(raw_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(html_anchor);
@@ -11350,8 +11359,8 @@ var app = (function () {
     	let span;
     	let current;
     	let if_block = /*multiple*/ ctx[3] && create_if_block_4$2(ctx);
-    	const default_slot_template = /*#slots*/ ctx[26].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[25], get_default_slot_context$1);
+    	const default_slot_template = /*#slots*/ ctx[27].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[26], get_default_slot_context$1);
     	const default_slot_or_fallback = default_slot || fallback_block_1(ctx);
 
     	const block = {
@@ -11363,7 +11372,7 @@ var app = (function () {
     			t = space();
     			span = element("span");
     			if (default_slot_or_fallback) default_slot_or_fallback.c();
-    			attr_dev(span, "class", "select-input-text svelte-1445dha");
+    			attr_dev(span, "class", "select-input-text svelte-15j36pp");
     			add_location(span, file$e, 18, 8, 683);
     			this.first = first;
     		},
@@ -11396,11 +11405,11 @@ var app = (function () {
     			}
 
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty[0] & /*$$scope, selectedOptions*/ 33685504)) {
-    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[25], !current ? [-1, -1] : dirty, get_default_slot_changes$1, get_default_slot_context$1);
+    				if (default_slot.p && (!current || dirty[0] & /*$$scope, selectedOptions*/ 67371008)) {
+    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[26], !current ? [-1, -1] : dirty, get_default_slot_changes$1, get_default_slot_context$1);
     				}
     			} else {
-    				if (default_slot_or_fallback && default_slot_or_fallback.p && (!current || dirty[0] & /*selectedOptions*/ 131072)) {
+    				if (default_slot_or_fallback && default_slot_or_fallback.p && (!current || dirty[0] & /*selectedOptions*/ 262144)) {
     					default_slot_or_fallback.p(ctx, !current ? [-1, -1] : dirty);
     				}
     			}
@@ -11448,7 +11457,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			t = text(t_value);
-    			attr_dev(span, "class", "select-input-text svelte-1445dha");
+    			attr_dev(span, "class", "select-input-text svelte-15j36pp");
     			add_location(span, file$e, 25, 8, 906);
     		},
     		m: function mount(target, anchor) {
@@ -11514,7 +11523,7 @@ var app = (function () {
     				each_1_else.c();
     			}
 
-    			attr_dev(div, "class", "select-dropdown svelte-1445dha");
+    			attr_dev(div, "class", "select-dropdown svelte-15j36pp");
     			toggle_class(div, "right", /*right*/ ctx[11]);
     			add_location(div, file$e, 34, 4, 1152);
     		},
@@ -11557,7 +11566,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (dirty[0] & /*filteredOptions, viewIndex, toggle, $$scope, filter*/ 33841153) {
+    			if (dirty[0] & /*filteredOptions, viewIndex, toggle, $$scope, filter*/ 67657729) {
     				each_value = /*filteredOptions*/ ctx[14];
     				validate_each_argument(each_value);
     				let i;
@@ -11641,8 +11650,7 @@ var app = (function () {
 
     // (36:6) {#if filterable}
     function create_if_block_2$2(ctx) {
-    	let div1;
-    	let div0;
+    	let div;
     	let input;
     	let t;
     	let a;
@@ -11659,8 +11667,7 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div1 = element("div");
-    			div0 = element("div");
+    			div = element("div");
     			input = element("input");
     			t = space();
     			a = element("a");
@@ -11669,34 +11676,31 @@ var app = (function () {
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "form-control");
     			attr_dev(input, "placeholder", /*filterPlaceholder*/ ctx[12]);
-    			add_location(input, file$e, 38, 12, 1298);
+    			add_location(input, file$e, 37, 10, 1259);
     			attr_dev(span, "class", "input-group-text");
-    			add_location(span, file$e, 40, 14, 1546);
-    			attr_dev(a, "class", "input-group-append");
+    			add_location(span, file$e, 46, 12, 1589);
     			attr_dev(a, "href", "/");
     			attr_dev(a, "tabindex", "-1");
-    			add_location(a, file$e, 39, 12, 1431);
-    			attr_dev(div0, "class", "input-group");
-    			add_location(div0, file$e, 37, 10, 1259);
-    			attr_dev(div1, "class", "filter svelte-1445dha");
-    			add_location(div1, file$e, 36, 8, 1227);
+    			add_location(a, file$e, 45, 10, 1503);
+    			attr_dev(div, "class", "filter svelte-15j36pp");
+    			add_location(div, file$e, 36, 8, 1227);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div1, anchor);
-    			append_dev(div1, div0);
-    			append_dev(div0, input);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, input);
     			set_input_value(input, /*filter*/ ctx[0]);
-    			append_dev(div0, t);
-    			append_dev(div0, a);
+    			/*input_binding*/ ctx[30](input);
+    			append_dev(div, t);
+    			append_dev(div, a);
     			append_dev(a, span);
     			mount_component(icon, span, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[28]),
-    					listen_dev(input, "keydown", /*keyListener*/ ctx[20], false, false, false),
-    					listen_dev(a, "click", prevent_default(/*click_handler*/ ctx[29]), false, true, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[29]),
+    					listen_dev(input, "keydown", /*keyListener*/ ctx[21], false, false, false),
+    					listen_dev(a, "click", prevent_default(/*click_handler*/ ctx[31]), false, true, false)
     				];
 
     				mounted = true;
@@ -11721,7 +11725,8 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(div);
+    			/*input_binding*/ ctx[30](null);
     			destroy_component(icon);
     			mounted = false;
     			run_all(dispose);
@@ -11739,10 +11744,10 @@ var app = (function () {
     	return block;
     }
 
-    // (60:6) {:else}
+    // (65:6) {:else}
     function create_else_block$3(ctx) {
     	let if_block_anchor;
-    	let if_block = /*filter*/ ctx[0] != null && /*filter*/ ctx[0].length > 0 && create_if_block_1$2(ctx);
+    	let if_block = /*filter*/ ctx[0] != null && /*filter*/ ctx[0].length > 0 && create_if_block_1$6(ctx);
 
     	const block = {
     		c: function create() {
@@ -11758,7 +11763,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_1$2(ctx);
+    					if_block = create_if_block_1$6(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -11777,15 +11782,15 @@ var app = (function () {
     		block,
     		id: create_else_block$3.name,
     		type: "else",
-    		source: "(60:6) {:else}",
+    		source: "(65:6) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (61:8) {#if filter != null && filter.length > 0}
-    function create_if_block_1$2(ctx) {
+    // (66:8) {#if filter != null && filter.length > 0}
+    function create_if_block_1$6(ctx) {
     	let div;
     	let t0;
     	let t1;
@@ -11797,8 +11802,8 @@ var app = (function () {
     			t0 = text("No options match \"");
     			t1 = text(/*filter*/ ctx[0]);
     			t2 = text("\"");
-    			attr_dev(div, "class", "alert alert-warning");
-    			add_location(div, file$e, 61, 10, 2202);
+    			attr_dev(div, "class", "no-results svelte-15j36pp");
+    			add_location(div, file$e, 66, 10, 2221);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11816,19 +11821,19 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
+    		id: create_if_block_1$6.name,
     		type: "if",
-    		source: "(61:8) {#if filter != null && filter.length > 0}",
+    		source: "(66:8) {#if filter != null && filter.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (56:25)               
+    // (61:25)               
     function fallback_block$1(ctx) {
     	let html_tag;
-    	let raw_value = /*option*/ ctx[40].label + "";
+    	let raw_value = /*option*/ ctx[42].label + "";
     	let html_anchor;
 
     	const block = {
@@ -11842,7 +11847,7 @@ var app = (function () {
     			insert_dev(target, html_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*filteredOptions*/ 16384 && raw_value !== (raw_value = /*option*/ ctx[40].label + "")) html_tag.p(raw_value);
+    			if (dirty[0] & /*filteredOptions*/ 16384 && raw_value !== (raw_value = /*option*/ ctx[42].label + "")) html_tag.p(raw_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(html_anchor);
@@ -11854,26 +11859,26 @@ var app = (function () {
     		block,
     		id: fallback_block$1.name,
     		type: "fallback",
-    		source: "(56:25)               ",
+    		source: "(61:25)               ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (48:6) {#each filteredOptions as option, index}
+    // (53:6) {#each filteredOptions as option, index}
     function create_each_block$3(ctx) {
     	let div;
     	let t;
     	let current;
     	let mounted;
     	let dispose;
-    	const default_slot_template = /*#slots*/ ctx[26].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[25], get_default_slot_context_1);
+    	const default_slot_template = /*#slots*/ ctx[27].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[26], get_default_slot_context_1);
     	const default_slot_or_fallback = default_slot || fallback_block$1(ctx);
 
     	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[30](/*option*/ ctx[40], /*index*/ ctx[42]);
+    		return /*click_handler_1*/ ctx[32](/*option*/ ctx[42], /*index*/ ctx[44]);
     	}
 
     	const block = {
@@ -11881,11 +11886,11 @@ var app = (function () {
     			div = element("div");
     			if (default_slot_or_fallback) default_slot_or_fallback.c();
     			t = space();
-    			attr_dev(div, "class", "item svelte-1445dha");
-    			toggle_class(div, "selected", /*option*/ ctx[40].selected);
-    			toggle_class(div, "viewing", /*viewIndex*/ ctx[13] == /*index*/ ctx[42]);
-    			toggle_class(div, "disabled", /*option*/ ctx[40].disabled);
-    			add_location(div, file$e, 48, 8, 1778);
+    			attr_dev(div, "class", "item svelte-15j36pp");
+    			toggle_class(div, "selected", /*option*/ ctx[42].selected);
+    			toggle_class(div, "viewing", /*viewIndex*/ ctx[13] == /*index*/ ctx[44]);
+    			toggle_class(div, "disabled", /*option*/ ctx[42].disabled);
+    			add_location(div, file$e, 53, 8, 1797);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11906,8 +11911,8 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty[0] & /*$$scope, filteredOptions*/ 33570816)) {
-    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[25], !current ? [-1, -1] : dirty, get_default_slot_changes_1, get_default_slot_context_1);
+    				if (default_slot.p && (!current || dirty[0] & /*$$scope, filteredOptions*/ 67125248)) {
+    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[26], !current ? [-1, -1] : dirty, get_default_slot_changes_1, get_default_slot_context_1);
     				}
     			} else {
     				if (default_slot_or_fallback && default_slot_or_fallback.p && (!current || dirty[0] & /*filteredOptions*/ 16384)) {
@@ -11916,15 +11921,15 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*filteredOptions*/ 16384) {
-    				toggle_class(div, "selected", /*option*/ ctx[40].selected);
+    				toggle_class(div, "selected", /*option*/ ctx[42].selected);
     			}
 
     			if (dirty[0] & /*viewIndex*/ 8192) {
-    				toggle_class(div, "viewing", /*viewIndex*/ ctx[13] == /*index*/ ctx[42]);
+    				toggle_class(div, "viewing", /*viewIndex*/ ctx[13] == /*index*/ ctx[44]);
     			}
 
     			if (dirty[0] & /*filteredOptions*/ 16384) {
-    				toggle_class(div, "disabled", /*option*/ ctx[40].disabled);
+    				toggle_class(div, "disabled", /*option*/ ctx[42].disabled);
     			}
     		},
     		i: function intro(local) {
@@ -11948,7 +11953,7 @@ var app = (function () {
     		block,
     		id: create_each_block$3.name,
     		type: "each",
-    		source: "(48:6) {#each filteredOptions as option, index}",
+    		source: "(53:6) {#each filteredOptions as option, index}",
     		ctx
     	});
 
@@ -11972,10 +11977,10 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	let if_block0 = (/*selectedOptions*/ ctx[17].length === 0 || !/*multiple*/ ctx[3] && /*selectedOptions*/ ctx[17][0].value) && create_if_block_6(ctx);
-    	let each_value_1 = /*selectedOptions*/ ctx[17];
+    	let if_block0 = (/*selectedOptions*/ ctx[18].length === 0 || !/*multiple*/ ctx[3] && /*selectedOptions*/ ctx[18][0].value) && create_if_block_6$1(ctx);
+    	let each_value_1 = /*selectedOptions*/ ctx[18];
     	validate_each_argument(each_value_1);
-    	const get_key = ctx => /*option*/ ctx[40];
+    	const get_key = ctx => /*option*/ ctx[42];
     	validate_each_keys(ctx, each_value_1, get_each_context_1$1, get_key);
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -11984,7 +11989,7 @@ var app = (function () {
     		each_1_lookup.set(key, each_blocks[i] = create_each_block_1$1(key, child_ctx));
     	}
 
-    	let if_block1 = (/*selectedOptions*/ ctx[17] == null || /*selectedOptions*/ ctx[17].length === 0) && create_if_block_3$2(ctx);
+    	let if_block1 = (/*selectedOptions*/ ctx[18] == null || /*selectedOptions*/ ctx[18].length === 0) && create_if_block_3$2(ctx);
 
     	icon = new Icon({
     			props: { data: caretDownIcon, class: "fw" },
@@ -12012,17 +12017,17 @@ var app = (function () {
     			create_component(icon.$$.fragment);
     			t3 = space();
     			if (if_block2) if_block2.c();
-    			attr_dev(div0, "class", "input-select-content svelte-1445dha");
+    			attr_dev(div0, "class", "input-select-content svelte-15j36pp");
     			add_location(div0, file$e, 12, 4, 346);
-    			attr_dev(span, "class", "dropdown-icon svelte-1445dha");
+    			attr_dev(span, "class", "dropdown-icon svelte-15j36pp");
     			add_location(span, file$e, 28, 4, 1016);
-    			attr_dev(div1, "class", div1_class_value = "btn btn-light " + /*className*/ ctx[8] + " svelte-1445dha");
+    			attr_dev(div1, "class", div1_class_value = "btn btn-light " + /*className*/ ctx[8] + " svelte-15j36pp");
     			attr_dev(div1, "data-test", div1_data_test_value = "" + (/*name*/ ctx[2] + "-btn"));
     			attr_dev(div1, "tabindex", tabindex);
     			toggle_class(div1, "btn-sm", /*sm*/ ctx[10]);
     			toggle_class(div1, "open", /*isOpen*/ ctx[1]);
     			add_location(div1, file$e, 1, 2, 101);
-    			attr_dev(div2, "class", "select svelte-1445dha");
+    			attr_dev(div2, "class", "select svelte-15j36pp");
     			attr_dev(div2, "data-test", /*name*/ ctx[2]);
     			attr_dev(div2, "id", /*name*/ ctx[2]);
     			toggle_class(div2, "inline", /*inline*/ ctx[9]);
@@ -12048,28 +12053,28 @@ var app = (function () {
     			append_dev(div1, t2);
     			append_dev(div1, span);
     			mount_component(icon, span, null);
-    			/*div1_binding*/ ctx[27](div1);
+    			/*div1_binding*/ ctx[28](div1);
     			append_dev(div2, t3);
     			if (if_block2) if_block2.m(div2, null);
-    			/*div2_binding*/ ctx[31](div2);
+    			/*div2_binding*/ ctx[33](div2);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div1, "click", /*open*/ ctx[19], false, false, false),
-    					listen_dev(div1, "focus", /*open*/ ctx[19], false, false, false),
-    					listen_dev(div1, "keydown", /*keyListener*/ ctx[20], false, false, false)
+    					listen_dev(div1, "click", /*open*/ ctx[20], false, false, false),
+    					listen_dev(div1, "focus", /*open*/ ctx[20], false, false, false),
+    					listen_dev(div1, "keydown", /*keyListener*/ ctx[21], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (/*selectedOptions*/ ctx[17].length === 0 || !/*multiple*/ ctx[3] && /*selectedOptions*/ ctx[17][0].value) {
+    			if (/*selectedOptions*/ ctx[18].length === 0 || !/*multiple*/ ctx[3] && /*selectedOptions*/ ctx[18][0].value) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_6(ctx);
+    					if_block0 = create_if_block_6$1(ctx);
     					if_block0.c();
     					if_block0.m(div0, t0);
     				}
@@ -12078,8 +12083,8 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (dirty[0] & /*selectedOptions, $$scope, inline, multiple*/ 33686024) {
-    				each_value_1 = /*selectedOptions*/ ctx[17];
+    			if (dirty[0] & /*selectedOptions, $$scope, inline, multiple*/ 67371528) {
+    				each_value_1 = /*selectedOptions*/ ctx[18];
     				validate_each_argument(each_value_1);
     				group_outros();
     				validate_each_keys(ctx, each_value_1, get_each_context_1$1, get_key);
@@ -12087,7 +12092,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*selectedOptions*/ ctx[17] == null || /*selectedOptions*/ ctx[17].length === 0) {
+    			if (/*selectedOptions*/ ctx[18] == null || /*selectedOptions*/ ctx[18].length === 0) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
@@ -12100,7 +12105,7 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if (!current || dirty[0] & /*className*/ 256 && div1_class_value !== (div1_class_value = "btn btn-light " + /*className*/ ctx[8] + " svelte-1445dha")) {
+    			if (!current || dirty[0] & /*className*/ 256 && div1_class_value !== (div1_class_value = "btn btn-light " + /*className*/ ctx[8] + " svelte-15j36pp")) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
@@ -12185,9 +12190,9 @@ var app = (function () {
 
     			if (if_block1) if_block1.d();
     			destroy_component(icon);
-    			/*div1_binding*/ ctx[27](null);
+    			/*div1_binding*/ ctx[28](null);
     			if (if_block2) if_block2.d();
-    			/*div2_binding*/ ctx[31](null);
+    			/*div2_binding*/ ctx[33](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -12234,6 +12239,7 @@ var app = (function () {
     	let { right = false } = $$props; // lazy - make dropdown start from right of button instead of left, for when it's toward right edge of screen
     	let container = null;
     	let fakeField = null;
+    	let filterField = null;
     	let { filter = "" } = $$props;
     	let { filterPlaceholder = "Filter" } = $$props;
 
@@ -12241,7 +12247,7 @@ var app = (function () {
     	let viewIndex = -1;
 
     	function makeValueArray() {
-    		if (!Array.isArray(value)) $$invalidate(21, value = [value]); else $$invalidate(21, value = optionsToArray(options, value).filter(o => o.selected).map(option => option.value));
+    		if (!Array.isArray(value)) $$invalidate(22, value = [value]); else $$invalidate(22, value = optionsToArray(options, value).filter(o => o.selected).map(option => option.value));
     	}
 
     	function optionsToArray(_options, v) {
@@ -12278,14 +12284,14 @@ var app = (function () {
 
     	function toggle(option, setViewIndex) {
     		if (multiple) {
-    			$$invalidate(21, value = option.selected
+    			$$invalidate(22, value = option.selected
     			? (value || []).filter(v => v != option.value)
     			: (value || []).concat(option.value));
 
     			// if user clicked an option in multi-select, refocus the fakeField
     			if (document.activeElement != fakeField) focusField();
     		} else {
-    			$$invalidate(21, value = option.value);
+    			$$invalidate(22, value = option.value);
     			close();
     		}
 
@@ -12367,7 +12373,7 @@ var app = (function () {
     	}
 
     	function focusField() {
-    		if (fakeField && !filterable) fakeField.focus();
+    		if (fakeField && !filterable) fakeField.focus(); else if (filterField) filterField.focus();
     	}
 
     	const writable_props = [
@@ -12406,6 +12412,13 @@ var app = (function () {
     		$$invalidate(0, filter);
     	}
 
+    	function input_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			filterField = $$value;
+    			$$invalidate(17, filterField);
+    		});
+    	}
+
     	const click_handler = () => $$invalidate(0, filter = "");
     	const click_handler_1 = (option, index) => option.disabled ? null : toggle(option, index);
 
@@ -12421,10 +12434,10 @@ var app = (function () {
     		if ("multiple" in $$props) $$invalidate(3, multiple = $$props.multiple);
     		if ("prefixLabel" in $$props) $$invalidate(4, prefixLabel = $$props.prefixLabel);
     		if ("placeholder" in $$props) $$invalidate(5, placeholder = $$props.placeholder);
-    		if ("options" in $$props) $$invalidate(22, options = $$props.options);
-    		if ("valueProp" in $$props) $$invalidate(23, valueProp = $$props.valueProp);
-    		if ("labelProp" in $$props) $$invalidate(24, labelProp = $$props.labelProp);
-    		if ("value" in $$props) $$invalidate(21, value = $$props.value);
+    		if ("options" in $$props) $$invalidate(23, options = $$props.options);
+    		if ("valueProp" in $$props) $$invalidate(24, valueProp = $$props.valueProp);
+    		if ("labelProp" in $$props) $$invalidate(25, labelProp = $$props.labelProp);
+    		if ("value" in $$props) $$invalidate(22, value = $$props.value);
     		if ("filterable" in $$props) $$invalidate(6, filterable = $$props.filterable);
     		if ("isOpen" in $$props) $$invalidate(1, isOpen = $$props.isOpen);
     		if ("disabled" in $$props) $$invalidate(7, disabled = $$props.disabled);
@@ -12434,7 +12447,7 @@ var app = (function () {
     		if ("right" in $$props) $$invalidate(11, right = $$props.right);
     		if ("filter" in $$props) $$invalidate(0, filter = $$props.filter);
     		if ("filterPlaceholder" in $$props) $$invalidate(12, filterPlaceholder = $$props.filterPlaceholder);
-    		if ("$$scope" in $$props) $$invalidate(25, $$scope = $$props.$$scope);
+    		if ("$$scope" in $$props) $$invalidate(26, $$scope = $$props.$$scope);
     	};
 
     	$$self.$capture_state = () => ({
@@ -12466,6 +12479,7 @@ var app = (function () {
     		right,
     		container,
     		fakeField,
+    		filterField,
     		tabindex,
     		filter,
     		filterPlaceholder,
@@ -12487,10 +12501,10 @@ var app = (function () {
     		if ("multiple" in $$props) $$invalidate(3, multiple = $$props.multiple);
     		if ("prefixLabel" in $$props) $$invalidate(4, prefixLabel = $$props.prefixLabel);
     		if ("placeholder" in $$props) $$invalidate(5, placeholder = $$props.placeholder);
-    		if ("options" in $$props) $$invalidate(22, options = $$props.options);
-    		if ("valueProp" in $$props) $$invalidate(23, valueProp = $$props.valueProp);
-    		if ("labelProp" in $$props) $$invalidate(24, labelProp = $$props.labelProp);
-    		if ("value" in $$props) $$invalidate(21, value = $$props.value);
+    		if ("options" in $$props) $$invalidate(23, options = $$props.options);
+    		if ("valueProp" in $$props) $$invalidate(24, valueProp = $$props.valueProp);
+    		if ("labelProp" in $$props) $$invalidate(25, labelProp = $$props.labelProp);
+    		if ("value" in $$props) $$invalidate(22, value = $$props.value);
     		if ("filterable" in $$props) $$invalidate(6, filterable = $$props.filterable);
     		if ("isOpen" in $$props) $$invalidate(1, isOpen = $$props.isOpen);
     		if ("disabled" in $$props) $$invalidate(7, disabled = $$props.disabled);
@@ -12500,11 +12514,12 @@ var app = (function () {
     		if ("right" in $$props) $$invalidate(11, right = $$props.right);
     		if ("container" in $$props) $$invalidate(15, container = $$props.container);
     		if ("fakeField" in $$props) $$invalidate(16, fakeField = $$props.fakeField);
+    		if ("filterField" in $$props) $$invalidate(17, filterField = $$props.filterField);
     		if ("filter" in $$props) $$invalidate(0, filter = $$props.filter);
     		if ("filterPlaceholder" in $$props) $$invalidate(12, filterPlaceholder = $$props.filterPlaceholder);
     		if ("viewIndex" in $$props) $$invalidate(13, viewIndex = $$props.viewIndex);
     		if ("filteredOptions" in $$props) $$invalidate(14, filteredOptions = $$props.filteredOptions);
-    		if ("selectedOptions" in $$props) $$invalidate(17, selectedOptions = $$props.selectedOptions);
+    		if ("selectedOptions" in $$props) $$invalidate(18, selectedOptions = $$props.selectedOptions);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -12512,11 +12527,11 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*value*/ 2097152) {
+    		if ($$self.$$.dirty[0] & /*value*/ 4194304) {
     			if (markDirty != null && value != null && !validator.equals(value, initialValue)) markDirty();
     		}
 
-    		if ($$self.$$.dirty[0] & /*options, value, filterable, filter*/ 6291521) {
+    		if ($$self.$$.dirty[0] & /*options, value, filterable, filter*/ 12582977) {
     			// options to render, filtered if necessary
     			$$invalidate(14, filteredOptions = (() => {
     				const arr = optionsToArray(options, value);
@@ -12532,16 +12547,16 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*multiple, value*/ 2097160) {
+    		if ($$self.$$.dirty[0] & /*multiple, value*/ 4194312) {
     			// if multiple...
     			// make sure value is always array
     			// make sure value is always sorted to match option order - just nice to pass the same order around regardless of user click order
     			if (multiple && value) makeValueArray();
     		}
 
-    		if ($$self.$$.dirty[0] & /*options, value, multiple*/ 6291464) {
+    		if ($$self.$$.dirty[0] & /*options, value, multiple*/ 12582920) {
     			// options to render in the selected box (so we can use the same slot logic)
-    			$$invalidate(17, selectedOptions = optionsToArray(options, value).filter(option => multiple
+    			$$invalidate(18, selectedOptions = optionsToArray(options, value).filter(option => multiple
     			? value && value.indexOf(option.value) > -1
     			: value == option.value));
     		}
@@ -12565,6 +12580,7 @@ var app = (function () {
     		filteredOptions,
     		container,
     		fakeField,
+    		filterField,
     		selectedOptions,
     		toggle,
     		open,
@@ -12577,6 +12593,7 @@ var app = (function () {
     		slots,
     		div1_binding,
     		input_input_handler,
+    		input_binding,
     		click_handler,
     		click_handler_1,
     		div2_binding
@@ -12598,10 +12615,10 @@ var app = (function () {
     				multiple: 3,
     				prefixLabel: 4,
     				placeholder: 5,
-    				options: 22,
-    				valueProp: 23,
-    				labelProp: 24,
-    				value: 21,
+    				options: 23,
+    				valueProp: 24,
+    				labelProp: 25,
+    				value: 22,
     				filterable: 6,
     				isOpen: 1,
     				disabled: 7,
@@ -12822,7 +12839,7 @@ var app = (function () {
     			if (default_slot_or_fallback) default_slot_or_fallback.c();
     			t = space();
     			attr_dev(a, "href", a_href_value = "#/" + /*slug*/ ctx[1] + "/" + /*item*/ ctx[6].id);
-    			attr_dev(a, "class", "svelte-10t9u79");
+    			attr_dev(a, "class", "svelte-14k5oh");
     			toggle_class(a, "active", /*item*/ ctx[6].id == /*active*/ ctx[3]);
     			add_location(a, file$d, 5, 4, 157);
     			this.first = a;
@@ -12918,10 +12935,10 @@ var app = (function () {
     			}
 
     			attr_dev(a, "href", a_href_value = "#/" + /*slug*/ ctx[1] + "/new");
-    			attr_dev(a, "class", "svelte-10t9u79");
+    			attr_dev(a, "class", "svelte-14k5oh");
     			toggle_class(a, "active", /*active*/ ctx[3] == "new");
     			add_location(a, file$d, 1, 2, 31);
-    			attr_dev(div, "class", "item-list-nav svelte-10t9u79");
+    			attr_dev(div, "class", "item-list-nav svelte-14k5oh");
     			add_location(div, file$d, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -13184,8 +13201,888 @@ var app = (function () {
     	return block;
     }
 
-    // (69:10) <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
-    function create_default_slot_9(ctx) {
+    // (10:2) {#if input}
+    function create_if_block$7(ctx) {
+    	let div13;
+    	let div12;
+    	let div7;
+    	let div6;
+    	let button0;
+    	let t1;
+    	let colorpicker;
+    	let updating_value;
+    	let t2;
+    	let div0;
+    	let button1;
+    	let icon0;
+    	let button1_class_value;
+    	let t3;
+    	let button2;
+    	let icon1;
+    	let button2_class_value;
+    	let t4;
+    	let button3;
+    	let icon2;
+    	let button3_class_value;
+    	let t5;
+    	let div1;
+    	let button4;
+    	let icon3;
+    	let t6;
+
+    	let t7_value = (/*undos*/ ctx[6].length > 0
+    	? /*undos*/ ctx[6].length
+    	: "") + "";
+
+    	let t7;
+    	let button4_disabled_value;
+    	let t8;
+    	let button5;
+    	let icon4;
+    	let t9;
+
+    	let t10_value = (/*redos*/ ctx[7].length > 0
+    	? /*redos*/ ctx[7].length
+    	: "") + "";
+
+    	let t10;
+    	let button5_disabled_value;
+    	let t11;
+    	let div2;
+    	let button6;
+    	let icon5;
+    	let t12;
+    	let button7;
+    	let icon6;
+    	let t13;
+    	let div3;
+    	let button8;
+    	let icon7;
+    	let t14;
+    	let button9;
+    	let icon8;
+    	let t15;
+    	let button10;
+    	let icon9;
+    	let t16;
+    	let button11;
+    	let icon10;
+    	let t17;
+    	let quickdropdown;
+    	let t18;
+    	let div4;
+    	let button12;
+    	let icon11;
+    	let t19;
+    	let t20;
+    	let button13;
+    	let icon12;
+    	let t21;
+    	let t22;
+    	let inputselect0;
+    	let updating_value_1;
+    	let t23;
+    	let div5;
+    	let label;
+    	let input_1;
+    	let t24;
+    	let t25;
+    	let inputselect1;
+    	let updating_value_2;
+    	let t26;
+    	let div8;
+    	let canvas0;
+    	let t27;
+    	let canvas1;
+    	let t28;
+    	let div11;
+    	let form;
+    	let t29;
+    	let div10;
+    	let fieldcheckbox;
+    	let updating_checked;
+    	let t30;
+    	let div9;
+    	let t31;
+    	let current_block_type_index;
+    	let if_block1;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	function colorpicker_value_binding(value) {
+    		/*colorpicker_value_binding*/ ctx[47](value);
+    	}
+
+    	let colorpicker_props = { dropdownClass: "below left" };
+
+    	if (/*selectedColor*/ ctx[8] !== void 0) {
+    		colorpicker_props.value = /*selectedColor*/ ctx[8];
+    	}
+
+    	colorpicker = new ColorPicker({ props: colorpicker_props, $$inline: true });
+    	binding_callbacks.push(() => bind(colorpicker, "value", colorpicker_value_binding));
+    	colorpicker.$on("change", /*change_handler*/ ctx[48]);
+
+    	icon0 = new Icon({
+    			props: { data: faPaintBrush },
+    			$$inline: true
+    		});
+
+    	icon1 = new Icon({
+    			props: { data: faFillDrip },
+    			$$inline: true
+    		});
+
+    	icon2 = new Icon({
+    			props: { data: eraseIcon },
+    			$$inline: true
+    		});
+
+    	icon3 = new Icon({
+    			props: { data: undoIcon },
+    			$$inline: true
+    		});
+
+    	icon4 = new Icon({
+    			props: { data: undoIcon, flip: "horizontal" },
+    			$$inline: true
+    		});
+
+    	icon5 = new Icon({
+    			props: { data: faExchangeAlt },
+    			$$inline: true
+    		});
+
+    	icon6 = new Icon({
+    			props: {
+    				data: faExchangeAlt,
+    				style: "transform: rotate(90deg);"
+    			},
+    			$$inline: true
+    		});
+
+    	icon7 = new Icon({
+    			props: { data: arrowLeftIcon },
+    			$$inline: true
+    		});
+
+    	icon8 = new Icon({
+    			props: { data: arrowRightIcon },
+    			$$inline: true
+    		});
+
+    	icon9 = new Icon({
+    			props: { data: arrowUpIcon },
+    			$$inline: true
+    		});
+
+    	icon10 = new Icon({
+    			props: { data: arrowDownIcon },
+    			$$inline: true
+    		});
+
+    	quickdropdown = new QuickDropdown({
+    			props: {
+    				label: "" + (/*input*/ ctx[0].width + "W x " + /*input*/ ctx[0].height + "H"),
+    				dropdownClass: "below left",
+    				$$slots: { default: [create_default_slot_9$1] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	quickdropdown.$on("open", /*startChangeSize*/ ctx[41]);
+
+    	icon11 = new Icon({
+    			props: { data: minusIcon },
+    			$$inline: true
+    		});
+
+    	icon12 = new Icon({
+    			props: { data: plusIcon },
+    			$$inline: true
+    		});
+
+    	function inputselect0_value_binding(value) {
+    		/*inputselect0_value_binding*/ ctx[54](value);
+    	}
+
+    	let inputselect0_props = {
+    		sm: true,
+    		placeholder: "Zoom",
+    		options: [...Array(11)].map(func),
+    		$$slots: {
+    			default: [
+    				create_default_slot_8$2,
+    				({ option }) => ({ 97: option }),
+    				({ option }) => [0, 0, 0, option ? 16 : 0]
+    			]
+    		},
+    		$$scope: { ctx }
+    	};
+
+    	if (/*zoom*/ ctx[2] !== void 0) {
+    		inputselect0_props.value = /*zoom*/ ctx[2];
+    	}
+
+    	inputselect0 = new InputSelect({
+    			props: inputselect0_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(inputselect0, "value", inputselect0_value_binding));
+
+    	function inputselect1_value_binding(value) {
+    		/*inputselect1_value_binding*/ ctx[56](value);
+    	}
+
+    	let inputselect1_props = {
+    		disabled: /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name] == null,
+    		options: /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name],
+    		placeholder: "Auto-saves",
+    		inline: true,
+    		sm: true,
+    		right: true,
+    		$$slots: {
+    			default: [
+    				create_default_slot_7$3,
+    				({ option }) => ({ 97: option }),
+    				({ option }) => [0, 0, 0, option ? 16 : 0]
+    			]
+    		},
+    		$$scope: { ctx }
+    	};
+
+    	if (/*selectedAutoSave*/ ctx[9] !== void 0) {
+    		inputselect1_props.value = /*selectedAutoSave*/ ctx[9];
+    	}
+
+    	inputselect1 = new InputSelect({
+    			props: inputselect1_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(inputselect1, "value", inputselect1_value_binding));
+    	inputselect1.$on("change", /*change_handler_1*/ ctx[57]);
+
+    	form = new Form({
+    			props: {
+    				hasChanges: /*hasChanges*/ ctx[15],
+    				$$slots: {
+    					buttons: [create_buttons_slot$5],
+    					default: [create_default_slot_5$5]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	form.$on("submit", /*save*/ ctx[20]);
+
+    	function fieldcheckbox_checked_binding(value) {
+    		/*fieldcheckbox_checked_binding*/ ctx[61](value);
+    	}
+
+    	let fieldcheckbox_props = {
+    		name: "animated",
+    		$$slots: { default: [create_default_slot_4$5] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[0].animated !== void 0) {
+    		fieldcheckbox_props.checked = /*input*/ ctx[0].animated;
+    	}
+
+    	fieldcheckbox = new FieldCheckbox({
+    			props: fieldcheckbox_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(fieldcheckbox, "checked", fieldcheckbox_checked_binding));
+    	fieldcheckbox.$on("change", /*animatedChanged*/ ctx[40]);
+    	let if_block0 = /*input*/ ctx[0].animated && create_if_block_4$1(ctx);
+    	const if_block_creators = [create_if_block_1$5, create_if_block_3$1];
+    	const if_blocks = [];
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*isBlockSize*/ ctx[17]) return 0;
+    		if (!/*input*/ ctx[0].animated) return 1;
+    		return -1;
+    	}
+
+    	if (~(current_block_type_index = select_block_type(ctx))) {
+    		if_block1 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div13 = element("div");
+    			div12 = element("div");
+    			div7 = element("div");
+    			div6 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "Start over";
+    			t1 = space();
+    			create_component(colorpicker.$$.fragment);
+    			t2 = space();
+    			div0 = element("div");
+    			button1 = element("button");
+    			create_component(icon0.$$.fragment);
+    			t3 = space();
+    			button2 = element("button");
+    			create_component(icon1.$$.fragment);
+    			t4 = space();
+    			button3 = element("button");
+    			create_component(icon2.$$.fragment);
+    			t5 = space();
+    			div1 = element("div");
+    			button4 = element("button");
+    			create_component(icon3.$$.fragment);
+    			t6 = space();
+    			t7 = text(t7_value);
+    			t8 = space();
+    			button5 = element("button");
+    			create_component(icon4.$$.fragment);
+    			t9 = space();
+    			t10 = text(t10_value);
+    			t11 = space();
+    			div2 = element("div");
+    			button6 = element("button");
+    			create_component(icon5.$$.fragment);
+    			t12 = space();
+    			button7 = element("button");
+    			create_component(icon6.$$.fragment);
+    			t13 = space();
+    			div3 = element("div");
+    			button8 = element("button");
+    			create_component(icon7.$$.fragment);
+    			t14 = space();
+    			button9 = element("button");
+    			create_component(icon8.$$.fragment);
+    			t15 = space();
+    			button10 = element("button");
+    			create_component(icon9.$$.fragment);
+    			t16 = space();
+    			button11 = element("button");
+    			create_component(icon10.$$.fragment);
+    			t17 = space();
+    			create_component(quickdropdown.$$.fragment);
+    			t18 = space();
+    			div4 = element("div");
+    			button12 = element("button");
+    			create_component(icon11.$$.fragment);
+    			t19 = text("\r\n                Half size");
+    			t20 = space();
+    			button13 = element("button");
+    			create_component(icon12.$$.fragment);
+    			t21 = text("\r\n                Double size");
+    			t22 = space();
+    			create_component(inputselect0.$$.fragment);
+    			t23 = space();
+    			div5 = element("div");
+    			label = element("label");
+    			input_1 = element("input");
+    			t24 = text("\r\n                Show grid");
+    			t25 = space();
+    			create_component(inputselect1.$$.fragment);
+    			t26 = space();
+    			div8 = element("div");
+    			canvas0 = element("canvas");
+    			t27 = space();
+    			canvas1 = element("canvas");
+    			t28 = space();
+    			div11 = element("div");
+    			create_component(form.$$.fragment);
+    			t29 = space();
+    			div10 = element("div");
+    			create_component(fieldcheckbox.$$.fragment);
+    			t30 = space();
+    			div9 = element("div");
+    			if (if_block0) if_block0.c();
+    			t31 = space();
+    			if (if_block1) if_block1.c();
+    			attr_dev(button0, "type", "button");
+    			attr_dev(button0, "class", "btn btn-light btn-sm mr1");
+    			add_location(button0, file$c, 14, 12, 458);
+    			attr_dev(button1, "type", "button");
+    			attr_dev(button1, "class", button1_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "paint" ? "primary" : "light"));
+    			attr_dev(button1, "title", "Paint brush");
+    			add_location(button1, file$c, 18, 14, 747);
+    			attr_dev(button2, "type", "button");
+    			attr_dev(button2, "class", button2_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "fill" ? "primary" : "light"));
+    			attr_dev(button2, "title", "Paint bucket");
+    			add_location(button2, file$c, 26, 14, 1054);
+    			attr_dev(button3, "type", "button");
+    			attr_dev(button3, "class", button3_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "erase" ? "primary" : "light"));
+    			attr_dev(button3, "title", "Eraser");
+    			add_location(button3, file$c, 34, 14, 1359);
+    			attr_dev(div0, "class", "btn-group");
+    			add_location(div0, file$c, 17, 12, 708);
+    			attr_dev(button4, "type", "button");
+    			button4.disabled = button4_disabled_value = /*undos*/ ctx[6].length == 0;
+    			attr_dev(button4, "class", "btn btn-default btn-sm");
+    			add_location(button4, file$c, 40, 14, 1636);
+    			attr_dev(button5, "type", "button");
+    			button5.disabled = button5_disabled_value = /*redos*/ ctx[7].length == 0;
+    			attr_dev(button5, "class", "btn btn-default btn-sm");
+    			add_location(button5, file$c, 44, 14, 1873);
+    			attr_dev(div1, "class", "btn-group");
+    			add_location(div1, file$c, 39, 12, 1597);
+    			attr_dev(button6, "type", "button");
+    			attr_dev(button6, "class", "btn btn-light btn-sm");
+    			attr_dev(button6, "title", "Flip horizontal");
+    			add_location(button6, file$c, 51, 14, 2187);
+    			attr_dev(button7, "type", "button");
+    			attr_dev(button7, "class", "btn btn-light btn-sm");
+    			attr_dev(button7, "title", "Flip vertical");
+    			add_location(button7, file$c, 54, 14, 2362);
+    			attr_dev(div2, "class", "btn-group");
+    			add_location(div2, file$c, 50, 12, 2148);
+    			attr_dev(button8, "type", "button");
+    			attr_dev(button8, "class", "btn btn-light btn-sm");
+    			attr_dev(button8, "title", "Move left");
+    			add_location(button8, file$c, 60, 14, 2628);
+    			attr_dev(button9, "type", "button");
+    			attr_dev(button9, "class", "btn btn-light btn-sm");
+    			attr_dev(button9, "title", "Move right");
+    			add_location(button9, file$c, 63, 14, 2805);
+    			attr_dev(button10, "type", "button");
+    			attr_dev(button10, "class", "btn btn-light btn-sm");
+    			attr_dev(button10, "title", "Move up");
+    			add_location(button10, file$c, 66, 14, 2985);
+    			attr_dev(button11, "type", "button");
+    			attr_dev(button11, "class", "btn btn-light btn-sm");
+    			attr_dev(button11, "title", "Move down");
+    			add_location(button11, file$c, 69, 14, 3156);
+    			attr_dev(div3, "class", "btn-group");
+    			add_location(div3, file$c, 59, 12, 2589);
+    			attr_dev(button12, "type", "button");
+    			attr_dev(button12, "class", "btn btn-light btn-sm");
+    			attr_dev(button12, "title", "Scale down");
+    			add_location(button12, file$c, 88, 14, 4024);
+    			attr_dev(button13, "type", "button");
+    			attr_dev(button13, "class", "btn btn-light btn-sm");
+    			attr_dev(button13, "title", "Scale up");
+    			add_location(button13, file$c, 93, 14, 4228);
+    			add_location(div4, file$c, 87, 12, 4003);
+    			attr_dev(input_1, "type", "checkbox");
+    			add_location(input_1, file$c, 105, 16, 4716);
+    			add_location(label, file$c, 104, 14, 4691);
+    			add_location(div5, file$c, 103, 12, 4670);
+    			attr_dev(div6, "class", "art-actions svelte-1gatncs");
+    			add_location(div6, file$c, 13, 10, 419);
+    			attr_dev(div7, "class", "col1");
+    			add_location(div7, file$c, 12, 8, 389);
+    			attr_dev(canvas0, "class", "draw-canvas svelte-1gatncs");
+    			add_location(canvas0, file$c, 127, 10, 5426);
+    			attr_dev(canvas1, "class", "grid-canvas svelte-1gatncs");
+    			toggle_class(canvas1, "paint-cursor", /*mode*/ ctx[5] == "paint");
+    			toggle_class(canvas1, "fill-cursor", /*mode*/ ctx[5] == "fill");
+    			toggle_class(canvas1, "erase-cursor", /*mode*/ ctx[5] == "erase");
+    			add_location(canvas1, file$c, 128, 10, 5491);
+    			attr_dev(div8, "class", "grow canvas-container svelte-1gatncs");
+    			add_location(div8, file$c, 126, 8, 5379);
+    			attr_dev(div9, "class", "preview flex");
+    			add_location(div9, file$c, 154, 12, 6520);
+    			attr_dev(div10, "class", "p1");
+    			add_location(div10, file$c, 151, 10, 6360);
+    			attr_dev(div11, "class", "col2");
+    			add_location(div11, file$c, 141, 8, 5985);
+    			attr_dev(div12, "class", "grow columns");
+    			add_location(div12, file$c, 11, 6, 353);
+    			attr_dev(div13, "class", "grow rows");
+    			add_location(div13, file$c, 10, 4, 322);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div13, anchor);
+    			append_dev(div13, div12);
+    			append_dev(div12, div7);
+    			append_dev(div7, div6);
+    			append_dev(div6, button0);
+    			append_dev(div6, t1);
+    			mount_component(colorpicker, div6, null);
+    			append_dev(div6, t2);
+    			append_dev(div6, div0);
+    			append_dev(div0, button1);
+    			mount_component(icon0, button1, null);
+    			append_dev(div0, t3);
+    			append_dev(div0, button2);
+    			mount_component(icon1, button2, null);
+    			append_dev(div0, t4);
+    			append_dev(div0, button3);
+    			mount_component(icon2, button3, null);
+    			append_dev(div6, t5);
+    			append_dev(div6, div1);
+    			append_dev(div1, button4);
+    			mount_component(icon3, button4, null);
+    			append_dev(button4, t6);
+    			append_dev(button4, t7);
+    			append_dev(div1, t8);
+    			append_dev(div1, button5);
+    			mount_component(icon4, button5, null);
+    			append_dev(button5, t9);
+    			append_dev(button5, t10);
+    			append_dev(div6, t11);
+    			append_dev(div6, div2);
+    			append_dev(div2, button6);
+    			mount_component(icon5, button6, null);
+    			append_dev(div2, t12);
+    			append_dev(div2, button7);
+    			mount_component(icon6, button7, null);
+    			append_dev(div6, t13);
+    			append_dev(div6, div3);
+    			append_dev(div3, button8);
+    			mount_component(icon7, button8, null);
+    			append_dev(div3, t14);
+    			append_dev(div3, button9);
+    			mount_component(icon8, button9, null);
+    			append_dev(div3, t15);
+    			append_dev(div3, button10);
+    			mount_component(icon9, button10, null);
+    			append_dev(div3, t16);
+    			append_dev(div3, button11);
+    			mount_component(icon10, button11, null);
+    			append_dev(div6, t17);
+    			mount_component(quickdropdown, div6, null);
+    			append_dev(div6, t18);
+    			append_dev(div6, div4);
+    			append_dev(div4, button12);
+    			mount_component(icon11, button12, null);
+    			append_dev(button12, t19);
+    			append_dev(div4, t20);
+    			append_dev(div4, button13);
+    			mount_component(icon12, button13, null);
+    			append_dev(button13, t21);
+    			append_dev(div6, t22);
+    			mount_component(inputselect0, div6, null);
+    			append_dev(div6, t23);
+    			append_dev(div6, div5);
+    			append_dev(div5, label);
+    			append_dev(label, input_1);
+    			input_1.checked = /*showGrid*/ ctx[1];
+    			append_dev(label, t24);
+    			append_dev(div6, t25);
+    			mount_component(inputselect1, div6, null);
+    			append_dev(div12, t26);
+    			append_dev(div12, div8);
+    			append_dev(div8, canvas0);
+    			/*canvas0_binding*/ ctx[58](canvas0);
+    			append_dev(div8, t27);
+    			append_dev(div8, canvas1);
+    			/*canvas1_binding*/ ctx[59](canvas1);
+    			append_dev(div12, t28);
+    			append_dev(div12, div11);
+    			mount_component(form, div11, null);
+    			append_dev(div11, t29);
+    			append_dev(div11, div10);
+    			mount_component(fieldcheckbox, div10, null);
+    			append_dev(div10, t30);
+    			append_dev(div10, div9);
+    			if (if_block0) if_block0.m(div9, null);
+    			append_dev(div10, t31);
+
+    			if (~current_block_type_index) {
+    				if_blocks[current_block_type_index].m(div10, null);
+    			}
+
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*reset*/ ctx[22], false, false, false),
+    					listen_dev(button1, "click", /*click_handler*/ ctx[49], false, false, false),
+    					listen_dev(button2, "click", /*click_handler_1*/ ctx[50], false, false, false),
+    					listen_dev(button3, "click", /*click_handler_2*/ ctx[51], false, false, false),
+    					listen_dev(button4, "click", /*undo*/ ctx[28], false, false, false),
+    					listen_dev(button5, "click", /*redo*/ ctx[29], false, false, false),
+    					listen_dev(button6, "click", /*flipX*/ ctx[31], false, false, false),
+    					listen_dev(button7, "click", /*flipY*/ ctx[30], false, false, false),
+    					listen_dev(button8, "click", /*moveLeft*/ ctx[32], false, false, false),
+    					listen_dev(button9, "click", /*moveRight*/ ctx[33], false, false, false),
+    					listen_dev(button10, "click", /*moveUp*/ ctx[34], false, false, false),
+    					listen_dev(button11, "click", /*moveDown*/ ctx[35], false, false, false),
+    					listen_dev(button12, "click", /*scaleDown*/ ctx[39], false, false, false),
+    					listen_dev(button13, "click", /*scaleUp*/ ctx[38], false, false, false),
+    					listen_dev(input_1, "change", /*input_1_change_handler*/ ctx[55]),
+    					listen_dev(canvas1, "pointerdown", prevent_default(/*onDrawPointerDown*/ ctx[23]), false, true, false),
+    					listen_dev(canvas1, "pointerup", prevent_default(/*onDrawPointerUp*/ ctx[24]), false, true, false),
+    					listen_dev(canvas1, "pointermove", prevent_default(/*onDrawPointerMove*/ ctx[25]), false, true, false),
+    					listen_dev(canvas1, "contextmenu", prevent_default(/*contextmenu_handler*/ ctx[46]), false, true, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			const colorpicker_changes = {};
+
+    			if (!updating_value && dirty[0] & /*selectedColor*/ 256) {
+    				updating_value = true;
+    				colorpicker_changes.value = /*selectedColor*/ ctx[8];
+    				add_flush_callback(() => updating_value = false);
+    			}
+
+    			colorpicker.$set(colorpicker_changes);
+
+    			if (!current || dirty[0] & /*mode*/ 32 && button1_class_value !== (button1_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "paint" ? "primary" : "light"))) {
+    				attr_dev(button1, "class", button1_class_value);
+    			}
+
+    			if (!current || dirty[0] & /*mode*/ 32 && button2_class_value !== (button2_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "fill" ? "primary" : "light"))) {
+    				attr_dev(button2, "class", button2_class_value);
+    			}
+
+    			if (!current || dirty[0] & /*mode*/ 32 && button3_class_value !== (button3_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "erase" ? "primary" : "light"))) {
+    				attr_dev(button3, "class", button3_class_value);
+    			}
+
+    			if ((!current || dirty[0] & /*undos*/ 64) && t7_value !== (t7_value = (/*undos*/ ctx[6].length > 0
+    			? /*undos*/ ctx[6].length
+    			: "") + "")) set_data_dev(t7, t7_value);
+
+    			if (!current || dirty[0] & /*undos*/ 64 && button4_disabled_value !== (button4_disabled_value = /*undos*/ ctx[6].length == 0)) {
+    				prop_dev(button4, "disabled", button4_disabled_value);
+    			}
+
+    			if ((!current || dirty[0] & /*redos*/ 128) && t10_value !== (t10_value = (/*redos*/ ctx[7].length > 0
+    			? /*redos*/ ctx[7].length
+    			: "") + "")) set_data_dev(t10, t10_value);
+
+    			if (!current || dirty[0] & /*redos*/ 128 && button5_disabled_value !== (button5_disabled_value = /*redos*/ ctx[7].length == 0)) {
+    				prop_dev(button5, "disabled", button5_disabled_value);
+    			}
+
+    			const quickdropdown_changes = {};
+    			if (dirty[0] & /*input*/ 1) quickdropdown_changes.label = "" + (/*input*/ ctx[0].width + "W x " + /*input*/ ctx[0].height + "H");
+
+    			if (dirty[0] & /*changeSize*/ 8192 | dirty[3] & /*$$scope*/ 64) {
+    				quickdropdown_changes.$$scope = { dirty, ctx };
+    			}
+
+    			quickdropdown.$set(quickdropdown_changes);
+    			const inputselect0_changes = {};
+
+    			if (dirty[3] & /*$$scope, option*/ 80) {
+    				inputselect0_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_1 && dirty[0] & /*zoom*/ 4) {
+    				updating_value_1 = true;
+    				inputselect0_changes.value = /*zoom*/ ctx[2];
+    				add_flush_callback(() => updating_value_1 = false);
+    			}
+
+    			inputselect0.$set(inputselect0_changes);
+
+    			if (dirty[0] & /*showGrid*/ 2) {
+    				input_1.checked = /*showGrid*/ ctx[1];
+    			}
+
+    			const inputselect1_changes = {};
+    			if (dirty[0] & /*$autoSaveStore, input*/ 262145) inputselect1_changes.disabled = /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name] == null;
+    			if (dirty[0] & /*$autoSaveStore, input*/ 262145) inputselect1_changes.options = /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name];
+
+    			if (dirty[3] & /*$$scope, option*/ 80) {
+    				inputselect1_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_2 && dirty[0] & /*selectedAutoSave*/ 512) {
+    				updating_value_2 = true;
+    				inputselect1_changes.value = /*selectedAutoSave*/ ctx[9];
+    				add_flush_callback(() => updating_value_2 = false);
+    			}
+
+    			inputselect1.$set(inputselect1_changes);
+
+    			if (dirty[0] & /*mode*/ 32) {
+    				toggle_class(canvas1, "paint-cursor", /*mode*/ ctx[5] == "paint");
+    			}
+
+    			if (dirty[0] & /*mode*/ 32) {
+    				toggle_class(canvas1, "fill-cursor", /*mode*/ ctx[5] == "fill");
+    			}
+
+    			if (dirty[0] & /*mode*/ 32) {
+    				toggle_class(canvas1, "erase-cursor", /*mode*/ ctx[5] == "erase");
+    			}
+
+    			const form_changes = {};
+    			if (dirty[0] & /*hasChanges*/ 32768) form_changes.hasChanges = /*hasChanges*/ ctx[15];
+
+    			if (dirty[0] & /*isAdding, input*/ 16385 | dirty[3] & /*$$scope*/ 64) {
+    				form_changes.$$scope = { dirty, ctx };
+    			}
+
+    			form.$set(form_changes);
+    			const fieldcheckbox_changes = {};
+
+    			if (dirty[3] & /*$$scope*/ 64) {
+    				fieldcheckbox_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_checked && dirty[0] & /*input*/ 1) {
+    				updating_checked = true;
+    				fieldcheckbox_changes.checked = /*input*/ ctx[0].animated;
+    				add_flush_callback(() => updating_checked = false);
+    			}
+
+    			fieldcheckbox.$set(fieldcheckbox_changes);
+
+    			if (/*input*/ ctx[0].animated) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+
+    					if (dirty[0] & /*input*/ 1) {
+    						transition_in(if_block0, 1);
+    					}
+    				} else {
+    					if_block0 = create_if_block_4$1(ctx);
+    					if_block0.c();
+    					transition_in(if_block0, 1);
+    					if_block0.m(div9, null);
+    				}
+    			} else if (if_block0) {
+    				group_outros();
+
+    				transition_out(if_block0, 1, 1, () => {
+    					if_block0 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			let previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+
+    			if (current_block_type_index === previous_block_index) {
+    				if (~current_block_type_index) {
+    					if_blocks[current_block_type_index].p(ctx, dirty);
+    				}
+    			} else {
+    				if (if_block1) {
+    					group_outros();
+
+    					transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    						if_blocks[previous_block_index] = null;
+    					});
+
+    					check_outros();
+    				}
+
+    				if (~current_block_type_index) {
+    					if_block1 = if_blocks[current_block_type_index];
+
+    					if (!if_block1) {
+    						if_block1 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    						if_block1.c();
+    					} else {
+    						if_block1.p(ctx, dirty);
+    					}
+
+    					transition_in(if_block1, 1);
+    					if_block1.m(div10, null);
+    				} else {
+    					if_block1 = null;
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(colorpicker.$$.fragment, local);
+    			transition_in(icon0.$$.fragment, local);
+    			transition_in(icon1.$$.fragment, local);
+    			transition_in(icon2.$$.fragment, local);
+    			transition_in(icon3.$$.fragment, local);
+    			transition_in(icon4.$$.fragment, local);
+    			transition_in(icon5.$$.fragment, local);
+    			transition_in(icon6.$$.fragment, local);
+    			transition_in(icon7.$$.fragment, local);
+    			transition_in(icon8.$$.fragment, local);
+    			transition_in(icon9.$$.fragment, local);
+    			transition_in(icon10.$$.fragment, local);
+    			transition_in(quickdropdown.$$.fragment, local);
+    			transition_in(icon11.$$.fragment, local);
+    			transition_in(icon12.$$.fragment, local);
+    			transition_in(inputselect0.$$.fragment, local);
+    			transition_in(inputselect1.$$.fragment, local);
+    			transition_in(form.$$.fragment, local);
+    			transition_in(fieldcheckbox.$$.fragment, local);
+    			transition_in(if_block0);
+    			transition_in(if_block1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(colorpicker.$$.fragment, local);
+    			transition_out(icon0.$$.fragment, local);
+    			transition_out(icon1.$$.fragment, local);
+    			transition_out(icon2.$$.fragment, local);
+    			transition_out(icon3.$$.fragment, local);
+    			transition_out(icon4.$$.fragment, local);
+    			transition_out(icon5.$$.fragment, local);
+    			transition_out(icon6.$$.fragment, local);
+    			transition_out(icon7.$$.fragment, local);
+    			transition_out(icon8.$$.fragment, local);
+    			transition_out(icon9.$$.fragment, local);
+    			transition_out(icon10.$$.fragment, local);
+    			transition_out(quickdropdown.$$.fragment, local);
+    			transition_out(icon11.$$.fragment, local);
+    			transition_out(icon12.$$.fragment, local);
+    			transition_out(inputselect0.$$.fragment, local);
+    			transition_out(inputselect1.$$.fragment, local);
+    			transition_out(form.$$.fragment, local);
+    			transition_out(fieldcheckbox.$$.fragment, local);
+    			transition_out(if_block0);
+    			transition_out(if_block1);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div13);
+    			destroy_component(colorpicker);
+    			destroy_component(icon0);
+    			destroy_component(icon1);
+    			destroy_component(icon2);
+    			destroy_component(icon3);
+    			destroy_component(icon4);
+    			destroy_component(icon5);
+    			destroy_component(icon6);
+    			destroy_component(icon7);
+    			destroy_component(icon8);
+    			destroy_component(icon9);
+    			destroy_component(icon10);
+    			destroy_component(quickdropdown);
+    			destroy_component(icon11);
+    			destroy_component(icon12);
+    			destroy_component(inputselect0);
+    			destroy_component(inputselect1);
+    			/*canvas0_binding*/ ctx[58](null);
+    			/*canvas1_binding*/ ctx[59](null);
+    			destroy_component(form);
+    			destroy_component(fieldcheckbox);
+    			if (if_block0) if_block0.d();
+
+    			if (~current_block_type_index) {
+    				if_blocks[current_block_type_index].d();
+    			}
+
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$7.name,
+    		type: "if",
+    		source: "(10:2) {#if input}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (75:12) <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
+    function create_default_slot_9$1(ctx) {
     	let form;
     	let div;
     	let t0;
@@ -13203,12 +14100,12 @@ var app = (function () {
     		c: function create() {
     			form = element("form");
     			div = element("div");
-    			t0 = text("W\r\n                ");
+    			t0 = text("W\r\n                  ");
     			input0 = element("input");
     			t1 = space();
     			strong = element("strong");
     			strong.textContent = "x";
-    			t3 = text("\r\n                H\r\n                ");
+    			t3 = text("\r\n                  H\r\n                  ");
     			input1 = element("input");
     			t4 = space();
     			button = element("button");
@@ -13217,19 +14114,19 @@ var app = (function () {
     			attr_dev(input0, "min", 1);
     			attr_dev(input0, "max", 1500);
     			attr_dev(input0, "class", "svelte-1gatncs");
-    			add_location(input0, file$c, 72, 16, 3385);
-    			add_location(strong, file$c, 73, 16, 3475);
+    			add_location(input0, file$c, 78, 18, 3602);
+    			add_location(strong, file$c, 79, 18, 3694);
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", 1);
     			attr_dev(input1, "max", 1500);
     			attr_dev(input1, "class", "svelte-1gatncs");
-    			add_location(input1, file$c, 75, 16, 3530);
+    			add_location(input1, file$c, 81, 18, 3753);
     			attr_dev(button, "type", "submit");
     			attr_dev(button, "class", "btn btn-info btn-sm");
-    			add_location(button, file$c, 76, 16, 3621);
+    			add_location(button, file$c, 82, 18, 3846);
     			attr_dev(div, "class", "p1");
-    			add_location(div, file$c, 70, 14, 3332);
-    			add_location(form, file$c, 69, 12, 3267);
+    			add_location(div, file$c, 76, 16, 3545);
+    			add_location(form, file$c, 75, 14, 3478);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -13273,16 +14170,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_9.name,
+    		id: create_default_slot_9$1.name,
     		type: "slot",
-    		source: "(69:10) <QuickDropdown label=\\\"{input.width}W x {input.height}H\\\" on:open={startChangeSize} dropdownClass=\\\"below left\\\">",
+    		source: "(75:12) <QuickDropdown label=\\\"{input.width}W x {input.height}H\\\" on:open={startChangeSize} dropdownClass=\\\"below left\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (94:10) <InputSelect sm placeholder="Zoom" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>
+    // (100:12) <InputSelect sm placeholder="Zoom" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>
     function create_default_slot_8$2(ctx) {
     	let icon;
     	let t0;
@@ -13330,15 +14227,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_8$2.name,
     		type: "slot",
-    		source: "(94:10) <InputSelect sm placeholder=\\\"Zoom\\\" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>",
+    		source: "(100:12) <InputSelect sm placeholder=\\\"Zoom\\\" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (105:10) <InputSelect              disabled={$autoSaveStore[input.name] == null}              options={$autoSaveStore[input.name]}              bind:value={selectedAutoSave}              on:change={e => loadAutoSave(e.detail)}              let:option              placeholder="Auto-saves"              inline              sm              right            >
-    function create_default_slot_7$2(ctx) {
+    // (111:12) <InputSelect                disabled={$autoSaveStore[input.name] == null}                options={$autoSaveStore[input.name]}                bind:value={selectedAutoSave}                on:change={e => loadAutoSave(e.detail)}                let:option                placeholder="Auto-saves"                inline                sm                right              >
+    function create_default_slot_7$3(ctx) {
     	let t0_value = /*option*/ ctx[97].name + "";
     	let t0;
     	let t1;
@@ -13353,7 +14250,7 @@ var app = (function () {
     			if (img.src !== (img_src_value = /*option*/ ctx[97].png)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "height", "40");
     			attr_dev(img, "alt", "");
-    			add_location(img, file$c, 116, 12, 4967);
+    			add_location(img, file$c, 122, 14, 5264);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -13376,16 +14273,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7$2.name,
+    		id: create_default_slot_7$3.name,
     		type: "slot",
-    		source: "(105:10) <InputSelect              disabled={$autoSaveStore[input.name] == null}              options={$autoSaveStore[input.name]}              bind:value={selectedAutoSave}              on:change={e => loadAutoSave(e.detail)}              let:option              placeholder=\\\"Auto-saves\\\"              inline              sm              right            >",
+    		source: "(111:12) <InputSelect                disabled={$autoSaveStore[input.name] == null}                options={$autoSaveStore[input.name]}                bind:value={selectedAutoSave}                on:change={e => loadAutoSave(e.detail)}                let:option                placeholder=\\\"Auto-saves\\\"                inline                sm                right              >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (143:10) <FieldText name="name" bind:value={input.name}>
+    // (149:12) <FieldText name="name" bind:value={input.name}>
     function create_default_slot_6$5(ctx) {
     	let t;
 
@@ -13405,14 +14302,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_6$5.name,
     		type: "slot",
-    		source: "(143:10) <FieldText name=\\\"name\\\" bind:value={input.name}>",
+    		source: "(149:12) <FieldText name=\\\"name\\\" bind:value={input.name}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (137:8) <Form on:submit={save} {hasChanges}>
+    // (143:10) <Form on:submit={save} {hasChanges}>
     function create_default_slot_5$5(ctx) {
     	let fieldtext;
     	let updating_value;
@@ -13476,15 +14373,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_5$5.name,
     		type: "slot",
-    		source: "(137:8) <Form on:submit={save} {hasChanges}>",
+    		source: "(143:10) <Form on:submit={save} {hasChanges}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (139:12) {#if !isAdding}
-    function create_if_block_4$1(ctx) {
+    // (145:14) {#if !isAdding}
+    function create_if_block_5$1(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -13495,7 +14392,7 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$c, 139, 14, 5793);
+    			add_location(button, file$c, 145, 16, 6134);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13515,26 +14412,26 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4$1.name,
+    		id: create_if_block_5$1.name,
     		type: "if",
-    		source: "(139:12) {#if !isAdding}",
+    		source: "(145:14) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (138:10) 
+    // (144:12) 
     function create_buttons_slot$5(ctx) {
     	let div;
-    	let if_block = !/*isAdding*/ ctx[14] && create_if_block_4$1(ctx);
+    	let if_block = !/*isAdding*/ ctx[14] && create_if_block_5$1(ctx);
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			if (if_block) if_block.c();
     			attr_dev(div, "slot", "buttons");
-    			add_location(div, file$c, 137, 10, 5728);
+    			add_location(div, file$c, 143, 12, 6065);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13545,7 +14442,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_4$1(ctx);
+    					if_block = create_if_block_5$1(ctx);
     					if_block.c();
     					if_block.m(div, null);
     				}
@@ -13564,14 +14461,14 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$5.name,
     		type: "slot",
-    		source: "(138:10) ",
+    		source: "(144:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (147:10) <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>
+    // (153:12) <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>
     function create_default_slot_4$5(ctx) {
     	let t;
 
@@ -13591,15 +14488,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_4$5.name,
     		type: "slot",
-    		source: "(147:10) <FieldCheckbox name=\\\"animated\\\" bind:checked={input.animated} on:change={animatedChanged}>",
+    		source: "(153:12) <FieldCheckbox name=\\\"animated\\\" bind:checked={input.animated} on:change={animatedChanged}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:12) {#if input.animated}
-    function create_if_block_3$1(ctx) {
+    // (156:14) {#if input.animated}
+    function create_if_block_4$1(ctx) {
     	let div2;
     	let fieldnumber0;
     	let updating_value;
@@ -13743,12 +14640,12 @@ var app = (function () {
     			attr_dev(img, "width", img_width_value = /*pngCanvas*/ ctx[10].width * artScale);
     			attr_dev(img, "height", img_height_value = /*pngCanvas*/ ctx[10].height * artScale);
     			attr_dev(img, "alt", "preview frame splits");
-    			add_location(img, file$c, 158, 20, 6824);
+    			add_location(img, file$c, 164, 22, 7197);
     			attr_dev(div0, "class", "frame-editor svelte-1gatncs");
-    			add_location(div0, file$c, 157, 18, 6776);
+    			add_location(div0, file$c, 163, 20, 7147);
     			attr_dev(div1, "class", "flex-column");
-    			add_location(div1, file$c, 155, 16, 6613);
-    			add_location(div2, file$c, 150, 14, 6241);
+    			add_location(div1, file$c, 161, 18, 6980);
+    			add_location(div2, file$c, 156, 16, 6600);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -13901,16 +14798,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$1.name,
+    		id: create_if_block_4$1.name,
     		type: "if",
-    		source: "(150:12) {#if input.animated}",
+    		source: "(156:14) {#if input.animated}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (152:16) <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>
+    // (158:18) <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>
     function create_default_slot_3$6(ctx) {
     	let t;
 
@@ -13930,14 +14827,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$6.name,
     		type: "slot",
-    		source: "(152:16) <FieldNumber name=\\\"frameWidth\\\" bind:value={input.frameWidth} max={200} step={1}>",
+    		source: "(158:18) <FieldNumber name=\\\"frameWidth\\\" bind:value={input.frameWidth} max={200} step={1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (153:16) <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>
+    // (159:18) <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>
     function create_default_slot_2$6(ctx) {
     	let t;
 
@@ -13957,14 +14854,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$6.name,
     		type: "slot",
-    		source: "(153:16) <FieldNumber name=\\\"frameRate\\\" bind:value={input.frameRate} max={60} min={1} step={1}>",
+    		source: "(159:18) <FieldNumber name=\\\"frameRate\\\" bind:value={input.frameRate} max={60} min={1} step={1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (154:16) <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>
+    // (160:18) <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>
     function create_default_slot_1$7(ctx) {
     	let t;
 
@@ -13984,14 +14881,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$7.name,
     		type: "slot",
-    		source: "(154:16) <FieldCheckbox name=\\\"yoyo\\\" bind:checked={input.yoyo}>",
+    		source: "(160:18) <FieldCheckbox name=\\\"yoyo\\\" bind:checked={input.yoyo}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (160:20) {#each [...Array(numFrames)] as x, frameNumber}
+    // (166:22) {#each [...Array(numFrames)] as x, frameNumber}
     function create_each_block_2(ctx) {
     	let div;
     	let a0;
@@ -14033,14 +14930,14 @@ var app = (function () {
     			t1 = space();
     			attr_dev(a0, "href", "#/");
     			attr_dev(a0, "class", "text-danger svelte-1gatncs");
-    			add_location(a0, file$c, 161, 24, 7185);
+    			add_location(a0, file$c, 167, 26, 7564);
     			attr_dev(a1, "href", "#/");
     			attr_dev(a1, "class", "text-info svelte-1gatncs");
-    			add_location(a1, file$c, 164, 24, 7385);
+    			add_location(a1, file$c, 170, 26, 7770);
     			attr_dev(div, "class", "frame svelte-1gatncs");
     			set_style(div, "left", /*frameNumber*/ ctx[96] * /*input*/ ctx[0].frameWidth * artScale + "px");
     			set_style(div, "width", /*input*/ ctx[0].frameWidth * artScale + "px");
-    			add_location(div, file$c, 160, 22, 7039);
+    			add_location(div, file$c, 166, 24, 7416);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14096,15 +14993,15 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(160:20) {#each [...Array(numFrames)] as x, frameNumber}",
+    		source: "(166:22) {#each [...Array(numFrames)] as x, frameNumber}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (192:36) 
-    function create_if_block_2$1(ctx) {
+    // (198:38) 
+    function create_if_block_3$1(ctx) {
     	let img;
     	let img_src_value;
     	let img_width_value;
@@ -14117,7 +15014,7 @@ var app = (function () {
     			attr_dev(img, "width", img_width_value = /*pngCanvas*/ ctx[10].width * artScale);
     			attr_dev(img, "height", img_height_value = /*pngCanvas*/ ctx[10].height * artScale);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$c, 192, 12, 8514);
+    			add_location(img, file$c, 198, 14, 8953);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -14144,17 +15041,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$1.name,
+    		id: create_if_block_3$1.name,
     		type: "if",
-    		source: "(192:36) ",
+    		source: "(198:38) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (177:10) {#if isBlockSize}
-    function create_if_block$7(ctx) {
+    // (183:12) {#if isBlockSize}
+    function create_if_block_1$5(ctx) {
     	let div;
     	let t;
     	let current;
@@ -14173,14 +15070,14 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			t = text("Block tiling preview\r\n              ");
+    			t = text("Block tiling preview\r\n                ");
 
     			for (let i = 0; i < 3; i += 1) {
     				each_blocks[i].c();
     			}
 
     			attr_dev(div, "class", "ml-2");
-    			add_location(div, file$c, 177, 12, 7825);
+    			add_location(div, file$c, 183, 14, 8234);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14247,16 +15144,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$7.name,
+    		id: create_if_block_1$5.name,
     		type: "if",
-    		source: "(177:10) {#if isBlockSize}",
+    		source: "(183:12) {#if isBlockSize}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (185:20) {:else}
+    // (191:22) {:else}
     function create_else_block$2(ctx) {
     	let img;
     	let img_src_value;
@@ -14270,7 +15167,7 @@ var app = (function () {
     			attr_dev(img, "alt", "block repeating preview");
     			attr_dev(img, "width", img_width_value = /*input*/ ctx[0].width * artScale);
     			attr_dev(img, "height", img_height_value = /*input*/ ctx[0].height * artScale);
-    			add_location(img, file$c, 185, 22, 8224);
+    			add_location(img, file$c, 191, 24, 8649);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -14299,15 +15196,15 @@ var app = (function () {
     		block,
     		id: create_else_block$2.name,
     		type: "else",
-    		source: "(185:20) {:else}",
+    		source: "(191:22) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (183:20) {#if input.animated}
-    function create_if_block_1$1(ctx) {
+    // (189:22) {#if input.animated}
+    function create_if_block_2$1(ctx) {
     	let animationpreview;
     	let current;
 
@@ -14367,22 +15264,22 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(183:20) {#if input.animated}",
+    		source: "(189:22) {#if input.animated}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (182:18) {#each [0, 0, 0] as margin}
+    // (188:20) {#each [0, 0, 0] as margin}
     function create_each_block_1(ctx) {
     	let current_block_type_index;
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block_1$1, create_else_block$2];
+    	const if_block_creators = [create_if_block_2$1, create_else_block$2];
     	const if_blocks = [];
 
     	function select_block_type_1(ctx, dirty) {
@@ -14449,14 +15346,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(182:18) {#each [0, 0, 0] as margin}",
+    		source: "(188:20) {#each [0, 0, 0] as margin}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (180:14) {#each [0, 0, 0] as r}
+    // (186:16) {#each [0, 0, 0] as r}
     function create_each_block$1(ctx) {
     	let div;
     	let t;
@@ -14483,7 +15380,7 @@ var app = (function () {
 
     			t = space();
     			attr_dev(div, "class", "flex");
-    			add_location(div, file$c, 180, 16, 7935);
+    			add_location(div, file$c, 186, 18, 8350);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14552,7 +15449,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(180:14) {#each [0, 0, 0] as r}",
+    		source: "(186:16) {#each [0, 0, 0] as r}",
     		ctx
     	});
 
@@ -14561,115 +15458,11 @@ var app = (function () {
 
     // (3:0) <AppLayout active="art">
     function create_default_slot$a(ctx) {
-    	let div0;
+    	let div;
     	let itemlistnav;
-    	let t0;
-    	let div14;
-    	let div13;
-    	let div8;
-    	let div7;
-    	let button0;
-    	let t2;
-    	let colorpicker;
-    	let updating_value;
-    	let t3;
-    	let div1;
-    	let button1;
-    	let icon0;
-    	let button1_class_value;
-    	let t4;
-    	let button2;
-    	let icon1;
-    	let button2_class_value;
-    	let t5;
-    	let button3;
-    	let icon2;
-    	let button3_class_value;
-    	let t6;
-    	let div2;
-    	let button4;
-    	let icon3;
-    	let t7;
-
-    	let t8_value = (/*undos*/ ctx[6].length > 0
-    	? /*undos*/ ctx[6].length
-    	: "") + "";
-
-    	let t8;
-    	let button4_disabled_value;
-    	let t9;
-    	let button5;
-    	let icon4;
-    	let t10;
-
-    	let t11_value = (/*redos*/ ctx[7].length > 0
-    	? /*redos*/ ctx[7].length
-    	: "") + "";
-
-    	let t11;
-    	let button5_disabled_value;
-    	let t12;
-    	let div3;
-    	let button6;
-    	let icon5;
-    	let t13;
-    	let button7;
-    	let icon6;
-    	let t14;
-    	let div4;
-    	let button8;
-    	let icon7;
-    	let t15;
-    	let button9;
-    	let icon8;
-    	let t16;
-    	let button10;
-    	let icon9;
-    	let t17;
-    	let button11;
-    	let icon10;
-    	let t18;
-    	let quickdropdown;
-    	let t19;
-    	let div5;
-    	let button12;
-    	let icon11;
-    	let t20;
-    	let t21;
-    	let button13;
-    	let icon12;
-    	let t22;
-    	let t23;
-    	let inputselect0;
-    	let updating_value_1;
-    	let t24;
-    	let div6;
-    	let label;
-    	let input_1;
-    	let t25;
-    	let t26;
-    	let inputselect1;
-    	let updating_value_2;
-    	let t27;
-    	let div9;
-    	let canvas0;
-    	let t28;
-    	let canvas1;
-    	let t29;
-    	let div12;
-    	let form;
-    	let t30;
-    	let div11;
-    	let fieldcheckbox;
-    	let updating_checked;
-    	let t31;
-    	let div10;
-    	let t32;
-    	let current_block_type_index;
-    	let if_block1;
+    	let t;
+    	let if_block_anchor;
     	let current;
-    	let mounted;
-    	let dispose;
 
     	itemlistnav = new ItemListNav({
     			props: {
@@ -14689,517 +15482,25 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	function colorpicker_value_binding(value) {
-    		/*colorpicker_value_binding*/ ctx[47](value);
-    	}
-
-    	let colorpicker_props = { dropdownClass: "below left" };
-
-    	if (/*selectedColor*/ ctx[8] !== void 0) {
-    		colorpicker_props.value = /*selectedColor*/ ctx[8];
-    	}
-
-    	colorpicker = new ColorPicker({ props: colorpicker_props, $$inline: true });
-    	binding_callbacks.push(() => bind(colorpicker, "value", colorpicker_value_binding));
-    	colorpicker.$on("change", /*change_handler*/ ctx[48]);
-
-    	icon0 = new Icon({
-    			props: { data: faPaintBrush },
-    			$$inline: true
-    		});
-
-    	icon1 = new Icon({
-    			props: { data: faFillDrip },
-    			$$inline: true
-    		});
-
-    	icon2 = new Icon({
-    			props: { data: eraseIcon },
-    			$$inline: true
-    		});
-
-    	icon3 = new Icon({
-    			props: { data: undoIcon },
-    			$$inline: true
-    		});
-
-    	icon4 = new Icon({
-    			props: { data: undoIcon, flip: "horizontal" },
-    			$$inline: true
-    		});
-
-    	icon5 = new Icon({
-    			props: { data: faExchangeAlt },
-    			$$inline: true
-    		});
-
-    	icon6 = new Icon({
-    			props: {
-    				data: faExchangeAlt,
-    				style: "transform: rotate(90deg);"
-    			},
-    			$$inline: true
-    		});
-
-    	icon7 = new Icon({
-    			props: { data: arrowLeftIcon },
-    			$$inline: true
-    		});
-
-    	icon8 = new Icon({
-    			props: { data: arrowRightIcon },
-    			$$inline: true
-    		});
-
-    	icon9 = new Icon({
-    			props: { data: arrowUpIcon },
-    			$$inline: true
-    		});
-
-    	icon10 = new Icon({
-    			props: { data: arrowDownIcon },
-    			$$inline: true
-    		});
-
-    	quickdropdown = new QuickDropdown({
-    			props: {
-    				label: "" + (/*input*/ ctx[0].width + "W x " + /*input*/ ctx[0].height + "H"),
-    				dropdownClass: "below left",
-    				$$slots: { default: [create_default_slot_9] },
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	quickdropdown.$on("open", /*startChangeSize*/ ctx[41]);
-
-    	icon11 = new Icon({
-    			props: { data: minusIcon },
-    			$$inline: true
-    		});
-
-    	icon12 = new Icon({
-    			props: { data: plusIcon },
-    			$$inline: true
-    		});
-
-    	function inputselect0_value_binding(value) {
-    		/*inputselect0_value_binding*/ ctx[54](value);
-    	}
-
-    	let inputselect0_props = {
-    		sm: true,
-    		placeholder: "Zoom",
-    		options: [...Array(11)].map(func),
-    		$$slots: {
-    			default: [
-    				create_default_slot_8$2,
-    				({ option }) => ({ 97: option }),
-    				({ option }) => [0, 0, 0, option ? 16 : 0]
-    			]
-    		},
-    		$$scope: { ctx }
-    	};
-
-    	if (/*zoom*/ ctx[2] !== void 0) {
-    		inputselect0_props.value = /*zoom*/ ctx[2];
-    	}
-
-    	inputselect0 = new InputSelect({
-    			props: inputselect0_props,
-    			$$inline: true
-    		});
-
-    	binding_callbacks.push(() => bind(inputselect0, "value", inputselect0_value_binding));
-
-    	function inputselect1_value_binding(value) {
-    		/*inputselect1_value_binding*/ ctx[56](value);
-    	}
-
-    	let inputselect1_props = {
-    		disabled: /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name] == null,
-    		options: /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name],
-    		placeholder: "Auto-saves",
-    		inline: true,
-    		sm: true,
-    		right: true,
-    		$$slots: {
-    			default: [
-    				create_default_slot_7$2,
-    				({ option }) => ({ 97: option }),
-    				({ option }) => [0, 0, 0, option ? 16 : 0]
-    			]
-    		},
-    		$$scope: { ctx }
-    	};
-
-    	if (/*selectedAutoSave*/ ctx[9] !== void 0) {
-    		inputselect1_props.value = /*selectedAutoSave*/ ctx[9];
-    	}
-
-    	inputselect1 = new InputSelect({
-    			props: inputselect1_props,
-    			$$inline: true
-    		});
-
-    	binding_callbacks.push(() => bind(inputselect1, "value", inputselect1_value_binding));
-    	inputselect1.$on("change", /*change_handler_1*/ ctx[57]);
-
-    	form = new Form({
-    			props: {
-    				hasChanges: /*hasChanges*/ ctx[15],
-    				$$slots: {
-    					buttons: [create_buttons_slot$5],
-    					default: [create_default_slot_5$5]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	form.$on("submit", /*save*/ ctx[20]);
-
-    	function fieldcheckbox_checked_binding(value) {
-    		/*fieldcheckbox_checked_binding*/ ctx[61](value);
-    	}
-
-    	let fieldcheckbox_props = {
-    		name: "animated",
-    		$$slots: { default: [create_default_slot_4$5] },
-    		$$scope: { ctx }
-    	};
-
-    	if (/*input*/ ctx[0].animated !== void 0) {
-    		fieldcheckbox_props.checked = /*input*/ ctx[0].animated;
-    	}
-
-    	fieldcheckbox = new FieldCheckbox({
-    			props: fieldcheckbox_props,
-    			$$inline: true
-    		});
-
-    	binding_callbacks.push(() => bind(fieldcheckbox, "checked", fieldcheckbox_checked_binding));
-    	fieldcheckbox.$on("change", /*animatedChanged*/ ctx[40]);
-    	let if_block0 = /*input*/ ctx[0].animated && create_if_block_3$1(ctx);
-    	const if_block_creators = [create_if_block$7, create_if_block_2$1];
-    	const if_blocks = [];
-
-    	function select_block_type(ctx, dirty) {
-    		if (/*isBlockSize*/ ctx[17]) return 0;
-    		if (!/*input*/ ctx[0].animated) return 1;
-    		return -1;
-    	}
-
-    	if (~(current_block_type_index = select_block_type(ctx))) {
-    		if_block1 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	}
+    	let if_block = /*input*/ ctx[0] && create_if_block$7(ctx);
 
     	const block = {
     		c: function create() {
-    			div0 = element("div");
+    			div = element("div");
     			create_component(itemlistnav.$$.fragment);
-    			t0 = space();
-    			div14 = element("div");
-    			div13 = element("div");
-    			div8 = element("div");
-    			div7 = element("div");
-    			button0 = element("button");
-    			button0.textContent = "Start over";
-    			t2 = space();
-    			create_component(colorpicker.$$.fragment);
-    			t3 = space();
-    			div1 = element("div");
-    			button1 = element("button");
-    			create_component(icon0.$$.fragment);
-    			t4 = space();
-    			button2 = element("button");
-    			create_component(icon1.$$.fragment);
-    			t5 = space();
-    			button3 = element("button");
-    			create_component(icon2.$$.fragment);
-    			t6 = space();
-    			div2 = element("div");
-    			button4 = element("button");
-    			create_component(icon3.$$.fragment);
-    			t7 = space();
-    			t8 = text(t8_value);
-    			t9 = space();
-    			button5 = element("button");
-    			create_component(icon4.$$.fragment);
-    			t10 = space();
-    			t11 = text(t11_value);
-    			t12 = space();
-    			div3 = element("div");
-    			button6 = element("button");
-    			create_component(icon5.$$.fragment);
-    			t13 = space();
-    			button7 = element("button");
-    			create_component(icon6.$$.fragment);
-    			t14 = space();
-    			div4 = element("div");
-    			button8 = element("button");
-    			create_component(icon7.$$.fragment);
-    			t15 = space();
-    			button9 = element("button");
-    			create_component(icon8.$$.fragment);
-    			t16 = space();
-    			button10 = element("button");
-    			create_component(icon9.$$.fragment);
-    			t17 = space();
-    			button11 = element("button");
-    			create_component(icon10.$$.fragment);
-    			t18 = space();
-    			create_component(quickdropdown.$$.fragment);
-    			t19 = space();
-    			div5 = element("div");
-    			button12 = element("button");
-    			create_component(icon11.$$.fragment);
-    			t20 = text("\r\n              Half size");
-    			t21 = space();
-    			button13 = element("button");
-    			create_component(icon12.$$.fragment);
-    			t22 = text("\r\n              Double size");
-    			t23 = space();
-    			create_component(inputselect0.$$.fragment);
-    			t24 = space();
-    			div6 = element("div");
-    			label = element("label");
-    			input_1 = element("input");
-    			t25 = text("\r\n              Show grid");
-    			t26 = space();
-    			create_component(inputselect1.$$.fragment);
-    			t27 = space();
-    			div9 = element("div");
-    			canvas0 = element("canvas");
-    			t28 = space();
-    			canvas1 = element("canvas");
-    			t29 = space();
-    			div12 = element("div");
-    			create_component(form.$$.fragment);
-    			t30 = space();
-    			div11 = element("div");
-    			create_component(fieldcheckbox.$$.fragment);
-    			t31 = space();
-    			div10 = element("div");
-    			if (if_block0) if_block0.c();
-    			t32 = space();
-    			if (if_block1) if_block1.c();
-    			attr_dev(div0, "class", "col1");
-    			add_location(div0, file$c, 3, 2, 116);
-    			attr_dev(button0, "type", "button");
-    			attr_dev(button0, "class", "btn btn-light btn-sm mr1");
-    			add_location(button0, file$c, 13, 10, 433);
-    			attr_dev(button1, "type", "button");
-    			attr_dev(button1, "class", button1_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "paint" ? "primary" : "light"));
-    			attr_dev(button1, "title", "Paint brush");
-    			add_location(button1, file$c, 17, 12, 716);
-    			attr_dev(button2, "type", "button");
-    			attr_dev(button2, "class", button2_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "fill" ? "primary" : "light"));
-    			attr_dev(button2, "title", "Paint bucket");
-    			add_location(button2, file$c, 25, 12, 1007);
-    			attr_dev(button3, "type", "button");
-    			attr_dev(button3, "class", button3_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "erase" ? "primary" : "light"));
-    			attr_dev(button3, "title", "Eraser");
-    			add_location(button3, file$c, 28, 12, 1222);
-    			attr_dev(div1, "class", "btn-group");
-    			add_location(div1, file$c, 16, 10, 679);
-    			attr_dev(button4, "type", "button");
-    			button4.disabled = button4_disabled_value = /*undos*/ ctx[6].length == 0;
-    			attr_dev(button4, "class", "btn btn-default btn-sm");
-    			add_location(button4, file$c, 34, 12, 1489);
-    			attr_dev(button5, "type", "button");
-    			button5.disabled = button5_disabled_value = /*redos*/ ctx[7].length == 0;
-    			attr_dev(button5, "class", "btn btn-default btn-sm");
-    			add_location(button5, file$c, 38, 12, 1718);
-    			attr_dev(div2, "class", "btn-group");
-    			add_location(div2, file$c, 33, 10, 1452);
-    			attr_dev(button6, "type", "button");
-    			attr_dev(button6, "class", "btn btn-light btn-sm");
-    			attr_dev(button6, "title", "Flip horizontal");
-    			add_location(button6, file$c, 45, 12, 2020);
-    			attr_dev(button7, "type", "button");
-    			attr_dev(button7, "class", "btn btn-light btn-sm");
-    			attr_dev(button7, "title", "Flip vertical");
-    			add_location(button7, file$c, 48, 12, 2189);
-    			attr_dev(div3, "class", "btn-group");
-    			add_location(div3, file$c, 44, 10, 1983);
-    			attr_dev(button8, "type", "button");
-    			attr_dev(button8, "class", "btn btn-light btn-sm");
-    			attr_dev(button8, "title", "Move left");
-    			add_location(button8, file$c, 54, 12, 2445);
-    			attr_dev(button9, "type", "button");
-    			attr_dev(button9, "class", "btn btn-light btn-sm");
-    			attr_dev(button9, "title", "Move right");
-    			add_location(button9, file$c, 57, 12, 2616);
-    			attr_dev(button10, "type", "button");
-    			attr_dev(button10, "class", "btn btn-light btn-sm");
-    			attr_dev(button10, "title", "Move up");
-    			add_location(button10, file$c, 60, 12, 2790);
-    			attr_dev(button11, "type", "button");
-    			attr_dev(button11, "class", "btn btn-light btn-sm");
-    			attr_dev(button11, "title", "Move down");
-    			add_location(button11, file$c, 63, 12, 2955);
-    			attr_dev(div4, "class", "btn-group");
-    			add_location(div4, file$c, 53, 10, 2408);
-    			attr_dev(button12, "type", "button");
-    			attr_dev(button12, "class", "btn btn-light btn-sm");
-    			attr_dev(button12, "title", "Scale down");
-    			add_location(button12, file$c, 82, 12, 3789);
-    			attr_dev(button13, "type", "button");
-    			attr_dev(button13, "class", "btn btn-light btn-sm");
-    			attr_dev(button13, "title", "Scale up");
-    			add_location(button13, file$c, 87, 12, 3985);
-    			add_location(div5, file$c, 81, 10, 3770);
-    			attr_dev(input_1, "type", "checkbox");
-    			add_location(input_1, file$c, 99, 14, 4451);
-    			add_location(label, file$c, 98, 12, 4428);
-    			add_location(div6, file$c, 97, 10, 4409);
-    			attr_dev(div7, "class", "art-actions svelte-1gatncs");
-    			add_location(div7, file$c, 12, 8, 396);
-    			attr_dev(div8, "class", "col1");
-    			add_location(div8, file$c, 11, 6, 368);
-    			attr_dev(canvas0, "class", "draw-canvas svelte-1gatncs");
-    			add_location(canvas0, file$c, 121, 8, 5119);
-    			attr_dev(canvas1, "class", "grid-canvas svelte-1gatncs");
-    			toggle_class(canvas1, "paint-cursor", /*mode*/ ctx[5] == "paint");
-    			toggle_class(canvas1, "fill-cursor", /*mode*/ ctx[5] == "fill");
-    			toggle_class(canvas1, "erase-cursor", /*mode*/ ctx[5] == "erase");
-    			add_location(canvas1, file$c, 122, 8, 5182);
-    			attr_dev(div9, "class", "grow canvas-container svelte-1gatncs");
-    			add_location(div9, file$c, 120, 6, 5074);
-    			attr_dev(div10, "class", "preview flex");
-    			add_location(div10, file$c, 148, 10, 6165);
-    			attr_dev(div11, "class", "p1");
-    			add_location(div11, file$c, 145, 8, 6009);
-    			attr_dev(div12, "class", "col2");
-    			add_location(div12, file$c, 135, 6, 5652);
-    			attr_dev(div13, "class", "grow columns");
-    			add_location(div13, file$c, 10, 4, 334);
-    			attr_dev(div14, "class", "grow rows");
-    			add_location(div14, file$c, 9, 2, 305);
+    			t = space();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty$1();
+    			attr_dev(div, "class", "col1");
+    			add_location(div, file$c, 3, 2, 116);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div0, anchor);
-    			mount_component(itemlistnav, div0, null);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div14, anchor);
-    			append_dev(div14, div13);
-    			append_dev(div13, div8);
-    			append_dev(div8, div7);
-    			append_dev(div7, button0);
-    			append_dev(div7, t2);
-    			mount_component(colorpicker, div7, null);
-    			append_dev(div7, t3);
-    			append_dev(div7, div1);
-    			append_dev(div1, button1);
-    			mount_component(icon0, button1, null);
-    			append_dev(div1, t4);
-    			append_dev(div1, button2);
-    			mount_component(icon1, button2, null);
-    			append_dev(div1, t5);
-    			append_dev(div1, button3);
-    			mount_component(icon2, button3, null);
-    			append_dev(div7, t6);
-    			append_dev(div7, div2);
-    			append_dev(div2, button4);
-    			mount_component(icon3, button4, null);
-    			append_dev(button4, t7);
-    			append_dev(button4, t8);
-    			append_dev(div2, t9);
-    			append_dev(div2, button5);
-    			mount_component(icon4, button5, null);
-    			append_dev(button5, t10);
-    			append_dev(button5, t11);
-    			append_dev(div7, t12);
-    			append_dev(div7, div3);
-    			append_dev(div3, button6);
-    			mount_component(icon5, button6, null);
-    			append_dev(div3, t13);
-    			append_dev(div3, button7);
-    			mount_component(icon6, button7, null);
-    			append_dev(div7, t14);
-    			append_dev(div7, div4);
-    			append_dev(div4, button8);
-    			mount_component(icon7, button8, null);
-    			append_dev(div4, t15);
-    			append_dev(div4, button9);
-    			mount_component(icon8, button9, null);
-    			append_dev(div4, t16);
-    			append_dev(div4, button10);
-    			mount_component(icon9, button10, null);
-    			append_dev(div4, t17);
-    			append_dev(div4, button11);
-    			mount_component(icon10, button11, null);
-    			append_dev(div7, t18);
-    			mount_component(quickdropdown, div7, null);
-    			append_dev(div7, t19);
-    			append_dev(div7, div5);
-    			append_dev(div5, button12);
-    			mount_component(icon11, button12, null);
-    			append_dev(button12, t20);
-    			append_dev(div5, t21);
-    			append_dev(div5, button13);
-    			mount_component(icon12, button13, null);
-    			append_dev(button13, t22);
-    			append_dev(div7, t23);
-    			mount_component(inputselect0, div7, null);
-    			append_dev(div7, t24);
-    			append_dev(div7, div6);
-    			append_dev(div6, label);
-    			append_dev(label, input_1);
-    			input_1.checked = /*showGrid*/ ctx[1];
-    			append_dev(label, t25);
-    			append_dev(div7, t26);
-    			mount_component(inputselect1, div7, null);
-    			append_dev(div13, t27);
-    			append_dev(div13, div9);
-    			append_dev(div9, canvas0);
-    			/*canvas0_binding*/ ctx[58](canvas0);
-    			append_dev(div9, t28);
-    			append_dev(div9, canvas1);
-    			/*canvas1_binding*/ ctx[59](canvas1);
-    			append_dev(div13, t29);
-    			append_dev(div13, div12);
-    			mount_component(form, div12, null);
-    			append_dev(div12, t30);
-    			append_dev(div12, div11);
-    			mount_component(fieldcheckbox, div11, null);
-    			append_dev(div11, t31);
-    			append_dev(div11, div10);
-    			if (if_block0) if_block0.m(div10, null);
-    			append_dev(div11, t32);
-
-    			if (~current_block_type_index) {
-    				if_blocks[current_block_type_index].m(div11, null);
-    			}
-
+    			insert_dev(target, div, anchor);
+    			mount_component(itemlistnav, div, null);
+    			insert_dev(target, t, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
     			current = true;
-
-    			if (!mounted) {
-    				dispose = [
-    					listen_dev(button0, "click", /*reset*/ ctx[22], false, false, false),
-    					listen_dev(button1, "click", /*click_handler*/ ctx[49], false, false, false),
-    					listen_dev(button2, "click", /*click_handler_1*/ ctx[50], false, false, false),
-    					listen_dev(button3, "click", /*click_handler_2*/ ctx[51], false, false, false),
-    					listen_dev(button4, "click", /*undo*/ ctx[28], false, false, false),
-    					listen_dev(button5, "click", /*redo*/ ctx[29], false, false, false),
-    					listen_dev(button6, "click", /*flipX*/ ctx[31], false, false, false),
-    					listen_dev(button7, "click", /*flipY*/ ctx[30], false, false, false),
-    					listen_dev(button8, "click", /*moveLeft*/ ctx[32], false, false, false),
-    					listen_dev(button9, "click", /*moveRight*/ ctx[33], false, false, false),
-    					listen_dev(button10, "click", /*moveUp*/ ctx[34], false, false, false),
-    					listen_dev(button11, "click", /*moveDown*/ ctx[35], false, false, false),
-    					listen_dev(button12, "click", /*scaleDown*/ ctx[39], false, false, false),
-    					listen_dev(button13, "click", /*scaleUp*/ ctx[38], false, false, false),
-    					listen_dev(input_1, "change", /*input_1_change_handler*/ ctx[55]),
-    					listen_dev(canvas1, "pointerdown", prevent_default(/*onDrawPointerDown*/ ctx[23]), false, true, false),
-    					listen_dev(canvas1, "pointerup", prevent_default(/*onDrawPointerUp*/ ctx[24]), false, true, false),
-    					listen_dev(canvas1, "pointermove", prevent_default(/*onDrawPointerMove*/ ctx[25]), false, true, false),
-    					listen_dev(canvas1, "contextmenu", prevent_default(/*contextmenu_handler*/ ctx[46]), false, true, false)
-    				];
-
-    				mounted = true;
-    			}
     		},
     		p: function update(ctx, dirty) {
     			const itemlistnav_changes = {};
@@ -15211,263 +15512,47 @@ var app = (function () {
     			}
 
     			itemlistnav.$set(itemlistnav_changes);
-    			const colorpicker_changes = {};
 
-    			if (!updating_value && dirty[0] & /*selectedColor*/ 256) {
-    				updating_value = true;
-    				colorpicker_changes.value = /*selectedColor*/ ctx[8];
-    				add_flush_callback(() => updating_value = false);
-    			}
-
-    			colorpicker.$set(colorpicker_changes);
-
-    			if (!current || dirty[0] & /*mode*/ 32 && button1_class_value !== (button1_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "paint" ? "primary" : "light"))) {
-    				attr_dev(button1, "class", button1_class_value);
-    			}
-
-    			if (!current || dirty[0] & /*mode*/ 32 && button2_class_value !== (button2_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "fill" ? "primary" : "light"))) {
-    				attr_dev(button2, "class", button2_class_value);
-    			}
-
-    			if (!current || dirty[0] & /*mode*/ 32 && button3_class_value !== (button3_class_value = "btn btn-sm btn-" + (/*mode*/ ctx[5] == "erase" ? "primary" : "light"))) {
-    				attr_dev(button3, "class", button3_class_value);
-    			}
-
-    			if ((!current || dirty[0] & /*undos*/ 64) && t8_value !== (t8_value = (/*undos*/ ctx[6].length > 0
-    			? /*undos*/ ctx[6].length
-    			: "") + "")) set_data_dev(t8, t8_value);
-
-    			if (!current || dirty[0] & /*undos*/ 64 && button4_disabled_value !== (button4_disabled_value = /*undos*/ ctx[6].length == 0)) {
-    				prop_dev(button4, "disabled", button4_disabled_value);
-    			}
-
-    			if ((!current || dirty[0] & /*redos*/ 128) && t11_value !== (t11_value = (/*redos*/ ctx[7].length > 0
-    			? /*redos*/ ctx[7].length
-    			: "") + "")) set_data_dev(t11, t11_value);
-
-    			if (!current || dirty[0] & /*redos*/ 128 && button5_disabled_value !== (button5_disabled_value = /*redos*/ ctx[7].length == 0)) {
-    				prop_dev(button5, "disabled", button5_disabled_value);
-    			}
-
-    			const quickdropdown_changes = {};
-    			if (dirty[0] & /*input*/ 1) quickdropdown_changes.label = "" + (/*input*/ ctx[0].width + "W x " + /*input*/ ctx[0].height + "H");
-
-    			if (dirty[0] & /*changeSize*/ 8192 | dirty[3] & /*$$scope*/ 64) {
-    				quickdropdown_changes.$$scope = { dirty, ctx };
-    			}
-
-    			quickdropdown.$set(quickdropdown_changes);
-    			const inputselect0_changes = {};
-
-    			if (dirty[3] & /*$$scope, option*/ 80) {
-    				inputselect0_changes.$$scope = { dirty, ctx };
-    			}
-
-    			if (!updating_value_1 && dirty[0] & /*zoom*/ 4) {
-    				updating_value_1 = true;
-    				inputselect0_changes.value = /*zoom*/ ctx[2];
-    				add_flush_callback(() => updating_value_1 = false);
-    			}
-
-    			inputselect0.$set(inputselect0_changes);
-
-    			if (dirty[0] & /*showGrid*/ 2) {
-    				input_1.checked = /*showGrid*/ ctx[1];
-    			}
-
-    			const inputselect1_changes = {};
-    			if (dirty[0] & /*$autoSaveStore, input*/ 262145) inputselect1_changes.disabled = /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name] == null;
-    			if (dirty[0] & /*$autoSaveStore, input*/ 262145) inputselect1_changes.options = /*$autoSaveStore*/ ctx[18][/*input*/ ctx[0].name];
-
-    			if (dirty[3] & /*$$scope, option*/ 80) {
-    				inputselect1_changes.$$scope = { dirty, ctx };
-    			}
-
-    			if (!updating_value_2 && dirty[0] & /*selectedAutoSave*/ 512) {
-    				updating_value_2 = true;
-    				inputselect1_changes.value = /*selectedAutoSave*/ ctx[9];
-    				add_flush_callback(() => updating_value_2 = false);
-    			}
-
-    			inputselect1.$set(inputselect1_changes);
-
-    			if (dirty[0] & /*mode*/ 32) {
-    				toggle_class(canvas1, "paint-cursor", /*mode*/ ctx[5] == "paint");
-    			}
-
-    			if (dirty[0] & /*mode*/ 32) {
-    				toggle_class(canvas1, "fill-cursor", /*mode*/ ctx[5] == "fill");
-    			}
-
-    			if (dirty[0] & /*mode*/ 32) {
-    				toggle_class(canvas1, "erase-cursor", /*mode*/ ctx[5] == "erase");
-    			}
-
-    			const form_changes = {};
-    			if (dirty[0] & /*hasChanges*/ 32768) form_changes.hasChanges = /*hasChanges*/ ctx[15];
-
-    			if (dirty[0] & /*isAdding, input*/ 16385 | dirty[3] & /*$$scope*/ 64) {
-    				form_changes.$$scope = { dirty, ctx };
-    			}
-
-    			form.$set(form_changes);
-    			const fieldcheckbox_changes = {};
-
-    			if (dirty[3] & /*$$scope*/ 64) {
-    				fieldcheckbox_changes.$$scope = { dirty, ctx };
-    			}
-
-    			if (!updating_checked && dirty[0] & /*input*/ 1) {
-    				updating_checked = true;
-    				fieldcheckbox_changes.checked = /*input*/ ctx[0].animated;
-    				add_flush_callback(() => updating_checked = false);
-    			}
-
-    			fieldcheckbox.$set(fieldcheckbox_changes);
-
-    			if (/*input*/ ctx[0].animated) {
-    				if (if_block0) {
-    					if_block0.p(ctx, dirty);
+    			if (/*input*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
 
     					if (dirty[0] & /*input*/ 1) {
-    						transition_in(if_block0, 1);
+    						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_3$1(ctx);
-    					if_block0.c();
-    					transition_in(if_block0, 1);
-    					if_block0.m(div10, null);
+    					if_block = create_if_block$7(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
-    			} else if (if_block0) {
+    			} else if (if_block) {
     				group_outros();
 
-    				transition_out(if_block0, 1, 1, () => {
-    					if_block0 = null;
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
     				});
 
     				check_outros();
-    			}
-
-    			let previous_block_index = current_block_type_index;
-    			current_block_type_index = select_block_type(ctx);
-
-    			if (current_block_type_index === previous_block_index) {
-    				if (~current_block_type_index) {
-    					if_blocks[current_block_type_index].p(ctx, dirty);
-    				}
-    			} else {
-    				if (if_block1) {
-    					group_outros();
-
-    					transition_out(if_blocks[previous_block_index], 1, 1, () => {
-    						if_blocks[previous_block_index] = null;
-    					});
-
-    					check_outros();
-    				}
-
-    				if (~current_block_type_index) {
-    					if_block1 = if_blocks[current_block_type_index];
-
-    					if (!if_block1) {
-    						if_block1 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    						if_block1.c();
-    					} else {
-    						if_block1.p(ctx, dirty);
-    					}
-
-    					transition_in(if_block1, 1);
-    					if_block1.m(div11, null);
-    				} else {
-    					if_block1 = null;
-    				}
     			}
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(itemlistnav.$$.fragment, local);
-    			transition_in(colorpicker.$$.fragment, local);
-    			transition_in(icon0.$$.fragment, local);
-    			transition_in(icon1.$$.fragment, local);
-    			transition_in(icon2.$$.fragment, local);
-    			transition_in(icon3.$$.fragment, local);
-    			transition_in(icon4.$$.fragment, local);
-    			transition_in(icon5.$$.fragment, local);
-    			transition_in(icon6.$$.fragment, local);
-    			transition_in(icon7.$$.fragment, local);
-    			transition_in(icon8.$$.fragment, local);
-    			transition_in(icon9.$$.fragment, local);
-    			transition_in(icon10.$$.fragment, local);
-    			transition_in(quickdropdown.$$.fragment, local);
-    			transition_in(icon11.$$.fragment, local);
-    			transition_in(icon12.$$.fragment, local);
-    			transition_in(inputselect0.$$.fragment, local);
-    			transition_in(inputselect1.$$.fragment, local);
-    			transition_in(form.$$.fragment, local);
-    			transition_in(fieldcheckbox.$$.fragment, local);
-    			transition_in(if_block0);
-    			transition_in(if_block1);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(itemlistnav.$$.fragment, local);
-    			transition_out(colorpicker.$$.fragment, local);
-    			transition_out(icon0.$$.fragment, local);
-    			transition_out(icon1.$$.fragment, local);
-    			transition_out(icon2.$$.fragment, local);
-    			transition_out(icon3.$$.fragment, local);
-    			transition_out(icon4.$$.fragment, local);
-    			transition_out(icon5.$$.fragment, local);
-    			transition_out(icon6.$$.fragment, local);
-    			transition_out(icon7.$$.fragment, local);
-    			transition_out(icon8.$$.fragment, local);
-    			transition_out(icon9.$$.fragment, local);
-    			transition_out(icon10.$$.fragment, local);
-    			transition_out(quickdropdown.$$.fragment, local);
-    			transition_out(icon11.$$.fragment, local);
-    			transition_out(icon12.$$.fragment, local);
-    			transition_out(inputselect0.$$.fragment, local);
-    			transition_out(inputselect1.$$.fragment, local);
-    			transition_out(form.$$.fragment, local);
-    			transition_out(fieldcheckbox.$$.fragment, local);
-    			transition_out(if_block0);
-    			transition_out(if_block1);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(div);
     			destroy_component(itemlistnav);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div14);
-    			destroy_component(colorpicker);
-    			destroy_component(icon0);
-    			destroy_component(icon1);
-    			destroy_component(icon2);
-    			destroy_component(icon3);
-    			destroy_component(icon4);
-    			destroy_component(icon5);
-    			destroy_component(icon6);
-    			destroy_component(icon7);
-    			destroy_component(icon8);
-    			destroy_component(icon9);
-    			destroy_component(icon10);
-    			destroy_component(quickdropdown);
-    			destroy_component(icon11);
-    			destroy_component(icon12);
-    			destroy_component(inputselect0);
-    			destroy_component(inputselect1);
-    			/*canvas0_binding*/ ctx[58](null);
-    			/*canvas1_binding*/ ctx[59](null);
-    			destroy_component(form);
-    			destroy_component(fieldcheckbox);
-    			if (if_block0) if_block0.d();
-
-    			if (~current_block_type_index) {
-    				if_blocks[current_block_type_index].d();
-    			}
-
-    			mounted = false;
-    			run_all(dispose);
+    			if (detaching) detach_dev(t);
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     		}
     	};
 
@@ -15603,7 +15688,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("ArtBuilder", slots, []);
     	let { params = {} } = $$props;
-    	let input = createDefaultInput();
+    	let input = null;
     	let mode = "paint";
     	let undos = [];
     	let redos = [];
@@ -16331,31 +16416,29 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty[0] & /*paramId, $art*/ 24) {
-    			if (paramId == "new" || paramId == null || $art != null) {
-    				paramId == "new" || paramId == null
-    				? create()
-    				: edit(paramId);
+    			if (paramId == "new" || $art != null) {
+    				paramId == "new" ? create() : edit(paramId);
     			}
     		}
 
     		if ($$self.$$.dirty[0] & /*input*/ 1) {
-    			$$invalidate(14, isAdding = input.id == null);
+    			$$invalidate(14, isAdding = input?.id == null);
     		}
 
     		if ($$self.$$.dirty[0] & /*input*/ 1) {
-    			$$invalidate(44, inputWidth = input.width);
+    			$$invalidate(44, inputWidth = input?.width);
     		}
 
     		if ($$self.$$.dirty[0] & /*input*/ 1) {
-    			$$invalidate(45, inputHeight = input.height);
+    			$$invalidate(45, inputHeight = input?.height);
     		}
 
     		if ($$self.$$.dirty[0] & /*input, $art*/ 17) {
-    			$$invalidate(15, hasChanges = !validator.equals(input, $art.find(a => a.id == input.id)));
+    			$$invalidate(15, hasChanges = input != null && !validator.equals(input, $art.find(a => a.id == input.id)));
     		}
 
     		if ($$self.$$.dirty[0] & /*input*/ 1) {
-    			$$invalidate(16, numFrames = input.width != null && input.frameWidth != null
+    			$$invalidate(16, numFrames = input != null && input.width != null && input.frameWidth != null
     			? Math.ceil(input.width / input.frameWidth)
     			: 0);
     		}
@@ -16365,7 +16448,7 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty[0] & /*input*/ 1) {
-    			$$invalidate(17, isBlockSize = input.height == 40 && (input.width == 40 || input.animated && input.frameWidth == 40));
+    			$$invalidate(17, isBlockSize = input != null && input.height == 40 && (input.width == 40 || input.animated && input.frameWidth == 40));
     		}
     	};
 
@@ -17176,7 +17259,86 @@ var app = (function () {
     	return block;
     }
 
-    // (10:6) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
+    // (8:2) {#if input}
+    function create_if_block$5(ctx) {
+    	let div0;
+    	let form;
+    	let t0;
+    	let div1;
+    	let current;
+
+    	form = new Form({
+    			props: {
+    				hasChanges: /*hasChanges*/ ctx[4],
+    				$$slots: {
+    					buttons: [create_buttons_slot$4],
+    					default: [create_default_slot_1$5]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	form.$on("submit", /*save*/ ctx[5]);
+
+    	const block = {
+    		c: function create() {
+    			div0 = element("div");
+    			create_component(form.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			div1.textContent = "Preview maybe?";
+    			attr_dev(div0, "class", "grow p1");
+    			add_location(div0, file$9, 8, 4, 250);
+    			attr_dev(div1, "class", "col2");
+    			add_location(div1, file$9, 57, 4, 3019);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div0, anchor);
+    			mount_component(form, div0, null);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div1, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const form_changes = {};
+    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
+
+    			if (dirty & /*$$scope, isAdding, input*/ 131081) {
+    				form_changes.$$scope = { dirty, ctx };
+    			}
+
+    			form.$set(form_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(form.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(form.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div0);
+    			destroy_component(form);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$5.name,
+    		type: "if",
+    		source: "(8:2) {#if input}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
     function create_default_slot_5$4(ctx) {
     	let t;
 
@@ -17196,14 +17358,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5$4.name,
     		type: "slot",
-    		source: "(10:6) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
+    		source: "(11:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (11:6) <FieldArtPicker bind:value={input.graphic}>
+    // (12:8) <FieldArtPicker bind:value={input.graphic}>
     function create_default_slot_4$4(ctx) {
     	let t;
 
@@ -17223,25 +17385,25 @@ var app = (function () {
     		block,
     		id: create_default_slot_4$4.name,
     		type: "slot",
-    		source: "(11:6) <FieldArtPicker bind:value={input.graphic}>",
+    		source: "(12:8) <FieldArtPicker bind:value={input.graphic}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (13:6) <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
+    // (14:8) <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
     function create_default_slot_3$5(ctx) {
     	let t0;
     	let div;
 
     	const block = {
     		c: function create() {
-    			t0 = text("Can walk on?\r\n        ");
+    			t0 = text("Can walk on?\r\n          ");
     			div = element("div");
     			div.textContent = "Can players walk on or through this block?";
     			attr_dev(div, "class", "help-text");
-    			add_location(div, file$9, 14, 8, 652);
+    			add_location(div, file$9, 15, 10, 683);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -17257,25 +17419,25 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$5.name,
     		type: "slot",
-    		source: "(13:6) <FieldCheckbox name=\\\"can-walk\\\" bind:checked={input.canWalk}>",
+    		source: "(14:8) <FieldCheckbox name=\\\"can-walk\\\" bind:checked={input.canWalk}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (17:6) <FieldCheckbox name="can-see" bind:checked={input.canSee}>
+    // (18:8) <FieldCheckbox name="can-see" bind:checked={input.canSee}>
     function create_default_slot_2$5(ctx) {
     	let t0;
     	let div;
 
     	const block = {
     		c: function create() {
-    			t0 = text("Can see through / across?\r\n        ");
+    			t0 = text("Can see through / across?\r\n          ");
     			div = element("div");
     			div.textContent = "Can players and enemies see through / across this block?";
     			attr_dev(div, "class", "help-text");
-    			add_location(div, file$9, 18, 8, 858);
+    			add_location(div, file$9, 19, 10, 897);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -17291,14 +17453,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$5.name,
     		type: "slot",
-    		source: "(17:6) <FieldCheckbox name=\\\"can-see\\\" bind:checked={input.canSee}>",
+    		source: "(18:8) <FieldCheckbox name=\\\"can-see\\\" bind:checked={input.canSee}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (9:4) <Form on:submit={save} {hasChanges}>
+    // (10:6) <Form on:submit={save} {hasChanges}>
     function create_default_slot_1$5(ctx) {
     	let fieldtext;
     	let updating_value;
@@ -17497,15 +17659,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$5.name,
     		type: "slot",
-    		source: "(9:4) <Form on:submit={save} {hasChanges}>",
+    		source: "(10:6) <Form on:submit={save} {hasChanges}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (51:8) {#if !isAdding}
-    function create_if_block$5(ctx) {
+    // (52:10) {#if !isAdding}
+    function create_if_block_1$4(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -17516,7 +17678,7 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$9, 51, 10, 2828);
+    			add_location(button, file$9, 52, 12, 2877);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -17536,26 +17698,26 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$5.name,
+    		id: create_if_block_1$4.name,
     		type: "if",
-    		source: "(51:8) {#if !isAdding}",
+    		source: "(52:10) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (50:6) 
+    // (51:8) 
     function create_buttons_slot$4(ctx) {
     	let span;
-    	let if_block = !/*isAdding*/ ctx[3] && create_if_block$5(ctx);
+    	let if_block = !/*isAdding*/ ctx[3] && create_if_block_1$4(ctx);
 
     	const block = {
     		c: function create() {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "slot", "buttons");
-    			add_location(span, file$9, 49, 6, 2770);
+    			add_location(span, file$9, 50, 8, 2815);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -17566,7 +17728,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$5(ctx);
+    					if_block = create_if_block_1$4(ctx);
     					if_block.c();
     					if_block.m(span, null);
     				}
@@ -17585,7 +17747,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$4.name,
     		type: "slot",
-    		source: "(50:6) ",
+    		source: "(51:8) ",
     		ctx
     	});
 
@@ -17594,13 +17756,10 @@ var app = (function () {
 
     // (1:0) <AppLayout active="blocks">
     function create_default_slot$7(ctx) {
-    	let div0;
+    	let div;
     	let itemlistnav;
-    	let t0;
-    	let div1;
-    	let form;
-    	let t1;
-    	let div2;
+    	let t;
+    	let if_block_anchor;
     	let current;
 
     	itemlistnav = new ItemListNav({
@@ -17621,45 +17780,24 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	form = new Form({
-    			props: {
-    				hasChanges: /*hasChanges*/ ctx[4],
-    				$$slots: {
-    					buttons: [create_buttons_slot$4],
-    					default: [create_default_slot_1$5]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	form.$on("submit", /*save*/ ctx[5]);
+    	let if_block = /*input*/ ctx[0] && create_if_block$5(ctx);
 
     	const block = {
     		c: function create() {
-    			div0 = element("div");
+    			div = element("div");
     			create_component(itemlistnav.$$.fragment);
-    			t0 = space();
-    			div1 = element("div");
-    			create_component(form.$$.fragment);
-    			t1 = space();
-    			div2 = element("div");
-    			div2.textContent = "Preview maybe?";
-    			attr_dev(div0, "class", "col1");
-    			add_location(div0, file$9, 1, 2, 31);
-    			attr_dev(div1, "class", "grow p1");
-    			add_location(div1, file$9, 7, 2, 233);
-    			attr_dev(div2, "class", "col2");
-    			add_location(div2, file$9, 56, 2, 2960);
+    			t = space();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty$1();
+    			attr_dev(div, "class", "col1");
+    			add_location(div, file$9, 1, 2, 31);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div0, anchor);
-    			mount_component(itemlistnav, div0, null);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div1, anchor);
-    			mount_component(form, div1, null);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, div, anchor);
+    			mount_component(itemlistnav, div, null);
+    			insert_dev(target, t, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -17672,34 +17810,47 @@ var app = (function () {
     			}
 
     			itemlistnav.$set(itemlistnav_changes);
-    			const form_changes = {};
-    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
 
-    			if (dirty & /*$$scope, isAdding, input*/ 131081) {
-    				form_changes.$$scope = { dirty, ctx };
+    			if (/*input*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*input*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$5(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
     			}
-
-    			form.$set(form_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(itemlistnav.$$.fragment, local);
-    			transition_in(form.$$.fragment, local);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(itemlistnav.$$.fragment, local);
-    			transition_out(form.$$.fragment, local);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(div);
     			destroy_component(itemlistnav);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div1);
-    			destroy_component(form);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(t);
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     		}
     	};
 
@@ -17785,7 +17936,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("BlockBuilder", slots, []);
     	let { params = {} } = $$props;
-    	let input = createDefaultInput();
+    	let input = null;
 
     	function createDefaultInput() {
     		return {
@@ -17917,15 +18068,13 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*paramId, $blocks*/ 6) {
-    			if (paramId == "new" || paramId == null || $blocks != null) {
-    				paramId == "new" || paramId == null
-    				? create()
-    				: edit(paramId);
+    			if (paramId == "new" || $blocks != null) {
+    				paramId == "new" ? create() : edit(paramId);
     			}
     		}
 
     		if ($$self.$$.dirty & /*input*/ 1) {
-    			$$invalidate(3, isAdding = input.id == null);
+    			$$invalidate(3, isAdding = input?.id == null);
     		}
 
     		if ($$self.$$.dirty & /*input, $blocks*/ 5) {
@@ -18247,8 +18396,87 @@ var app = (function () {
     	return block;
     }
 
-    // (10:6) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_7$1(ctx) {
+    // (8:2) {#if input}
+    function create_if_block$4(ctx) {
+    	let div0;
+    	let form;
+    	let t0;
+    	let div1;
+    	let current;
+
+    	form = new Form({
+    			props: {
+    				hasChanges: /*hasChanges*/ ctx[4],
+    				$$slots: {
+    					buttons: [create_buttons_slot$3],
+    					default: [create_default_slot_1$4]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	form.$on("submit", /*save*/ ctx[5]);
+
+    	const block = {
+    		c: function create() {
+    			div0 = element("div");
+    			create_component(form.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			div1.textContent = "Preview maybe?";
+    			attr_dev(div0, "class", "grow p1");
+    			add_location(div0, file$7, 8, 4, 253);
+    			attr_dev(div1, "class", "col2");
+    			add_location(div1, file$7, 24, 4, 1186);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div0, anchor);
+    			mount_component(form, div0, null);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div1, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const form_changes = {};
+    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
+
+    			if (dirty & /*$$scope, isAdding, input*/ 524297) {
+    				form_changes.$$scope = { dirty, ctx };
+    			}
+
+    			form.$set(form_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(form.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(form.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div0);
+    			destroy_component(form);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$4.name,
+    		type: "if",
+    		source: "(8:2) {#if input}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
+    function create_default_slot_7$2(ctx) {
     	let t;
 
     	const block = {
@@ -18265,16 +18493,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7$1.name,
+    		id: create_default_slot_7$2.name,
     		type: "slot",
-    		source: "(10:6) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
+    		source: "(11:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (11:6) <FieldArtPicker bind:value={input.graphics.still}>
+    // (12:8) <FieldArtPicker bind:value={input.graphics.still}>
     function create_default_slot_6$3(ctx) {
     	let t;
 
@@ -18294,14 +18522,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_6$3.name,
     		type: "slot",
-    		source: "(11:6) <FieldArtPicker bind:value={input.graphics.still}>",
+    		source: "(12:8) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (13:6) <FieldScriptEditor bind:value={input.onCollision}>
+    // (14:8) <FieldScriptEditor bind:value={input.onCollision}>
     function create_default_slot_5$3(ctx) {
     	let t;
 
@@ -18321,14 +18549,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5$3.name,
     		type: "slot",
-    		source: "(13:6) <FieldScriptEditor bind:value={input.onCollision}>",
+    		source: "(14:8) <FieldScriptEditor bind:value={input.onCollision}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (14:6) <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">
+    // (15:8) <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">
     function create_default_slot_4$3(ctx) {
     	let t;
 
@@ -18348,14 +18576,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4$3.name,
     		type: "slot",
-    		source: "(14:6) <FieldCheckbox bind:checked={input.removeOnCollision} name=\\\"remove-on-collision\\\">",
+    		source: "(15:8) <FieldCheckbox bind:checked={input.removeOnCollision} name=\\\"remove-on-collision\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (15:6) <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">
+    // (16:8) <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">
     function create_default_slot_3$4(ctx) {
     	let t;
 
@@ -18375,14 +18603,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$4.name,
     		type: "slot",
-    		source: "(15:6) <FieldCheckbox bind:checked={input.playersCanUse} name=\\\"players-can-use\\\">",
+    		source: "(16:8) <FieldCheckbox bind:checked={input.playersCanUse} name=\\\"players-can-use\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:6) <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">
+    // (17:8) <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">
     function create_default_slot_2$4(ctx) {
     	let t;
 
@@ -18402,14 +18630,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$4.name,
     		type: "slot",
-    		source: "(16:6) <FieldCheckbox bind:checked={input.enemiesCanUse} name=\\\"enemies-can-use\\\">",
+    		source: "(17:8) <FieldCheckbox bind:checked={input.enemiesCanUse} name=\\\"enemies-can-use\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (9:4) <Form on:submit={save} {hasChanges}>
+    // (10:6) <Form on:submit={save} {hasChanges}>
     function create_default_slot_1$4(ctx) {
     	let fieldtext;
     	let updating_value;
@@ -18437,7 +18665,7 @@ var app = (function () {
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_7$1] },
+    		$$slots: { default: [create_default_slot_7$2] },
     		$$scope: { ctx }
     	};
 
@@ -18697,15 +18925,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$4.name,
     		type: "slot",
-    		source: "(9:4) <Form on:submit={save} {hasChanges}>",
+    		source: "(10:6) <Form on:submit={save} {hasChanges}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (18:8) {#if !isAdding}
-    function create_if_block$4(ctx) {
+    // (19:10) {#if !isAdding}
+    function create_if_block_1$3(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -18716,7 +18944,7 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$7, 18, 10, 1007);
+    			add_location(button, file$7, 19, 12, 1044);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -18736,26 +18964,26 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$4.name,
+    		id: create_if_block_1$3.name,
     		type: "if",
-    		source: "(18:8) {#if !isAdding}",
+    		source: "(19:10) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (17:6) 
+    // (18:8) 
     function create_buttons_slot$3(ctx) {
     	let span;
-    	let if_block = !/*isAdding*/ ctx[3] && create_if_block$4(ctx);
+    	let if_block = !/*isAdding*/ ctx[3] && create_if_block_1$3(ctx);
 
     	const block = {
     		c: function create() {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "slot", "buttons");
-    			add_location(span, file$7, 16, 6, 949);
+    			add_location(span, file$7, 17, 8, 982);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -18766,7 +18994,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$4(ctx);
+    					if_block = create_if_block_1$3(ctx);
     					if_block.c();
     					if_block.m(span, null);
     				}
@@ -18785,7 +19013,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$3.name,
     		type: "slot",
-    		source: "(17:6) ",
+    		source: "(18:8) ",
     		ctx
     	});
 
@@ -18794,13 +19022,10 @@ var app = (function () {
 
     // (1:0) <AppLayout active="items">
     function create_default_slot$6(ctx) {
-    	let div0;
+    	let div;
     	let itemlistnav;
-    	let t0;
-    	let div1;
-    	let form;
-    	let t1;
-    	let div2;
+    	let t;
+    	let if_block_anchor;
     	let current;
 
     	itemlistnav = new ItemListNav({
@@ -18821,45 +19046,24 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	form = new Form({
-    			props: {
-    				hasChanges: /*hasChanges*/ ctx[4],
-    				$$slots: {
-    					buttons: [create_buttons_slot$3],
-    					default: [create_default_slot_1$4]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	form.$on("submit", /*save*/ ctx[5]);
+    	let if_block = /*input*/ ctx[0] && create_if_block$4(ctx);
 
     	const block = {
     		c: function create() {
-    			div0 = element("div");
+    			div = element("div");
     			create_component(itemlistnav.$$.fragment);
-    			t0 = space();
-    			div1 = element("div");
-    			create_component(form.$$.fragment);
-    			t1 = space();
-    			div2 = element("div");
-    			div2.textContent = "Preview maybe?";
-    			attr_dev(div0, "class", "col1");
-    			add_location(div0, file$7, 1, 2, 30);
-    			attr_dev(div1, "class", "grow p1");
-    			add_location(div1, file$7, 7, 2, 236);
-    			attr_dev(div2, "class", "col2");
-    			add_location(div2, file$7, 23, 2, 1139);
+    			t = space();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty$1();
+    			attr_dev(div, "class", "col1");
+    			add_location(div, file$7, 1, 2, 30);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div0, anchor);
-    			mount_component(itemlistnav, div0, null);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div1, anchor);
-    			mount_component(form, div1, null);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, div, anchor);
+    			mount_component(itemlistnav, div, null);
+    			insert_dev(target, t, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -18872,34 +19076,47 @@ var app = (function () {
     			}
 
     			itemlistnav.$set(itemlistnav_changes);
-    			const form_changes = {};
-    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
 
-    			if (dirty & /*$$scope, isAdding, input*/ 524297) {
-    				form_changes.$$scope = { dirty, ctx };
+    			if (/*input*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*input*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$4(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
     			}
-
-    			form.$set(form_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(itemlistnav.$$.fragment, local);
-    			transition_in(form.$$.fragment, local);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(itemlistnav.$$.fragment, local);
-    			transition_out(form.$$.fragment, local);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(div);
     			destroy_component(itemlistnav);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div1);
-    			destroy_component(form);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(t);
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     		}
     	};
 
@@ -18985,7 +19202,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("ItemBuilder", slots, []);
     	let { params = {} } = $$props;
-    	let input = createDefaultInput();
+    	let input = null;
 
     	function createDefaultInput() {
     		return {
@@ -19134,15 +19351,13 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*paramId, $items*/ 6) {
-    			if (paramId == "new" || paramId == null || $items != null) {
-    				paramId == "new" || paramId == null
-    				? create()
-    				: edit(paramId);
+    			if (paramId == "new" || $items != null) {
+    				paramId == "new" ? create() : edit(paramId);
     			}
     		}
 
     		if ($$self.$$.dirty & /*input*/ 1) {
-    			$$invalidate(3, isAdding = input.id == null);
+    			$$invalidate(3, isAdding = input?.id == null);
     		}
 
     		if ($$self.$$.dirty & /*input, $items*/ 5) {
@@ -19251,7 +19466,86 @@ var app = (function () {
     	return block;
     }
 
-    // (10:6) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
+    // (8:2) {#if input}
+    function create_if_block$3(ctx) {
+    	let div0;
+    	let form;
+    	let t0;
+    	let div1;
+    	let current;
+
+    	form = new Form({
+    			props: {
+    				hasChanges: /*hasChanges*/ ctx[4],
+    				$$slots: {
+    					buttons: [create_buttons_slot$2],
+    					default: [create_default_slot_1$3]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	form.$on("submit", /*save*/ ctx[5]);
+
+    	const block = {
+    		c: function create() {
+    			div0 = element("div");
+    			create_component(form.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			div1.textContent = "Preview maybe?";
+    			attr_dev(div0, "class", "grow p1");
+    			add_location(div0, file$6, 8, 4, 273);
+    			attr_dev(div1, "class", "col2");
+    			add_location(div1, file$6, 22, 4, 978);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div0, anchor);
+    			mount_component(form, div0, null);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div1, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const form_changes = {};
+    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
+
+    			if (dirty & /*$$scope, isAdding, input*/ 131081) {
+    				form_changes.$$scope = { dirty, ctx };
+    			}
+
+    			form.$set(form_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(form.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(form.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div0);
+    			destroy_component(form);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(8:2) {#if input}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
     function create_default_slot_5$2(ctx) {
     	let t;
 
@@ -19271,14 +19565,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5$2.name,
     		type: "slot",
-    		source: "(10:6) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
+    		source: "(11:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (11:6) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
+    // (12:8) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
     function create_default_slot_4$2(ctx) {
     	let t;
 
@@ -19298,14 +19592,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4$2.name,
     		type: "slot",
-    		source: "(11:6) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
+    		source: "(12:8) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (12:6) <FieldArtPicker bind:value={input.graphics.still}>
+    // (13:8) <FieldArtPicker bind:value={input.graphics.still}>
     function create_default_slot_3$3(ctx) {
     	let t;
 
@@ -19325,14 +19619,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$3.name,
     		type: "slot",
-    		source: "(12:6) <FieldArtPicker bind:value={input.graphics.still}>",
+    		source: "(13:8) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (13:6) <FieldArtPicker bind:value={input.graphics.moving}>
+    // (14:8) <FieldArtPicker bind:value={input.graphics.moving}>
     function create_default_slot_2$3(ctx) {
     	let t;
 
@@ -19352,14 +19646,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$3.name,
     		type: "slot",
-    		source: "(13:6) <FieldArtPicker bind:value={input.graphics.moving}>",
+    		source: "(14:8) <FieldArtPicker bind:value={input.graphics.moving}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (9:4) <Form on:submit={save} {hasChanges}>
+    // (10:6) <Form on:submit={save} {hasChanges}>
     function create_default_slot_1$3(ctx) {
     	let fieldtext;
     	let updating_value;
@@ -19554,15 +19848,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$3.name,
     		type: "slot",
-    		source: "(9:4) <Form on:submit={save} {hasChanges}>",
+    		source: "(10:6) <Form on:submit={save} {hasChanges}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:8) {#if !isAdding}
-    function create_if_block$3(ctx) {
+    // (17:10) {#if !isAdding}
+    function create_if_block_1$2(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -19573,7 +19867,7 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$6, 16, 10, 803);
+    			add_location(button, file$6, 17, 12, 836);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -19593,26 +19887,26 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(16:8) {#if !isAdding}",
+    		source: "(17:10) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (15:6) 
+    // (16:8) 
     function create_buttons_slot$2(ctx) {
     	let span;
-    	let if_block = !/*isAdding*/ ctx[3] && create_if_block$3(ctx);
+    	let if_block = !/*isAdding*/ ctx[3] && create_if_block_1$2(ctx);
 
     	const block = {
     		c: function create() {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "slot", "buttons");
-    			add_location(span, file$6, 14, 6, 745);
+    			add_location(span, file$6, 15, 8, 774);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -19623,7 +19917,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$3(ctx);
+    					if_block = create_if_block_1$2(ctx);
     					if_block.c();
     					if_block.m(span, null);
     				}
@@ -19642,7 +19936,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$2.name,
     		type: "slot",
-    		source: "(15:6) ",
+    		source: "(16:8) ",
     		ctx
     	});
 
@@ -19651,13 +19945,10 @@ var app = (function () {
 
     // (1:0) <AppLayout active="characters">
     function create_default_slot$5(ctx) {
-    	let div0;
+    	let div;
     	let itemlistnav;
-    	let t0;
-    	let div1;
-    	let form;
-    	let t1;
-    	let div2;
+    	let t;
+    	let if_block_anchor;
     	let current;
 
     	itemlistnav = new ItemListNav({
@@ -19678,45 +19969,24 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	form = new Form({
-    			props: {
-    				hasChanges: /*hasChanges*/ ctx[4],
-    				$$slots: {
-    					buttons: [create_buttons_slot$2],
-    					default: [create_default_slot_1$3]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	form.$on("submit", /*save*/ ctx[5]);
+    	let if_block = /*input*/ ctx[0] && create_if_block$3(ctx);
 
     	const block = {
     		c: function create() {
-    			div0 = element("div");
+    			div = element("div");
     			create_component(itemlistnav.$$.fragment);
-    			t0 = space();
-    			div1 = element("div");
-    			create_component(form.$$.fragment);
-    			t1 = space();
-    			div2 = element("div");
-    			div2.textContent = "Preview maybe?";
-    			attr_dev(div0, "class", "col1");
-    			add_location(div0, file$6, 1, 2, 35);
-    			attr_dev(div1, "class", "grow p1");
-    			add_location(div1, file$6, 7, 2, 256);
-    			attr_dev(div2, "class", "col2");
-    			add_location(div2, file$6, 21, 2, 935);
+    			t = space();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty$1();
+    			attr_dev(div, "class", "col1");
+    			add_location(div, file$6, 1, 2, 35);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div0, anchor);
-    			mount_component(itemlistnav, div0, null);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div1, anchor);
-    			mount_component(form, div1, null);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, div, anchor);
+    			mount_component(itemlistnav, div, null);
+    			insert_dev(target, t, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -19729,34 +19999,47 @@ var app = (function () {
     			}
 
     			itemlistnav.$set(itemlistnav_changes);
-    			const form_changes = {};
-    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
 
-    			if (dirty & /*$$scope, isAdding, input*/ 131081) {
-    				form_changes.$$scope = { dirty, ctx };
+    			if (/*input*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*input*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$3(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
     			}
-
-    			form.$set(form_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(itemlistnav.$$.fragment, local);
-    			transition_in(form.$$.fragment, local);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(itemlistnav.$$.fragment, local);
-    			transition_out(form.$$.fragment, local);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(div);
     			destroy_component(itemlistnav);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div1);
-    			destroy_component(form);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(t);
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     		}
     	};
 
@@ -19842,7 +20125,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("CharacterBuilder", slots, []);
     	let { params = {} } = $$props;
-    	let input = createDefaultInput();
+    	let input = null;
 
     	function createDefaultInput() {
     		return {
@@ -19973,15 +20256,13 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*paramId, $characters*/ 6) {
-    			if (paramId == "new" || paramId == null || $characters != null) {
-    				paramId == "new" || paramId == null
-    				? create()
-    				: edit(paramId);
+    			if (paramId == "new" || $characters != null) {
+    				paramId == "new" ? create() : edit(paramId);
     			}
     		}
 
     		if ($$self.$$.dirty & /*input*/ 1) {
-    			$$invalidate(3, isAdding = input.id == null);
+    			$$invalidate(3, isAdding = input?.id == null);
     		}
 
     		if ($$self.$$.dirty & /*input, $characters*/ 5) {
@@ -20031,15 +20312,15 @@ var app = (function () {
     const file$5 = "src\\client\\pages\\EnemyBuilder.svelte";
 
     // (3:4) <ItemListNav slug="enemies" type="enemy" collection={$enemies} active={paramId} let:item>
-    function create_default_slot_6$1(ctx) {
+    function create_default_slot_7$1(ctx) {
     	let artthumb;
     	let t0;
-    	let t1_value = /*item*/ ctx[16].name + "";
+    	let t1_value = /*item*/ ctx[17].name + "";
     	let t1;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*item*/ ctx[16].graphics.still },
+    			props: { id: /*item*/ ctx[17].graphics.still },
     			$$inline: true
     		});
 
@@ -20057,9 +20338,9 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty & /*item*/ 65536) artthumb_changes.id = /*item*/ ctx[16].graphics.still;
+    			if (dirty & /*item*/ 131072) artthumb_changes.id = /*item*/ ctx[17].graphics.still;
     			artthumb.$set(artthumb_changes);
-    			if ((!current || dirty & /*item*/ 65536) && t1_value !== (t1_value = /*item*/ ctx[16].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*item*/ 131072) && t1_value !== (t1_value = /*item*/ ctx[17].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -20079,7 +20360,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$1.name,
+    		id: create_default_slot_7$1.name,
     		type: "slot",
     		source: "(3:4) <ItemListNav slug=\\\"enemies\\\" type=\\\"enemy\\\" collection={$enemies} active={paramId} let:item>",
     		ctx
@@ -20088,8 +20369,87 @@ var app = (function () {
     	return block;
     }
 
-    // (10:6) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_5$1(ctx) {
+    // (8:2) {#if input}
+    function create_if_block$2(ctx) {
+    	let div0;
+    	let form;
+    	let t0;
+    	let div1;
+    	let current;
+
+    	form = new Form({
+    			props: {
+    				hasChanges: /*hasChanges*/ ctx[4],
+    				$$slots: {
+    					buttons: [create_buttons_slot$1],
+    					default: [create_default_slot_1$2]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	form.$on("submit", /*save*/ ctx[5]);
+
+    	const block = {
+    		c: function create() {
+    			div0 = element("div");
+    			create_component(form.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			div1.textContent = "Preview maybe?";
+    			attr_dev(div0, "class", "grow p1");
+    			add_location(div0, file$5, 8, 4, 260);
+    			attr_dev(div1, "class", "col2");
+    			add_location(div1, file$5, 23, 4, 1071);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div0, anchor);
+    			mount_component(form, div0, null);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div1, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const form_changes = {};
+    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
+
+    			if (dirty & /*$$scope, isAdding, input*/ 262153) {
+    				form_changes.$$scope = { dirty, ctx };
+    			}
+
+    			form.$set(form_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(form.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(form.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div0);
+    			destroy_component(form);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$2.name,
+    		type: "if",
+    		source: "(8:2) {#if input}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
+    function create_default_slot_6$1(ctx) {
     	let t;
 
     	const block = {
@@ -20106,17 +20466,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$1.name,
+    		id: create_default_slot_6$1.name,
     		type: "slot",
-    		source: "(10:6) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
+    		source: "(11:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (11:6) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
-    function create_default_slot_4$1(ctx) {
+    // (12:8) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
+    function create_default_slot_5$1(ctx) {
     	let t;
 
     	const block = {
@@ -20133,17 +20493,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$1.name,
+    		id: create_default_slot_5$1.name,
     		type: "slot",
-    		source: "(11:6) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
+    		source: "(12:8) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (12:6) <FieldArtPicker bind:value={input.graphics.still}>
-    function create_default_slot_3$2(ctx) {
+    // (13:8) <FieldArtPicker bind:value={input.graphics.still}>
+    function create_default_slot_4$1(ctx) {
     	let t;
 
     	const block = {
@@ -20160,17 +20520,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$2.name,
+    		id: create_default_slot_4$1.name,
     		type: "slot",
-    		source: "(12:6) <FieldArtPicker bind:value={input.graphics.still}>",
+    		source: "(13:8) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (13:6) <FieldArtPicker bind:value={input.graphics.moving}>
-    function create_default_slot_2$2(ctx) {
+    // (14:8) <FieldArtPicker bind:value={input.graphics.moving}>
+    function create_default_slot_3$2(ctx) {
     	let t;
 
     	const block = {
@@ -20187,21 +20547,48 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_2$2.name,
+    		id: create_default_slot_3$2.name,
     		type: "slot",
-    		source: "(13:6) <FieldArtPicker bind:value={input.graphics.moving}>",
+    		source: "(14:8) <FieldArtPicker bind:value={input.graphics.moving}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (9:4) <Form on:submit={save} {hasChanges}>
+    // (15:8) <FieldNumber name="max-range" bind:value={input.sightRadius}>
+    function create_default_slot_2$2(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Sight radius (pixels)");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_2$2.name,
+    		type: "slot",
+    		source: "(15:8) <FieldNumber name=\\\"max-range\\\" bind:value={input.sightRadius}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (10:6) <Form on:submit={save} {hasChanges}>
     function create_default_slot_1$2(ctx) {
     	let fieldtext;
     	let updating_value;
     	let t0;
-    	let fieldnumber;
+    	let fieldnumber0;
     	let updating_value_1;
     	let t1;
     	let fieldartpicker0;
@@ -20209,6 +20596,9 @@ var app = (function () {
     	let t2;
     	let fieldartpicker1;
     	let updating_value_3;
+    	let t3;
+    	let fieldnumber1;
+    	let updating_value_4;
     	let current;
 
     	function fieldtext_value_binding(value) {
@@ -20218,7 +20608,7 @@ var app = (function () {
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_5$1] },
+    		$$slots: { default: [create_default_slot_6$1] },
     		$$scope: { ctx }
     	};
 
@@ -20229,30 +20619,34 @@ var app = (function () {
     	fieldtext = new FieldText({ props: fieldtext_props, $$inline: true });
     	binding_callbacks.push(() => bind(fieldtext, "value", fieldtext_value_binding));
 
-    	function fieldnumber_value_binding(value) {
-    		/*fieldnumber_value_binding*/ ctx[9](value);
+    	function fieldnumber0_value_binding(value) {
+    		/*fieldnumber0_value_binding*/ ctx[9](value);
     	}
 
-    	let fieldnumber_props = {
+    	let fieldnumber0_props = {
     		name: "speed",
     		placeholder: "Speed (pixels per frame)",
-    		$$slots: { default: [create_default_slot_4$1] },
+    		$$slots: { default: [create_default_slot_5$1] },
     		$$scope: { ctx }
     	};
 
     	if (/*input*/ ctx[0].speed !== void 0) {
-    		fieldnumber_props.value = /*input*/ ctx[0].speed;
+    		fieldnumber0_props.value = /*input*/ ctx[0].speed;
     	}
 
-    	fieldnumber = new FieldNumber({ props: fieldnumber_props, $$inline: true });
-    	binding_callbacks.push(() => bind(fieldnumber, "value", fieldnumber_value_binding));
+    	fieldnumber0 = new FieldNumber({
+    			props: fieldnumber0_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(fieldnumber0, "value", fieldnumber0_value_binding));
 
     	function fieldartpicker0_value_binding(value) {
     		/*fieldartpicker0_value_binding*/ ctx[10](value);
     	}
 
     	let fieldartpicker0_props = {
-    		$$slots: { default: [create_default_slot_3$2] },
+    		$$slots: { default: [create_default_slot_4$1] },
     		$$scope: { ctx }
     	};
 
@@ -20272,7 +20666,7 @@ var app = (function () {
     	}
 
     	let fieldartpicker1_props = {
-    		$$slots: { default: [create_default_slot_2$2] },
+    		$$slots: { default: [create_default_slot_3$2] },
     		$$scope: { ctx }
     	};
 
@@ -20287,30 +20681,55 @@ var app = (function () {
 
     	binding_callbacks.push(() => bind(fieldartpicker1, "value", fieldartpicker1_value_binding));
 
+    	function fieldnumber1_value_binding(value) {
+    		/*fieldnumber1_value_binding*/ ctx[12](value);
+    	}
+
+    	let fieldnumber1_props = {
+    		name: "max-range",
+    		$$slots: { default: [create_default_slot_2$2] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[0].sightRadius !== void 0) {
+    		fieldnumber1_props.value = /*input*/ ctx[0].sightRadius;
+    	}
+
+    	fieldnumber1 = new FieldNumber({
+    			props: fieldnumber1_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(fieldnumber1, "value", fieldnumber1_value_binding));
+
     	const block = {
     		c: function create() {
     			create_component(fieldtext.$$.fragment);
     			t0 = space();
-    			create_component(fieldnumber.$$.fragment);
+    			create_component(fieldnumber0.$$.fragment);
     			t1 = space();
     			create_component(fieldartpicker0.$$.fragment);
     			t2 = space();
     			create_component(fieldartpicker1.$$.fragment);
+    			t3 = space();
+    			create_component(fieldnumber1.$$.fragment);
     		},
     		m: function mount(target, anchor) {
     			mount_component(fieldtext, target, anchor);
     			insert_dev(target, t0, anchor);
-    			mount_component(fieldnumber, target, anchor);
+    			mount_component(fieldnumber0, target, anchor);
     			insert_dev(target, t1, anchor);
     			mount_component(fieldartpicker0, target, anchor);
     			insert_dev(target, t2, anchor);
     			mount_component(fieldartpicker1, target, anchor);
+    			insert_dev(target, t3, anchor);
+    			mount_component(fieldnumber1, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 131072) {
+    			if (dirty & /*$$scope*/ 262144) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -20321,22 +20740,22 @@ var app = (function () {
     			}
 
     			fieldtext.$set(fieldtext_changes);
-    			const fieldnumber_changes = {};
+    			const fieldnumber0_changes = {};
 
-    			if (dirty & /*$$scope*/ 131072) {
-    				fieldnumber_changes.$$scope = { dirty, ctx };
+    			if (dirty & /*$$scope*/ 262144) {
+    				fieldnumber0_changes.$$scope = { dirty, ctx };
     			}
 
     			if (!updating_value_1 && dirty & /*input*/ 1) {
     				updating_value_1 = true;
-    				fieldnumber_changes.value = /*input*/ ctx[0].speed;
+    				fieldnumber0_changes.value = /*input*/ ctx[0].speed;
     				add_flush_callback(() => updating_value_1 = false);
     			}
 
-    			fieldnumber.$set(fieldnumber_changes);
+    			fieldnumber0.$set(fieldnumber0_changes);
     			const fieldartpicker0_changes = {};
 
-    			if (dirty & /*$$scope*/ 131072) {
+    			if (dirty & /*$$scope*/ 262144) {
     				fieldartpicker0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -20349,7 +20768,7 @@ var app = (function () {
     			fieldartpicker0.$set(fieldartpicker0_changes);
     			const fieldartpicker1_changes = {};
 
-    			if (dirty & /*$$scope*/ 131072) {
+    			if (dirty & /*$$scope*/ 262144) {
     				fieldartpicker1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -20360,30 +20779,47 @@ var app = (function () {
     			}
 
     			fieldartpicker1.$set(fieldartpicker1_changes);
+    			const fieldnumber1_changes = {};
+
+    			if (dirty & /*$$scope*/ 262144) {
+    				fieldnumber1_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_4 && dirty & /*input*/ 1) {
+    				updating_value_4 = true;
+    				fieldnumber1_changes.value = /*input*/ ctx[0].sightRadius;
+    				add_flush_callback(() => updating_value_4 = false);
+    			}
+
+    			fieldnumber1.$set(fieldnumber1_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(fieldtext.$$.fragment, local);
-    			transition_in(fieldnumber.$$.fragment, local);
+    			transition_in(fieldnumber0.$$.fragment, local);
     			transition_in(fieldartpicker0.$$.fragment, local);
     			transition_in(fieldartpicker1.$$.fragment, local);
+    			transition_in(fieldnumber1.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(fieldtext.$$.fragment, local);
-    			transition_out(fieldnumber.$$.fragment, local);
+    			transition_out(fieldnumber0.$$.fragment, local);
     			transition_out(fieldartpicker0.$$.fragment, local);
     			transition_out(fieldartpicker1.$$.fragment, local);
+    			transition_out(fieldnumber1.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			destroy_component(fieldtext, detaching);
     			if (detaching) detach_dev(t0);
-    			destroy_component(fieldnumber, detaching);
+    			destroy_component(fieldnumber0, detaching);
     			if (detaching) detach_dev(t1);
     			destroy_component(fieldartpicker0, detaching);
     			if (detaching) detach_dev(t2);
     			destroy_component(fieldartpicker1, detaching);
+    			if (detaching) detach_dev(t3);
+    			destroy_component(fieldnumber1, detaching);
     		}
     	};
 
@@ -20391,15 +20827,15 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$2.name,
     		type: "slot",
-    		source: "(9:4) <Form on:submit={save} {hasChanges}>",
+    		source: "(10:6) <Form on:submit={save} {hasChanges}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:8) {#if !isAdding}
-    function create_if_block$2(ctx) {
+    // (18:10) {#if !isAdding}
+    function create_if_block_1$1(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -20410,7 +20846,7 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$5, 16, 10, 790);
+    			add_location(button, file$5, 18, 12, 929);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -20430,26 +20866,26 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(16:8) {#if !isAdding}",
+    		source: "(18:10) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (15:6) 
+    // (17:8) 
     function create_buttons_slot$1(ctx) {
     	let span;
-    	let if_block = !/*isAdding*/ ctx[3] && create_if_block$2(ctx);
+    	let if_block = !/*isAdding*/ ctx[3] && create_if_block_1$1(ctx);
 
     	const block = {
     		c: function create() {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "slot", "buttons");
-    			add_location(span, file$5, 14, 6, 732);
+    			add_location(span, file$5, 16, 8, 867);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -20460,7 +20896,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$2(ctx);
+    					if_block = create_if_block_1$1(ctx);
     					if_block.c();
     					if_block.m(span, null);
     				}
@@ -20479,7 +20915,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$1.name,
     		type: "slot",
-    		source: "(15:6) ",
+    		source: "(17:8) ",
     		ctx
     	});
 
@@ -20488,13 +20924,10 @@ var app = (function () {
 
     // (1:0) <AppLayout active="enemies">
     function create_default_slot$4(ctx) {
-    	let div0;
+    	let div;
     	let itemlistnav;
-    	let t0;
-    	let div1;
-    	let form;
-    	let t1;
-    	let div2;
+    	let t;
+    	let if_block_anchor;
     	let current;
 
     	itemlistnav = new ItemListNav({
@@ -20505,9 +20938,9 @@ var app = (function () {
     				active: /*paramId*/ ctx[1],
     				$$slots: {
     					default: [
-    						create_default_slot_6$1,
-    						({ item }) => ({ 16: item }),
-    						({ item }) => item ? 65536 : 0
+    						create_default_slot_7$1,
+    						({ item }) => ({ 17: item }),
+    						({ item }) => item ? 131072 : 0
     					]
     				},
     				$$scope: { ctx }
@@ -20515,45 +20948,24 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	form = new Form({
-    			props: {
-    				hasChanges: /*hasChanges*/ ctx[4],
-    				$$slots: {
-    					buttons: [create_buttons_slot$1],
-    					default: [create_default_slot_1$2]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	form.$on("submit", /*save*/ ctx[5]);
+    	let if_block = /*input*/ ctx[0] && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
-    			div0 = element("div");
+    			div = element("div");
     			create_component(itemlistnav.$$.fragment);
-    			t0 = space();
-    			div1 = element("div");
-    			create_component(form.$$.fragment);
-    			t1 = space();
-    			div2 = element("div");
-    			div2.textContent = "Preview maybe?";
-    			attr_dev(div0, "class", "col1");
-    			add_location(div0, file$5, 1, 2, 32);
-    			attr_dev(div1, "class", "grow p1");
-    			add_location(div1, file$5, 7, 2, 243);
-    			attr_dev(div2, "class", "col2");
-    			add_location(div2, file$5, 21, 2, 922);
+    			t = space();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty$1();
+    			attr_dev(div, "class", "col1");
+    			add_location(div, file$5, 1, 2, 32);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div0, anchor);
-    			mount_component(itemlistnav, div0, null);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div1, anchor);
-    			mount_component(form, div1, null);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, div, anchor);
+    			mount_component(itemlistnav, div, null);
+    			insert_dev(target, t, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -20561,39 +20973,52 @@ var app = (function () {
     			if (dirty & /*$enemies*/ 4) itemlistnav_changes.collection = /*$enemies*/ ctx[2];
     			if (dirty & /*paramId*/ 2) itemlistnav_changes.active = /*paramId*/ ctx[1];
 
-    			if (dirty & /*$$scope, item*/ 196608) {
+    			if (dirty & /*$$scope, item*/ 393216) {
     				itemlistnav_changes.$$scope = { dirty, ctx };
     			}
 
     			itemlistnav.$set(itemlistnav_changes);
-    			const form_changes = {};
-    			if (dirty & /*hasChanges*/ 16) form_changes.hasChanges = /*hasChanges*/ ctx[4];
 
-    			if (dirty & /*$$scope, isAdding, input*/ 131081) {
-    				form_changes.$$scope = { dirty, ctx };
+    			if (/*input*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*input*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$2(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
     			}
-
-    			form.$set(form_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(itemlistnav.$$.fragment, local);
-    			transition_in(form.$$.fragment, local);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(itemlistnav.$$.fragment, local);
-    			transition_out(form.$$.fragment, local);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(div);
     			destroy_component(itemlistnav);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div1);
-    			destroy_component(form);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(t);
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     		}
     	};
 
@@ -20635,7 +21060,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const applayout_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, input, $enemies, paramId*/ 131103) {
+    			if (dirty & /*$$scope, hasChanges, isAdding, input, $enemies, paramId*/ 262175) {
     				applayout_changes.$$scope = { dirty, ctx };
     			}
 
@@ -20675,18 +21100,19 @@ var app = (function () {
     	validate_store(enemies, "enemies");
     	component_subscribe($$self, enemies, $$value => $$invalidate(2, $enemies = $$value));
     	validate_store(project, "project");
-    	component_subscribe($$self, project, $$value => $$invalidate(12, $project = $$value));
+    	component_subscribe($$self, project, $$value => $$invalidate(13, $project = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("EnemyBuilder", slots, []);
     	let { params = {} } = $$props;
-    	let input = createDefaultInput();
+    	let input = null;
 
     	function createDefaultInput() {
     		return {
     			projectId: $project.id,
     			name: "",
     			graphics: { still: null, moving: null },
-    			abilities: []
+    			abilities: [],
+    			sightRadius: 150
     		};
     	}
 
@@ -20741,7 +21167,7 @@ var app = (function () {
     		}
     	}
 
-    	function fieldnumber_value_binding(value) {
+    	function fieldnumber0_value_binding(value) {
     		if ($$self.$$.not_equal(input.speed, value)) {
     			input.speed = value;
     			$$invalidate(0, input);
@@ -20758,6 +21184,13 @@ var app = (function () {
     	function fieldartpicker1_value_binding(value) {
     		if ($$self.$$.not_equal(input.graphics.moving, value)) {
     			input.graphics.moving = value;
+    			$$invalidate(0, input);
+    		}
+    	}
+
+    	function fieldnumber1_value_binding(value) {
+    		if ($$self.$$.not_equal(input.sightRadius, value)) {
+    			input.sightRadius = value;
     			$$invalidate(0, input);
     		}
     	}
@@ -20810,15 +21243,13 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*paramId, $enemies*/ 6) {
-    			if (paramId == "new" || paramId == null || $enemies != null) {
-    				paramId == "new" || paramId == null
-    				? create()
-    				: edit(paramId);
+    			if (paramId == "new" || $enemies != null) {
+    				paramId == "new" ? create() : edit(paramId);
     			}
     		}
 
     		if ($$self.$$.dirty & /*input*/ 1) {
-    			$$invalidate(3, isAdding = input.id == null);
+    			$$invalidate(3, isAdding = input?.id == null);
     		}
 
     		if ($$self.$$.dirty & /*input, $enemies*/ 5) {
@@ -20836,9 +21267,10 @@ var app = (function () {
     		del,
     		params,
     		fieldtext_value_binding,
-    		fieldnumber_value_binding,
+    		fieldnumber0_value_binding,
     		fieldartpicker0_value_binding,
-    		fieldartpicker1_value_binding
+    		fieldartpicker1_value_binding,
+    		fieldnumber1_value_binding
     	];
     }
 
@@ -20911,10 +21343,12 @@ var app = (function () {
         this.x = x;
         this.y = y;
 
+        this.sortableChildren = true;
         this.config = config;
         this.speed = config.speed; // so events can modify without affecting config
 
         this.sprites = new PIXI.Container();
+        this.sprites.zIndex = 2;
         this.addChild(this.sprites);
         this.sprites.still = makeArtSprite(graphics.still);
         this.sprites.still.anchor.set(0.5);
@@ -20951,7 +21385,19 @@ var app = (function () {
       }
 
       canSee(target) {
-        return this.levelGrid.canSee(this.position, target)
+        // check distance between ourself and target
+        // a^2 + b^2 = c^2
+        // a = distance in x
+        const a = this.x - target.x;
+
+        // b = distance in y
+        const b = this.y - target.y;
+
+        // c = distance in straight line from x1,y1 to x2,y2
+        const c = Math.sqrt(a * a + b * b);
+
+        // check if we can find a visible path to target
+        return c <= this.config.sightRadius && this.levelGrid.canSee(this.position, target)
       }
 
       clearPathAfterCurrentTarget() {
@@ -21065,8 +21511,18 @@ var app = (function () {
     }
 
     class Enemy extends LivingSprite {
-      constructor(graphics, config, x, y, levelGrid, showPaths) {
+      constructor(graphics, config, x, y, levelGrid, showPaths, showSightRadius) {
         super(graphics, config, x, y, levelGrid, showPaths);
+
+        // render a little sight radius circle
+        if (showSightRadius) {
+          this.radiusPreview = new PIXI.Graphics();
+          this.radiusPreview.beginFill(0xff0000, 0.2);
+          // radiusPreview.lineStyle(2, 0xffffff, 0.5)
+          this.radiusPreview.drawCircle(0, 0, config.sightRadius ?? 150);
+          this.radiusPreview.zIndex = 1;
+          this.addChild(this.radiusPreview);
+        }
       }
     }
 
@@ -23848,7 +24304,7 @@ var app = (function () {
 
     		for (const enemyConfig of level.enemies) {
     			const e = $enemies.find(e => e.id == enemyConfig.id);
-    			const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize, enemyConfig.y * gridSize, levelGrid, level.showPaths);
+    			const enemy = new Enemy(buildGraphics(e.graphics), e, (enemyConfig.x + 1) * gridSize, (enemyConfig.y + 1) * gridSize, levelGrid, level.showPaths, level.showSightRadius);
     			enemyContainer.addChild(enemy);
     		}
     	}
@@ -24197,39 +24653,121 @@ var app = (function () {
     /* src\client\pages\LevelBuilder.svelte generated by Svelte v3.38.3 */
     const file$3 = "src\\client\\pages\\LevelBuilder.svelte";
 
-    // (3:4) <ItemListNav slug="levels" type="level" collection={$levels} active={paramId} let:item>
-    function create_default_slot_8(ctx) {
-    	let div;
-    	let t_value = /*item*/ ctx[46].name + "";
-    	let t;
+    // (4:6) {#if $characters?.length}
+    function create_if_block_6(ctx) {
+    	let artthumb;
+    	let current;
+
+    	artthumb = new ArtThumb({
+    			props: {
+    				id: /*$characters*/ ctx[13][0].graphics.still
+    			},
+    			$$inline: true
+    		});
 
     	const block = {
     		c: function create() {
-    			div = element("div");
-    			t = text(t_value);
-    			attr_dev(div, "class", "level-nav-item svelte-he9i7z");
-    			set_style(div, "background-image", "url(" + /*item*/ ctx[46].thumbnail + ")");
-    			add_location(div, file$3, 3, 6, 150);
+    			create_component(artthumb.$$.fragment);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, t);
+    			mount_component(artthumb, target, anchor);
+    			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[1] & /*item*/ 32768 && t_value !== (t_value = /*item*/ ctx[46].name + "")) set_data_dev(t, t_value);
-
-    			if (dirty[1] & /*item*/ 32768) {
-    				set_style(div, "background-image", "url(" + /*item*/ ctx[46].thumbnail + ")");
-    			}
+    			const artthumb_changes = {};
+    			if (dirty[0] & /*$characters*/ 8192) artthumb_changes.id = /*$characters*/ ctx[13][0].graphics.still;
+    			artthumb.$set(artthumb_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(artthumb.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(artthumb.$$.fragment, local);
+    			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			destroy_component(artthumb, detaching);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8.name,
+    		id: create_if_block_6.name,
+    		type: "if",
+    		source: "(4:6) {#if $characters?.length}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (3:4) <ItemListNav slug="levels" type="level" collection={$levels} active={paramId} let:item>
+    function create_default_slot_9(ctx) {
+    	let t0;
+    	let t1_value = /*item*/ ctx[49].name + "";
+    	let t1;
+    	let current;
+    	let if_block = /*$characters*/ ctx[13]?.length && create_if_block_6(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			t0 = space();
+    			t1 = text(t1_value);
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t1, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*$characters*/ ctx[13]?.length) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty[0] & /*$characters*/ 8192) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block_6(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(t0.parentNode, t0);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if ((!current || dirty[1] & /*item*/ 262144) && t1_value !== (t1_value = /*item*/ ctx[49].name + "")) set_data_dev(t1, t1_value);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_9.name,
     		type: "slot",
     		source: "(3:4) <ItemListNav slug=\\\"levels\\\" type=\\\"level\\\" collection={$levels} active={paramId} let:item>",
     		ctx
@@ -24238,7 +24776,7 @@ var app = (function () {
     	return block;
     }
 
-    // (10:2) {#if input}
+    // (14:2) {#if input}
     function create_if_block$1(ctx) {
     	let div0;
     	let current_block_type_index;
@@ -24263,7 +24801,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*$isDrawing*/ ctx[12]) return 0;
+    		if (/*$isDrawing*/ ctx[14]) return 0;
     		return 1;
     	}
 
@@ -24272,7 +24810,7 @@ var app = (function () {
 
     	form = new Form({
     			props: {
-    				hasChanges: /*hasChanges*/ ctx[8],
+    				hasChanges: /*hasChanges*/ ctx[9],
     				$$slots: {
     					buttons: [create_buttons_slot],
     					default: [create_default_slot_1$1]
@@ -24282,7 +24820,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	form.$on("submit", /*save*/ ctx[15]);
+    	form.$on("submit", /*save*/ ctx[17]);
 
     	const block = {
     		c: function create() {
@@ -24301,19 +24839,19 @@ var app = (function () {
     			create_component(form.$$.fragment);
     			attr_dev(div0, "class", "grow");
     			set_style(div0, "position", "relative");
-    			add_location(div0, file$3, 10, 4, 313);
+    			add_location(div0, file$3, 14, 4, 444);
     			attr_dev(button0, "type", "button");
-    			attr_dev(button0, "class", button0_class_value = "btn " + (!/*$isDrawing*/ ctx[12] ? "btn-success" : ""));
-    			add_location(button0, file$3, 28, 8, 838);
+    			attr_dev(button0, "class", button0_class_value = "btn " + (!/*$isDrawing*/ ctx[14] ? "btn-success" : ""));
+    			add_location(button0, file$3, 32, 8, 995);
     			attr_dev(button1, "type", "button");
-    			attr_dev(button1, "class", button1_class_value = "btn " + (/*$isDrawing*/ ctx[12] ? "btn-success" : ""));
-    			add_location(button1, file$3, 29, 8, 968);
+    			attr_dev(button1, "class", button1_class_value = "btn " + (/*$isDrawing*/ ctx[14] ? "btn-success" : ""));
+    			add_location(button1, file$3, 33, 8, 1125);
     			attr_dev(div1, "class", "btn-group");
-    			add_location(div1, file$3, 27, 6, 805);
+    			add_location(div1, file$3, 31, 6, 962);
     			attr_dev(div2, "class", "grow");
-    			add_location(div2, file$3, 32, 6, 1110);
+    			add_location(div2, file$3, 36, 6, 1267);
     			attr_dev(div3, "class", "col2 rows");
-    			add_location(div3, file$3, 26, 4, 774);
+    			add_location(div3, file$3, 30, 4, 931);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -24333,8 +24871,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*click_handler*/ ctx[26], false, false, false),
-    					listen_dev(button1, "click", /*click_handler_1*/ ctx[27], false, false, false)
+    					listen_dev(button0, "click", /*click_handler*/ ctx[29], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_1*/ ctx[30], false, false, false)
     				];
 
     				mounted = true;
@@ -24367,18 +24905,18 @@ var app = (function () {
     				if_block.m(div0, null);
     			}
 
-    			if (!current || dirty[0] & /*$isDrawing*/ 4096 && button0_class_value !== (button0_class_value = "btn " + (!/*$isDrawing*/ ctx[12] ? "btn-success" : ""))) {
+    			if (!current || dirty[0] & /*$isDrawing*/ 16384 && button0_class_value !== (button0_class_value = "btn " + (!/*$isDrawing*/ ctx[14] ? "btn-success" : ""))) {
     				attr_dev(button0, "class", button0_class_value);
     			}
 
-    			if (!current || dirty[0] & /*$isDrawing*/ 4096 && button1_class_value !== (button1_class_value = "btn " + (/*$isDrawing*/ ctx[12] ? "btn-success" : ""))) {
+    			if (!current || dirty[0] & /*$isDrawing*/ 16384 && button1_class_value !== (button1_class_value = "btn " + (/*$isDrawing*/ ctx[14] ? "btn-success" : ""))) {
     				attr_dev(button1, "class", button1_class_value);
     			}
 
     			const form_changes = {};
-    			if (dirty[0] & /*hasChanges*/ 256) form_changes.hasChanges = /*hasChanges*/ ctx[8];
+    			if (dirty[0] & /*hasChanges*/ 512) form_changes.hasChanges = /*hasChanges*/ ctx[9];
 
-    			if (dirty[0] & /*isAdding, enemyOptions, selectedEnemyId, itemOptions, selectedItemId, blockOptions, selectedBlockId, input*/ 3825 | dirty[1] & /*$$scope*/ 65536) {
+    			if (dirty[0] & /*isAdding, drawMode, enemyOptions, selectedEnemyId, itemOptions, selectedItemId, blockOptions, selectedBlockId, input*/ 7665 | dirty[1] & /*$$scope*/ 524288) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -24410,26 +24948,30 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(10:2) {#if input}",
+    		source: "(14:2) {#if input}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (22:6) {:else}
+    // (26:6) {:else}
     function create_else_block$1(ctx) {
     	let levelrenderer;
     	let current;
 
+    	let levelrenderer_props = {
+    		level: /*input*/ ctx[0],
+    		playable: true,
+    		gridSize
+    	};
+
     	levelrenderer = new LevelBuilder_Renderer({
-    			props: {
-    				level: /*input*/ ctx[0],
-    				playable: true,
-    				gridSize
-    			},
+    			props: levelrenderer_props,
     			$$inline: true
     		});
+
+    	/*levelrenderer_binding_1*/ ctx[28](levelrenderer);
 
     	const block = {
     		c: function create() {
@@ -24454,6 +24996,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			/*levelrenderer_binding_1*/ ctx[28](null);
     			destroy_component(levelrenderer, detaching);
     		}
     	};
@@ -24462,14 +25005,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(22:6) {:else}",
+    		source: "(26:6) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (12:6) {#if $isDrawing}
+    // (16:6) {#if $isDrawing}
     function create_if_block_5(ctx) {
     	let levelrenderer;
     	let current;
@@ -24485,10 +25028,10 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	/*levelrenderer_binding*/ ctx[25](levelrenderer);
-    	levelrenderer.$on("pointerdown", /*onDrawPointerDown*/ ctx[17]);
-    	levelrenderer.$on("pointerup", /*onDrawPointerUp*/ ctx[19]);
-    	levelrenderer.$on("pointermove", /*onDrawPointerMove*/ ctx[18]);
+    	/*levelrenderer_binding*/ ctx[27](levelrenderer);
+    	levelrenderer.$on("pointerdown", /*onDrawPointerDown*/ ctx[19]);
+    	levelrenderer.$on("pointerup", /*onDrawPointerUp*/ ctx[21]);
+    	levelrenderer.$on("pointermove", /*onDrawPointerMove*/ ctx[20]);
 
     	const block = {
     		c: function create() {
@@ -24513,7 +25056,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			/*levelrenderer_binding*/ ctx[25](null);
+    			/*levelrenderer_binding*/ ctx[27](null);
     			destroy_component(levelrenderer, detaching);
     		}
     	};
@@ -24522,15 +25065,15 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(12:6) {#if $isDrawing}",
+    		source: "(16:6) {#if $isDrawing}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (41:10) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_7(ctx) {
+    // (45:10) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
+    function create_default_slot_8(ctx) {
     	let t;
 
     	const block = {
@@ -24547,17 +25090,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7.name,
+    		id: create_default_slot_8.name,
     		type: "slot",
-    		source: "(41:10) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
+    		source: "(45:10) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (47:10) <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing">
-    function create_default_slot_6(ctx) {
+    // (51:10) <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing">
+    function create_default_slot_7(ctx) {
     	let t;
 
     	const block = {
@@ -24574,17 +25117,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6.name,
+    		id: create_default_slot_7.name,
     		type: "slot",
-    		source: "(47:10) <FieldCheckbox bind:checked={input.smoothPathing} name=\\\"smooth-pathing\\\">",
+    		source: "(51:10) <FieldCheckbox bind:checked={input.smoothPathing} name=\\\"smooth-pathing\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (48:10) <FieldCheckbox bind:checked={input.showPaths} name="show-paths">
-    function create_default_slot_5(ctx) {
+    // (52:10) <FieldCheckbox bind:checked={input.showPaths} name="show-paths">
+    function create_default_slot_6(ctx) {
     	let t;
 
     	const block = {
@@ -24601,22 +25144,49 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5.name,
+    		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(48:10) <FieldCheckbox bind:checked={input.showPaths} name=\\\"show-paths\\\">",
+    		source: "(52:10) <FieldCheckbox bind:checked={input.showPaths} name=\\\"show-paths\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (53:14) {#if option.graphic != null}
+    // (53:10) <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius">
+    function create_default_slot_5(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Show sight radius");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_5.name,
+    		type: "slot",
+    		source: "(53:10) <FieldCheckbox bind:checked={input.showSightRadius} name=\\\"show-sight-radius\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (60:18) {#if option.graphic != null}
     function create_if_block_4(ctx) {
     	let artthumb;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*option*/ ctx[45].graphic },
+    			props: { id: /*option*/ ctx[48].graphic },
     			$$inline: true
     		});
 
@@ -24630,7 +25200,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty[1] & /*option*/ 16384) artthumb_changes.id = /*option*/ ctx[45].graphic;
+    			if (dirty[1] & /*option*/ 131072) artthumb_changes.id = /*option*/ ctx[48].graphic;
     			artthumb.$set(artthumb_changes);
     		},
     		i: function intro(local) {
@@ -24651,20 +25221,20 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(53:14) {#if option.graphic != null}",
+    		source: "(60:18) {#if option.graphic != null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (52:12) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option on:change={() => setDrawMode(DrawMode.Blocks)}>
+    // (59:16) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
     function create_default_slot_4(ctx) {
     	let t0;
-    	let t1_value = /*option*/ ctx[45].name + "";
+    	let t1_value = /*option*/ ctx[48].name + "";
     	let t1;
     	let current;
-    	let if_block = /*option*/ ctx[45].graphic != null && create_if_block_4(ctx);
+    	let if_block = /*option*/ ctx[48].graphic != null && create_if_block_4(ctx);
 
     	const block = {
     		c: function create() {
@@ -24679,11 +25249,11 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*option*/ ctx[45].graphic != null) {
+    			if (/*option*/ ctx[48].graphic != null) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty[1] & /*option*/ 16384) {
+    					if (dirty[1] & /*option*/ 131072) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -24702,7 +25272,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty[1] & /*option*/ 16384) && t1_value !== (t1_value = /*option*/ ctx[45].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[1] & /*option*/ 131072) && t1_value !== (t1_value = /*option*/ ctx[48].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -24724,20 +25294,20 @@ var app = (function () {
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(52:12) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option on:change={() => setDrawMode(DrawMode.Blocks)}>",
+    		source: "(59:16) <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (63:14) {#if option.graphics?.still != null}
+    // (72:18) {#if option.graphics?.still != null}
     function create_if_block_3(ctx) {
     	let artthumb;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*option*/ ctx[45].graphics.still },
+    			props: { id: /*option*/ ctx[48].graphics.still },
     			$$inline: true
     		});
 
@@ -24751,7 +25321,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty[1] & /*option*/ 16384) artthumb_changes.id = /*option*/ ctx[45].graphics.still;
+    			if (dirty[1] & /*option*/ 131072) artthumb_changes.id = /*option*/ ctx[48].graphics.still;
     			artthumb.$set(artthumb_changes);
     		},
     		i: function intro(local) {
@@ -24772,20 +25342,20 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(63:14) {#if option.graphics?.still != null}",
+    		source: "(72:18) {#if option.graphics?.still != null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (62:12) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option on:change={() => setDrawMode(DrawMode.Items)}>
+    // (71:16) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
     function create_default_slot_3$1(ctx) {
     	let t0;
-    	let t1_value = /*option*/ ctx[45].name + "";
+    	let t1_value = /*option*/ ctx[48].name + "";
     	let t1;
     	let current;
-    	let if_block = /*option*/ ctx[45].graphics?.still != null && create_if_block_3(ctx);
+    	let if_block = /*option*/ ctx[48].graphics?.still != null && create_if_block_3(ctx);
 
     	const block = {
     		c: function create() {
@@ -24800,11 +25370,11 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*option*/ ctx[45].graphics?.still != null) {
+    			if (/*option*/ ctx[48].graphics?.still != null) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty[1] & /*option*/ 16384) {
+    					if (dirty[1] & /*option*/ 131072) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -24823,7 +25393,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty[1] & /*option*/ 16384) && t1_value !== (t1_value = /*option*/ ctx[45].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[1] & /*option*/ 131072) && t1_value !== (t1_value = /*option*/ ctx[48].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -24845,20 +25415,20 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$1.name,
     		type: "slot",
-    		source: "(62:12) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option on:change={() => setDrawMode(DrawMode.Items)}>",
+    		source: "(71:16) <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (73:14) {#if option.graphics?.still != null}
+    // (84:18) {#if option.graphics?.still != null}
     function create_if_block_2(ctx) {
     	let artthumb;
     	let current;
 
     	artthumb = new ArtThumb({
-    			props: { id: /*option*/ ctx[45].graphics.still },
+    			props: { id: /*option*/ ctx[48].graphics.still },
     			$$inline: true
     		});
 
@@ -24872,7 +25442,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const artthumb_changes = {};
-    			if (dirty[1] & /*option*/ 16384) artthumb_changes.id = /*option*/ ctx[45].graphics.still;
+    			if (dirty[1] & /*option*/ 131072) artthumb_changes.id = /*option*/ ctx[48].graphics.still;
     			artthumb.$set(artthumb_changes);
     		},
     		i: function intro(local) {
@@ -24893,20 +25463,20 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(73:14) {#if option.graphics?.still != null}",
+    		source: "(84:18) {#if option.graphics?.still != null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (72:12) <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option on:change={() => setDrawMode(DrawMode.Enemies)}>
+    // (83:16) <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
     function create_default_slot_2$1(ctx) {
     	let t0;
-    	let t1_value = /*option*/ ctx[45].name + "";
+    	let t1_value = /*option*/ ctx[48].name + "";
     	let t1;
     	let current;
-    	let if_block = /*option*/ ctx[45].graphics?.still != null && create_if_block_2(ctx);
+    	let if_block = /*option*/ ctx[48].graphics?.still != null && create_if_block_2(ctx);
 
     	const block = {
     		c: function create() {
@@ -24921,11 +25491,11 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*option*/ ctx[45].graphics?.still != null) {
+    			if (/*option*/ ctx[48].graphics?.still != null) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty[1] & /*option*/ 16384) {
+    					if (dirty[1] & /*option*/ 131072) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -24944,7 +25514,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if ((!current || dirty[1] & /*option*/ 16384) && t1_value !== (t1_value = /*option*/ ctx[45].name + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[1] & /*option*/ 131072) && t1_value !== (t1_value = /*option*/ ctx[48].name + "")) set_data_dev(t1, t1_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -24966,14 +25536,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$1.name,
     		type: "slot",
-    		source: "(72:12) <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option on:change={() => setDrawMode(DrawMode.Enemies)}>",
+    		source: "(83:16) <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (34:8) <Form on:submit={save} {hasChanges}>
+    // (38:8) <Form on:submit={save} {hasChanges}>
     function create_default_slot_1$1(ctx) {
     	let fieldtext;
     	let updating_value;
@@ -24990,33 +25560,42 @@ var app = (function () {
     	let fieldcheckbox1;
     	let updating_checked_1;
     	let t5;
+    	let fieldcheckbox2;
+    	let updating_checked_2;
+    	let t6;
+    	let div7;
+    	let div2;
     	let div1;
     	let label1;
-    	let t7;
+    	let t8;
     	let inputselect0;
     	let updating_value_2;
-    	let t8;
-    	let div2;
+    	let t9;
+    	let div4;
+    	let div3;
     	let label2;
-    	let t10;
+    	let t11;
     	let inputselect1;
     	let updating_value_3;
-    	let t11;
-    	let div3;
+    	let t12;
+    	let div6;
+    	let div5;
     	let label3;
-    	let t13;
+    	let t14;
     	let inputselect2;
     	let updating_value_4;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	function fieldtext_value_binding(value) {
-    		/*fieldtext_value_binding*/ ctx[28](value);
+    		/*fieldtext_value_binding*/ ctx[31](value);
     	}
 
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_7] },
+    		$$slots: { default: [create_default_slot_8] },
     		$$scope: { ctx }
     	};
 
@@ -25028,7 +25607,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(fieldtext, "value", fieldtext_value_binding));
 
     	function colorpicker_value_binding(value) {
-    		/*colorpicker_value_binding*/ ctx[29](value);
+    		/*colorpicker_value_binding*/ ctx[32](value);
     	}
 
     	let colorpicker_props = { dropdownClass: "below right" };
@@ -25041,12 +25620,12 @@ var app = (function () {
     	binding_callbacks.push(() => bind(colorpicker, "value", colorpicker_value_binding));
 
     	function fieldcheckbox0_checked_binding(value) {
-    		/*fieldcheckbox0_checked_binding*/ ctx[30](value);
+    		/*fieldcheckbox0_checked_binding*/ ctx[33](value);
     	}
 
     	let fieldcheckbox0_props = {
     		name: "smooth-pathing",
-    		$$slots: { default: [create_default_slot_6] },
+    		$$slots: { default: [create_default_slot_7] },
     		$$scope: { ctx }
     	};
 
@@ -25062,12 +25641,12 @@ var app = (function () {
     	binding_callbacks.push(() => bind(fieldcheckbox0, "checked", fieldcheckbox0_checked_binding));
 
     	function fieldcheckbox1_checked_binding(value) {
-    		/*fieldcheckbox1_checked_binding*/ ctx[31](value);
+    		/*fieldcheckbox1_checked_binding*/ ctx[34](value);
     	}
 
     	let fieldcheckbox1_props = {
     		name: "show-paths",
-    		$$slots: { default: [create_default_slot_5] },
+    		$$slots: { default: [create_default_slot_6] },
     		$$scope: { ctx }
     	};
 
@@ -25082,17 +25661,38 @@ var app = (function () {
 
     	binding_callbacks.push(() => bind(fieldcheckbox1, "checked", fieldcheckbox1_checked_binding));
 
+    	function fieldcheckbox2_checked_binding(value) {
+    		/*fieldcheckbox2_checked_binding*/ ctx[35](value);
+    	}
+
+    	let fieldcheckbox2_props = {
+    		name: "show-sight-radius",
+    		$$slots: { default: [create_default_slot_5] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[0].showSightRadius !== void 0) {
+    		fieldcheckbox2_props.checked = /*input*/ ctx[0].showSightRadius;
+    	}
+
+    	fieldcheckbox2 = new FieldCheckbox({
+    			props: fieldcheckbox2_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(fieldcheckbox2, "checked", fieldcheckbox2_checked_binding));
+
     	function inputselect0_value_binding(value) {
-    		/*inputselect0_value_binding*/ ctx[32](value);
+    		/*inputselect0_value_binding*/ ctx[36](value);
     	}
 
     	let inputselect0_props = {
-    		options: /*blockOptions*/ ctx[9],
+    		options: /*blockOptions*/ ctx[10],
     		$$slots: {
     			default: [
     				create_default_slot_4,
-    				({ option }) => ({ 45: option }),
-    				({ option }) => [0, option ? 16384 : 0]
+    				({ option }) => ({ 48: option }),
+    				({ option }) => [0, option ? 131072 : 0]
     			]
     		},
     		$$scope: { ctx }
@@ -25108,19 +25708,18 @@ var app = (function () {
     		});
 
     	binding_callbacks.push(() => bind(inputselect0, "value", inputselect0_value_binding));
-    	inputselect0.$on("change", /*change_handler*/ ctx[33]);
 
     	function inputselect1_value_binding(value) {
-    		/*inputselect1_value_binding*/ ctx[34](value);
+    		/*inputselect1_value_binding*/ ctx[38](value);
     	}
 
     	let inputselect1_props = {
-    		options: /*itemOptions*/ ctx[10],
+    		options: /*itemOptions*/ ctx[11],
     		$$slots: {
     			default: [
     				create_default_slot_3$1,
-    				({ option }) => ({ 45: option }),
-    				({ option }) => [0, option ? 16384 : 0]
+    				({ option }) => ({ 48: option }),
+    				({ option }) => [0, option ? 131072 : 0]
     			]
     		},
     		$$scope: { ctx }
@@ -25136,19 +25735,18 @@ var app = (function () {
     		});
 
     	binding_callbacks.push(() => bind(inputselect1, "value", inputselect1_value_binding));
-    	inputselect1.$on("change", /*change_handler_1*/ ctx[35]);
 
     	function inputselect2_value_binding(value) {
-    		/*inputselect2_value_binding*/ ctx[36](value);
+    		/*inputselect2_value_binding*/ ctx[40](value);
     	}
 
     	let inputselect2_props = {
-    		options: /*enemyOptions*/ ctx[11],
+    		options: /*enemyOptions*/ ctx[12],
     		$$slots: {
     			default: [
     				create_default_slot_2$1,
-    				({ option }) => ({ 45: option }),
-    				({ option }) => [0, option ? 16384 : 0]
+    				({ option }) => ({ 48: option }),
+    				({ option }) => [0, option ? 131072 : 0]
     			]
     		},
     		$$scope: { ctx }
@@ -25164,7 +25762,6 @@ var app = (function () {
     		});
 
     	binding_callbacks.push(() => bind(inputselect2, "value", inputselect2_value_binding));
-    	inputselect2.$on("change", /*change_handler_2*/ ctx[37]);
 
     	const block = {
     		c: function create() {
@@ -25180,35 +25777,52 @@ var app = (function () {
     			t4 = space();
     			create_component(fieldcheckbox1.$$.fragment);
     			t5 = space();
+    			create_component(fieldcheckbox2.$$.fragment);
+    			t6 = space();
+    			div7 = element("div");
+    			div2 = element("div");
     			div1 = element("div");
     			label1 = element("label");
     			label1.textContent = "Place a block";
-    			t7 = space();
-    			create_component(inputselect0.$$.fragment);
     			t8 = space();
-    			div2 = element("div");
+    			create_component(inputselect0.$$.fragment);
+    			t9 = space();
+    			div4 = element("div");
+    			div3 = element("div");
     			label2 = element("label");
     			label2.textContent = "Place an item";
-    			t10 = space();
-    			create_component(inputselect1.$$.fragment);
     			t11 = space();
-    			div3 = element("div");
+    			create_component(inputselect1.$$.fragment);
+    			t12 = space();
+    			div6 = element("div");
+    			div5 = element("div");
     			label3 = element("label");
     			label3.textContent = "Place an enemy";
-    			t13 = space();
+    			t14 = space();
     			create_component(inputselect2.$$.fragment);
-    			add_location(label0, file$3, 42, 12, 1521);
+    			add_location(label0, file$3, 46, 12, 1678);
     			attr_dev(div0, "class", "form-group");
-    			add_location(div0, file$3, 41, 10, 1483);
-    			add_location(label1, file$3, 50, 12, 1932);
-    			attr_dev(div1, "class", "form-group");
-    			add_location(div1, file$3, 49, 10, 1894);
-    			add_location(label2, file$3, 60, 12, 2339);
-    			attr_dev(div2, "class", "form-group");
-    			add_location(div2, file$3, 59, 10, 2301);
-    			add_location(label3, file$3, 70, 12, 2758);
-    			attr_dev(div3, "class", "form-group");
-    			add_location(div3, file$3, 69, 10, 2720);
+    			add_location(div0, file$3, 45, 10, 1640);
+    			add_location(label1, file$3, 57, 16, 2386);
+    			attr_dev(div1, "class", "form-group svelte-1tj5btd");
+    			add_location(div1, file$3, 56, 14, 2344);
+    			attr_dev(div2, "class", "draw-option svelte-1tj5btd");
+    			toggle_class(div2, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[16].Blocks);
+    			add_location(div2, file$3, 55, 12, 2212);
+    			add_location(label2, file$3, 69, 16, 2930);
+    			attr_dev(div3, "class", "form-group svelte-1tj5btd");
+    			add_location(div3, file$3, 68, 14, 2888);
+    			attr_dev(div4, "class", "draw-option svelte-1tj5btd");
+    			toggle_class(div4, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[16].Items);
+    			add_location(div4, file$3, 67, 12, 2758);
+    			add_location(label3, file$3, 81, 16, 3491);
+    			attr_dev(div5, "class", "form-group svelte-1tj5btd");
+    			add_location(div5, file$3, 80, 14, 3449);
+    			attr_dev(div6, "class", "draw-option svelte-1tj5btd");
+    			toggle_class(div6, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[16].Enemies);
+    			add_location(div6, file$3, 79, 12, 3315);
+    			attr_dev(div7, "class", "flex-column");
+    			add_location(div7, file$3, 54, 10, 2173);
     		},
     		m: function mount(target, anchor) {
     			mount_component(fieldtext, target, anchor);
@@ -25222,26 +25836,42 @@ var app = (function () {
     			insert_dev(target, t4, anchor);
     			mount_component(fieldcheckbox1, target, anchor);
     			insert_dev(target, t5, anchor);
-    			insert_dev(target, div1, anchor);
+    			mount_component(fieldcheckbox2, target, anchor);
+    			insert_dev(target, t6, anchor);
+    			insert_dev(target, div7, anchor);
+    			append_dev(div7, div2);
+    			append_dev(div2, div1);
     			append_dev(div1, label1);
-    			append_dev(div1, t7);
+    			append_dev(div1, t8);
     			mount_component(inputselect0, div1, null);
-    			insert_dev(target, t8, anchor);
-    			insert_dev(target, div2, anchor);
-    			append_dev(div2, label2);
-    			append_dev(div2, t10);
-    			mount_component(inputselect1, div2, null);
-    			insert_dev(target, t11, anchor);
-    			insert_dev(target, div3, anchor);
-    			append_dev(div3, label3);
-    			append_dev(div3, t13);
-    			mount_component(inputselect2, div3, null);
+    			append_dev(div7, t9);
+    			append_dev(div7, div4);
+    			append_dev(div4, div3);
+    			append_dev(div3, label2);
+    			append_dev(div3, t11);
+    			mount_component(inputselect1, div3, null);
+    			append_dev(div7, t12);
+    			append_dev(div7, div6);
+    			append_dev(div6, div5);
+    			append_dev(div5, label3);
+    			append_dev(div5, t14);
+    			mount_component(inputselect2, div5, null);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(div2, "click", /*click_handler_2*/ ctx[37], false, false, false),
+    					listen_dev(div4, "click", /*click_handler_3*/ ctx[39], false, false, false),
+    					listen_dev(div6, "click", /*click_handler_4*/ ctx[41], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 65536) {
+    			if (dirty[1] & /*$$scope*/ 524288) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25263,7 +25893,7 @@ var app = (function () {
     			colorpicker.$set(colorpicker_changes);
     			const fieldcheckbox0_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 65536) {
+    			if (dirty[1] & /*$$scope*/ 524288) {
     				fieldcheckbox0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25276,7 +25906,7 @@ var app = (function () {
     			fieldcheckbox0.$set(fieldcheckbox0_changes);
     			const fieldcheckbox1_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 65536) {
+    			if (dirty[1] & /*$$scope*/ 524288) {
     				fieldcheckbox1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25287,10 +25917,23 @@ var app = (function () {
     			}
 
     			fieldcheckbox1.$set(fieldcheckbox1_changes);
-    			const inputselect0_changes = {};
-    			if (dirty[0] & /*blockOptions*/ 512) inputselect0_changes.options = /*blockOptions*/ ctx[9];
+    			const fieldcheckbox2_changes = {};
 
-    			if (dirty[1] & /*$$scope, option*/ 81920) {
+    			if (dirty[1] & /*$$scope*/ 524288) {
+    				fieldcheckbox2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_checked_2 && dirty[0] & /*input*/ 1) {
+    				updating_checked_2 = true;
+    				fieldcheckbox2_changes.checked = /*input*/ ctx[0].showSightRadius;
+    				add_flush_callback(() => updating_checked_2 = false);
+    			}
+
+    			fieldcheckbox2.$set(fieldcheckbox2_changes);
+    			const inputselect0_changes = {};
+    			if (dirty[0] & /*blockOptions*/ 1024) inputselect0_changes.options = /*blockOptions*/ ctx[10];
+
+    			if (dirty[1] & /*$$scope, option*/ 655360) {
     				inputselect0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25301,10 +25944,15 @@ var app = (function () {
     			}
 
     			inputselect0.$set(inputselect0_changes);
-    			const inputselect1_changes = {};
-    			if (dirty[0] & /*itemOptions*/ 1024) inputselect1_changes.options = /*itemOptions*/ ctx[10];
 
-    			if (dirty[1] & /*$$scope, option*/ 81920) {
+    			if (dirty[0] & /*drawMode, DrawMode*/ 65664) {
+    				toggle_class(div2, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[16].Blocks);
+    			}
+
+    			const inputselect1_changes = {};
+    			if (dirty[0] & /*itemOptions*/ 2048) inputselect1_changes.options = /*itemOptions*/ ctx[11];
+
+    			if (dirty[1] & /*$$scope, option*/ 655360) {
     				inputselect1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25315,10 +25963,15 @@ var app = (function () {
     			}
 
     			inputselect1.$set(inputselect1_changes);
-    			const inputselect2_changes = {};
-    			if (dirty[0] & /*enemyOptions*/ 2048) inputselect2_changes.options = /*enemyOptions*/ ctx[11];
 
-    			if (dirty[1] & /*$$scope, option*/ 81920) {
+    			if (dirty[0] & /*drawMode, DrawMode*/ 65664) {
+    				toggle_class(div4, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[16].Items);
+    			}
+
+    			const inputselect2_changes = {};
+    			if (dirty[0] & /*enemyOptions*/ 4096) inputselect2_changes.options = /*enemyOptions*/ ctx[12];
+
+    			if (dirty[1] & /*$$scope, option*/ 655360) {
     				inputselect2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25329,6 +25982,10 @@ var app = (function () {
     			}
 
     			inputselect2.$set(inputselect2_changes);
+
+    			if (dirty[0] & /*drawMode, DrawMode*/ 65664) {
+    				toggle_class(div6, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[16].Enemies);
+    			}
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -25336,6 +25993,7 @@ var app = (function () {
     			transition_in(colorpicker.$$.fragment, local);
     			transition_in(fieldcheckbox0.$$.fragment, local);
     			transition_in(fieldcheckbox1.$$.fragment, local);
+    			transition_in(fieldcheckbox2.$$.fragment, local);
     			transition_in(inputselect0.$$.fragment, local);
     			transition_in(inputselect1.$$.fragment, local);
     			transition_in(inputselect2.$$.fragment, local);
@@ -25346,6 +26004,7 @@ var app = (function () {
     			transition_out(colorpicker.$$.fragment, local);
     			transition_out(fieldcheckbox0.$$.fragment, local);
     			transition_out(fieldcheckbox1.$$.fragment, local);
+    			transition_out(fieldcheckbox2.$$.fragment, local);
     			transition_out(inputselect0.$$.fragment, local);
     			transition_out(inputselect1.$$.fragment, local);
     			transition_out(inputselect2.$$.fragment, local);
@@ -25361,14 +26020,14 @@ var app = (function () {
     			if (detaching) detach_dev(t4);
     			destroy_component(fieldcheckbox1, detaching);
     			if (detaching) detach_dev(t5);
-    			if (detaching) detach_dev(div1);
+    			destroy_component(fieldcheckbox2, detaching);
+    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(div7);
     			destroy_component(inputselect0);
-    			if (detaching) detach_dev(t8);
-    			if (detaching) detach_dev(div2);
     			destroy_component(inputselect1);
-    			if (detaching) detach_dev(t11);
-    			if (detaching) detach_dev(div3);
     			destroy_component(inputselect2);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -25376,14 +26035,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$1.name,
     		type: "slot",
-    		source: "(34:8) <Form on:submit={save} {hasChanges}>",
+    		source: "(38:8) <Form on:submit={save} {hasChanges}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (36:12) {#if !isAdding}
+    // (40:12) {#if !isAdding}
     function create_if_block_1(ctx) {
     	let button;
     	let mounted;
@@ -25395,13 +26054,13 @@ var app = (function () {
     			button.textContent = "Delete";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$3, 36, 14, 1252);
+    			add_location(button, file$3, 40, 14, 1409);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*del*/ ctx[16], false, false, false);
+    				dispose = listen_dev(button, "click", /*del*/ ctx[18], false, false, false);
     				mounted = true;
     			}
     		},
@@ -25417,31 +26076,31 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(36:12) {#if !isAdding}",
+    		source: "(40:12) {#if !isAdding}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (35:10) 
+    // (39:10) 
     function create_buttons_slot(ctx) {
     	let span;
-    	let if_block = !/*isAdding*/ ctx[7] && create_if_block_1(ctx);
+    	let if_block = !/*isAdding*/ ctx[8] && create_if_block_1(ctx);
 
     	const block = {
     		c: function create() {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "slot", "buttons");
-    			add_location(span, file$3, 34, 10, 1186);
+    			add_location(span, file$3, 38, 10, 1343);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
     			if (if_block) if_block.m(span, null);
     		},
     		p: function update(ctx, dirty) {
-    			if (!/*isAdding*/ ctx[7]) {
+    			if (!/*isAdding*/ ctx[8]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -25464,7 +26123,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot.name,
     		type: "slot",
-    		source: "(35:10) ",
+    		source: "(39:10) ",
     		ctx
     	});
 
@@ -25487,9 +26146,9 @@ var app = (function () {
     				active: /*paramId*/ ctx[1],
     				$$slots: {
     					default: [
-    						create_default_slot_8,
-    						({ item }) => ({ 46: item }),
-    						({ item }) => [0, item ? 32768 : 0]
+    						create_default_slot_9,
+    						({ item }) => ({ 49: item }),
+    						({ item }) => [0, item ? 262144 : 0]
     					]
     				},
     				$$scope: { ctx }
@@ -25522,7 +26181,7 @@ var app = (function () {
     			if (dirty[0] & /*$levels*/ 4) itemlistnav_changes.collection = /*$levels*/ ctx[2];
     			if (dirty[0] & /*paramId*/ 2) itemlistnav_changes.active = /*paramId*/ ctx[1];
 
-    			if (dirty[1] & /*$$scope, item*/ 98304) {
+    			if (dirty[0] & /*$characters*/ 8192 | dirty[1] & /*$$scope, item*/ 786432) {
     				itemlistnav_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25609,7 +26268,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const applayout_changes = {};
 
-    			if (dirty[0] & /*hasChanges, isAdding, enemyOptions, selectedEnemyId, itemOptions, selectedItemId, blockOptions, selectedBlockId, input, $isDrawing, levelRenderer, $levels, paramId*/ 8191 | dirty[1] & /*$$scope*/ 65536) {
+    			if (dirty[0] & /*hasChanges, isAdding, drawMode, enemyOptions, selectedEnemyId, itemOptions, selectedItemId, blockOptions, selectedBlockId, input, $isDrawing, levelRenderer, $levels, paramId, $characters*/ 32767 | dirty[1] & /*$$scope*/ 524288) {
     				applayout_changes.$$scope = { dirty, ctx };
     			}
 
@@ -25674,25 +26333,28 @@ var app = (function () {
     	let $items;
     	let $enemies;
     	let $project;
+    	let $characters;
     	let $isDrawing;
     	validate_store(levels, "levels");
     	component_subscribe($$self, levels, $$value => $$invalidate(2, $levels = $$value));
     	validate_store(blocks, "blocks");
-    	component_subscribe($$self, blocks, $$value => $$invalidate(22, $blocks = $$value));
+    	component_subscribe($$self, blocks, $$value => $$invalidate(24, $blocks = $$value));
     	validate_store(items, "items");
-    	component_subscribe($$self, items, $$value => $$invalidate(23, $items = $$value));
+    	component_subscribe($$self, items, $$value => $$invalidate(25, $items = $$value));
     	validate_store(enemies, "enemies");
-    	component_subscribe($$self, enemies, $$value => $$invalidate(24, $enemies = $$value));
+    	component_subscribe($$self, enemies, $$value => $$invalidate(26, $enemies = $$value));
     	validate_store(project, "project");
-    	component_subscribe($$self, project, $$value => $$invalidate(40, $project = $$value));
+    	component_subscribe($$self, project, $$value => $$invalidate(43, $project = $$value));
+    	validate_store(characters, "characters");
+    	component_subscribe($$self, characters, $$value => $$invalidate(13, $characters = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("LevelBuilder", slots, []);
     	let isDrawing = LocalStorageStore("is-drawing", false);
     	validate_store(isDrawing, "isDrawing");
-    	component_subscribe($$self, isDrawing, value => $$invalidate(12, $isDrawing = value));
+    	component_subscribe($$self, isDrawing, value => $$invalidate(14, $isDrawing = value));
     	let levelRenderer;
     	let { params = {} } = $$props;
-    	let input = createDefaultInput();
+    	let input = null;
     	let selectedBlockId = 0;
     	let selectedItemId = null;
     	let selectedEnemyId = null;
@@ -25710,6 +26372,7 @@ var app = (function () {
     			backgroundColor: "rgba(0,0,0,1)",
     			smoothPathing: false,
     			showPaths: true,
+    			showSightRadius: true,
     			blocks: [],
     			items: [],
     			enemies: []
@@ -25760,15 +26423,18 @@ var app = (function () {
     		// if they do anything but left click, select the block at the current position (or eraser if null)
     		if (event.detail.button != 0) {
     			const { x, y } = getBlockCoordsFromEvent(event);
-    			$$invalidate(4, selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id);
-    			$$invalidate(5, selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id);
-    			$$invalidate(6, selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id);
 
-    			setDrawMode(selectedEnemyId != null
-    			? DrawMode.Enemies
-    			: selectedItemId != null
-    				? DrawMode.Items
-    				: DrawMode.Blocks);
+    			switch (drawMode) {
+    				case DrawMode.Blocks:
+    					$$invalidate(4, selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id);
+    					break;
+    				case DrawMode.Items:
+    					$$invalidate(5, selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id);
+    					break;
+    				case DrawMode.Enemies:
+    					$$invalidate(6, selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id);
+    					break;
+    			}
     		} else {
     			drawAtEvent(event);
     		}
@@ -25803,22 +26469,7 @@ var app = (function () {
     	}
 
     	function setDrawMode(dm) {
-    		drawMode = dm;
-
-    		switch (dm) {
-    			case DrawMode.Blocks:
-    				$$invalidate(5, selectedItemId = null);
-    				$$invalidate(6, selectedEnemyId = null);
-    				break;
-    			case DrawMode.Items:
-    				$$invalidate(4, selectedBlockId = null);
-    				$$invalidate(6, selectedEnemyId = null);
-    				break;
-    			case DrawMode.Enemies:
-    				$$invalidate(4, selectedBlockId = null);
-    				$$invalidate(5, selectedItemId = null);
-    				break;
-    		}
+    		$$invalidate(7, drawMode = dm);
     	}
 
     	const writable_props = ["params"];
@@ -25828,6 +26479,13 @@ var app = (function () {
     	});
 
     	function levelrenderer_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			levelRenderer = $$value;
+    			$$invalidate(3, levelRenderer);
+    		});
+    	}
+
+    	function levelrenderer_binding_1($$value) {
     		binding_callbacks[$$value ? "unshift" : "push"](() => {
     			levelRenderer = $$value;
     			$$invalidate(3, levelRenderer);
@@ -25865,29 +26523,36 @@ var app = (function () {
     		}
     	}
 
+    	function fieldcheckbox2_checked_binding(value) {
+    		if ($$self.$$.not_equal(input.showSightRadius, value)) {
+    			input.showSightRadius = value;
+    			$$invalidate(0, input);
+    		}
+    	}
+
     	function inputselect0_value_binding(value) {
     		selectedBlockId = value;
     		$$invalidate(4, selectedBlockId);
     	}
 
-    	const change_handler = () => setDrawMode(DrawMode.Blocks);
+    	const click_handler_2 = () => setDrawMode(DrawMode.Blocks);
 
     	function inputselect1_value_binding(value) {
     		selectedItemId = value;
     		$$invalidate(5, selectedItemId);
     	}
 
-    	const change_handler_1 = () => setDrawMode(DrawMode.Items);
+    	const click_handler_3 = () => setDrawMode(DrawMode.Items);
 
     	function inputselect2_value_binding(value) {
     		selectedEnemyId = value;
     		$$invalidate(6, selectedEnemyId);
     	}
 
-    	const change_handler_2 = () => setDrawMode(DrawMode.Enemies);
+    	const click_handler_4 = () => setDrawMode(DrawMode.Enemies);
 
     	$$self.$$set = $$props => {
-    		if ("params" in $$props) $$invalidate(21, params = $$props.params);
+    		if ("params" in $$props) $$invalidate(23, params = $$props.params);
     	};
 
     	$$self.$capture_state = () => ({
@@ -25896,6 +26561,7 @@ var app = (function () {
     		enemies,
     		items,
     		levels,
+    		characters,
     		push,
     		sortByName,
     		tick,
@@ -25944,25 +26610,26 @@ var app = (function () {
     		enemyOptions,
     		$enemies,
     		$project,
+    		$characters,
     		$isDrawing
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("isDrawing" in $$props) $$invalidate(13, isDrawing = $$props.isDrawing);
+    		if ("isDrawing" in $$props) $$invalidate(15, isDrawing = $$props.isDrawing);
     		if ("levelRenderer" in $$props) $$invalidate(3, levelRenderer = $$props.levelRenderer);
-    		if ("params" in $$props) $$invalidate(21, params = $$props.params);
+    		if ("params" in $$props) $$invalidate(23, params = $$props.params);
     		if ("input" in $$props) $$invalidate(0, input = $$props.input);
     		if ("selectedBlockId" in $$props) $$invalidate(4, selectedBlockId = $$props.selectedBlockId);
     		if ("selectedItemId" in $$props) $$invalidate(5, selectedItemId = $$props.selectedItemId);
     		if ("selectedEnemyId" in $$props) $$invalidate(6, selectedEnemyId = $$props.selectedEnemyId);
-    		if ("drawMode" in $$props) drawMode = $$props.drawMode;
+    		if ("drawMode" in $$props) $$invalidate(7, drawMode = $$props.drawMode);
     		if ("pointerIsDown" in $$props) pointerIsDown = $$props.pointerIsDown;
     		if ("paramId" in $$props) $$invalidate(1, paramId = $$props.paramId);
-    		if ("isAdding" in $$props) $$invalidate(7, isAdding = $$props.isAdding);
-    		if ("hasChanges" in $$props) $$invalidate(8, hasChanges = $$props.hasChanges);
-    		if ("blockOptions" in $$props) $$invalidate(9, blockOptions = $$props.blockOptions);
-    		if ("itemOptions" in $$props) $$invalidate(10, itemOptions = $$props.itemOptions);
-    		if ("enemyOptions" in $$props) $$invalidate(11, enemyOptions = $$props.enemyOptions);
+    		if ("isAdding" in $$props) $$invalidate(8, isAdding = $$props.isAdding);
+    		if ("hasChanges" in $$props) $$invalidate(9, hasChanges = $$props.hasChanges);
+    		if ("blockOptions" in $$props) $$invalidate(10, blockOptions = $$props.blockOptions);
+    		if ("itemOptions" in $$props) $$invalidate(11, itemOptions = $$props.itemOptions);
+    		if ("enemyOptions" in $$props) $$invalidate(12, enemyOptions = $$props.enemyOptions);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -25970,43 +26637,41 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*params*/ 2097152) {
+    		if ($$self.$$.dirty[0] & /*params*/ 8388608) {
     			$$invalidate(1, paramId = decodeURIComponent(params.id) || "new");
     		}
 
     		if ($$self.$$.dirty[0] & /*paramId, $levels*/ 6) {
-    			if (paramId == "new" || paramId == null || $levels != null) {
-    				paramId == "new" || paramId == null
-    				? create()
-    				: edit(paramId);
+    			if (paramId == "new" || $levels != null) {
+    				paramId == "new" ? create() : edit(paramId);
     			}
     		}
 
     		if ($$self.$$.dirty[0] & /*input*/ 1) {
-    			$$invalidate(7, isAdding = input?.id == null);
+    			$$invalidate(8, isAdding = input?.id == null);
     		}
 
     		if ($$self.$$.dirty[0] & /*input, $levels*/ 5) {
-    			$$invalidate(8, hasChanges = input != null && !validator.equals(input, $levels.find(l => l.id == input.id)));
+    			$$invalidate(9, hasChanges = input != null && !validator.equals(input, $levels.find(l => l.id == input.id)));
     		}
 
-    		if ($$self.$$.dirty[0] & /*$blocks*/ 4194304) {
-    			$$invalidate(9, blockOptions = [
-    				{ value: null, name: "None" },
+    		if ($$self.$$.dirty[0] & /*$blocks*/ 16777216) {
+    			$$invalidate(10, blockOptions = [
+    				{ value: null, name: "Erase blocks" },
     				...$blocks.map(b => ({ ...b, value: b.id })).sort(sortByName)
     			]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$items*/ 8388608) {
-    			$$invalidate(10, itemOptions = [
-    				{ value: null, name: "None" },
+    		if ($$self.$$.dirty[0] & /*$items*/ 33554432) {
+    			$$invalidate(11, itemOptions = [
+    				{ value: null, name: "Erase items" },
     				...$items.map(i => ({ ...i, value: i.id })).sort(sortByName)
     			]);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$enemies*/ 16777216) {
-    			$$invalidate(11, enemyOptions = [
-    				{ value: null, name: "None" },
+    		if ($$self.$$.dirty[0] & /*$enemies*/ 67108864) {
+    			$$invalidate(12, enemyOptions = [
+    				{ value: null, name: "Erase enemies" },
     				...$enemies.map(i => ({ ...i, value: i.id })).sort(sortByName)
     			]);
     		}
@@ -26020,11 +26685,13 @@ var app = (function () {
     		selectedBlockId,
     		selectedItemId,
     		selectedEnemyId,
+    		drawMode,
     		isAdding,
     		hasChanges,
     		blockOptions,
     		itemOptions,
     		enemyOptions,
+    		$characters,
     		$isDrawing,
     		isDrawing,
     		DrawMode,
@@ -26039,25 +26706,27 @@ var app = (function () {
     		$items,
     		$enemies,
     		levelrenderer_binding,
+    		levelrenderer_binding_1,
     		click_handler,
     		click_handler_1,
     		fieldtext_value_binding,
     		colorpicker_value_binding,
     		fieldcheckbox0_checked_binding,
     		fieldcheckbox1_checked_binding,
+    		fieldcheckbox2_checked_binding,
     		inputselect0_value_binding,
-    		change_handler,
+    		click_handler_2,
     		inputselect1_value_binding,
-    		change_handler_1,
+    		click_handler_3,
     		inputselect2_value_binding,
-    		change_handler_2
+    		click_handler_4
     	];
     }
 
     class LevelBuilder extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { params: 21 }, [-1, -1]);
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { params: 23 }, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,

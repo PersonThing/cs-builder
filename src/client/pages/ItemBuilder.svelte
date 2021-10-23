@@ -5,23 +5,25 @@
       {item.name}
     </ItemListNav>
   </div>
-  <div class="grow p1">
-    <Form on:submit={save} {hasChanges}>
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
+  {#if input}
+    <div class="grow p1">
+      <Form on:submit={save} {hasChanges}>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
 
-      <FieldScriptEditor bind:value={input.onCollision}>onCollision(item, sprite)</FieldScriptEditor>
-      <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
-      <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
-      <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
-      <span slot="buttons">
-        {#if !isAdding}
-          <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-        {/if}
-      </span>
-    </Form>
-  </div>
-  <div class="col2">Preview maybe?</div>
+        <FieldScriptEditor bind:value={input.onCollision}>onCollision(item, sprite)</FieldScriptEditor>
+        <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
+        <span slot="buttons">
+          {#if !isAdding}
+            <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
+          {/if}
+        </span>
+      </Form>
+    </div>
+    <div class="col2">Preview maybe?</div>
+  {/if}
 </AppLayout>
 
 <script>
@@ -38,13 +40,13 @@
   import FieldCheckbox from '../components/FieldCheckbox.svelte'
 
   export let params = {}
-  let input = createDefaultInput()
+  let input = null
 
   $: paramId = decodeURIComponent(params.id) || 'new'
-  $: if (paramId == 'new' || paramId == null || $items != null) {
-    paramId == 'new' || paramId == null ? create() : edit(paramId)
+  $: if (paramId == 'new' || $items != null) {
+    paramId == 'new' ? create() : edit(paramId)
   }
-  $: isAdding = input.id == null
+  $: isAdding = input?.id == null
   $: hasChanges =
     input != null &&
     !validator.equals(

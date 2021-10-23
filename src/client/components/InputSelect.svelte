@@ -35,14 +35,19 @@
     <div class="select-dropdown" class:right>
       {#if filterable}
         <div class="filter">
-          <div class="input-group">
-            <input type="text" class="form-control" bind:value={filter} placeholder={filterPlaceholder} on:keydown={keyListener} />
-            <a class="input-group-append" on:click|preventDefault={() => (filter = '')} href="/" tabindex="-1">
-              <span class="input-group-text">
-                <Icon data={removeIcon} class="fw" />
-              </span>
-            </a>
-          </div>
+          <input
+            type="text"
+            class="form-control"
+            bind:value={filter}
+            placeholder={filterPlaceholder}
+            on:keydown={keyListener}
+            bind:this={filterField}
+          />
+          <a on:click|preventDefault={() => (filter = '')} href="/" tabindex="-1">
+            <span class="input-group-text">
+              <Icon data={removeIcon} class="fw" />
+            </span>
+          </a>
         </div>
       {/if}
       {#each filteredOptions as option, index}
@@ -59,7 +64,7 @@
         </div>
       {:else}
         {#if filter != null && filter.length > 0}
-          <div class="alert alert-warning">No options match "{filter}"</div>
+          <div class="no-results">No options match "{filter}"</div>
         {/if}
       {/each}
     </div>
@@ -124,6 +129,7 @@
 
   let container = null
   let fakeField = null
+  let filterField = null
 
   const tabindex = 0
 
@@ -266,6 +272,7 @@
 
   function focusField() {
     if (fakeField && !filterable) fakeField.focus()
+    else if (filterField) filterField.focus()
   }
 </script>
 
@@ -343,6 +350,15 @@
 
     & > .filter {
       padding: 2px;
+
+      display: flex;
+      flex-direction: row;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .no-results {
+      padding: 5px;
     }
 
     & > .item {
