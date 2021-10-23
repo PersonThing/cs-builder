@@ -78,7 +78,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: monospace; // 'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: 'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     // letter-spacing: -0.15em;
 
     textarea,
