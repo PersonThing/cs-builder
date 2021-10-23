@@ -1,0 +1,156 @@
+import express from 'express'
+import path from 'path'
+const app = express()
+import { Server } from 'http'
+const http = Server(app)
+const staticPath = path.resolve('public')
+console.log(staticPath)
+app.use(express.static(staticPath))
+app.use(express.json())
+
+// db wrapper
+import repo from './repo.js'
+const itemTypeNames = ['art', 'blocks', 'items', 'characters', 'enemies', 'levels', 'particles']
+
+// https://zellwk.com/blog/crud-express-mongodb/
+// this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
+repo.connect().then(() => {
+  // fix data
+  app.get('/api/reset-mongo', (req, res) => {
+    repo.resetMongo()
+    res.json(true)
+  })
+
+  // list projects
+  app.get('/api/projects', (req, res) => {
+    repo.find('projects').then(projects => {
+      res.json(projects)
+    })
+  })
+
+  // get project
+  app.get('/api/projects/:id', (req, res) => {
+    // get project from db
+    repo.get('projects', { id: req.params.id }).then(project => {
+      if (project == null) return {}
+      // populate all its collections to save ui requests
+      Promise.all(
+        itemTypeNames.map(it =>
+          repo.find(it, { projectId: req.params.id }).then(items => {
+            project[it] = items
+          })
+        )
+      ).then(() => res.json(project))
+    })
+  })
+
+  // add project
+  app.post('/api/projects', (req, res) => {
+    console.log('adding project', req.body)
+    repo.find('projects').then(projects => {
+      const item = req.body
+      item.id = (
+        projects
+          .map(p => parseInt(p.id))
+          .sort((a, b) => (a < b ? -1 : 1))
+          .pop() + 1
+      ).toString()
+
+      repo.insert('projects', item).then(dbres => {
+        item._id = dbres.insertedid
+        res.json(item)
+      })
+    })
+  })
+
+  // update project
+  app.put('/api/projects/:id', (req, res) => {
+    const project = req.body
+    project.id = req.params.id
+    repo.update('projects', { id: project.id }, project).then(() => {
+      // todo sockets.emit() to update others
+      res.json(project)
+    })
+  })
+
+  // delete project
+  app.delete('/api/projects/:id', (req, res) => {
+    // delete project
+    repo.delete('projects', { id: req.params.id }).then(() => {
+      // delete project items
+      Promise.all(itemTypeNames.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
+        // todo sockets.emit() to update others
+        res.json(true)
+      })
+    })
+  })
+
+  // crud for project child collections
+  itemTypeNames.forEach(c => {
+    // list
+    app.get(`/api/projects/:projectId/${c}`, (req, res) => {
+      repo.find(c, { projectId: req.params.projectId }).then(objects => res.json(objects))
+    })
+
+    // get
+    app.get(`/api/projects/:projectId/${c}/:id`, (req, res) => {
+      repo.get(c, { projectId: req.params.projectId, id: req.params.id }).then(object => res.send(object))
+    })
+
+    // add
+    app.post(`/api/projects/:projectId/${c}`, (req, res) => {
+      repo.find(c, { projectId: req.params.projectId }).then(collection => {
+        const item = req.body
+        item.id = (
+          itemTypeNames
+            .map(c => parseInt(c.id))
+            .sort((a, b) => (a < b ? -1 : 1))
+            .pop() + 1
+        ).toString()
+        repo.insert(c, item).then(dbres => {
+          // todo sockets.emit() to update others working on same project
+          item._id = dbres.insertedid
+          res.json(item)
+        })
+      })
+    })
+
+    // update
+    app.put(`/api/projects/:projectId/${c}/:id`, (req, res) => {
+      const item = req.body
+      item.projectId = req.params.projectId
+      item.id = req.params.id
+      console.log('updating', item)
+      repo.update(c, { projectId: item.projectId, id: item.id }, item).then(() => {
+        // todo sockets.emit() to update others working on same project
+        res.json(item)
+      })
+    })
+
+    // delete
+    app.delete(`/api/projects/:projectId/${c}/:id`, (req, res) => {
+      repo.delete(c, { projectId: req.params.projectId, id: req.params.id }).then(() => {
+        // todo sockets.emit() to update others working on same project
+        res.json(true)
+      })
+    })
+  })
+
+  /////// sockets ///////
+  // import SocketIO from 'socket.io'
+  // const io = SocketIO(httpServer)
+  // io.on('connection', socket => {
+  //   socket.on('login', (name, password) => {
+  //     socket.user = db.users.find(u => u.name == name && u.password == password) || { name: `Guest ${socket.id}` }
+  //   })
+
+  //   socket.on('disconnect', () => console.log(`${socket.user?.name} disconnected`))
+  //   // listen for socket events / send socket events
+  //   // socket.on('event-name', payload => { /* client sent something */ })
+  //   // socket.emit('event-name', payload) send to just this socket
+  //   // io.emit('event-name', payload) send to everyone
+  // })
+
+  const port = process.env.PORT || 4999
+  http.listen(port, () => console.log(`Server listening on *:${port}`))
+})
