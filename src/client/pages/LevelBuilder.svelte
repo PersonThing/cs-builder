@@ -308,18 +308,26 @@
   }
 
   .draw-option {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
     border: 2px solid transparent;
     border-radius: 5px;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 5px 5px 5px 35px;
     cursor: pointer;
+    position: relative;
 
     &.selected {
       border-color: rgb(0, 119, 255);
       background: rgba(0, 119, 200, 0.1);
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 13px;
+        border: 8px solid transparent;
+        border-left-color: rgb(0, 119, 255);
+      }
     }
 
     .form-group {

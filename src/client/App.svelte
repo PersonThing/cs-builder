@@ -78,15 +78,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: monospace; // 'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     // letter-spacing: -0.15em;
 
     textarea,
     input,
     pre {
-      font-family: 'Lucida Console', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
-        sans-serif;
-      letter-spacing: normal;
+      font-family: monospace;
+      // letter-spacing: -0.05rem;
     }
   }
 
