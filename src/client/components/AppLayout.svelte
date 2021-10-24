@@ -87,7 +87,7 @@
       }
     }
 
-    .main {
+    :global(.main) {
       flex: 1;
       display: flex;
       flex-direction: row;
@@ -127,6 +127,12 @@
       :global(.rows) {
         display: flex;
         flex-direction: column;
+        height: 100%;
+      }
+
+      :global(form) {
+        display: block;
+        width: 100%;
         height: 100%;
       }
 

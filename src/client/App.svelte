@@ -78,13 +78,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: monospace; //'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     // letter-spacing: -0.15em;
 
     textarea,
     input,
     pre {
-      font-family: monospace;
+      // font-family: monospace;
       // letter-spacing: -0.05rem;
     }
   }
@@ -250,6 +250,8 @@
   .btn-group {
     display: flex;
     flex-direction: row;
+    gap: 3px;
+    margin-bottom: 10px;
 
     .btn {
       margin: 0;
@@ -285,5 +287,24 @@
 
   .text-right {
     text-align: right;
+  }
+
+  .absolute {
+    position: absolute;
+  }
+  .relative {
+    position: relative;
+  }
+  .top {
+    top: 0;
+  }
+  .left {
+    left: 0;
+  }
+  .bottom {
+    bottom: 0;
+  }
+  .right {
+    right: 0;
   }
 </style>

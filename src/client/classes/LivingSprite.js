@@ -8,6 +8,7 @@ export default class LivingSprite extends PIXI.Container {
 
     this.sortableChildren = true
     this.config = config
+    this.config.width = graphics.still.width // for radius collision checking
     this.speed = config.speed // so events can modify without affecting config
 
     this.sprites = new PIXI.Container()
@@ -67,11 +68,15 @@ export default class LivingSprite extends PIXI.Container {
     this.path = []
   }
 
+  stopMoving() {
+    this.path = []
+    this.target = null
+    this.endTarget = null
+  }
+
   setTarget(target) {
     if (target == null) {
-      this.path = []
-      this.target = null
-      this.endTarget = null
+      this.stopMoving()
       return
     }
     if (target.x == this.x && target.y == this.y) return
@@ -92,6 +97,21 @@ export default class LivingSprite extends PIXI.Container {
     else {
       this.sprites.rotation = Math.atan2(this.target.y - this.y, this.target.x - this.x) + (90 * Math.PI) / 180
     }
+  }
+
+  getDistanceTo(sprite) {
+    const a = sprite.x - this.x
+    const b = sprite.y - this.y
+    return Math.sqrt(a * a + b * b)
+  }
+
+  isTouchingRadius(sprite) {
+    let radius = this.getTouchRadius() + sprite.getTouchRadius()
+    return this.getDistanceTo(sprite) < radius
+  }
+
+  getTouchRadius() {
+    return (this.sprites.width * this.sprites.scale.x) / 2
   }
 
   setTint(tint) {

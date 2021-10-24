@@ -1,57 +1,52 @@
-<AppLayout active="levels">
-  <div class="col1">
-    <ItemListNav slug="levels" type="level" collection={$levels} active={paramId} let:item>
-      {#if $characters?.length}
-        <ArtThumb id={$characters[0].graphics.still} />
-      {/if}
-      {item.name}
-      <!-- <div class="level-nav-item" style="background-image:url({item.thumbnail})">
-        {item.name}
-      </div> -->
-    </ItemListNav>
-  </div>
-
-  {#if input}
-    <div class="grow" style="position: relative;">
-      {#if $isDrawing}
-        <LevelRenderer
-          level={input}
-          playable={false}
-          {gridSize}
-          bind:this={levelRenderer}
-          on:pointerdown={onDrawPointerDown}
-          on:pointerup={onDrawPointerUp}
-          on:pointermove={onDrawPointerMove}
-        />
-      {:else}
-        <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
-      {/if}
-    </div>
-
-    <div class="col2 rows">
-      <div class="btn-group">
-        <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play</button>
-        <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
+<ItemTypeBuilder
+  id={params.id}
+  itemType="levels"
+  store={levels}
+  {itemTemplate}
+  bind:input
+  bind:this={itemTypeBuilder}
+  {getItemGraphic}
+  showButtons={false}
+  let:isAdding
+  let:hasChanges
+>
+  {#if input != null}
+    <div class="level-builder-container">
+      <div class="grow relative">
+        <div class="btn-group play-edit-toggle">
+          <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play</button>
+          <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
+        </div>
+        {#if $isDrawing}
+          <LevelRenderer
+            level={input}
+            playable={false}
+            {gridSize}
+            bind:this={levelRenderer}
+            on:pointerdown={onDrawPointerDown}
+            on:pointerup={onDrawPointerUp}
+            on:pointermove={onDrawPointerMove}
+          />
+        {:else}
+          <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
+        {/if}
       </div>
 
-      <div class="grow">
-        <Form on:submit={save} {hasChanges}>
-          <span slot="buttons">
-            {#if !isAdding}
-              <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-            {/if}
-          </span>
+      <div class="col2 p1">
+        <FormButtons {hasChanges} canDelete={!isAdding} on:delete={del}>
+          <div class="grow" />
+        </FormButtons>
 
-          <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-          <div class="form-group">
-            <label>Background color</label>
-            <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
-          </div>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <div class="form-group">
+          <label>Background color</label>
+          <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
+        </div>
+        <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing" on:change={forceRender}>Smooth pathing</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.showPaths} name="show-paths" on:change={forceRender}>Show paths</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius" on:change={forceRender}>Show sight radius</FieldCheckbox>
 
-          <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing">Smooth pathing</FieldCheckbox>
-          <FieldCheckbox bind:checked={input.showPaths} name="show-paths">Show paths</FieldCheckbox>
-          <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius">Show sight radius</FieldCheckbox>
-
+        {#if $isDrawing}
           <div class="flex-column">
             <div class="draw-option" class:selected={drawMode == DrawMode.Blocks} on:click={() => setDrawMode(DrawMode.Blocks)}>
               <div class="form-group">
@@ -89,61 +84,62 @@
               </div>
             </div>
           </div>
-        </Form>
+        {/if}
       </div>
-      <!-- <div class="grow">Properties of selected item, if any</div> -->
     </div>
   {/if}
-</AppLayout>
+</ItemTypeBuilder>
 
 <script>
-  import { project, blocks, enemies, items, levels, characters } from '../stores/project-stores'
-  import { push } from 'svelte-spa-router'
-  import { sortByName } from '../services/object-utils'
-  import { tick } from 'svelte'
-  import AppLayout from '../components/AppLayout.svelte'
-  import ArtThumb from '../components/ArtThumb.svelte'
-  import ColorPicker from '../components/ColorPicker.svelte'
-  import FieldCheckbox from '../components/FieldCheckbox.svelte'
-  import FieldText from '../components/FieldText.svelte'
-  import Form from '../components/Form.svelte'
-  import InputSelect from '../components/InputSelect.svelte'
-  import ItemListNav from '../components/ItemListNav.svelte'
-  import LevelRenderer from './LevelBuilder.Renderer.svelte'
-  import LocalStorageStore from '../stores/local-storage-store'
-  import validator from '../services/validator'
-
-  let isDrawing = LocalStorageStore('is-drawing', false)
-
-  let levelRenderer
+  //////////// common ItemTypeBuilder stuff ////////////
+  import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
 
   export let params = {}
   let input = null
 
-  const gridSize = 40
-
-  $: paramId = decodeURIComponent(params.id) || 'new'
-  $: if (paramId == 'new' || $levels != null) {
-    paramId == 'new' ? create() : edit(paramId)
+  const itemTemplate = {
+    name: '',
+    backgroundColor: 'rgba(0,0,0,1)',
+    smoothPathing: false,
+    showPaths: true,
+    showSightRadius: true,
+    blocks: [],
+    items: [],
+    enemies: [],
   }
-  $: isAdding = input?.id == null
-  $: hasChanges =
-    input != null &&
-    !validator.equals(
-      input,
-      $levels.find(l => l.id == input.id)
-    )
 
-  let selectedBlockId = 0
-  let selectedItemId = null
-  let selectedEnemyId = null
+  function getItemGraphic(item) {
+    return $characters.length ? $characters[0].graphics.still : null
+  }
 
+  //////////// things unique to level builder ////////////
+  import { blocks, enemies, items, characters, levels } from '../stores/project-stores'
+  import { sortByName } from '../services/object-utils'
+  import ArtThumb from '../components/ArtThumb.svelte'
+  import ColorPicker from '../components/ColorPicker.svelte'
+  import FieldCheckbox from '../components/FieldCheckbox.svelte'
+  import FieldText from '../components/FieldText.svelte'
+  import FormButtons from '../components/FormButtons.svelte'
+  import InputSelect from '../components/InputSelect.svelte'
+  import LevelRenderer from './LevelBuilder.Renderer.svelte'
+  import LocalStorageStore from '../stores/local-storage-store'
+
+  let itemTypeBuilder
+
+  const gridSize = 40
   const DrawMode = {
     Blocks: 0,
     Items: 1,
     Enemies: 2,
   }
+
+  let isDrawing = LocalStorageStore('is-drawing', false)
+  let levelRenderer
+  let selectedBlockId = 0
+  let selectedItemId = null
+  let selectedEnemyId = null
   let drawMode = DrawMode.Blocks
+  let pointerIsDown = false
 
   $: blockOptions = [
     { value: null, name: 'Erase blocks' },
@@ -175,58 +171,16 @@
       .sort(sortByName),
   ]
 
-  function create() {
-    input = createDefaultInput()
+  function forceRender() {
+    // this works if nothing else
+    // let inputC = JSON.parse(JSON.stringify(input))
+    // input = null
+    // await tick()
+    // input = inputC
+
+    levelRenderer.restartPixi()
   }
 
-  function createDefaultInput() {
-    return {
-      projectId: $project.id,
-      name: '',
-      backgroundColor: 'rgba(0,0,0,1)',
-      smoothPathing: false,
-      showPaths: true,
-      showSightRadius: true,
-      blocks: [],
-      items: [],
-      enemies: [],
-    }
-  }
-
-  async function edit(id) {
-    const level = $levels.find(l => l.id == id)
-    if (level == null) return
-    input = null
-    await tick()
-    input = {
-      ...createDefaultInput(),
-      ...JSON.parse(JSON.stringify(level)),
-    }
-  }
-
-  function save() {
-    if (validator.empty(input.name)) {
-      document.getElementById('name').focus()
-      return
-    }
-    ;(isAdding
-      ? levels.apiInsert(input).then(item => {
-          input = item
-        })
-      : levels.apiUpdate(input)
-    ).then(() => {
-      push(`/levels/${encodeURIComponent(input.id)}`)
-    })
-  }
-
-  function del() {
-    if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      levels.apiDelete(input.projectId, input.id)
-      push(`/levels/new`)
-    }
-  }
-
-  let pointerIsDown = false
   function onDrawPointerDown(event) {
     pointerIsDown = true
     // if they do anything but left click, select the block at the current position (or eraser if null)
@@ -283,7 +237,11 @@
   }
 
   function replaceAtCoord(objects, x, y, id) {
-    const objectsMinusAnyAtThisXY = objects.filter(o => o.x != x || o.y != y)
+    const objectsMinusAnyAtThisXY = objects
+      // filter out blocks at THIS spot
+      .filter(o => o.x != x || o.y != y)
+      // also filter blocks that are in negative space (messes with grid path helper)
+      .filter(b => b.x >= 0 && b.y >= 0)
     if (id == null) {
       objects = objectsMinusAnyAtThisXY
     } else {
@@ -296,15 +254,19 @@
   function setDrawMode(dm) {
     drawMode = dm
   }
+
+  function del() {
+    itemTypeBuilder(del())
+  }
 </script>
 
 <style lang="scss">
-  .level-nav-item {
-    height: 60px;
-    width: 100%;
-    background-size: contain;
-    background-position: 10px 20px;
-    background-repeat: no-repeat;
+  .level-builder-container {
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    margin-bottom: 10px;
   }
 
   .draw-option {
@@ -333,5 +295,13 @@
     .form-group {
       margin-bottom: 0;
     }
+  }
+
+  .play-edit-toggle {
+    background: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
   }
 </style>

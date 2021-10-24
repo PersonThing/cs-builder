@@ -42,6 +42,18 @@ function createActiveProjectStore() {
 
     if (p.id == null) return
 
+    // remove any missing references from levels
+    // todo, should do the same for art, but instead we'll just make that fail gracefully
+    const blockIds = p.blocks.map(b => b.id)
+    const enemyIds = p.enemies.map(e => e.id)
+    const itemIds = p.items.map(i => i.id)
+    p.levels = p.levels.map(level => {
+      level.blocks = level.blocks?.filter(b => blockIds.includes(b.id.toString()))
+      level.enemies = level.enemies?.filter(e => enemyIds.includes(e.id.toString()))
+      level.items = level.items?.filter(i => itemIds.includes(i.id.toString()))
+      return level
+    })
+
     // populate item stores with this project's stuff
     art.set(p.art)
     blocks.set(p.blocks)
@@ -110,7 +122,10 @@ function createProjectsStore() {
     })
   }
 
-  socket.on('projects.insert', p => addToStore(update, p))
+  socket.on('projects.insert', p => {
+    console.log('socket insert', res)
+    addToStore(update, p)
+  })
   socket.on('projects.update', p => replaceInStore(update, p))
   socket.on('projects.update', id => removeFromStore(update, id))
 
@@ -158,21 +173,21 @@ function createProjectItemStore(itemTypeName) {
 
     apiInsert(item) {
       return api[itemTypeName].insert(item).then(res => {
-        update(c => [...c, res])
+        addToStore(update, res)
         return res
       })
     },
 
     apiUpdate(item) {
       return api[itemTypeName].update(item).then(res => {
-        update(c => c.map(o => (o.id == res.id ? item : o)))
+        replaceInStore(update, res)
         return res
       })
     },
 
     apiDelete(projectId, id) {
       return api[itemTypeName].delete(projectId, id).then(() => {
-        update(c => c.filter(o => o.id != id))
+        removeFromStore(update, id)
       })
     },
   }

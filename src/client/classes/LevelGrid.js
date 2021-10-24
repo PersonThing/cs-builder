@@ -4,8 +4,12 @@ export default class LevelGrid {
   constructor(blocks, level, gridSize) {
     this.smoothPathing = level.smoothPathing
     this.gridSize = gridSize
+    this.createGridFromBlocks(blocks, level.blocks)
+  }
 
-    const walkableBlocks = level.blocks
+  createGridFromBlocks(blocks, levelBlocks) {
+    const walkableBlocks = levelBlocks
+      .filter(b => b.x > 0 && b.y > 0)
       .filter(b => blocks.find(bc => bc.id == b.id).canWalk)
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
@@ -30,6 +34,10 @@ export default class LevelGrid {
       allowDiagonal: true,
       dontCrossCorners: true,
     })
+  }
+
+  setWalkableAt(x, y, isWalkable) {
+    this.grid.setWalkableAt(x, y, isWalkable)
   }
 
   /**

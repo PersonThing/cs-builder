@@ -1,8 +1,11 @@
 <AppLayout active="project">
-  <div class="grow p1">
+  <div class="grow">
     <Form on:submit={save} {hasChanges}>
-      <FieldText name="name" bind:value={input.name}>Name</FieldText>
-      <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>Pixel size</FieldNumber>
+      <div class="p1">
+        <FieldText name="name" bind:value={input.name}>Name</FieldText>
+        <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>Pixel size</FieldNumber>
+        <FormButtons {hasChanges} />
+      </div>
     </Form>
   </div>
 </AppLayout>
@@ -14,6 +17,7 @@
   import validator from '../services/validator'
   import { project, projects } from '../stores/project-stores.js'
   import FieldText from '../components/FieldText.svelte'
+  import FormButtons from '../components/FormButtons.svelte'
 
   let input = createDefaultInput()
 

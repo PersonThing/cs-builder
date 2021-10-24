@@ -17,7 +17,6 @@
   import Block from '../classes/Block.js'
   import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
-  import isTouching from '../services/hit-test.js'
 
   const dispatch = createEventDispatcher()
 
@@ -25,11 +24,6 @@
   let pixiApp
   let world
   let player
-  let itemContainer
-  let blockContainer
-  let enemyContainer
-
-  let levelGrid
 
   let screenTarget = {
     x: 0,
@@ -78,8 +72,14 @@
     renderLevel()
   }
 
+  export function restartPixi() {
+    pixiApp.destroy()
+    pixiContainer.childNodes.forEach(c => pixiContainer.removeChild(c))
+    startPixi()
+  }
+
   export function redrawBlocks() {
-    emptyContainer(blockContainer)
+    emptyContainer(world.blockContainer)
     for (const blockConfig of level.blocks) {
       const bc = $blocks.find(b => b.id == blockConfig.id)
       if (bc == null) continue
@@ -90,12 +90,12 @@
         blockConfig,
         gridSize
       )
-      blockContainer.addChild(block)
+      world.blockContainer.addChild(block)
     }
   }
 
   export function redrawItems() {
-    emptyContainer(itemContainer)
+    emptyContainer(world.itemContainer)
     for (const itemConfig of level.items) {
       const ic = $items.find(i => i.id == itemConfig.id)
       const item = new Item(
@@ -104,12 +104,12 @@
         itemConfig,
         gridSize
       )
-      itemContainer.addChild(item)
+      world.itemContainer.addChild(item)
     }
   }
 
   export function redrawEnemies() {
-    emptyContainer(enemyContainer)
+    emptyContainer(world.enemyContainer)
     for (const enemyConfig of level.enemies) {
       const e = $enemies.find(e => e.id == enemyConfig.id)
       const enemy = new Enemy(
@@ -117,11 +117,11 @@
         e,
         enemyConfig.x * gridSize + gridSize / 2,
         enemyConfig.y * gridSize + gridSize / 2,
-        levelGrid,
+        world.levelGrid,
         level.showPaths,
         level.showSightRadius
       )
-      enemyContainer.addChild(enemy)
+      world.enemyContainer.addChild(enemy)
     }
   }
 
@@ -134,29 +134,27 @@
 
   function renderLevel() {
     // clear pixi stage to re-render everything
-    pixiApp.stage.children.forEach(c => pixiApp.stage.removeChild(c))
+    emptyContainer(pixiApp.stage)
 
     // preload art
     preloadArt().then(() => {
       // set background color and clear stage whenever we re-render level (this should only be called once when playing levels, or any time the level is changed when editing levels)
       pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
 
-      // level grid helper for pathing
-      levelGrid = new LevelGrid($blocks, level, gridSize)
-
       // world contains everything but player
       world = new PIXI.Container()
-
-      blockContainer = new PIXI.Container()
-      world.addChild(blockContainer)
+      // helper for pathing - set on world so collisions and other places can access it
+      world.levelGrid = new LevelGrid($blocks, level, gridSize)
+      world.blockContainer = new PIXI.Container()
+      world.addChild(world.blockContainer)
       redrawBlocks()
 
-      itemContainer = new PIXI.Container()
-      world.addChild(itemContainer)
+      world.itemContainer = new PIXI.Container()
+      world.addChild(world.itemContainer)
       redrawItems()
 
-      enemyContainer = new PIXI.Container()
-      world.addChild(enemyContainer)
+      world.enemyContainer = new PIXI.Container()
+      world.addChild(world.enemyContainer)
       redrawEnemies()
 
       pixiApp.stage.addChild(world)
@@ -165,7 +163,7 @@
       // create player
       if ($characters.length > 0) {
         const char = $characters[0]
-        player = new Player(buildGraphics(char.graphics), char, 1.5 * gridSize, 1.5 * gridSize, levelGrid, level.showPaths)
+        player = new Player(buildGraphics(char.graphics), char, 1.5 * gridSize, 1.5 * gridSize, world.levelGrid, level.showPaths)
         pixiApp.stage.addChild(player)
       }
     })
@@ -210,7 +208,7 @@
     centerViewOnPlayer()
 
     if (playable) {
-      enemyContainer?.children
+      world?.enemyContainer?.children
         .filter(e => e.config != null)
         .forEach(enemy => {
           // if enemy can see player, target player
@@ -245,21 +243,23 @@
   }
 
   function checkCollisions() {
-    itemContainer?.children.forEach(item => {
+    world?.itemContainer?.children.forEach(item => {
       if (item.config.playersCanUse) {
-        if (isTouching(item, player)) {
-          item.onCollision(player)
-          if (item.config.removeOnCollision) itemContainer.removeChild(item)
+        if (player.isTouchingRadius(item)) {
+          item.onCollision(player, world)
+          if (item.config.removeOnCollision) world.itemContainer.removeChild(item)
         }
       }
 
       if (item.config.enemiesCanUse) {
-        enemyContainer.children.forEach(enemy => {
-          if (isTouching(item, enemy)) {
-            item.onCollision(enemy)
-            if (item.config.removeOnCollision) itemContainer.removeChild(item)
-          }
-        })
+        world.enemyContainer.children
+          .filter(e => e.config != null)
+          .forEach(enemy => {
+            if (enemy.isTouchingRadius(item)) {
+              item.onCollision(enemy, world)
+              if (item.config.removeOnCollision) world.itemContainer.removeChild(item)
+            }
+          })
       }
     })
   }

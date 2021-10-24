@@ -3,7 +3,6 @@ import LivingSprite from './LivingSprite.js'
 export default class Enemy extends LivingSprite {
   constructor(graphics, config, x, y, levelGrid, showPaths, showSightRadius) {
     super(graphics, config, x, y, levelGrid, showPaths)
-    console.log('enemy', x, y)
 
     // render a little sight radius circle
     if (showSightRadius) {

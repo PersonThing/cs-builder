@@ -73,7 +73,7 @@
             </div>
 
             <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
-              <form on:submit|preventDefault={applyChangeSize}>
+              <Form on:submit={applyChangeSize}>
                 <div class="p1">
                   W
                   <input type="number" min={1} max={1500} bind:value={changeSize.width} />
@@ -82,7 +82,7 @@
                   <input type="number" min={1} max={1500} bind:value={changeSize.height} />
                   <button type="submit" class="btn btn-info btn-sm">Apply</button>
                 </div>
-              </form>
+              </Form>
             </QuickDropdown>
 
             <div>
@@ -141,12 +141,10 @@
 
         <div class="col2">
           <Form on:submit={save} {hasChanges}>
-            <div slot="buttons">
-              {#if !isAdding}
-                <button type="button" class="btn btn-danger" on:click={del}>Delete</button>
-              {/if}
+            <div class="p1">
+              <FieldText name="name" bind:value={input.name}>Name</FieldText>
+              <FormButtons canDelete={!isAdding} on:delete={del} />
             </div>
-            <FieldText name="name" bind:value={input.name}>Name</FieldText>
           </Form>
 
           <div class="p1">
@@ -238,6 +236,7 @@
   import ItemListNav from '../components/ItemListNav.svelte'
   import QuickDropdown from '../components/QuickDropdown.svelte'
   import validator from '../services/validator'
+  import FormButtons from '../components/FormButtons.svelte'
 
   export let params = {}
   let input = null
