@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store'
 import api from '../services/api.js'
 import io from 'socket.io-client'
+import projectItemTypes from '../../server/project-item-types'
 
 const socket = io('/')
 
@@ -10,8 +11,6 @@ const replaceInStore = (update, item) => update(items => items.map(i => (i.id ==
 const addToStore = (update, item) => update(items => [...items.filter(i => i.id != item.id), item])
 const removeFromStore = (update, id) => update(items => items.filter(i => i.id != id))
 
-const itemTypeNames = ['art', 'blocks', 'characters', 'enemies', 'items', 'levels']
-
 let $project
 export const project = createActiveProjectStore()
 project.subscribe(p => {
@@ -20,6 +19,7 @@ project.subscribe(p => {
 export const projects = createProjectsStore()
 
 export const art = createProjectItemStore('art')
+export const abilities = createProjectItemStore('abilities')
 export const blocks = createProjectItemStore('blocks')
 export const characters = createProjectItemStore('characters')
 export const enemies = createProjectItemStore('enemies')
@@ -27,7 +27,7 @@ export const items = createProjectItemStore('items')
 export const levels = createProjectItemStore('levels')
 export const particles = createProjectItemStore('particles')
 
-const stores = { art, blocks, characters, enemies, items, levels }
+const stores = { art, abilities, blocks, characters, enemies, items, levels }
 
 function createActiveProjectStore() {
   const { subscribe, set, update } = writable({})
@@ -56,6 +56,7 @@ function createActiveProjectStore() {
 
     // populate item stores with this project's stuff
     art.set(p.art)
+    abilities.set(p.abilities)
     blocks.set(p.blocks)
     characters.set(p.characters)
     enemies.set(p.enemies)
@@ -91,7 +92,7 @@ function createActiveProjectStore() {
     })
   })
 
-  itemTypeNames.forEach(it => {
+  projectItemTypes.forEach(it => {
     socket.on(`${it}.insert`, item => {
       console.log(it, 'insert from server', item)
       if (item.projectId == $project.id) addToStore(stores[it].update, item)

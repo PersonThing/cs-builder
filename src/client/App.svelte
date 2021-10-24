@@ -11,6 +11,7 @@
 <script>
   import Router from 'svelte-spa-router'
   import ArtBuilder from './pages/ArtBuilder.svelte'
+  import AbilityBuilder from './pages/AbilityBuilder.svelte'
   import ParticleBuilder from './pages/ParticleBuilder.svelte'
   import BlockBuilder from './pages/BlockBuilder.svelte'
   import ItemBuilder from './pages/ItemBuilder.svelte'
@@ -27,6 +28,7 @@
     '/': SelectProject,
     '/project': ProjectSettings,
     '/art/:id?': ArtBuilder,
+    '/abilities/:id?': AbilityBuilder,
     '/particles/:id?': ParticleBuilder,
     '/blocks/:id?': BlockBuilder,
     '/items/:id?': ItemBuilder,
@@ -78,15 +80,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: monospace; //'pixels', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    // letter-spacing: -0.15em;
+    font-family: monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    letter-spacing: -0.05rem;
 
-    textarea,
-    input,
-    pre {
-      // font-family: monospace;
-      // letter-spacing: -0.05rem;
-    }
+    // textarea,
+    // input,
+    // pre {
+    //   font-family: monospace;
+    //   letter-spacing: -0.05rem;
+    // }
   }
 
   a {
@@ -273,8 +275,13 @@
     flex-direction: column;
   }
 
-  .grow {
+  .grow,
+  .flex-grow {
     flex: 1;
+  }
+
+  .flex-shrink {
+    flex-shrink: 1;
   }
 
   .wrap {

@@ -1,3 +1,5 @@
+<svelte:window on:keydown={onKeyDown} on:keyup={onKeyUp} />
+
 <div
   bind:this={pixiContainer}
   class="pixi-container"
@@ -11,12 +13,13 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
-  import { art, blocks, characters, enemies, items } from '../stores/project-stores.js'
+  import { abilities, art, blocks, characters, enemies, items } from '../stores/project-stores.js'
   import Player from '../classes/Player.js'
   import Enemy from '../classes/Enemy.js'
   import Block from '../classes/Block.js'
   import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
+  import abilityKeys from '../services/ability-keys.js'
 
   const dispatch = createEventDispatcher()
 
@@ -54,10 +57,23 @@
     dispatch('pointerup', event)
   }
 
-  function movePlayerToEvent(event) {
-    screenTarget = {
-      x: event.offsetX,
-      y: event.offsetY,
+  let keys = {}
+  function onKeyDown(event) {
+    const key = event.key
+    if (abilityKeys.includes(key)) keys[key] = true
+  }
+  function onKeyUp(event) {
+    const key = event.key
+    if (abilityKeys.includes(key)) keys[key] = false
+  }
+  let pointerPosition = {
+    x: 0,
+    y: 0,
+  }
+  function onPixiPointerMove(e) {
+    pointerPosition = {
+      x: e.data.global.x - screenCenter.x + player?.x ?? 0,
+      y: e.data.global.y - screenCenter.y + player?.y ?? 0,
     }
   }
   ////// end input
@@ -68,14 +84,18 @@
     })
     pixiContainer.appendChild(pixiApp.view)
     pixiApp.ticker.add(onTick)
+    pixiApp.stage.interactive = true
+    pixiApp.stage.on('pointermove', onPixiPointerMove)
 
     renderLevel()
   }
 
   export function restartPixi() {
-    pixiApp.destroy()
-    pixiContainer.childNodes.forEach(c => pixiContainer.removeChild(c))
-    startPixi()
+    if (pixiApp != null) {
+      pixiApp.destroy()
+      pixiContainer.childNodes.forEach(c => pixiContainer.removeChild(c))
+      startPixi()
+    }
   }
 
   export function redrawBlocks() {
@@ -83,7 +103,6 @@
     for (const blockConfig of level.blocks) {
       const bc = $blocks.find(b => b.id == blockConfig.id)
       if (bc == null) continue
-
       const block = new Block(
         bc,
         $art.find(a => a.id == bc.graphic),
@@ -157,13 +176,27 @@
       world.addChild(world.enemyContainer)
       redrawEnemies()
 
+      // for projectiles / etc
+      world.abilityContainer = new PIXI.Container()
+      world.addChild(world.abilityContainer)
+
       pixiApp.stage.addChild(world)
       pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
 
       // create player
       if ($characters.length > 0) {
-        const char = $characters[0]
+        const char = JSON.parse(JSON.stringify($characters[0]))
+        char.abilities = char.abilities.map(a => {
+          const ability = $abilities.find(ab => ab.id == a.id)
+          ability.art = $art.find(ar => ar.id == ability.graphic)
+          return {
+            ...a,
+            ...ability,
+            nextFire: 0,
+          }
+        })
         player = new Player(buildGraphics(char.graphics), char, 1.5 * gridSize, 1.5 * gridSize, world.levelGrid, level.showPaths)
+        player.world = world
         pixiApp.stage.addChild(player)
       }
     })
@@ -204,7 +237,8 @@
   }
 
   function onTick() {
-    player?.onTick()
+    const time = performance.now()
+    player?.onTick(time, keys, pointerPosition)
     centerViewOnPlayer()
 
     if (playable) {
@@ -220,6 +254,8 @@
           }
           enemy.onTick()
         })
+
+      world?.abilityContainer?.children.forEach(projectile => projectile.onTick())
 
       checkCollisions()
     }
@@ -245,7 +281,7 @@
   function checkCollisions() {
     world?.itemContainer?.children.forEach(item => {
       if (item.config.playersCanUse) {
-        if (player.isTouchingRadius(item)) {
+        if (player.isTouching(item)) {
           item.onCollision(player, world)
           if (item.config.removeOnCollision) world.itemContainer.removeChild(item)
         }
@@ -255,13 +291,20 @@
         world.enemyContainer.children
           .filter(e => e.config != null)
           .forEach(enemy => {
-            if (enemy.isTouchingRadius(item)) {
+            if (enemy.isTouching(item)) {
               item.onCollision(enemy, world)
               if (item.config.removeOnCollision) world.itemContainer.removeChild(item)
             }
           })
       }
     })
+  }
+
+  function movePlayerToEvent(event) {
+    screenTarget = {
+      x: event.offsetX,
+      y: event.offsetY,
+    }
   }
 </script>
 

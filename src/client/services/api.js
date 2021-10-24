@@ -1,4 +1,4 @@
-const itemTypeNames = ['art', 'blocks', 'characters', 'enemies', 'items', 'levels', 'particles']
+import projectItemTypes from '../../server/project-item-types'
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -23,7 +23,7 @@ function _fetch(url, options = {}) {
 
 function stripProjectOfItems(project) {
   const body = JSON.parse(JSON.stringify(project))
-  itemTypeNames.forEach(it => {
+  projectItemTypes.forEach(it => {
     if (body.hasOwnProperty(it)) delete body[it]
   })
   return body
@@ -79,7 +79,7 @@ const Api = {
   },
 }
 
-itemTypeNames.forEach(c => {
+projectItemTypes.forEach(c => {
   Api[c] = {
     find: projectId => {
       console.log(`api.${c}.find`)

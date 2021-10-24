@@ -1,6 +1,7 @@
 <ItemTypeBuilder
   id={params.id}
   itemType="levels"
+  singular="level"
   store={levels}
   {itemTemplate}
   bind:input
@@ -9,93 +10,92 @@
   showButtons={false}
   let:isAdding
   let:hasChanges
+  on:edit={forceRender}
 >
-  {#if input != null}
-    <div class="level-builder-container">
-      <div class="grow relative">
-        <div class="btn-group play-edit-toggle">
-          <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play</button>
-          <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
-        </div>
-        {#if $isDrawing}
-          <LevelRenderer
-            level={input}
-            playable={false}
-            {gridSize}
-            bind:this={levelRenderer}
-            on:pointerdown={onDrawPointerDown}
-            on:pointerup={onDrawPointerUp}
-            on:pointermove={onDrawPointerMove}
-          />
-        {:else}
-          <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
-        {/if}
-      </div>
-
-      <div class="col2 p1">
-        <FormButtons {hasChanges} canDelete={!isAdding} on:delete={del}>
-          <div class="grow" />
-        </FormButtons>
-
-        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-        <div class="form-group">
-          <label>Background color</label>
-          <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
-        </div>
-        <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing" on:change={forceRender}>Smooth pathing</FieldCheckbox>
-        <FieldCheckbox bind:checked={input.showPaths} name="show-paths" on:change={forceRender}>Show paths</FieldCheckbox>
-        <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius" on:change={forceRender}>Show sight radius</FieldCheckbox>
-
-        {#if $isDrawing}
-          <div class="flex-column">
-            <div class="draw-option" class:selected={drawMode == DrawMode.Blocks} on:click={() => setDrawMode(DrawMode.Blocks)}>
-              <div class="form-group">
-                <label>Place a block</label>
-                <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
-                  {#if option.graphic != null}
-                    <ArtThumb id={option.graphic} />
-                  {/if}
-                  {option.name}
-                </InputSelect>
-              </div>
-            </div>
-
-            <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
-              <div class="form-group">
-                <label>Place an item</label>
-                <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
-                  {#if option.graphics?.still != null}
-                    <ArtThumb id={option.graphics.still} />
-                  {/if}
-                  {option.name}
-                </InputSelect>
-              </div>
-            </div>
-
-            <div class="draw-option" class:selected={drawMode == DrawMode.Enemies} on:click={() => setDrawMode(DrawMode.Enemies)}>
-              <div class="form-group">
-                <label>Place an enemy</label>
-                <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
-                  {#if option.graphics?.still != null}
-                    <ArtThumb id={option.graphics.still} />
-                  {/if}
-                  {option.name}
-                </InputSelect>
-              </div>
-            </div>
-          </div>
-        {/if}
-      </div>
+  <div class="grow">
+    <div class="btn-group play-edit-toggle">
+      <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play</button>
+      <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
     </div>
-  {/if}
+    {#if $isDrawing}
+      <LevelRenderer
+        level={input}
+        playable={false}
+        {gridSize}
+        bind:this={levelRenderer}
+        on:pointerdown={onDrawPointerDown}
+        on:pointerup={onDrawPointerUp}
+        on:pointermove={onDrawPointerMove}
+      />
+    {:else}
+      <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
+    {/if}
+  </div>
+
+  <div class="col2 p1">
+    <Form on:submit={() => itemTypeBuilder.save()}>
+      <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
+      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+      <div class="form-group">
+        <label>Background color</label>
+        <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
+      </div>
+      <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing" on:change={forceRender}>Smooth pathing</FieldCheckbox>
+      <FieldCheckbox bind:checked={input.showPaths} name="show-paths" on:change={forceRender}>Show paths</FieldCheckbox>
+      <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius" on:change={forceRender}>Show sight radius</FieldCheckbox>
+    </Form>
+
+    {#if $isDrawing}
+      <div class="flex-column">
+        <div class="draw-option" class:selected={drawMode == DrawMode.Blocks} on:click={() => setDrawMode(DrawMode.Blocks)}>
+          <div class="form-group">
+            <label>Place a block</label>
+            <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
+              {#if option.graphic != null}
+                <ArtThumb id={option.graphic} />
+              {/if}
+              {option.name}
+            </InputSelect>
+          </div>
+        </div>
+
+        <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
+          <div class="form-group">
+            <label>Place an item</label>
+            <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+              {#if option.graphics?.still != null}
+                <ArtThumb id={option.graphics.still} />
+              {/if}
+              {option.name}
+            </InputSelect>
+          </div>
+        </div>
+
+        <div class="draw-option" class:selected={drawMode == DrawMode.Enemies} on:click={() => setDrawMode(DrawMode.Enemies)}>
+          <div class="form-group">
+            <label>Place an enemy</label>
+            <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
+              {#if option.graphics?.still != null}
+                <ArtThumb id={option.graphics.still} />
+              {/if}
+              {option.name}
+            </InputSelect>
+          </div>
+        </div>
+      </div>
+    {/if}
+  </div>
 </ItemTypeBuilder>
 
 <script>
   //////////// common ItemTypeBuilder stuff ////////////
   import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
+  import Form from '../components/Form.svelte'
+  import FormButtons from '../components/FormButtons.svelte'
 
   export let params = {}
   let input = null
+  let itemTypeBuilder
 
   const itemTemplate = {
     name: '',
@@ -119,12 +119,9 @@
   import ColorPicker from '../components/ColorPicker.svelte'
   import FieldCheckbox from '../components/FieldCheckbox.svelte'
   import FieldText from '../components/FieldText.svelte'
-  import FormButtons from '../components/FormButtons.svelte'
   import InputSelect from '../components/InputSelect.svelte'
   import LevelRenderer from './LevelBuilder.Renderer.svelte'
   import LocalStorageStore from '../stores/local-storage-store'
-
-  let itemTypeBuilder
 
   const gridSize = 40
   const DrawMode = {
@@ -172,13 +169,7 @@
   ]
 
   function forceRender() {
-    // this works if nothing else
-    // let inputC = JSON.parse(JSON.stringify(input))
-    // input = null
-    // await tick()
-    // input = inputC
-
-    levelRenderer.restartPixi()
+    levelRenderer?.restartPixi()
   }
 
   function onDrawPointerDown(event) {
@@ -253,10 +244,6 @@
 
   function setDrawMode(dm) {
     drawMode = dm
-  }
-
-  function del() {
-    itemTypeBuilder(del())
   }
 </script>
 

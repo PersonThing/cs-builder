@@ -3,6 +3,9 @@ import { Server as SocketIO } from 'socket.io'
 import path from 'path'
 import { Server } from 'http'
 
+import projectItemTypes from './project-item-types.js'
+import repo from './repo.js'
+
 const app = express()
 const http = Server(app)
 const staticPath = path.resolve('public')
@@ -10,10 +13,6 @@ const io = new SocketIO(http)
 
 app.use(express.static(staticPath))
 app.use(express.json())
-
-// db wrapper
-import repo from './repo.js'
-const itemTypeNames = ['art', 'blocks', 'items', 'characters', 'enemies', 'levels', 'particles']
 
 // https://zellwk.com/blog/crud-express-mongodb/
 // this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
@@ -38,7 +37,7 @@ repo.connect().then(() => {
       if (project == null) return {}
       // populate all its collections to save ui requests
       Promise.all(
-        itemTypeNames.map(it =>
+        projectItemTypes.map(it =>
           repo.find(it, { projectId: req.params.id }).then(items => {
             project[it] = items
           })
@@ -82,7 +81,7 @@ repo.connect().then(() => {
     // delete project
     repo.delete('projects', { id: req.params.id }).then(() => {
       // delete project items
-      Promise.all(itemTypeNames.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
+      Promise.all(projectItemTypes.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
         io.emit('projects.delete', req.params.id)
         res.json(true)
       })
@@ -90,7 +89,7 @@ repo.connect().then(() => {
   })
 
   // crud for project child collections
-  itemTypeNames.forEach(c => {
+  projectItemTypes.forEach(c => {
     // list
     app.get(`/api/projects/:projectId/${c}`, (req, res) => {
       repo.find(c, { projectId: req.params.projectId }).then(objects => res.json(objects))

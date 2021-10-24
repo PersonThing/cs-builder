@@ -21,6 +21,7 @@
         <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
         <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->
         <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
+        <a href="/#/abilities" class:active={active == 'abilities'}>Abilities</a>
         <a href="/#/levels" class:active={active == 'levels'}>Levels</a>
       {/if}
     </div>
@@ -132,8 +133,6 @@
 
       :global(form) {
         display: block;
-        width: 100%;
-        height: 100%;
       }
 
       :global(.columns) {

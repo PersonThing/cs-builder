@@ -30,6 +30,30 @@ export default class LivingSprite extends PIXI.Container {
 
     this.levelGrid = levelGrid
     this.showPaths = showPaths
+
+    // render a little health bar
+    this.nameTag = new PIXI.Text(config.name, {
+      fontFamily: 'consolas',
+      fontSize: 12,
+      strokeThickness: 3,
+      stroke: 0x000000,
+      fill: 0xffffff,
+      align: 'center',
+    })
+    this.nameTag.zIndex = 4
+    this.nameTag.y = -50
+    this.nameTag.x = -this.nameTag.width / 2
+    this.addChild(this.nameTag)
+
+    this.health = config.health
+    this.healthBar = new PIXI.Graphics()
+    this.healthBar.x = -40
+    this.healthBar.y = -60
+    this.drawHealthBar()
+    this.healthBar.zIndex = 3
+    this.addChild(this.healthBar)
+    this.healthBar.width = this.nameTag.width
+    this.healthBar.x = -this.nameTag.width / 2
   }
 
   bringToFront() {
@@ -105,9 +129,10 @@ export default class LivingSprite extends PIXI.Container {
     return Math.sqrt(a * a + b * b)
   }
 
-  isTouchingRadius(sprite) {
-    let radius = this.getTouchRadius() + sprite.getTouchRadius()
-    return this.getDistanceTo(sprite) < radius
+  isTouching(sprite, padDistance = 0) {
+    let combinedRadius = this.getTouchRadius() + sprite.getTouchRadius()
+    let distance = this.getDistanceTo(sprite)
+    return distance < combinedRadius + padDistance
   }
 
   getTouchRadius() {
@@ -184,5 +209,24 @@ export default class LivingSprite extends PIXI.Container {
       this.pathLine.lineTo(p.x, p.y)
       this.pathLine.drawCircle(p.x, p.y, 5)
     })
+  }
+
+  takeDamage(damage) {
+    this.health = Math.max(0, this.health - damage)
+    this.drawHealthBar()
+
+    if (this.health <= 0) {
+      this.parent.removeChild(this)
+      this.destroy()
+    }
+  }
+
+  drawHealthBar() {
+    this.healthBar.clear()
+    this.healthBar.lineStyle(2, 0x000000)
+    this.healthBar.beginFill(0x000000, 0.3)
+    this.healthBar.drawRect(0, 0, this.nameTag.width, 10)
+    this.healthBar.beginFill(0x00ff00)
+    this.healthBar.drawRect(0, 0, (this.nameTag.width * this.health) / 100, 10)
   }
 }

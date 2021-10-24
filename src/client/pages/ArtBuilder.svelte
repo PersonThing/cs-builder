@@ -1,209 +1,236 @@
 <svelte:window on:keyup={onKeyUp} on:paste={onPaste} on:mouseup={onDrawPointerUp} />
 
-<AppLayout active="art">
-  <div class="col1">
-    <ItemListNav slug="art" type="art" collection={$art} active={paramId} let:item>
-      <ArtThumb id={item.id} />
-      {item.name}
-    </ItemListNav>
-  </div>
-  {#if input}
-    <div class="grow rows">
-      <div class="grow columns">
-        <div class="col1">
-          <div class="art-actions">
-            <button type="button" class="btn btn-light btn-sm mr1" on:click={reset}>Start over</button>
+<ItemTypeBuilder
+  id={params.id}
+  itemType="art"
+  singular="art"
+  store={art}
+  {itemTemplate}
+  bind:input
+  bind:this={itemTypeBuilder}
+  {getItemGraphic}
+  showButtons={false}
+  let:isAdding
+  let:hasChanges
+  on:edit={redraw}
+  on:create={redraw}
+>
+  <div class="grow rows">
+    <div class="grow columns">
+      <div class="col1">
+        <div class="art-actions">
+          <button type="button" class="btn btn-light btn-sm mr1" on:click={reset}>Start over</button>
 
-            <ColorPicker bind:value={selectedColor} on:change={() => (mode = mode == 'erase' ? 'paint' : mode)} dropdownClass="below left" />
-            <div class="btn-group">
-              <button
-                type="button"
-                class="btn btn-sm btn-{mode == 'paint' ? 'primary' : 'light'}"
-                on:click={() => (mode = 'paint')}
-                title="Paint brush"
-              >
-                <Icon data={paintIcon} />
-              </button>
-              <button
-                type="button"
-                class="btn btn-sm btn-{mode == 'fill' ? 'primary' : 'light'}"
-                on:click={() => (mode = 'fill')}
-                title="Paint bucket"
-              >
-                <Icon data={fillIcon} />
-              </button>
-              <button type="button" class="btn btn-sm btn-{mode == 'erase' ? 'primary' : 'light'}" on:click={() => (mode = 'erase')} title="Eraser">
-                <Icon data={eraseIcon} />
-              </button>
-            </div>
-
-            <div class="btn-group">
-              <button type="button" disabled={undos.length == 0} class="btn btn-default btn-sm" on:click={undo}>
-                <Icon data={undoIcon} />
-                {undos.length > 0 ? undos.length : ''}
-              </button>
-              <button type="button" disabled={redos.length == 0} class="btn btn-default btn-sm" on:click={redo}>
-                <Icon data={undoIcon} flip="horizontal" />
-                {redos.length > 0 ? redos.length : ''}
-              </button>
-            </div>
-
-            <div class="btn-group">
-              <button type="button" class="btn btn-light btn-sm" on:click={flipX} title="Flip horizontal">
-                <Icon data={flipIcon} />
-              </button>
-              <button type="button" class="btn btn-light btn-sm" on:click={flipY} title="Flip vertical">
-                <Icon data={flipIcon} style="transform: rotate(90deg);" />
-              </button>
-            </div>
-
-            <div class="btn-group">
-              <button type="button" class="btn btn-light btn-sm" on:click={moveLeft} title="Move left">
-                <Icon data={arrowLeftIcon} />
-              </button>
-              <button type="button" class="btn btn-light btn-sm" on:click={moveRight} title="Move right">
-                <Icon data={arrowRightIcon} />
-              </button>
-              <button type="button" class="btn btn-light btn-sm" on:click={moveUp} title="Move up">
-                <Icon data={arrowUpIcon} />
-              </button>
-              <button type="button" class="btn btn-light btn-sm" on:click={moveDown} title="Move down">
-                <Icon data={arrowDownIcon} />
-              </button>
-            </div>
-
-            <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
-              <Form on:submit={applyChangeSize}>
-                <div class="p1">
-                  W
-                  <input type="number" min={1} max={1500} bind:value={changeSize.width} />
-                  <strong>x</strong>
-                  H
-                  <input type="number" min={1} max={1500} bind:value={changeSize.height} />
-                  <button type="submit" class="btn btn-info btn-sm">Apply</button>
-                </div>
-              </Form>
-            </QuickDropdown>
-
-            <div>
-              <button type="button" class="btn btn-light btn-sm" on:click={scaleDown} title="Scale down">
-                <Icon data={minusIcon} />
-                Half size
-              </button>
-
-              <button type="button" class="btn btn-light btn-sm" on:click={scaleUp} title="Scale up">
-                <Icon data={plusIcon} />
-                Double size
-              </button>
-            </div>
-
-            <InputSelect sm placeholder="Zoom" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>
-              <Icon data={zoomIcon} />
-              {option.value}
-            </InputSelect>
-            <div>
-              <label>
-                <input type="checkbox" bind:checked={showGrid} />
-                Show grid
-              </label>
-            </div>
-
-            <InputSelect
-              disabled={$autoSaveStore[input.name] == null}
-              options={$autoSaveStore[input.name]}
-              bind:value={selectedAutoSave}
-              on:change={e => loadAutoSave(e.detail)}
-              let:option
-              placeholder="Auto-saves"
-              inline
-              sm
-              right
+          <ColorPicker bind:value={selectedColor} on:change={() => (mode = mode == 'erase' ? 'paint' : mode)} dropdownClass="below left" />
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-sm btn-{mode == 'paint' ? 'primary' : 'light'}"
+              on:click={() => (mode = 'paint')}
+              title="Paint brush"
             >
-              {option.name}
-              <img src={option.png} height="40" alt="" />
-            </InputSelect>
+              <Icon data={paintIcon} />
+            </button>
+            <button type="button" class="btn btn-sm btn-{mode == 'fill' ? 'primary' : 'light'}" on:click={() => (mode = 'fill')} title="Paint bucket">
+              <Icon data={fillIcon} />
+            </button>
+            <button type="button" class="btn btn-sm btn-{mode == 'erase' ? 'primary' : 'light'}" on:click={() => (mode = 'erase')} title="Eraser">
+              <Icon data={eraseIcon} />
+            </button>
           </div>
-        </div>
-        <div class="grow canvas-container">
-          <canvas class="draw-canvas" bind:this={drawCanvas} />
-          <canvas
-            class="grid-canvas"
-            bind:this={gridCanvas}
-            class:paint-cursor={mode == 'paint'}
-            class:fill-cursor={mode == 'fill'}
-            class:erase-cursor={mode == 'erase'}
-            on:pointerdown|preventDefault={onDrawPointerDown}
-            on:pointerup|preventDefault={onDrawPointerUp}
-            on:pointermove|preventDefault={onDrawPointerMove}
-            on:contextmenu|preventDefault
-          />
-        </div>
 
-        <div class="col2">
-          <Form on:submit={save} {hasChanges}>
-            <div class="p1">
-              <FieldText name="name" bind:value={input.name}>Name</FieldText>
-              <FormButtons canDelete={!isAdding} on:delete={del} />
-            </div>
-          </Form>
+          <div class="btn-group">
+            <button type="button" disabled={undos.length == 0} class="btn btn-default btn-sm" on:click={undo}>
+              <Icon data={undoIcon} />
+              {undos.length > 0 ? undos.length : ''}
+            </button>
+            <button type="button" disabled={redos.length == 0} class="btn btn-default btn-sm" on:click={redo}>
+              <Icon data={undoIcon} flip="horizontal" />
+              {redos.length > 0 ? redos.length : ''}
+            </button>
+          </div>
 
+          <div class="btn-group">
+            <button type="button" class="btn btn-light btn-sm" on:click={flipX} title="Flip horizontal">
+              <Icon data={flipIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={flipY} title="Flip vertical">
+              <Icon data={flipIcon} style="transform: rotate(90deg);" />
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-light btn-sm" on:click={moveLeft} title="Move left">
+              <Icon data={arrowLeftIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={moveRight} title="Move right">
+              <Icon data={arrowRightIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={moveUp} title="Move up">
+              <Icon data={arrowUpIcon} />
+            </button>
+            <button type="button" class="btn btn-light btn-sm" on:click={moveDown} title="Move down">
+              <Icon data={arrowDownIcon} />
+            </button>
+          </div>
+
+          <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
+            <Form on:submit={applyChangeSize}>
+              <div class="p1">
+                W
+                <input type="number" min={1} max={1500} bind:value={changeSize.width} />
+                <strong>x</strong>
+                H
+                <input type="number" min={1} max={1500} bind:value={changeSize.height} />
+                <button type="submit" class="btn btn-info btn-sm">Apply</button>
+              </div>
+            </Form>
+          </QuickDropdown>
+
+          <div>
+            <button type="button" class="btn btn-light btn-sm" on:click={scaleDown} title="Scale down">
+              <Icon data={minusIcon} />
+              Half size
+            </button>
+
+            <button type="button" class="btn btn-light btn-sm" on:click={scaleUp} title="Scale up">
+              <Icon data={plusIcon} />
+              Double size
+            </button>
+          </div>
+
+          <InputSelect sm placeholder="Zoom" bind:value={zoom} let:option options={[...Array(11)].map((_, i) => i + 10)}>
+            <Icon data={zoomIcon} />
+            {option.value}
+          </InputSelect>
+          <div>
+            <label>
+              <input type="checkbox" bind:checked={showGrid} />
+              Show grid
+            </label>
+          </div>
+
+          <InputSelect
+            disabled={$autoSaveStore[input.name] == null}
+            options={$autoSaveStore[input.name]}
+            bind:value={selectedAutoSave}
+            on:change={e => loadAutoSave(e.detail)}
+            let:option
+            placeholder="Auto-saves"
+            inline
+            sm
+            right
+          >
+            {option.name}
+            <img src={option.png} height="40" alt="" />
+          </InputSelect>
+        </div>
+      </div>
+      <div class="grow canvas-container">
+        <canvas class="draw-canvas" bind:this={drawCanvas} />
+        <canvas
+          class="grid-canvas"
+          bind:this={gridCanvas}
+          class:paint-cursor={mode == 'paint'}
+          class:fill-cursor={mode == 'fill'}
+          class:erase-cursor={mode == 'erase'}
+          on:pointerdown|preventDefault={onDrawPointerDown}
+          on:pointerup|preventDefault={onDrawPointerUp}
+          on:pointermove|preventDefault={onDrawPointerMove}
+          on:contextmenu|preventDefault
+        />
+      </div>
+
+      <div class="col2">
+        <Form on:submit={() => itemTypeBuilder.save()}>
           <div class="p1">
-            <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>Animated?</FieldCheckbox>
+            <FieldText name="name" bind:value={input.name}>Name</FieldText>
+            <FormButtons canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} {hasChanges} />
+          </div>
+        </Form>
 
-            <div class="preview flex">
-              {#if input.animated}
-                <div>
-                  <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>Frame width</FieldNumber>
-                  <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>Frame rate</FieldNumber>
-                  <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>Loop back?</FieldCheckbox>
+        <div class="p1">
+          <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>Animated?</FieldCheckbox>
 
-                  <div class="flex-column">
-                    <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} />
-                    <div class="frame-editor">
-                      <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="preview frame splits" />
-                      {#each [...Array(numFrames)] as x, frameNumber}
-                        <div class="frame" style="left: {frameNumber * input.frameWidth * artScale}px; width: {input.frameWidth * artScale}px;">
-                          <a href="#/" on:click|preventDefault={() => removeFrame(frameNumber)} class="text-danger">
-                            <Icon data={deleteIcon} />
-                          </a>
-                          <a href="#/" on:click|preventDefault={() => copyFrame(frameNumber)} class="text-info">
-                            <Icon data={copyIcon} />
-                          </a>
-                        </div>
-                      {/each}
-                    </div>
-                  </div>
-                </div>
-              {/if}
-            </div>
+          <div class="preview flex">
+            {#if input.animated}
+              <div>
+                <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>Frame width</FieldNumber>
+                <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>Frame rate</FieldNumber>
+                <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>Loop back?</FieldCheckbox>
 
-            <!-- if block size, show repeated in x and y-->
-            {#if isBlockSize}
-              <div class="ml-2">
-                Block tiling preview
-                {#each [0, 0, 0] as r}
-                  <div class="flex">
-                    {#each [0, 0, 0] as margin}
-                      {#if input.animated}
-                        <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} simple />
-                      {:else}
-                        <img src={input.png} alt="block repeating preview" width={input.width * artScale} height={input.height * artScale} />
-                      {/if}
+                <div class="flex-column">
+                  <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} />
+                  <div class="frame-editor">
+                    <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="preview frame splits" />
+                    {#each [...Array(numFrames)] as x, frameNumber}
+                      <div class="frame" style="left: {frameNumber * input.frameWidth * artScale}px; width: {input.frameWidth * artScale}px;">
+                        <a href="#/" on:click|preventDefault={() => removeFrame(frameNumber)} class="text-danger">
+                          <Icon data={deleteIcon} />
+                        </a>
+                        <a href="#/" on:click|preventDefault={() => copyFrame(frameNumber)} class="text-info">
+                          <Icon data={copyIcon} />
+                        </a>
+                      </div>
                     {/each}
                   </div>
-                {/each}
+                </div>
               </div>
-            {:else if !input.animated}
-              <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="" />
             {/if}
           </div>
+
+          <!-- if block size, show repeated in x and y-->
+          {#if isBlockSize}
+            <div class="ml-2">
+              Block tiling preview
+              {#each [0, 0, 0] as r}
+                <div class="flex">
+                  {#each [0, 0, 0] as margin}
+                    {#if input.animated}
+                      <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} simple />
+                    {:else}
+                      <img src={input.png} alt="block repeating preview" width={input.width * artScale} height={input.height * artScale} />
+                    {/if}
+                  {/each}
+                </div>
+              {/each}
+            </div>
+          {:else if !input.animated}
+            <img src={input.png} width={pngCanvas.width * artScale} height={pngCanvas.height * artScale} alt="" />
+          {/if}
         </div>
       </div>
     </div>
-  {/if}
-</AppLayout>
+  </div>
+</ItemTypeBuilder>
 
 <script>
+  //////////// common ItemTypeBuilder stuff ////////////
+  import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
+  import Form from '../components/Form.svelte'
+  import FormButtons from '../components/FormButtons.svelte'
+
+  export let params = {}
+  let input = null
+  let itemTypeBuilder
+
+  const itemTemplate = {
+    name: '',
+    width: 40,
+    height: 40,
+    png: null,
+
+    animated: false,
+    frameWidth: 25,
+    frameRate: 10,
+    yoyo: false,
+  }
+
+  function getItemGraphic(item) {
+    return item.id
+  }
+
+  //////////// things unique to level builder ////////////
   import {
     arrowLeft as arrowLeftIcon,
     arrowRight as arrowRightIcon,
@@ -219,27 +246,18 @@
   } from 'svelte-awesome/icons'
   import { faFillDrip as fillIcon, faPaintBrush as paintIcon, faExchangeAlt as flipIcon } from '@fortawesome/free-solid-svg-icons'
   import { onMount } from 'svelte'
-  import { project, art } from '../stores/project-stores'
-  import { push } from 'svelte-spa-router'
+  import { art } from '../stores/project-stores'
   import AnimationPreview from '../components/AnimationPreview.svelte'
-  import AppLayout from '../components/AppLayout.svelte'
-  import ArtThumb from '../components/ArtThumb.svelte'
   import autoSaveStore from '../stores/auto-save-store'
   import ColorPicker from '../components/ColorPicker.svelte'
   import debounce from '../services/debounce'
   import FieldCheckbox from '../components/FieldCheckbox.svelte'
   import FieldNumber from '../components/FieldNumber.svelte'
   import FieldText from '../components/FieldText.svelte'
-  import Form from '../components/Form.svelte'
   import Icon from 'svelte-awesome'
   import InputSelect from '../components/InputSelect.svelte'
-  import ItemListNav from '../components/ItemListNav.svelte'
   import QuickDropdown from '../components/QuickDropdown.svelte'
-  import validator from '../services/validator'
-  import FormButtons from '../components/FormButtons.svelte'
 
-  export let params = {}
-  let input = null
   let mode = 'paint'
   let undos = []
   let redos = []
@@ -270,86 +288,18 @@
   }
 
   const debouncedRedraw = debounce(() => redraw(), 200)
-  $: paramId = decodeURIComponent(params.id) || 'new'
-  $: if (paramId == 'new' || $art != null) {
-    paramId == 'new' ? create() : edit(paramId)
-  }
-  $: isAdding = input?.id == null
   $: inputWidth = input?.width
   $: inputHeight = input?.height
-  $: hasChanges =
-    input != null &&
-    !validator.equals(
-      input,
-      $art.find(a => a.id == input.id)
-    )
   $: numFrames = input != null && input.width != null && input.frameWidth != null ? Math.ceil(input.width / input.frameWidth) : 0
   $: if (inputWidth != 0 && inputHeight != 0 && showGrid != null && zoom != null) debouncedRedraw()
   $: isBlockSize = input != null && input.height == 40 && (input.width == 40 || (input.animated && input.frameWidth == 40))
 
   onMount(() => redraw())
 
-  function create() {
-    input = createDefaultInput()
-    redraw()
-  }
-
-  function createDefaultInput() {
-    return {
-      projectId: $project.id,
-      name: '',
-      width: 40,
-      height: 40,
-      png: null,
-
-      animated: false,
-      frameWidth: 25,
-      frameRate: 10,
-      yoyo: false,
-    }
-  }
-
-  function edit(id) {
-    const item = $art.find(a => a.id === id)
-    if (item == null) return
-
-    undos = []
-    redos = []
-
-    input = {
-      ...createDefaultInput(),
-      ...JSON.parse(JSON.stringify(item)),
-    }
-    redraw()
-  }
-
   function loadAutoSave(saveData) {
     input = JSON.parse(JSON.stringify(saveData))
     selectedAutoSave = null
     redraw()
-  }
-
-  function save() {
-    if (validator.empty(input.name)) {
-      document.getElementById('name').focus()
-      return
-    }
-
-    ;(isAdding
-      ? art.apiInsert(input).then(item => {
-          input = item
-        })
-      : art.apiUpdate(input)
-    ).then(() => {
-      push(`/art/${encodeURIComponent(input.id)}`)
-    })
-  }
-
-  function del() {
-    if (confirm(`Are you sure you want to delete "${input.name}"?`)) {
-      art.apiDelete(input.projectId, input.id)
-      push(`/art/new`)
-    }
   }
 
   function reset(undoable = true) {

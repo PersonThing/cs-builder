@@ -2,137 +2,90 @@
   <label>
     <slot />
   </label>
-  <div class="card bg-light mb-2">
-    <div class="card-body">
-      <table class="table">
+  <div>
+    <table cellspacing="0">
+      {#if keyAssignable}
         <thead>
           <tr>
+            <th>Ability</th>
+            <th>Key</th>
             <th />
-            {#if requireKeybinds}
-              <th>Key</th>
-            {/if}
-            <th>Range</th>
-            <th>Name</th>
-            <th>Character graphic</th>
-            <th>Damage per hit</th>
-            <th>Damage blocks on hit</th>
-            <th>Attack rate (MS)</th>
-            <th>Projectile?</th>
-            <th>Projectile Graphics</th>
-            <th>Projectile Velocity</th>
-            <th>Projectile pass through blocks?</th>
           </tr>
         </thead>
-
-        <tbody>
-          {#each abilities as a, i}
+      {/if}
+      <tbody>
+        {#if value?.length}
+          {#each value as itemAbility, i}
             <tr>
               <td>
-                <button type="button" class="btn btn-danger" on:click={() => removeAbility(i)}>
-                  <Icon data={removeIcon} />
-                </button>
+                <AbilityPicker name="ability-picker-{i}" bind:value={itemAbility.id} />
               </td>
-              {#if requireKeybinds}
+              {#if keyAssignable}
                 <td>
-                  <InputSelect name="ability-key-{i}" inline options={availableKeys} let:option bind:value={a.key}>{option.value}</InputSelect>
+                  <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key}>{option.value}</InputSelect
+                  >
                 </td>
               {/if}
               <td>
-                <input type="number" min={0} max={10000} bind:value={a.range} />
+                <a href={null} on:click|preventDefault={() => removeAbility(i)}>Remove</a>
               </td>
-              <td>
-                <input type="text" bind:value={a.name} />
-              </td>
-              <td>
-                <FieldArtPicker name="ability-graphics-character-{i}" bind:value={a.graphics.character} placeholder="Character graphic" />
-              </td>
-              <td>
-                <input type="number" bind:value={a.damage} />
-              </td>
-              <td>
-                <input type="checkbox" bind:checked={a.damageBlocksOnHit} />
-              </td>
-              <td>
-                <input type="number" bind:value={a.attackRateMs} min={0} max={120000} />
-              </td>
-              <td>
-                <input type="checkbox" bind:checked={a.projectile} />
-              </td>
-              {#if a.projectile}
-                <td>
-                  <FieldArtPicker name="ability-graphics-projectile-{i}" bind:value={a.graphics.projectile} placeholder="Projectile graphic" />
-                  <ParticlesPicker name="ability-{i}-particles" bind:value={a.particles} />
-                </td>
-                <td>
-                  <input type="number" bind:value={a.projectileVelocity} min={0} max={10000} />
-                </td>
-                <td>
-                  <input type="checkbox" bind:checked={a.projectilePassThroughBlocks} />
-                </td>
-              {:else}
-                <td colspan="2" />
-              {/if}
             </tr>
           {/each}
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div>
-    <button on:click={addAbility} class="btn btn-success btn-sm" type="button">
-      <Icon data={plusIcon} />
-      Add ability
-    </button>
+        {/if}
+        <tr>
+          <td colspan="3">
+            <a href={null} on:click|preventDefault={addAbility}>Add ability</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <script>
-  import { plus as plusIcon, remove as removeIcon } from 'svelte-awesome/icons'
-  import FieldArtPicker from './FieldArtPicker.svelte'
-  import ParticlesPicker from './ParticlesPicker.svelte'
-  import Icon from 'svelte-awesome'
   import InputSelect from './InputSelect.svelte'
+  import AbilityPicker from './AbilityPicker.svelte'
+  import abilityKeys from '../services/ability-keys.js'
 
-  export let abilities = []
-  export let requireKeybinds = true // whether to show key bind field
+  export let value = null
+  export let keyAssignable = true
 
-  const availableKeys = ['Q', 'W', 'E', 'R', 'S', 'F', 'T']
+  $: if (value == null) value = []
 
   function addAbility() {
-    abilities = abilities.concat(createDefaultAbility())
+    if (value == null) value = []
+
+    value = [...value, createDefaultAbility()]
   }
 
   function removeAbility(i) {
-    abilities.splice(i, 1)
-    abilities = abilities
+    value.splice(i, 1)
+    value = value
   }
 
   function createDefaultAbility() {
-    return {
-      name: '',
-      key: 'R',
-      range: 400,
-      damage: 50,
-      attackRateMs: 500,
-      projectile: false,
-      projectileVelocity: 500,
-      projectilePassThroughBlocks: false,
-      damageBlocksOnHit: false,
-
-      graphics: {
-        character: null,
-        projectile: null,
-      },
-
-      particles: null,
+    const ability = {
+      id: null,
     }
+    if (keyAssignable) {
+      ability.key = null
+    }
+    return ability
   }
 </script>
 
-<style lang="scss">
-  .table {
-    thead th {
-      border-top: none;
-    }
+<style>
+  th {
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  a {
+    cursor: pointer;
   }
 </style>

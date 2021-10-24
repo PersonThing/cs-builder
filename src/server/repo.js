@@ -1,4 +1,6 @@
 import { MongoClient } from 'mongodb'
+import projectItemTypes from './project-item-types.js'
+
 const mongoConnectionString = 'mongodb://localhost:27017/cs-builder'
 const client = new MongoClient(mongoConnectionString)
 
@@ -12,9 +14,9 @@ class Repo {
   }
 
   // resetMongo() {
-  //   const collectionNames = ['art', 'blocks', 'items', 'characters', 'levels', 'enemies']
+  //   const projectItemTypes = ['art', 'blocks', 'items', 'characters', 'levels', 'enemies']
 
-  //   collectionNames.forEach(cn => {
+  //   projectItemTypes.forEach(cn => {
   //     let items = database.projects.flatMap(p =>
   //       Object.values(p[cn]).map(e => ({
   //         ...e,
