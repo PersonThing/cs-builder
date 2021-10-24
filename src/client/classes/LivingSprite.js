@@ -222,11 +222,18 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   drawHealthBar() {
+    const healthPercent = this.health / this.config.health
+    let color = 0x00ff00
+    if (healthPercent < 0.3) {
+      color = 0xff0000
+    } else if (healthPercent < 0.6) {
+      color = 0xffff00
+    }
     this.healthBar.clear()
     this.healthBar.lineStyle(2, 0x000000)
     this.healthBar.beginFill(0x000000, 0.3)
     this.healthBar.drawRect(0, 0, this.nameTag.width, 10)
-    this.healthBar.beginFill(0x00ff00)
-    this.healthBar.drawRect(0, 0, (this.nameTag.width * this.health) / 100, 10)
+    this.healthBar.beginFill(color)
+    this.healthBar.drawRect(0, 0, this.nameTag.width * healthPercent, 10)
   }
 }
