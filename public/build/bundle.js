@@ -21513,6 +21513,7 @@ var app = (function () {
     class Enemy extends LivingSprite {
       constructor(graphics, config, x, y, levelGrid, showPaths, showSightRadius) {
         super(graphics, config, x, y, levelGrid, showPaths);
+        console.log('enemy', x, y);
 
         // render a little sight radius circle
         if (showSightRadius) {
@@ -24304,7 +24305,7 @@ var app = (function () {
 
     		for (const enemyConfig of level.enemies) {
     			const e = $enemies.find(e => e.id == enemyConfig.id);
-    			const enemy = new Enemy(buildGraphics(e.graphics), e, (enemyConfig.x + 1) * gridSize, (enemyConfig.y + 1) * gridSize, levelGrid, level.showPaths, level.showSightRadius);
+    			const enemy = new Enemy(buildGraphics(e.graphics), e, enemyConfig.x * gridSize + gridSize / 2, enemyConfig.y * gridSize + gridSize / 2, levelGrid, level.showPaths, level.showSightRadius);
     			enemyContainer.addChild(enemy);
     		}
     	}

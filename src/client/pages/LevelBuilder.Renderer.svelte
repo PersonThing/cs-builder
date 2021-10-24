@@ -115,8 +115,8 @@
       const enemy = new Enemy(
         buildGraphics(e.graphics),
         e,
-        (enemyConfig.x + 1) * gridSize,
-        (enemyConfig.y + 1) * gridSize,
+        enemyConfig.x * gridSize + gridSize / 2,
+        enemyConfig.y * gridSize + gridSize / 2,
         levelGrid,
         level.showPaths,
         level.showSightRadius
