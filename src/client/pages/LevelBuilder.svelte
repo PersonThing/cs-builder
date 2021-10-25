@@ -2,6 +2,7 @@
   id={params.id}
   itemType="levels"
   singular="level"
+  itemTypeDescription="Create and test levels here."
   store={levels}
   {itemTemplate}
   bind:input
@@ -14,7 +15,7 @@
 >
   <div class="grow">
     <div class="btn-group play-edit-toggle">
-      <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play</button>
+      <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play test</button>
       <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
     </div>
     {#if $isDrawing}
@@ -248,14 +249,6 @@
 </script>
 
 <style lang="scss">
-  .level-builder-container {
-    height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    margin-bottom: 10px;
-  }
-
   .draw-option {
     border: 2px solid transparent;
     border-radius: 5px;

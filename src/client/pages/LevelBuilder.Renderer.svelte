@@ -20,6 +20,7 @@
   import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
   import abilityKeys from '../services/ability-keys.js'
+  import * as PIXI from 'pixi.js'
 
   const dispatch = createEventDispatcher()
 
@@ -176,9 +177,11 @@
       world.addChild(world.enemyContainer)
       redrawEnemies()
 
-      // for projectiles / etc
-      world.abilityContainer = new PIXI.Container()
-      world.addChild(world.abilityContainer)
+      world.projectileContainer = new PIXI.Container()
+      world.addChild(world.projectileContainer)
+
+      world.particleContainer = new PIXI.Container()
+      world.addChild(world.particleContainer)
 
       pixiApp.stage.addChild(world)
       pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
@@ -195,7 +198,16 @@
             nextFire: 0,
           }
         })
-        player = new Player(buildGraphics(char.graphics), char, 1.5 * gridSize, 1.5 * gridSize, world.levelGrid, level.showPaths)
+        player = new Player(
+          buildGraphics(char.graphics),
+          char,
+          1.5 * gridSize,
+          1.5 * gridSize,
+          world.levelGrid,
+          level.showPaths,
+          pixiContainer.clientWidth,
+          pixiContainer.clientHeight
+        )
         player.world = world
         pixiApp.stage.addChild(player)
       }
@@ -252,10 +264,10 @@
           } else {
             enemy.clearPathAfterCurrentTarget()
           }
-          enemy.onTick()
+          enemy.onTick(time)
         })
 
-      world?.abilityContainer?.children.forEach(projectile => projectile.onTick())
+      world?.projectileContainer?.children.forEach(projectile => projectile.onTick(time))
 
       checkCollisions()
     }

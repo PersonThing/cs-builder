@@ -3,6 +3,7 @@
   bind:this={itemTypeBuilder}
   itemType="blocks"
   singular="block"
+  itemTypeDescription="You build levels out of blocks.  Blocks have art, and determine whether the area they're placed in can be walked through or seen through."
   store={blocks}
   {itemTemplate}
   bind:input

@@ -10,6 +10,11 @@
   </div>
   {#if input != null}
     <slot {hasChanges} {isAdding} />
+  {:else}
+    <div class="grow p1">
+      <h2>{itemType}</h2>
+      <p>{itemTypeDescription}</p>
+    </div>
   {/if}
 </AppLayout>
 
@@ -28,6 +33,7 @@
   export let store
   export let itemTemplate
   export let itemType
+  export let itemTypeDescription
   export let singular
   export let getItemGraphic
 

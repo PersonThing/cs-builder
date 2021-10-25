@@ -52,10 +52,12 @@ repo.connect().then(() => {
     repo.find('projects').then(projects => {
       const item = req.body
       item.id = (
-        projects
-          .map(p => parseInt(p.id))
-          .sort((a, b) => (a < b ? -1 : 1))
-          .pop() + 1
+        projects.length
+          ? projects
+              .map(p => parseInt(p.id))
+              .sort((a, b) => (a < b ? -1 : 1))
+              .pop() + 1
+          : 0
       ).toString()
 
       repo.insert('projects', item).then(dbres => {
@@ -105,10 +107,12 @@ repo.connect().then(() => {
       repo.find(c, { projectId: req.params.projectId }).then(collection => {
         const item = req.body
         item.id = (
-          collection
-            .map(c => parseInt(c.id))
-            .sort((a, b) => (a < b ? -1 : 1))
-            .pop() + 1
+          collection.length
+            ? collection
+                .map(c => parseInt(c.id))
+                .sort((a, b) => (a < b ? -1 : 1))
+                .pop() + 1
+            : 0
         ).toString()
         repo.insert(c, item).then(dbres => {
           item._id = dbres.insertedid

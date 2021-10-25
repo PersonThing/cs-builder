@@ -4,6 +4,7 @@
   id={params.id}
   itemType="art"
   singular="art"
+  itemTypeDescription="Use this page to create the art for your game. You can make simple graphics or animations."
   store={art}
   {itemTemplate}
   bind:input
@@ -157,7 +158,8 @@
               <div>
                 <FieldNumber name="frameWidth" bind:value={input.frameWidth} max={200} step={1}>Frame width</FieldNumber>
                 <FieldNumber name="frameRate" bind:value={input.frameRate} max={60} min={1} step={1}>Frame rate</FieldNumber>
-                <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>Loop back?</FieldCheckbox>
+                <!-- don't know if we can make this work in pixi, so just have to copy frames maybe
+                <FieldCheckbox name="yoyo" bind:checked={input.yoyo}>Loop back?</FieldCheckbox> -->
 
                 <div class="flex-column">
                   <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} />
@@ -223,7 +225,7 @@
     animated: false,
     frameWidth: 25,
     frameRate: 10,
-    yoyo: false,
+    // yoyo: false,
   }
 
   function getItemGraphic(item) {

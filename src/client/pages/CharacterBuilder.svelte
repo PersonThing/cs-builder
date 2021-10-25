@@ -3,6 +3,7 @@
   bind:this={itemTypeBuilder}
   itemType="characters"
   singular="character"
+  itemTypeDescription="Create your playable characters or friendly NPCs here."
   store={characters}
   {itemTemplate}
   bind:input

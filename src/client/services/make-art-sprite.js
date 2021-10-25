@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js'
+
 export default function makeArtSprite(art) {
   const texture = PIXI.Texture.from(art.png)
   if (art.animated) {

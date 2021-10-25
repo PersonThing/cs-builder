@@ -3,6 +3,7 @@
   bind:this={itemTypeBuilder}
   itemType="abilities"
   singular="ability"
+  itemTypeDescription="Create the abilities that can be used by your characters or enemies."
   store={abilities}
   {itemTemplate}
   bind:input
@@ -14,12 +15,17 @@
     <Form on:submit={() => itemTypeBuilder.save()}>
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
       <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
-      <FieldNumber name="range" bind:value={input.range} placeholder="Type a number">Range (pixels)</FieldNumber>
+      <FieldNumber name="speed" bind:value={input.speed} placeholder="Type a number">
+        Projectile speed (tip: 0 to drop bombs / traps at your feet)
+      </FieldNumber>
+      <FieldNumber name="range" bind:value={input.range} placeholder="Type a number">Max range (pixels)?</FieldNumber>
+      <FieldNumber name="projectileLifetimeMs" bind:value={input.lifetimeMs} placeholder="Type a number">
+        How long do projectiles last (ms)? (if they don't move, they should at least expire)
+      </FieldNumber>
       <FieldNumber name="damage" bind:value={input.damage} placeholder="Type a number">Damage</FieldNumber>
       <FieldNumber name="area-damage" bind:value={input.areaDamage} placeholder="Type a number">Area damage</FieldNumber>
       <FieldNumber name="area-damage-radius" bind:value={input.areaDamageRadius} placeholder="Type a number">Area damage radius (pixels)</FieldNumber>
       <FieldNumber name="attacks-per-second" bind:value={input.attacksPerSecond} placeholder="Type a number">Attacks per second</FieldNumber>
-      <FieldNumber name="speed" bind:value={input.speed} placeholder="Type a number">Projectile speed</FieldNumber>
       <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
     </Form>
   </div>
@@ -47,6 +53,7 @@
     areaDamageRadius: 40,
     attacksPerSecond: 2,
     speed: 10,
+    lifetimeMs: 2000,
   }
 
   function getItemGraphic(item) {

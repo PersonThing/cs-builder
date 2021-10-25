@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js'
+
 export default class Item extends PIXI.Sprite {
   constructor(itemConfig, art, { id, x, y }, gridSize) {
     super(PIXI.Texture.from(art.png))

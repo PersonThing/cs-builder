@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js'
 import makeArtSprite from '../services/make-art-sprite.js'
 
 export default class LivingSprite extends PIXI.Container {
@@ -38,7 +39,6 @@ export default class LivingSprite extends PIXI.Container {
       strokeThickness: 3,
       stroke: 0x000000,
       fill: 0xffffff,
-      align: 'center',
     })
     this.nameTag.zIndex = 4
     this.nameTag.y = -50
@@ -144,6 +144,15 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites.moving.tint = tint
   }
 
+  setScale(scale) {
+    this.sprites.scale.x = scale
+    this.sprites.scale.y = scale
+  }
+
+  getScale() {
+    return this.sprites.scale.x
+  }
+
   onTick() {
     this.moveTowardTarget()
   }
@@ -214,11 +223,7 @@ export default class LivingSprite extends PIXI.Container {
   takeDamage(damage) {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
-
-    if (this.health <= 0) {
-      this.parent.removeChild(this)
-      this.destroy()
-    }
+    if (this.health <= 0) this.destroy()
   }
 
   drawHealthBar() {
@@ -235,5 +240,14 @@ export default class LivingSprite extends PIXI.Container {
     this.healthBar.drawRect(0, 0, this.nameTag.width, 10)
     this.healthBar.beginFill(color)
     this.healthBar.drawRect(0, 0, this.nameTag.width * healthPercent, 10)
+  }
+
+  destroy() {
+    if (this.pathLine != null) {
+      this.parent.removeChild(this.pathLine)
+      this.pathLine.destroy()
+    }
+    this.parent.removeChild(this)
+    super.destroy()
   }
 }

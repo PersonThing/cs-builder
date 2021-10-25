@@ -3,6 +3,7 @@
   bind:this={itemTypeBuilder}
   itemType="items"
   singular="item"
+  itemTypeDescription="For now, items are things you can place in a level that detect collisions with players or enemies, and run a script when those collisions happen."
   store={items}
   {itemTemplate}
   bind:input

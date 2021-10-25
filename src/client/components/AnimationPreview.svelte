@@ -32,7 +32,7 @@
   export let frameWidth
   export let frameRate
   export let scale = 1
-  export let yoyo
+  // export let yoyo
 
   export let simple = false
 
@@ -50,12 +50,12 @@
   // change the graphic every 60 / frameRate frames
   $: if (frame > 60 / frameRate) {
     if (numFrames > 1) {
-      if (yoyo) {
-        if ((frameIndex == 0 && frameDelta == -1) || (frameIndex == numFrames - 1 && frameDelta == 1)) frameDelta *= -1
-        frameIndex += frameDelta
-      } else {
-        frameIndex = frameIndex >= numFrames - 1 ? 0 : frameIndex + 1
-      }
+      // if (yoyo) {
+      //   if ((frameIndex == 0 && frameDelta == -1) || (frameIndex == numFrames - 1 && frameDelta == 1)) frameDelta *= -1
+      //   frameIndex += frameDelta
+      // } else {
+      frameIndex = frameIndex >= numFrames - 1 ? 0 : frameIndex + 1
+      // }
     } else {
       frameIndex = 0
     }

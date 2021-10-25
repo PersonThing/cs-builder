@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js'
+
 export default class Block extends PIXI.Sprite {
   constructor(block, art, levelBlockConfig, gridSize) {
     super(PIXI.Texture.from(art.png))

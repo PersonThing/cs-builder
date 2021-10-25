@@ -9,7 +9,7 @@ export default class LevelGrid {
 
   createGridFromBlocks(blocks, levelBlocks) {
     const walkableBlocks = levelBlocks
-      .filter(b => b.x > 0 && b.y > 0)
+      .filter(b => b.x >= 0 && b.y >= 0)
       .filter(b => blocks.find(bc => bc.id == b.id).canWalk)
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))

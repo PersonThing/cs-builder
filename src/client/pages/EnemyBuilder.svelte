@@ -3,6 +3,7 @@
   bind:this={itemTypeBuilder}
   itemType="enemies"
   singular="enemy"
+  itemTypeDescription="Create the bad guys who will try to hurt your playable characters or friendly NPCs."
   store={enemies}
   {itemTemplate}
   bind:input
