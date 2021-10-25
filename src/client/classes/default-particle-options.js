@@ -37,8 +37,8 @@ const oldStyleConfig = {
     max: 200,
   },
   lifetime: {
-    min: 0.5,
-    max: 2,
+    min: 0.1,
+    max: 0.8,
   },
   blendMode: 'normal',
   frequency: 0.01,

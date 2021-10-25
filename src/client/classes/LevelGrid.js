@@ -1,34 +1,34 @@
 import PF from 'pathfinding'
 
 export default class LevelGrid {
-  constructor(blocks, level, gridSize) {
+  constructor(tiles, level, gridSize) {
     this.smoothPathing = level.smoothPathing
     this.gridSize = gridSize
-    this.createGridFromBlocks(blocks, level.blocks)
+    this.createGridFromTiles(tiles, level.tiles)
   }
 
-  createGridFromBlocks(blocks, levelBlocks) {
-    const walkableBlocks = levelBlocks
-      .filter(b => b.x >= 0 && b.y >= 0)
-      .filter(b => blocks.find(bc => bc.id == b.id).canWalk)
+  createGridFromTiles(tiles, levelTiles) {
+    const walkableTiles = levelTiles
+      .filter(t => t.x >= 0 && t.y >= 0)
+      .filter(t => tiles.find(tc => tc.id == t.id).canWalk)
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
 
-    let highestX = walkableBlocks.map(b => b.x).sort((a, b) => b - a)[0]
-    let highestY = walkableBlocks.map(b => b.y).sort((a, b) => b - a)[0]
+    let highestX = walkableTiles.map(t => t.x).sort((a, b) => b - a)[0]
+    let highestY = walkableTiles.map(t => t.y).sort((a, b) => b - a)[0]
 
     if (highestX == null) highestX = 10
     if (highestY == null) highestY = 10
 
     this.grid = new PF.Grid(highestX + 1, highestY + 1)
 
-    // make only walkable blocks work
+    // make only walkable tiles work
     for (let x = 0; x <= highestX; x++) {
       for (let y = 0; y <= highestY; y++) {
         this.grid.setWalkableAt(x, y, false)
       }
     }
-    walkableBlocks.forEach(b => this.grid.setWalkableAt(b.x, b.y, true))
+    walkableTiles.forEach(b => this.grid.setWalkableAt(b.x, b.y, true))
 
     this.finder = new PF.AStarFinder({
       allowDiagonal: true,

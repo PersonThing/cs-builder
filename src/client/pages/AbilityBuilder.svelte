@@ -15,6 +15,7 @@
     <Form on:submit={() => itemTypeBuilder.save()}>
       <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
       <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
+      <FieldArtPicker bind:value={input.particleGraphic}>Particle graphic (temporary until full particle builder added)</FieldArtPicker>
       <FieldNumber name="speed" bind:value={input.speed} placeholder="Type a number">
         Projectile speed (tip: 0 to drop bombs / traps at your feet)
       </FieldNumber>
@@ -47,6 +48,7 @@
   const itemTemplate = {
     name: '',
     graphic: null,
+    particleGraphic: null, // temporary
     range: 400,
     damage: 20,
     areaDamage: 0,

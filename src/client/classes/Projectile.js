@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js'
 import ParticleEmitter from './ParticleEmitter'
+import makeArtSprite from '../services/make-art-sprite'
 
 export default class Projectile extends PIXI.Container {
   constructor(world, ability, x, y, targetX, targetY, time) {
@@ -16,9 +17,8 @@ export default class Projectile extends PIXI.Container {
     this.targetY = targetY
 
     // make a sprite to represent projectile if ability has any art
-    const texture = ability.art != null ? PIXI.Texture.from(ability.art.png) : null
-    if (texture != null) {
-      this.artSprite = new PIXI.Sprite(texture)
+    if (ability.projectileArt != null) {
+      this.artSprite = makeArtSprite(ability.projectileArt)
       this.artSprite.anchor.set(0.5)
       this.addChild(this.artSprite)
     }
@@ -29,12 +29,22 @@ export default class Projectile extends PIXI.Container {
 
     this.dying = false
 
-    this.particles = new ParticleEmitter(texture, world.particleContainer, this.rotation, time)
-    this.particles.move(this.x, this.y)
+    if (ability.particleArt) {
+      // const particleTexture = ability.particleArt ? PIXI.Texture.from(ability.particleArt.png) : null
+      const particleTexture = PIXI.Texture.from(ability.particleArt.png)
+      this.particles = new ParticleEmitter(particleTexture, world.particleContainer, this.rotation, time)
+      this.particles.move(this.x, this.y)
+    }
+
+    // TODO: visualization of path + range for debugging / demo?
+    // const path = new PIXI.Graphics()
+    // explosion.beginFill(0xff0000, 0.3)
+    // explosion.drawCircle(this.x, this.y, this.config.areaDamageRadius)
+    // explosion.zIndex = 1
   }
 
   onTick(time) {
-    this.particles.onTick(time)
+    this.particles?.onTick(time)
 
     if (this.dying) return
 
@@ -42,7 +52,7 @@ export default class Projectile extends PIXI.Container {
       // move toward target in straight line
       this.x += Math.cos(this._angle) * this.config.speed
       this.y += Math.sin(this._angle) * this.config.speed
-      this.particles.move(this.x, this.y)
+      this.particles?.move(this.x, this.y)
     }
 
     // check if touching any enemies
@@ -75,6 +85,8 @@ export default class Projectile extends PIXI.Container {
   }
 
   destroy() {
+    this.dying = true
+
     // before we're destroyed, we explode for area damage
     if (this.config.areaDamage > 0 && this.config.areaDamageRadius > 0) {
       // draw a circle indicating aoe radius.. later this could turn into an explosion animation setting or something
@@ -85,7 +97,7 @@ export default class Projectile extends PIXI.Container {
       this.world.particleContainer.addChild(explosion)
       // remove the circle quickly
       setTimeout(() => {
-        this.world.particleContainer.removeChild(explosion)
+        explosion.parent.removeChild(explosion)
         explosion.destroy()
       }, 40)
 
@@ -96,17 +108,19 @@ export default class Projectile extends PIXI.Container {
       enemiesInAreaDamageRadius.forEach(e => e.takeDamage(this.config.areaDamage))
     }
 
-    this.dying = true
-
-    if (this.artSprite != null) {
+    if (this.particles) {
+      this.particles.stop()
       this.removeChild(this.artSprite)
-    }
-    this.particles.stop()
-
-    setTimeout(() => {
+      // wait max particle lifetime before removing particles, so they can fade out
+      setTimeout(() => {
+        this.world.particleContainer.removeChild(this.particles)
+        this.particles.destroy()
+        this.parent.removeChild(this)
+        super.destroy()
+      }, this.particles.getMaxLifetime() * 1000)
+    } else {
       this.parent.removeChild(this)
-      this.particles.destroy()
       super.destroy()
-    }, 300)
+    }
   }
 }

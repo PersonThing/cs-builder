@@ -1,11 +1,14 @@
 import * as PIXI from 'pixi.js'
 import makeArtSprite from '../services/make-art-sprite.js'
+import Projectile from './Projectile.js'
 
 export default class LivingSprite extends PIXI.Container {
-  constructor(graphics, config, x, y, levelGrid, showPaths) {
+  constructor(config, graphics, abilities, x, y, levelGrid, showPaths) {
     super()
     this.x = x
     this.y = y
+
+    this.abilities = abilities
 
     this.sortableChildren = true
     this.config = config
@@ -24,6 +27,7 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites.addChild(this.sprites.moving)
 
     this.isMoving = false
+    this.useAttackingSprite = false
 
     this.path = []
     this.target = null
@@ -41,19 +45,18 @@ export default class LivingSprite extends PIXI.Container {
       fill: 0xffffff,
     })
     this.nameTag.zIndex = 4
-    this.nameTag.y = -50
+    this.nameTag.y = -this.sprites.still.height / 2 - 15
     this.nameTag.x = -this.nameTag.width / 2
     this.addChild(this.nameTag)
 
     this.health = config.health
     this.healthBar = new PIXI.Graphics()
-    this.healthBar.x = -40
-    this.healthBar.y = -60
     this.drawHealthBar()
     this.healthBar.zIndex = 3
     this.addChild(this.healthBar)
     this.healthBar.width = this.nameTag.width
     this.healthBar.x = -this.nameTag.width / 2
+    this.healthBar.y = this.nameTag.y - 10
   }
 
   bringToFront() {
@@ -65,11 +68,12 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   setMoving(isMoving) {
-    if (this.isMoving == isMoving) return
-
     this.isMoving = isMoving
-    this.sprites.still.visible = !isMoving
-    this.sprites.moving.visible = isMoving
+  }
+
+  showCorrectSprites() {
+    this.sprites.still.visible = !this.isMoving && !this.useAttackingSprite
+    this.sprites.moving.visible = this.isMoving && !this.useAttackingSprite
   }
 
   canSee(target) {
@@ -108,7 +112,7 @@ export default class LivingSprite extends PIXI.Container {
     // if (this.endTarget?.x == target.x && this.endTarget?.y == target.y) return
     this.endTarget = target
 
-    // make it compute a path around any blocks in the way
+    // make it compute a path around any tiles in the way
     // if no path available, get as close as possible to clicked point
     this.path = this.levelGrid.findPath(this.position, target)
 
@@ -117,10 +121,15 @@ export default class LivingSprite extends PIXI.Container {
 
   targetNextPathPoint() {
     this.target = this.path.shift()
-    if (this.target == null) this.endTarget = null
-    else {
-      this.sprites.rotation = Math.atan2(this.target.y - this.y, this.target.x - this.x) + (90 * Math.PI) / 180
+    if (this.target == null) {
+      this.endTarget = null
+    } else {
+      this.rotateToward(this.target.x, this.target.y)
     }
+  }
+
+  rotateToward(x, y) {
+    this.sprites.rotation = Math.atan2(y - this.y, x - this.x) + (90 * Math.PI) / 180
   }
 
   getDistanceTo(sprite) {
@@ -155,6 +164,7 @@ export default class LivingSprite extends PIXI.Container {
 
   onTick() {
     this.moveTowardTarget()
+    this.showCorrectSprites()
   }
 
   moveTowardTarget() {
@@ -244,10 +254,37 @@ export default class LivingSprite extends PIXI.Container {
 
   destroy() {
     if (this.pathLine != null) {
-      this.parent.removeChild(this.pathLine)
+      this.pathLine.parent.removeChild(this.pathLine)
       this.pathLine.destroy()
     }
     this.parent.removeChild(this)
     super.destroy()
+  }
+
+  fireAbility(time, ability, targetX, targetY) {
+    ability.nextFire = time + 1000 / ability.attacksPerSecond
+
+    this.rotateToward(targetX, targetY)
+
+    // temporarily show this ability sprite
+    if (ability.characterArt) {
+      if (this.sprites.attacking) {
+        this.sprites.removeChild(this.sprites.attacking)
+        this.sprites.attacking.destroy()
+      }
+      this.sprites.attacking = makeArtSprite(ability.characterArt)
+      this.sprites.attacking.loop = false
+      this.sprites.attacking.anchor.set(0.5)
+      // TODO: setting on characterAbility to say whether to ONLY show this sprite, or layer it on top
+      // this.useAttackingSprite = true
+      this.sprites.attacking.onComplete = () => {
+        // this.useAttackingSprite = false
+        this.sprites.removeChild(this.sprites.attacking)
+      }
+      this.sprites.addChild(this.sprites.attacking)
+    }
+
+    const projectile = new Projectile(this.world, ability, this.x, this.y, targetX, targetY, time)
+    this.world.projectileContainer.addChild(projectile)
   }
 }

@@ -16,7 +16,7 @@
       {#if $project?.name}
         <a href="/#/project" class:active={active == 'project'}>Project settings</a>
         <a href="/#/art" class:active={active == 'art'}>Art</a>
-        <a href="/#/blocks" class:active={active == 'blocks'}>Blocks</a>
+        <a href="/#/tiles" class:active={active == 'tiles'}>Tiles</a>
         <a href="/#/items" class:active={active == 'items'}>Items</a>
         <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
         <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->

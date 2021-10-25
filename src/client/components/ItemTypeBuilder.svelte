@@ -106,3 +106,9 @@
     }
   }
 </script>
+
+<style>
+  h2:first-letter {
+    text-transform: capitalize;
+  }
+</style>

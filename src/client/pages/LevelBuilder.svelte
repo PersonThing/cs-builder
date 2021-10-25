@@ -48,10 +48,10 @@
 
     {#if $isDrawing}
       <div class="flex-column">
-        <div class="draw-option" class:selected={drawMode == DrawMode.Blocks} on:click={() => setDrawMode(DrawMode.Blocks)}>
+        <div class="draw-option" class:selected={drawMode == DrawMode.Tiles} on:click={() => setDrawMode(DrawMode.Tiles)}>
           <div class="form-group">
-            <label>Place a block</label>
-            <InputSelect bind:value={selectedBlockId} options={blockOptions} let:option>
+            <label>Place a tile</label>
+            <InputSelect bind:value={selectedTileId} options={tileOptions} let:option>
               {#if option.graphic != null}
                 <ArtThumb id={option.graphic} />
               {/if}
@@ -104,7 +104,7 @@
     smoothPathing: false,
     showPaths: true,
     showSightRadius: true,
-    blocks: [],
+    tiles: [],
     items: [],
     enemies: [],
   }
@@ -114,7 +114,7 @@
   }
 
   //////////// things unique to level builder ////////////
-  import { blocks, enemies, items, characters, levels } from '../stores/project-stores'
+  import { tiles, enemies, items, characters, levels } from '../stores/project-stores'
   import { sortByName } from '../services/object-utils'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ColorPicker from '../components/ColorPicker.svelte'
@@ -126,25 +126,25 @@
 
   const gridSize = 40
   const DrawMode = {
-    Blocks: 0,
+    Tiles: 0,
     Items: 1,
     Enemies: 2,
   }
 
   let isDrawing = LocalStorageStore('is-drawing', false)
   let levelRenderer
-  let selectedBlockId = 0
+  let selectedTileId = 0
   let selectedItemId = null
   let selectedEnemyId = null
-  let drawMode = DrawMode.Blocks
+  let drawMode = DrawMode.Tiles
   let pointerIsDown = false
 
-  $: blockOptions = [
-    { value: null, name: 'Erase blocks' },
-    ...$blocks
-      .map(b => ({
-        ...b,
-        value: b.id,
+  $: tileOptions = [
+    { value: null, name: 'Erase tiles' },
+    ...$tiles
+      .map(t => ({
+        ...t,
+        value: t.id,
       }))
       .sort(sortByName),
   ]
@@ -175,12 +175,12 @@
 
   function onDrawPointerDown(event) {
     pointerIsDown = true
-    // if they do anything but left click, select the block at the current position (or eraser if null)
+    // if they do anything but left click, select the tile at the current position (or eraser if null)
     if (event.detail.button != 0) {
-      const { x, y } = getBlockCoordsFromEvent(event)
+      const { x, y } = getGridCoordsFromEvent(event)
       switch (drawMode) {
-        case DrawMode.Blocks:
-          selectedBlockId = input.blocks.find(b => b.x == x && b.y == y)?.id
+        case DrawMode.Tiles:
+          selectedTileId = input.tiles.find(t => t.x == x && t.y == y)?.id
           break
         case DrawMode.Items:
           selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
@@ -203,7 +203,7 @@
     pointerIsDown = false
   }
 
-  function getBlockCoordsFromEvent(event) {
+  function getGridCoordsFromEvent(event) {
     return {
       x: Math.floor(event.detail.offsetX / gridSize),
       y: Math.floor(event.detail.offsetY / gridSize),
@@ -211,11 +211,11 @@
   }
 
   function drawAtEvent(event) {
-    const { x, y } = getBlockCoordsFromEvent(event)
+    const { x, y } = getGridCoordsFromEvent(event)
     switch (drawMode) {
-      case DrawMode.Blocks:
-        input.blocks = replaceAtCoord(input.blocks, x, y, selectedBlockId)
-        levelRenderer.redrawBlocks()
+      case DrawMode.Tiles:
+        input.tiles = replaceAtCoord(input.tiles, x, y, selectedTileId)
+        levelRenderer.redrawTiles()
         break
       case DrawMode.Items:
         input.items = replaceAtCoord(input.items, x, y, selectedItemId)
@@ -230,9 +230,9 @@
 
   function replaceAtCoord(objects, x, y, id) {
     const objectsMinusAnyAtThisXY = objects
-      // filter out blocks at THIS spot
+      // filter out tiles at THIS spot
       .filter(o => o.x != x || o.y != y)
-      // also filter blocks that are in negative space (messes with grid path helper)
+      // also filter tiles that are in negative space (messes with grid path helper)
       .filter(b => b.x >= 0 && b.y >= 0)
     if (id == null) {
       objects = objectsMinusAnyAtThisXY

@@ -17,11 +17,10 @@ app.use(express.json())
 // https://zellwk.com/blog/crud-express-mongodb/
 // this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
 repo.connect().then(() => {
-  // fix data
-  app.get('/api/reset-mongo', (req, res) => {
-    repo.resetMongo()
-    res.json(true)
-  })
+  // app.get('/api/migrate-tiles', (req, res) => {
+  //   repo.migrateToTiles()
+  //   res.json(true)
+  // })
 
   // list projects
   app.get('/api/projects', (req, res) => {
@@ -152,7 +151,7 @@ repo.connect().then(() => {
     //   socket.user = db.users.find(u => u.name == name && u.password == password) || { name: `Guest ${socket.id}` }
     // })
 
-    socket.on('disconnect', () => console.log(`${socket.user?.name} disconnected`))
+    socket.on('disconnect', () => console.log(`socket ${socket.user?.name ?? 'guest'} disconnected`))
     // listen for socket events / send socket events
     // socket.on('event-name', payload => { /* client sent something */ })
     // socket.emit('event-name', payload) send to just this socket

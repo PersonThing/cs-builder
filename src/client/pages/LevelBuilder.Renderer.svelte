@@ -13,10 +13,10 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
-  import { abilities, art, blocks, characters, enemies, items } from '../stores/project-stores.js'
+  import { abilities, art, tiles, characters, enemies, items } from '../stores/project-stores.js'
   import Player from '../classes/Player.js'
   import Enemy from '../classes/Enemy.js'
-  import Block from '../classes/Block.js'
+  import Tile from '../classes/Tile.js'
   import Item from '../classes/Item.js'
   import LevelGrid from '../classes/LevelGrid.js'
   import abilityKeys from '../services/ability-keys.js'
@@ -83,6 +83,7 @@
     pixiApp = new PIXI.Application({
       resizeTo: pixiContainer,
     })
+    PIXI.settings.ROUND_PIXELS = true
     pixiContainer.appendChild(pixiApp.view)
     pixiApp.ticker.add(onTick)
     pixiApp.stage.interactive = true
@@ -99,18 +100,18 @@
     }
   }
 
-  export function redrawBlocks() {
-    emptyContainer(world.blockContainer)
-    for (const blockConfig of level.blocks) {
-      const bc = $blocks.find(b => b.id == blockConfig.id)
+  export function redrawTiles() {
+    emptyContainer(world.tileContainer)
+    for (const tileConfig of level.tiles) {
+      const bc = $tiles.find(b => b.id == tileConfig.id)
       if (bc == null) continue
-      const block = new Block(
+      const tile = new Tile(
         bc,
         $art.find(a => a.id == bc.graphic),
-        blockConfig,
+        tileConfig,
         gridSize
       )
-      world.blockContainer.addChild(block)
+      world.tileContainer.addChild(tile)
     }
   }
 
@@ -133,8 +134,9 @@
     for (const enemyConfig of level.enemies) {
       const e = $enemies.find(e => e.id == enemyConfig.id)
       const enemy = new Enemy(
-        buildGraphics(e.graphics),
         e,
+        buildGraphics(e.graphics),
+        buildAbilities(e.abilities),
         enemyConfig.x * gridSize + gridSize / 2,
         enemyConfig.y * gridSize + gridSize / 2,
         world.levelGrid,
@@ -147,8 +149,8 @@
 
   function emptyContainer(container) {
     container?.children.forEach(c => {
-      c.destroy()
       container.removeChild(c)
+      c.destroy()
     })
   }
 
@@ -164,10 +166,10 @@
       // world contains everything but player
       world = new PIXI.Container()
       // helper for pathing - set on world so collisions and other places can access it
-      world.levelGrid = new LevelGrid($blocks, level, gridSize)
-      world.blockContainer = new PIXI.Container()
-      world.addChild(world.blockContainer)
-      redrawBlocks()
+      world.levelGrid = new LevelGrid($tiles, level, gridSize)
+      world.tileContainer = new PIXI.Container()
+      world.addChild(world.tileContainer)
+      redrawTiles()
 
       world.itemContainer = new PIXI.Container()
       world.addChild(world.itemContainer)
@@ -187,20 +189,12 @@
       pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
 
       // create player
-      if ($characters.length > 0) {
-        const char = JSON.parse(JSON.stringify($characters[0]))
-        char.abilities = char.abilities.map(a => {
-          const ability = $abilities.find(ab => ab.id == a.id)
-          ability.art = $art.find(ar => ar.id == ability.graphic)
-          return {
-            ...a,
-            ...ability,
-            nextFire: 0,
-          }
-        })
+      if (playable && $characters.length > 0) {
+        const charConfig = JSON.parse(JSON.stringify($characters[0]))
         player = new Player(
-          buildGraphics(char.graphics),
-          char,
+          charConfig,
+          buildGraphics(charConfig.graphics),
+          buildAbilities(charConfig.abilities),
           1.5 * gridSize,
           1.5 * gridSize,
           world.levelGrid,
@@ -233,6 +227,20 @@
     return graphics
   }
 
+  function buildAbilities(charAbilities) {
+    return charAbilities.map(charAbility => {
+      const ability = $abilities.find(ab => ab.id == charAbility.id)
+      return {
+        ...ability,
+        key: charAbility.key,
+        projectileArt: ability.graphic ? $art.find(ar => ar.id == ability.graphic) : null,
+        particleArt: ability.particleGraphic ? $art.find(ar => ar.id == ability.particleGraphic) : null,
+        characterArt: charAbility.characterArt ? $art.find(ar => ar.id == charAbility.characterArt) : null,
+        nextFire: 0,
+      }
+    })
+  }
+
   const screenCenter = {
     x: 0,
     y: 0,
@@ -249,11 +257,10 @@
   }
 
   function onTick() {
-    const time = performance.now()
-    player?.onTick(time, keys, pointerPosition)
-    centerViewOnPlayer()
-
     if (playable) {
+      const time = performance.now()
+      player?.onTick(time, keys, pointerPosition)
+      centerViewOnPlayer()
       world?.enemyContainer?.children
         .filter(e => e.config != null)
         .forEach(enemy => {
@@ -268,7 +275,6 @@
         })
 
       world?.projectileContainer?.children.forEach(projectile => projectile.onTick(time))
-
       checkCollisions()
     }
   }
@@ -292,24 +298,22 @@
 
   function checkCollisions() {
     world?.itemContainer?.children.forEach(item => {
-      if (item.config.playersCanUse) {
-        if (player.isTouching(item)) {
-          item.onCollision(player, world)
-          if (item.config.removeOnCollision) world.itemContainer.removeChild(item)
-        }
-      }
+      if (item.config.playersCanUse && player) checkAndHandleItemCollision(player, item)
 
       if (item.config.enemiesCanUse) {
-        world.enemyContainer.children
-          .filter(e => e.config != null)
-          .forEach(enemy => {
-            if (enemy.isTouching(item)) {
-              item.onCollision(enemy, world)
-              if (item.config.removeOnCollision) world.itemContainer.removeChild(item)
-            }
-          })
+        world.enemyContainer.children.filter(e => e.config != null).forEach(enemy => checkAndHandleItemCollision(enemy, item))
       }
     })
+  }
+
+  function checkAndHandleItemCollision(sprite, item) {
+    if (sprite.isTouching(item)) {
+      item.onCollision(sprite, world)
+      if (item.config.removeOnCollision) {
+        world.itemContainer.removeChild(item)
+        item.destroy()
+      }
+    }
   }
 
   function movePlayerToEvent(event) {

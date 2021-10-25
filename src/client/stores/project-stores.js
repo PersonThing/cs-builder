@@ -20,14 +20,14 @@ export const projects = createProjectsStore()
 
 export const art = createProjectItemStore('art')
 export const abilities = createProjectItemStore('abilities')
-export const blocks = createProjectItemStore('blocks')
+export const tiles = createProjectItemStore('tiles')
 export const characters = createProjectItemStore('characters')
 export const enemies = createProjectItemStore('enemies')
 export const items = createProjectItemStore('items')
 export const levels = createProjectItemStore('levels')
 export const particles = createProjectItemStore('particles')
 
-const stores = { art, abilities, blocks, characters, enemies, items, levels }
+const stores = { art, abilities, tiles, characters, enemies, items, levels }
 
 function createActiveProjectStore() {
   const { subscribe, set, update } = writable({})
@@ -44,11 +44,11 @@ function createActiveProjectStore() {
 
     // remove any missing references from levels
     // todo, should do the same for art, but instead we'll just make that fail gracefully
-    const blockIds = p.blocks.map(b => b.id)
+    const tileIds = p.tiles.map(t => t.id)
     const enemyIds = p.enemies.map(e => e.id)
     const itemIds = p.items.map(i => i.id)
     p.levels = p.levels.map(level => {
-      level.blocks = level.blocks?.filter(b => blockIds.includes(b.id.toString()))
+      level.tiles = level.tiles?.filter(t => tileIds.includes(t.id.toString()))
       level.enemies = level.enemies?.filter(e => enemyIds.includes(e.id.toString()))
       level.items = level.items?.filter(i => itemIds.includes(i.id.toString()))
       return level
@@ -57,7 +57,7 @@ function createActiveProjectStore() {
     // populate item stores with this project's stuff
     art.set(p.art)
     abilities.set(p.abilities)
-    blocks.set(p.blocks)
+    tiles.set(p.tiles)
     characters.set(p.characters)
     enemies.set(p.enemies)
     items.set(p.items)

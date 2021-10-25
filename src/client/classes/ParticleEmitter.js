@@ -9,7 +9,6 @@ export default class ParticleEmitter {
   }
 
   move(x, y) {
-    console.log('moving particles to', x, y)
     this.emitter.spawnPos.x = x
     this.emitter.spawnPos.y = y
   }
@@ -18,10 +17,9 @@ export default class ParticleEmitter {
     // if (this.lastTime == null) this.lastTime = time
     // The emitter requires the elapsed
     // number of seconds since the last update
-    const ms = performance.now()
-    if (this.lastMs == null) this.lastMs = ms
-    this.emitter.update((ms - this.lastMs) / 1000)
-    this.lastMs = ms
+    if (this.lastTime == null) this.lastTime = time
+    this.emitter.update((time - this.lastTime) / 1000)
+    this.lastTime = time
   }
 
   stop() {
@@ -30,5 +28,9 @@ export default class ParticleEmitter {
 
   destroy() {
     this.emitter.destroy()
+  }
+
+  getMaxLifetime() {
+    return this.emitter.maxLifetime
   }
 }

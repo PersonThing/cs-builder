@@ -1,58 +1,58 @@
 import * as PIXI from 'pixi.js'
+import makeArtSprite from '../services/make-art-sprite.js'
 import LivingSprite from './LivingSprite.js'
-import Projectile from './Projectile.js'
 
 export default class Player extends LivingSprite {
-  constructor(player, config, x, y, levelGrid, showPaths, rendererWidth, rendererHeight) {
-    super(player, config, x, y, levelGrid, showPaths)
-
+  constructor(config, graphics, abilities, x, y, levelGrid, showPaths, rendererWidth, rendererHeight) {
+    super(config, graphics, abilities, x, y, levelGrid, showPaths)
     this.drawAbilityBar(0, rendererHeight / 2)
   }
 
   onTick(time, keys, pointerPosition) {
     // keys is map of key = true|false (whether its pressed or not)
     // abilities is array of { id, key }
-    if (this.config.abilities?.length) {
+    if (this.abilities?.length) {
       const pressedKeys = Object.keys(keys).filter(k => keys[k])
-      this.config.abilities
+      this.abilities
         .filter(a => pressedKeys.includes(a.key) && a.nextFire < time)
-        .forEach(a => {
-          a.nextFire = time + 1000 / a.attacksPerSecond
-          const projectile = new Projectile(this.world, a, this.x, this.y, pointerPosition.x, pointerPosition.y, time)
-          this.world.projectileContainer.addChild(projectile)
-        })
+        .forEach(a => this.fireAbility(time, a, pointerPosition.x, pointerPosition.y))
     }
-
     super.onTick()
   }
 
   drawAbilityBar(barX, barY) {
-    const barWidth = this.config.abilities.length * 50
-    const barHeight = 50
+    const buttonWidth = 45
+    const buttonHeight = 45
+    const buttonPadding = 10
+    const barWidth = this.abilities.length * (buttonWidth + buttonPadding + buttonPadding)
+    const barHeight = buttonHeight + buttonPadding
 
     this.abilityBar = new PIXI.Container()
     this.abilityBar.x = barX - barWidth / 2
     this.abilityBar.y = barY - barHeight - 15
     this.addChild(this.abilityBar)
 
-    // background
-    const abilityBarBackground = new PIXI.Graphics()
-    abilityBarBackground.lineStyle(5, 0x000000)
-    abilityBarBackground.beginFill(0x000000, 0.5)
-    abilityBarBackground.drawRect(0, 0, barWidth, barHeight)
-    this.abilityBar.addChild(abilityBarBackground)
-
     let x = 0
-    this.config.abilities.forEach((ability, i) => {
+    this.abilities.forEach((ability, i) => {
+      const bg = new PIXI.Graphics()
+      bg.x = x
+      bg.y = 0
+      bg.lineStyle(5, 0x000000)
+      bg.beginFill(0x000000, 0.5)
+      bg.drawRect(0, 0, buttonWidth, buttonHeight)
+      this.abilityBar.addChild(bg)
+
       // art
-      if (ability.art) {
-        const abilityArt = new PIXI.Sprite(PIXI.Texture.from(ability.art.png))
-        abilityArt.x = x + 5
-        abilityArt.y = 5
+      const art = ability.projectileArt ? ability.projectileArt : ability.characterArt ? ability.characterArt : null
+      if (art) {
+        const abilityArt = makeArtSprite(art) // new PIXI.Sprite(PIXI.Texture.from(art))
+        abilityArt.x = x + buttonWidth / 2
+        abilityArt.y = buttonHeight / 2
+        abilityArt.anchor.set(0.5)
         this.abilityBar.addChild(abilityArt)
       }
 
-      // key
+      // key text
       if (ability.key) {
         const keyText = new PIXI.Text(ability.key.toUpperCase(), {
           fontFamily: 'consolas',
@@ -61,18 +61,29 @@ export default class Player extends LivingSprite {
           stroke: 0x000000,
           fill: 0xffffff,
         })
-        keyText.x = x + 5 + 12
-        keyText.y = 5
+        keyText.x = x + buttonWidth / 2 - keyText.width / 2
+        keyText.y = -buttonHeight / 2
         this.abilityBar.addChild(keyText)
       }
 
-      x += 50
+      // ability name text
+      const nameText = new PIXI.Text(ability.name, {
+        fontFamily: 'consolas',
+        fontSize: 14,
+        strokeThickness: 4,
+        stroke: 0x000000,
+        fill: 0xffffff,
+      })
+      nameText.x = x + buttonWidth / 2 - nameText.width / 2
+      nameText.y = buttonHeight
+      this.abilityBar.addChild(nameText)
+
+      x += buttonWidth + buttonPadding + buttonPadding
     })
   }
 
   destroy() {
-    // this.removeChild(this.abilityBar)
-    this.parent.removeChild(this)
+    this.abilityBar.parent.removeChild(this.abilityBar)
     this.abilityBar.destroy()
     super.destroy()
   }

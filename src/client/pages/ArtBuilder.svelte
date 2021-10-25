@@ -181,17 +181,17 @@
             {/if}
           </div>
 
-          <!-- if block size, show repeated in x and y-->
-          {#if isBlockSize}
+          <!-- if tile size, show repeated in x and y-->
+          {#if isTileSize}
             <div class="ml-2">
-              Block tiling preview
+              Tiling preview
               {#each [0, 0, 0] as r}
                 <div class="flex">
                   {#each [0, 0, 0] as margin}
                     {#if input.animated}
                       <AnimationPreview {...input} scale={artScale} width={pngCanvas.width} height={pngCanvas.height} simple />
                     {:else}
-                      <img src={input.png} alt="block repeating preview" width={input.width * artScale} height={input.height * artScale} />
+                      <img src={input.png} alt="tiling preview" width={input.width * artScale} height={input.height * artScale} />
                     {/if}
                   {/each}
                 </div>
@@ -294,7 +294,7 @@
   $: inputHeight = input?.height
   $: numFrames = input != null && input.width != null && input.frameWidth != null ? Math.ceil(input.width / input.frameWidth) : 0
   $: if (inputWidth != 0 && inputHeight != 0 && showGrid != null && zoom != null) debouncedRedraw()
-  $: isBlockSize = input != null && input.height == 40 && (input.width == 40 || (input.animated && input.frameWidth == 40))
+  $: isTileSize = input != null && input.height == 40 && (input.width == 40 || (input.animated && input.frameWidth == 40))
 
   onMount(() => redraw())
 

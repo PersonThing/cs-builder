@@ -16,8 +16,8 @@ export default class Item extends PIXI.Sprite {
     this.y = y * gridSize + gridSize / 4
 
     // run our item.config.onCollision code
-    const customOnCollisionHandler = Function('item', 'sprite', 'world', itemConfig.onCollision)
-    this.onCollision = (sprite, world) => customOnCollisionHandler(this, sprite, world)
+    const customOnCollisionHandler = Function('item', 'sprite', 'world', 'PIXI', itemConfig.onCollision)
+    this.onCollision = (sprite, world) => customOnCollisionHandler(this, sprite, world, PIXI)
   }
 
   getTouchRadius() {

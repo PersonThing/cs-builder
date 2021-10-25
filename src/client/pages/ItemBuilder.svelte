@@ -18,7 +18,7 @@
       <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
       <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
       <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
-      <FieldScriptEditor bind:value={input.onCollision} {examples}>onCollision(item, sprite, world)</FieldScriptEditor>
+      <FieldScriptEditor bind:value={input.onCollision} {examples}>onCollision(item, sprite, world, PIXI)</FieldScriptEditor>
       <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
     </Form>
   </div>

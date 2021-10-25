@@ -22,10 +22,14 @@
               </td>
               {#if keyAssignable}
                 <td>
-                  <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key}>{option.value}</InputSelect
+                  <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key}
+                    >{option.value.toUpperCase()}</InputSelect
                   >
                 </td>
               {/if}
+              <td>
+                <ArtPicker name="abililty-character-art-{i}" bind:value={itemAbility.characterArt} placeholder="Character art when using ability" />
+              </td>
               <td>
                 <a href={null} on:click|preventDefault={() => removeAbility(i)}>Remove</a>
               </td>
@@ -46,6 +50,7 @@
   import InputSelect from './InputSelect.svelte'
   import AbilityPicker from './AbilityPicker.svelte'
   import abilityKeys from '../services/ability-keys.js'
+  import ArtPicker from './ArtPicker.svelte'
 
   export let value = null
   export let keyAssignable = true
