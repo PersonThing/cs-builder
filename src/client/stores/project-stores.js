@@ -20,14 +20,15 @@ export const projects = createProjectsStore()
 
 export const art = createProjectItemStore('art')
 export const abilities = createProjectItemStore('abilities')
-export const tiles = createProjectItemStore('tiles')
+export const audio = createProjectItemStore('audio')
 export const characters = createProjectItemStore('characters')
 export const enemies = createProjectItemStore('enemies')
 export const items = createProjectItemStore('items')
 export const levels = createProjectItemStore('levels')
 export const particles = createProjectItemStore('particles')
+export const tiles = createProjectItemStore('tiles')
 
-const stores = { art, abilities, tiles, characters, enemies, items, levels }
+const stores = { art, abilities, audio, characters, enemies, items, levels, particles, tiles }
 
 function createActiveProjectStore() {
   const { subscribe, set, update } = writable({})
@@ -55,13 +56,7 @@ function createActiveProjectStore() {
     })
 
     // populate item stores with this project's stuff
-    art.set(p.art)
-    abilities.set(p.abilities)
-    tiles.set(p.tiles)
-    characters.set(p.characters)
-    enemies.set(p.enemies)
-    items.set(p.items)
-    levels.set(p.levels)
+    Object.keys(stores).forEach(key => stores[key].set(p[key]))
   }
 
   const loadFromApi = id => {

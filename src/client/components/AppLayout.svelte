@@ -22,6 +22,7 @@
         <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->
         <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
         <a href="/#/abilities" class:active={active == 'abilities'}>Abilities</a>
+        <a href="/#/audio" class:active={active == 'audio'}>Audio</a>
         <a href="/#/levels" class:active={active == 'levels'}>Levels</a>
       {/if}
     </div>

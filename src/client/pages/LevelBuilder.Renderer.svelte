@@ -13,7 +13,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
-  import { abilities, art, tiles, characters, enemies, items } from '../stores/project-stores.js'
+  import { abilities, art, tiles, characters, enemies, items, audio } from '../stores/project-stores.js'
   import Player from '../classes/Player.js'
   import Enemy from '../classes/Enemy.js'
   import Tile from '../classes/Tile.js'
@@ -66,6 +66,11 @@
   function onKeyUp(event) {
     const key = event.key
     if (abilityKeys.includes(key)) keys[key] = false
+
+    if (key == 'Enter') {
+      player.dead = false
+      restartPixi()
+    }
   }
   let pointerPosition = {
     x: 0,
@@ -122,6 +127,7 @@
       const item = new Item(
         ic,
         $art.find(a => a.id == ic.graphics.still),
+        $audio.find(au => au.id == ic.audioOnCollision),
         itemConfig,
         gridSize
       )
@@ -134,6 +140,9 @@
     for (const enemyConfig of level.enemies) {
       const e = $enemies.find(e => e.id == enemyConfig.id)
       const enemy = new Enemy(
+        world,
+        // function to get enemies for enemies
+        () => [player],
         e,
         buildGraphics(e.graphics),
         buildAbilities(e.abilities),
@@ -192,6 +201,9 @@
       if (playable && $characters.length > 0) {
         const charConfig = JSON.parse(JSON.stringify($characters[0]))
         player = new Player(
+          world,
+          // function to get enemies for player
+          () => world.enemyContainer?.children.filter(e => e.config != null),
           charConfig,
           buildGraphics(charConfig.graphics),
           buildAbilities(charConfig.abilities),
@@ -202,7 +214,6 @@
           pixiContainer.clientWidth,
           pixiContainer.clientHeight
         )
-        player.world = world
         pixiApp.stage.addChild(player)
       }
     })
@@ -233,9 +244,11 @@
       return {
         ...ability,
         key: charAbility.key,
-        projectileArt: ability.graphic ? $art.find(ar => ar.id == ability.graphic) : null,
-        particleArt: ability.particleGraphic ? $art.find(ar => ar.id == ability.particleGraphic) : null,
-        characterArt: charAbility.characterArt ? $art.find(ar => ar.id == charAbility.characterArt) : null,
+        projectileArt: $art.find(ar => ar.id == ability.graphic),
+        particleArt: $art.find(ar => ar.id == ability.particleGraphic),
+        characterArt: $art.find(ar => ar.id == charAbility.characterArt),
+        audioOnUse: $audio.find(au => au.id == ability.audioOnUse),
+        audioOnHit: $audio.find(au => au.id == ability.audioOnHit),
         nextFire: 0,
       }
     })
@@ -258,6 +271,11 @@
 
   function onTick() {
     if (playable) {
+      if (player?.dead) {
+        drawGameOverScreen()
+        pixiApp.ticker.stop()
+        return
+      }
       const time = performance.now()
       player?.onTick(time, keys, pointerPosition)
       centerViewOnPlayer()
@@ -321,6 +339,17 @@
       x: event.offsetX,
       y: event.offsetY,
     }
+  }
+
+  function drawGameOverScreen() {
+    // const graphics = new PIXI.Graphics()
+    // graphics.beginFill(0x000000, 0.5)
+    // graphics.drawRect(0, 0, pixiContainer.clientWidth, pixiContainer.clientHeight)
+    // graphics.zIndex = 10
+    // pixiApp.stage.addChild(graphics)
+    // const text = new PIXI.Text('Press enter to restart', { fontFamily: 'Arial', fontSize: 50, fill: 0xffffff })
+    // text.x = 100 // screenCenter.x - text.width / 2
+    // text.y = 100 // screenCenter.y - text.height / 2
   }
 </script>
 

@@ -1,9 +1,12 @@
 import * as PIXI from 'pixi.js'
+import audioService from '../services/audio-service.js'
+import parseKidScript from '../services/kid-script-parser.js'
 
 export default class Item extends PIXI.Sprite {
-  constructor(itemConfig, art, { id, x, y }, gridSize) {
+  constructor(itemConfig, art, audioOnCollision, { id, x, y }, gridSize) {
     super(PIXI.Texture.from(art.png))
 
+    this.audioOnCollision = audioOnCollision
     this.config = {
       ...itemConfig,
       id,
@@ -16,8 +19,13 @@ export default class Item extends PIXI.Sprite {
     this.y = y * gridSize + gridSize / 4
 
     // run our item.config.onCollision code
-    const customOnCollisionHandler = Function('item', 'sprite', 'world', 'PIXI', itemConfig.onCollision)
-    this.onCollision = (sprite, world) => customOnCollisionHandler(this, sprite, world, PIXI)
+    const customOnCollisionHandler = Function('item', 'sprite', 'world', 'PIXI', parseKidScript(itemConfig.onCollision))
+    this.onCollision = (sprite, world) => {
+      if (this.audioOnCollision?.data?.base64) {
+        audioService.play(this.audioOnCollision.data.base64)
+      }
+      customOnCollisionHandler(this, sprite, world, PIXI)
+    }
   }
 
   getTouchRadius() {

@@ -35,14 +35,7 @@
     <div class="select-dropdown" class:right>
       {#if filterable}
         <div class="filter">
-          <input
-            type="text"
-            class="form-control"
-            bind:value={filter}
-            placeholder={filterPlaceholder}
-            on:keydown={keyListener}
-            bind:this={filterField}
-          />
+          <input type="text" bind:value={filter} placeholder={filterPlaceholder} on:keydown={keyListener} bind:this={filterField} />
           <a on:click|preventDefault={() => (filter = '')} href="/" tabindex="-1">
             <span class="input-group-text">
               <Icon data={removeIcon} class="fw" />
@@ -282,6 +275,7 @@
   .select {
     position: relative;
     cursor: pointer;
+    max-width: 300px;
 
     .item,
     .select-input-text {
@@ -305,6 +299,8 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      border: 1px solid #ccc;
+      padding: 5px;
 
       .dropdown-icon {
         margin-left: 0.6rem;
@@ -355,6 +351,10 @@
       flex-direction: row;
       gap: 3px;
       align-items: center;
+
+      input {
+        flex: 1;
+      }
     }
 
     .no-results {

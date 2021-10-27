@@ -13,5 +13,5 @@
   import AnimationPreview from './AnimationPreview.svelte'
 
   export let id
-  $: _art = $art.find(a => a.id == id)
+  $: _art = id != null ? $art.find(a => a.id == id) : null
 </script>

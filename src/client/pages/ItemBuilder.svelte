@@ -11,22 +11,26 @@
   let:hasChanges
   let:isAdding
 >
-  <div class="grow p1">
-    <Form on:submit={() => itemTypeBuilder.save()}>
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
-      <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
-      <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
-      <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
-      <FieldScriptEditor bind:value={input.onCollision} {examples}>onCollision(item, sprite, world, PIXI)</FieldScriptEditor>
-      <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
-    </Form>
-  </div>
+  {#if input}
+    <div class="grow p1">
+      <Form on:submit={() => itemTypeBuilder.save()}>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
+        <FieldAudioPicker bind:value={input.audioOnCollision}>Audio on collision</FieldAudioPicker>
+        <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
+        <FieldScriptEditor bind:value={input.onCollision} {examples}>onCollision(item, sprite, world, PIXI)</FieldScriptEditor>
+        <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
+      </Form>
+    </div>
+  {/if}
 </ItemTypeBuilder>
 
 <script>
   import { items } from '../stores/project-stores.js'
   import FieldArtPicker from '../components/FieldArtPicker.svelte'
+  import FieldAudioPicker from '../components/FieldAudioPicker.svelte'
   import FieldCheckbox from '../components/FieldCheckbox.svelte'
   import FieldScriptEditor from '../components/FieldScriptEditor.svelte'
   import FieldText from '../components/FieldText.svelte'
@@ -55,9 +59,9 @@ text.y = -50
 sprite.addChild(text)
 
 // turn off an effect after 5 seconds
-setTimeout(() => {
+sprite.wait(5000).then(() => {
   sprite.speed -= 1
-}, 5000)`
+})`
 
   const itemTemplate = {
     name: '',
@@ -65,6 +69,7 @@ setTimeout(() => {
       still: null,
     },
     onCollision: null,
+    audioOnCollision: null,
     removeOnCollision: true,
     playersCanUse: true,
     enemiesCanUse: false,

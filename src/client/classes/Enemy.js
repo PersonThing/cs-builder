@@ -2,8 +2,8 @@ import * as PIXI from 'pixi.js'
 import LivingSprite from './LivingSprite.js'
 
 export default class Enemy extends LivingSprite {
-  constructor(config, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
-    super(config, graphics, abilities, x, y, levelGrid, showPaths)
+  constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
+    super(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths)
 
     // render a little sight radius circle
     if (showSightRadius) {
@@ -14,5 +14,30 @@ export default class Enemy extends LivingSprite {
       this.radiusPreview.zIndex = 1
       this.addChild(this.radiusPreview)
     }
+  }
+
+  onTick(time) {
+    if (this.abilities?.length) {
+      const enemies = this.getEnemies()
+
+      for (const e of enemies) {
+        const canSeeResult = this.canSee(e)
+        if (canSeeResult) {
+          const distance = canSeeResult.distance
+          const closestAbilityInRange = this.abilities
+            .filter(a => a.nextFire < time && a.range > distance)
+            .sort((a, b) => a.range - b.range)
+            .shift()
+          if (closestAbilityInRange) {
+            closestAbilityInRange.nextFire = time + 1000 / closestAbilityInRange.attacksPerSecond
+            setTimeout(() => {
+              this.fireAbility(time, closestAbilityInRange, e.x, e.y)
+            }, 500)
+            break
+          }
+        }
+      }
+    }
+    super.onTick()
   }
 }

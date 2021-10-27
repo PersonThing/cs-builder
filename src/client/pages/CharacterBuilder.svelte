@@ -11,17 +11,19 @@
   let:hasChanges
   let:isAdding
 >
-  <div class="grow p1">
-    <Form on:submit={() => itemTypeBuilder.save()}>
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
-      <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
-      <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
-      <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">Health</FieldNumber>
-      <FieldAbilities bind:value={input.abilities} keyAssignable>Abilities</FieldAbilities>
-      <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
-    </Form>
-  </div>
+  {#if input}
+    <div class="grow p1">
+      <Form on:submit={() => itemTypeBuilder.save()}>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
+        <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
+        <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
+        <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">Health</FieldNumber>
+        <FieldAbilities bind:value={input.abilities} keyAssignable>Abilities</FieldAbilities>
+        <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
+      </Form>
+    </div>
+  {/if}
 </ItemTypeBuilder>
 
 <script>

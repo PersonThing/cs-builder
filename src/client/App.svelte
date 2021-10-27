@@ -11,6 +11,7 @@
 <script>
   import Router from 'svelte-spa-router'
   import ArtBuilder from './pages/ArtBuilder.svelte'
+  import AudioBuilder from './pages/AudioBuilder.svelte'
   import AbilityBuilder from './pages/AbilityBuilder.svelte'
   import ParticleBuilder from './pages/ParticleBuilder.svelte'
   import TileBuilder from './pages/TileBuilder.svelte'
@@ -28,6 +29,7 @@
     '/': SelectProject,
     '/project': ProjectSettings,
     '/art/:id?': ArtBuilder,
+    '/audio/:id?': AudioBuilder,
     '/abilities/:id?': AbilityBuilder,
     '/particles/:id?': ParticleBuilder,
     '/tiles/:id?': TileBuilder,

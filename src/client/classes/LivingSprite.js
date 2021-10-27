@@ -1,10 +1,14 @@
 import * as PIXI from 'pixi.js'
 import makeArtSprite from '../services/make-art-sprite.js'
 import Projectile from './Projectile.js'
+import audioService from '../services/audio-service.js'
 
 export default class LivingSprite extends PIXI.Container {
-  constructor(config, graphics, abilities, x, y, levelGrid, showPaths) {
+  constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths) {
     super()
+    this.world = world
+    this.getEnemies = getEnemies
+
     this.x = x
     this.y = y
 
@@ -90,6 +94,10 @@ export default class LivingSprite extends PIXI.Container {
 
     // check if we can find a visible path to target
     return c <= this.config.sightRadius && this.levelGrid.canSee(this.position, target)
+      ? {
+          distance: c,
+        }
+      : false
   }
 
   clearPathAfterCurrentTarget() {
@@ -132,10 +140,14 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites.rotation = Math.atan2(y - this.y, x - this.x) + (90 * Math.PI) / 180
   }
 
-  getDistanceTo(sprite) {
+  getSquaredDistanceTo(sprite) {
     const a = sprite.x - this.x
     const b = sprite.y - this.y
-    return Math.sqrt(a * a + b * b)
+    return a * a + b * b
+  }
+
+  getDistanceTo(sprite) {
+    return Math.sqrt(this.getSquaredDistanceTo(sprite))
   }
 
   isTouching(sprite, padDistance = 0) {
@@ -145,12 +157,16 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   getTouchRadius() {
-    return (this.sprites.width * this.sprites.scale.x) / 2
+    return (this.sprites.width * this.sprites.scale.x) / 2 - 5
   }
 
   setTint(tint) {
     this.sprites.still.tint = tint
     this.sprites.moving.tint = tint
+  }
+
+  resetTint() {
+    this.setTint(0xffffff)
   }
 
   setScale(scale) {
@@ -233,7 +249,15 @@ export default class LivingSprite extends PIXI.Container {
   takeDamage(damage) {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
-    if (this.health <= 0) this.destroy()
+    if (this.health <= 0) {
+      this.parent.removeChild(this)
+      this.destroy()
+    }
+  }
+
+  heal(damage) {
+    this.health = Math.min(this.config.health, this.health + damage)
+    this.drawHealthBar()
   }
 
   drawHealthBar() {
@@ -266,6 +290,11 @@ export default class LivingSprite extends PIXI.Container {
 
     this.rotateToward(targetX, targetY)
 
+    // if there's sound, play it
+    if (ability.audioOnUse?.data?.base64) {
+      audioService.play(ability.audioOnUse.data.base64)
+    }
+
     // temporarily show this ability sprite
     if (ability.characterArt) {
       if (this.sprites.attacking) {
@@ -284,7 +313,22 @@ export default class LivingSprite extends PIXI.Container {
       this.sprites.addChild(this.sprites.attacking)
     }
 
-    const projectile = new Projectile(this.world, ability, this.x, this.y, targetX, targetY, time)
+    const projectile = new Projectile(this.world, this, this.getEnemies, ability, this.x, this.y, targetX, targetY, time)
     this.world.projectileContainer.addChild(projectile)
+  }
+
+  waitUntil(conditionFunc) {
+    return new Promise((resolve, reject) => {
+      const interval = setInterval(() => {
+        if (conditionFunc()) {
+          clearInterval(interval)
+          resolve()
+        }
+      }, 50)
+    })
+  }
+
+  wait(ms) {
+    return new Promise((resolve, reject) => setTimeout(resolve, ms))
   }
 }

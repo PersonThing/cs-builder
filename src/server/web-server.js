@@ -17,11 +17,6 @@ app.use(express.json())
 // https://zellwk.com/blog/crud-express-mongodb/
 // this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
 repo.connect().then(() => {
-  // app.get('/api/migrate-tiles', (req, res) => {
-  //   repo.migrateToTiles()
-  //   res.json(true)
-  // })
-
   // list projects
   app.get('/api/projects', (req, res) => {
     repo.find('projects').then(projects => {

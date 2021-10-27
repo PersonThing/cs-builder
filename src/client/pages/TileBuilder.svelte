@@ -11,21 +11,23 @@
   let:hasChanges
   let:isAdding
 >
-  <div class="grow p1">
-    <Form on:submit={() => itemTypeBuilder.save()}>
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
-      <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
-        Can walk on?
-        <div class="help-text">Can players and enemies walk on / through this tile?</div>
-      </FieldCheckbox>
-      <FieldCheckbox name="can-see" bind:checked={input.canSee}>
-        Can see through / across?
-        <div class="help-text">Can players and enemies see through / across this tile?</div>
-      </FieldCheckbox>
-      <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
-    </Form>
-  </div>
+  {#if input}
+    <div class="grow p1">
+      <Form on:submit={() => itemTypeBuilder.save()}>
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
+        <FieldCheckbox name="can-walk" bind:checked={input.canWalk}>
+          Can walk on?
+          <div class="help-text">Can players and enemies walk on / through this tile?</div>
+        </FieldCheckbox>
+        <FieldCheckbox name="can-see" bind:checked={input.canSee}>
+          Can see through / across?
+          <div class="help-text">Can players and enemies see through / across this tile?</div>
+        </FieldCheckbox>
+        <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
+      </Form>
+    </div>
+  {/if}
 </ItemTypeBuilder>
 
 <script>

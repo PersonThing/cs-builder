@@ -13,79 +13,81 @@
   let:hasChanges
   on:edit={forceRender}
 >
-  <div class="grow">
-    <div class="btn-group play-edit-toggle">
-      <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play test</button>
-      <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
+  {#if input}
+    <div class="grow">
+      <div class="btn-group play-edit-toggle">
+        <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play test</button>
+        <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
+      </div>
+      {#if $isDrawing}
+        <LevelRenderer
+          level={input}
+          playable={false}
+          {gridSize}
+          bind:this={levelRenderer}
+          on:pointerdown={onDrawPointerDown}
+          on:pointerup={onDrawPointerUp}
+          on:pointermove={onDrawPointerMove}
+        />
+      {:else}
+        <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
+      {/if}
     </div>
-    {#if $isDrawing}
-      <LevelRenderer
-        level={input}
-        playable={false}
-        {gridSize}
-        bind:this={levelRenderer}
-        on:pointerdown={onDrawPointerDown}
-        on:pointerup={onDrawPointerUp}
-        on:pointermove={onDrawPointerMove}
-      />
-    {:else}
-      <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
-    {/if}
-  </div>
 
-  <div class="col2 p1">
-    <Form on:submit={() => itemTypeBuilder.save()}>
-      <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
-      <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
-      <div class="form-group">
-        <label>Background color</label>
-        <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
-      </div>
-      <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing" on:change={forceRender}>Smooth pathing</FieldCheckbox>
-      <FieldCheckbox bind:checked={input.showPaths} name="show-paths" on:change={forceRender}>Show paths</FieldCheckbox>
-      <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius" on:change={forceRender}>Show sight radius</FieldCheckbox>
-    </Form>
+    <div class="col2 p1">
+      <Form on:submit={() => itemTypeBuilder.save()}>
+        <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
+        <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
+        <div class="form-group">
+          <label>Background color</label>
+          <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
+        </div>
+        <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing" on:change={forceRender}>Smooth pathing</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.showPaths} name="show-paths" on:change={forceRender}>Show paths</FieldCheckbox>
+        <FieldCheckbox bind:checked={input.showSightRadius} name="show-sight-radius" on:change={forceRender}>Show sight radius</FieldCheckbox>
+      </Form>
 
-    {#if $isDrawing}
-      <div class="flex-column">
-        <div class="draw-option" class:selected={drawMode == DrawMode.Tiles} on:click={() => setDrawMode(DrawMode.Tiles)}>
-          <div class="form-group">
-            <label>Place a tile</label>
-            <InputSelect bind:value={selectedTileId} options={tileOptions} let:option>
-              {#if option.graphic != null}
-                <ArtThumb id={option.graphic} />
-              {/if}
-              {option.name}
-            </InputSelect>
+      {#if $isDrawing}
+        <div class="flex-column">
+          <div class="draw-option" class:selected={drawMode == DrawMode.Tiles} on:click={() => setDrawMode(DrawMode.Tiles)}>
+            <div class="form-group">
+              <label>Place a tile</label>
+              <InputSelect bind:value={selectedTileId} options={tileOptions} let:option>
+                {#if option.graphic != null}
+                  <ArtThumb id={option.graphic} />
+                {/if}
+                {option.name}
+              </InputSelect>
+            </div>
+          </div>
+
+          <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
+            <div class="form-group">
+              <label>Place an item</label>
+              <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+                {#if option.graphics?.still != null}
+                  <ArtThumb id={option.graphics.still} />
+                {/if}
+                {option.name}
+              </InputSelect>
+            </div>
+          </div>
+
+          <div class="draw-option" class:selected={drawMode == DrawMode.Enemies} on:click={() => setDrawMode(DrawMode.Enemies)}>
+            <div class="form-group">
+              <label>Place an enemy</label>
+              <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
+                {#if option.graphics?.still != null}
+                  <ArtThumb id={option.graphics.still} />
+                {/if}
+                {option.name}
+              </InputSelect>
+            </div>
           </div>
         </div>
-
-        <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
-          <div class="form-group">
-            <label>Place an item</label>
-            <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
-              {#if option.graphics?.still != null}
-                <ArtThumb id={option.graphics.still} />
-              {/if}
-              {option.name}
-            </InputSelect>
-          </div>
-        </div>
-
-        <div class="draw-option" class:selected={drawMode == DrawMode.Enemies} on:click={() => setDrawMode(DrawMode.Enemies)}>
-          <div class="form-group">
-            <label>Place an enemy</label>
-            <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
-              {#if option.graphics?.still != null}
-                <ArtThumb id={option.graphics.still} />
-              {/if}
-              {option.name}
-            </InputSelect>
-          </div>
-        </div>
-      </div>
-    {/if}
-  </div>
+      {/if}
+    </div>
+  {/if}
 </ItemTypeBuilder>
 
 <script>

@@ -1,9 +1,15 @@
+<!-- TODO: apparently you can embed vs code now ? might be worth playing with
+
+https://playground.babylonjs.com/
+-->
+
 <div class="form-group">
   <label for={name}>
     <slot />
   </label>
 
   <pre bind:this={element} class="lang-javascript">{value}</pre>
+  <pre>{parseKidScript(value)}</pre>
 
   {#if examples}
     <div class="examples">
@@ -15,9 +21,10 @@
 
 <script>
   import { CodeJar } from 'codejar'
-  import Prism from 'prismjs'
-  import { withLineNumbers } from 'codejar/linenumbers'
   import { onMount, onDestroy } from 'svelte'
+  import { withLineNumbers } from 'codejar/linenumbers'
+  import parseKidScript from '../services/kid-script-parser.js'
+  import Prism from 'prismjs'
 
   export let value = null
   export let name = 'text'
@@ -26,6 +33,12 @@
   let element
   let examplesElement
   let jar
+
+  // when value changes externally, refresh jar
+  $: if (jar != null && value != jar.toString()) {
+    console.log('updating jar to value')
+    jar.updateCode(value)
+  }
 
   onMount(() => {
     jar = CodeJar(
