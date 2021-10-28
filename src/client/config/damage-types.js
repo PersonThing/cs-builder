@@ -28,7 +28,13 @@ export const Cold = {
     // tint target blue
     // slow?  maybe chance to freeze?
     // ice / cold particles on target?
+    target.setTint(Cold.color)
+    target.speed *= 0.5
     applySimpleDamage(target, ability, isDirectHit)
+    setTimeout(() => {
+      target.speed *= 2
+      target.resetTint()
+    })
   },
 }
 
@@ -85,7 +91,7 @@ export const Poison = {
 function applySimpleDamage(target, ability, isDirectHit, damageMultiplier) {
   if (isDirectHit && ability.damage > 0) {
     target.takeDamage(ability.damage * damageMultiplier)
-  } else if (ability.areaDamage > 0) {
+  } else if (!isDirectHit && ability.areaDamage > 0) {
     target.takeDamage(ability.areaDamage * damageMultiplier)
   }
 }

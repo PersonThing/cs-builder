@@ -250,6 +250,9 @@ export default class LivingSprite extends PIXI.Container {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
     if (this.health <= 0) {
+      if (this.config.audioOnDeath) {
+        audioService.play(this.config.audioOnDeath.data.base64)
+      }
       this.parent.removeChild(this)
       this.destroy()
     }

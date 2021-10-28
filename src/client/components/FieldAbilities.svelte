@@ -4,25 +4,17 @@
   </label>
   <div>
     <table cellspacing="0">
-      {#if keyAssignable}
-        <thead>
-          <tr>
-            <th>Ability</th>
-            <th>Key</th>
-            <th />
-          </tr>
-        </thead>
-      {/if}
+      {#if keyAssignable}{/if}
       <tbody>
         {#if value?.length}
           {#each value as itemAbility, i}
             <tr>
               <td>
-                <AbilityPicker name="ability-picker-{i}" bind:value={itemAbility.id} />
+                <AbilityPicker name="ability-picker-{i}" bind:value={itemAbility.id} placeholder="Ability" />
               </td>
               {#if keyAssignable}
                 <td>
-                  <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key}
+                  <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key} placeholder="Key"
                     >{option.value.toUpperCase()}</InputSelect
                   >
                 </td>

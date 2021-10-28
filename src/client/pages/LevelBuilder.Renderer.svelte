@@ -139,6 +139,7 @@
     emptyContainer(world.enemyContainer)
     for (const enemyConfig of level.enemies) {
       const e = $enemies.find(e => e.id == enemyConfig.id)
+      e.audioOnDeath = $audio.find(au => au.id == e.audioOnDeath)
       const enemy = new Enemy(
         world,
         // function to get enemies for enemies

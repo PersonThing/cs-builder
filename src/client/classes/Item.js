@@ -36,9 +36,13 @@ export default class Item extends PIXI.Sprite {
     return this.getDistanceTo(sprite) < distance
   }
 
-  getDistanceTo(sprite) {
+  getSquaredDistanceTo(sprite) {
     const a = sprite.x - this.x
     const b = sprite.y - this.y
-    return Math.sqrt(a * a + b * b)
+    return a * a + b * b
+  }
+
+  getDistanceTo(sprite) {
+    return Math.sqrt(this.getSquaredDistanceTo(sprite))
   }
 }

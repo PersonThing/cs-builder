@@ -20,6 +20,7 @@
         <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
         <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">Health</FieldNumber>
         <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">Sight radius (pixels)</FieldNumber>
+        <FieldAudioPicker bind:value={input.audioOnDeath}>Audio on death</FieldAudioPicker>
         <FieldAbilities bind:value={input.abilities} keyAssignable={false}>Abilities</FieldAbilities>
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
       </Form>
@@ -36,6 +37,7 @@
   import Form from '../components/Form.svelte'
   import FormButtons from '../components/FormButtons.svelte'
   import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
+  import FieldAudioPicker from '../components/FieldAudioPicker.svelte'
 
   export let params = {}
   let input = null
@@ -51,6 +53,7 @@
     abilities: [],
     sightRadius: 150,
     health: 100,
+    audioOnDeath: null,
   }
 
   function getItemGraphic(item) {

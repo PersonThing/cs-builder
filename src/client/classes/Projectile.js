@@ -76,7 +76,7 @@ export default class Projectile extends PIXI.Container {
     }
 
     // have we run out of time?
-    if (time > this.createdAtMs + this.config.lifetimeMs) {
+    if (this.config.lifetimeMs > 0 && time > this.createdAtMs + this.config.lifetimeMs) {
       this.destroy()
     }
   }

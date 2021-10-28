@@ -18,14 +18,14 @@
         <FieldDamageTypePicker bind:value={input.damageType}>Damage type</FieldDamageTypePicker>
         <FieldArtPicker bind:value={input.graphic}>Graphic</FieldArtPicker>
         <FieldArtPicker bind:value={input.particleGraphic}>Particle graphic (temporary until full particle builder added)</FieldArtPicker>
+        <FieldAudioPicker bind:value={input.audioOnUse}>Audio on use</FieldAudioPicker>
+        <FieldAudioPicker bind:value={input.audioOnHit}>Audio on hit</FieldAudioPicker>
         <FieldNumber name="speed" bind:value={input.speed} placeholder="Type a number">
           Projectile speed (tip: 0 to drop bombs / traps at your feet)
         </FieldNumber>
-        <FieldAudioPicker bind:value={input.audioOnUse}>Audio on use</FieldAudioPicker>
-        <FieldAudioPicker bind:value={input.audioOnHit}>Audio on hit</FieldAudioPicker>
         <FieldNumber name="range" bind:value={input.range} placeholder="Type a number">Max range (pixels)?</FieldNumber>
         <FieldNumber name="projectileLifetimeMs" bind:value={input.lifetimeMs} placeholder="Type a number">
-          How long do projectiles last (ms)? (if they don't move, they should at least expire)
+          How long do projectiles last (ms)? (if they don't move, they should at least expire, 0 or empty = forever)
         </FieldNumber>
         <FieldNumber name="damage" bind:value={input.damage} placeholder="Type a number">Damage</FieldNumber>
         <FieldNumber name="area-damage" bind:value={input.areaDamage} placeholder="Type a number">Area damage</FieldNumber>

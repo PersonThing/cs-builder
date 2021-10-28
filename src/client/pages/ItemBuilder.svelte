@@ -68,7 +68,7 @@ sprite.wait(5000).then(() => {
     graphics: {
       still: null,
     },
-    onCollision: null,
+    onCollision: '',
     audioOnCollision: null,
     removeOnCollision: true,
     playersCanUse: true,
