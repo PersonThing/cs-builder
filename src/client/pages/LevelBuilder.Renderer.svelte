@@ -139,12 +139,12 @@
     emptyContainer(world.enemyContainer)
     for (const enemyConfig of level.enemies) {
       const e = $enemies.find(e => e.id == enemyConfig.id)
-      e.audioOnDeath = $audio.find(au => au.id == e.audioOnDeath)
       const enemy = new Enemy(
         world,
         // function to get enemies for enemies
         () => [player],
         e,
+        $audio.find(au => au.id == e.audioOnDeath),
         buildGraphics(e.graphics),
         buildAbilities(e.abilities),
         enemyConfig.x * gridSize + gridSize / 2,
@@ -201,11 +201,13 @@
       // create player
       if (playable && $characters.length > 0) {
         const charConfig = JSON.parse(JSON.stringify($characters[0]))
+        const audioOnDeath = $audio.find(au => au.id === charConfig.audioOnDeath)
         player = new Player(
           world,
           // function to get enemies for player
           () => world.enemyContainer?.children.filter(e => e.config != null),
           charConfig,
+          audioOnDeath,
           buildGraphics(charConfig.graphics),
           buildAbilities(charConfig.abilities),
           1.5 * gridSize,

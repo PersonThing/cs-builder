@@ -3,8 +3,8 @@ import makeArtSprite from '../services/make-art-sprite.js'
 import LivingSprite from './LivingSprite.js'
 
 export default class Player extends LivingSprite {
-  constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths, rendererWidth, rendererHeight) {
-    super(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths)
+  constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, rendererWidth, rendererHeight) {
+    super(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
     this.drawAbilityBar(0, rendererHeight / 2)
   }
 
@@ -92,6 +92,7 @@ export default class Player extends LivingSprite {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
     if (this.health <= 0) {
+      this.playAudioOnDeath()
       this.setTint(0xff0000)
       this.dead = true
     }

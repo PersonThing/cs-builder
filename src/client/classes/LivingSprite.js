@@ -4,7 +4,7 @@ import Projectile from './Projectile.js'
 import audioService from '../services/audio-service.js'
 
 export default class LivingSprite extends PIXI.Container {
-  constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths) {
+  constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
     super()
     this.world = world
     this.getEnemies = getEnemies
@@ -13,6 +13,8 @@ export default class LivingSprite extends PIXI.Container {
     this.y = y
 
     this.abilities = abilities
+
+    this.audioOnDeath = audioOnDeath
 
     this.sortableChildren = true
     this.config = config
@@ -250,12 +252,13 @@ export default class LivingSprite extends PIXI.Container {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
     if (this.health <= 0) {
-      if (this.config.audioOnDeath) {
-        audioService.play(this.config.audioOnDeath.data.base64)
-      }
-      this.parent.removeChild(this)
+      this.playAudioOnDeath()
       this.destroy()
     }
+  }
+
+  playAudioOnDeath() {
+    if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64)
   }
 
   heal(damage) {

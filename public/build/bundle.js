@@ -14181,7 +14181,7 @@ var app = (function () {
     			props: {
     				label: "" + (/*input*/ ctx[1].width + "W x " + /*input*/ ctx[1].height + "H"),
     				dropdownClass: "below left",
-    				$$slots: { default: [create_default_slot_8$4] },
+    				$$slots: { default: [create_default_slot_8$5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -14965,7 +14965,7 @@ var app = (function () {
     }
 
     // (84:12) <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
-    function create_default_slot_8$4(ctx) {
+    function create_default_slot_8$5(ctx) {
     	let form;
     	let current;
 
@@ -15012,7 +15012,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8$4.name,
+    		id: create_default_slot_8$5.name,
     		type: "slot",
     		source: "(84:12) <QuickDropdown label=\\\"{input.width}W x {input.height}H\\\" on:open={startChangeSize} dropdownClass=\\\"below left\\\">",
     		ctx
@@ -18997,10 +18997,11 @@ var app = (function () {
     const Fire = {
       name: 'Fire',
       color: 0xf72702,
-      applyDamage: (source, target, ability, isDirectHit) => {
+      applyDamage: (source, target, ability, isDirectHit, projectile) => {
         // check if target is fire immune
         // tint target red
         // fire / smoke particles on target?
+
         applySimpleDamage(target, ability, isDirectHit);
       },
     };
@@ -19027,8 +19028,7 @@ var app = (function () {
         let ticks = poisonDuration / tickInterval;
         const damageMultiplierPerTick = tickInterval / poisonDuration;
 
-        Poison.tick(target, ability, isDirectHit, damageMultiplierPerTick);
-
+        target.setTint(Poison.color);
         const interval = setInterval(() => {
           if (ticks == 0 || target == null || target.health <= 0) {
             if (target?.health > 0) target.resetTint();
@@ -19040,11 +19040,9 @@ var app = (function () {
           }
         }, tickInterval);
       },
-
-      tick() {},
     };
 
-    function applySimpleDamage(target, ability, isDirectHit, damageMultiplier) {
+    function applySimpleDamage(target, ability, isDirectHit, damageMultiplier = 1.0) {
       if (isDirectHit && ability.damage > 0) {
         target.takeDamage(ability.damage * damageMultiplier);
       } else if (!isDirectHit && ability.areaDamage > 0) {
@@ -19706,7 +19704,7 @@ var app = (function () {
     }
 
     // (23:8) <FieldNumber name="speed" bind:value={input.speed} placeholder="Type a number">
-    function create_default_slot_8$3(ctx) {
+    function create_default_slot_8$4(ctx) {
     	let t;
 
     	const block = {
@@ -19723,7 +19721,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8$3.name,
+    		id: create_default_slot_8$4.name,
     		type: "slot",
     		source: "(23:8) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Type a number\\\">",
     		ctx
@@ -20063,7 +20061,7 @@ var app = (function () {
     	let fieldnumber0_props = {
     		name: "speed",
     		placeholder: "Type a number",
-    		$$slots: { default: [create_default_slot_8$3] },
+    		$$slots: { default: [create_default_slot_8$4] },
     		$$scope: { ctx }
     	};
 
@@ -22414,7 +22412,7 @@ var app = (function () {
       return script.replace(
         /wait\(([0-9]+)\)((.|\n)+)/,
         `setTimeout(() => {$2
-}, $1)`.replace(/waitUntil\(([0-9]+)\)((.|\n)+)/)
+}, $1)` //.replace(/waitUntil\(([0-9]+)\)((.|\n)+)/)
       )
     }
 
@@ -24593,7 +24591,7 @@ var app = (function () {
     }
 
     // (17:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_8$2(ctx) {
+    function create_default_slot_8$3(ctx) {
     	let t;
 
     	const block = {
@@ -24610,7 +24608,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8$2.name,
+    		id: create_default_slot_8$3.name,
     		type: "slot",
     		source: "(17:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
@@ -24814,7 +24812,7 @@ var app = (function () {
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_8$2] },
+    		$$slots: { default: [create_default_slot_8$3] },
     		$$scope: { ctx }
     	};
 
@@ -26549,7 +26547,7 @@ sprite.wait(5000).then(() => {
     			$$inline: true
     		});
 
-    	form.$on("submit", /*submit_handler*/ ctx[11]);
+    	form.$on("submit", /*submit_handler*/ ctx[12]);
 
     	const block = {
     		c: function create() {
@@ -26566,7 +26564,7 @@ sprite.wait(5000).then(() => {
     		p: function update(ctx, dirty) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input*/ 114694) {
+    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input*/ 229382) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -26599,7 +26597,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (17:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_7$2(ctx) {
+    function create_default_slot_8$2(ctx) {
     	let t;
 
     	const block = {
@@ -26616,7 +26614,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7$2.name,
+    		id: create_default_slot_8$2.name,
     		type: "slot",
     		source: "(17:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
@@ -26626,7 +26624,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (18:8) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
-    function create_default_slot_6$2(ctx) {
+    function create_default_slot_7$2(ctx) {
     	let t;
 
     	const block = {
@@ -26643,7 +26641,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$2.name,
+    		id: create_default_slot_7$2.name,
     		type: "slot",
     		source: "(18:8) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
     		ctx
@@ -26653,7 +26651,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (19:8) <FieldArtPicker bind:value={input.graphics.still}>
-    function create_default_slot_5$2(ctx) {
+    function create_default_slot_6$2(ctx) {
     	let t;
 
     	const block = {
@@ -26670,7 +26668,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$2.name,
+    		id: create_default_slot_6$2.name,
     		type: "slot",
     		source: "(19:8) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
@@ -26680,7 +26678,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (20:8) <FieldArtPicker bind:value={input.graphics.moving}>
-    function create_default_slot_4$2(ctx) {
+    function create_default_slot_5$2(ctx) {
     	let t;
 
     	const block = {
@@ -26697,7 +26695,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$2.name,
+    		id: create_default_slot_5$2.name,
     		type: "slot",
     		source: "(20:8) <FieldArtPicker bind:value={input.graphics.moving}>",
     		ctx
@@ -26707,7 +26705,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (21:8) <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">
-    function create_default_slot_3$3(ctx) {
+    function create_default_slot_4$2(ctx) {
     	let t;
 
     	const block = {
@@ -26724,7 +26722,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$3.name,
+    		id: create_default_slot_4$2.name,
     		type: "slot",
     		source: "(21:8) <FieldNumber name=\\\"health\\\" bind:value={input.health} placeholder=\\\"Type a number...\\\">",
     		ctx
@@ -26733,7 +26731,34 @@ sprite.wait(5000).then(() => {
     	return block;
     }
 
-    // (22:8) <FieldAbilities bind:value={input.abilities} keyAssignable>
+    // (22:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
+    function create_default_slot_3$3(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Audio on death");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_3$3.name,
+    		type: "slot",
+    		source: "(22:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (23:8) <FieldAbilities bind:value={input.abilities} keyAssignable>
     function create_default_slot_2$3(ctx) {
     	let t;
 
@@ -26753,7 +26778,7 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_default_slot_2$3.name,
     		type: "slot",
-    		source: "(22:8) <FieldAbilities bind:value={input.abilities} keyAssignable>",
+    		source: "(23:8) <FieldAbilities bind:value={input.abilities} keyAssignable>",
     		ctx
     	});
 
@@ -26777,9 +26802,12 @@ sprite.wait(5000).then(() => {
     	let fieldnumber1;
     	let updating_value_4;
     	let t4;
-    	let fieldabilities;
+    	let fieldaudiopicker;
     	let updating_value_5;
     	let t5;
+    	let fieldabilities;
+    	let updating_value_6;
+    	let t6;
     	let formbuttons;
     	let current;
 
@@ -26790,7 +26818,7 @@ sprite.wait(5000).then(() => {
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_7$2] },
+    		$$slots: { default: [create_default_slot_8$2] },
     		$$scope: { ctx }
     	};
 
@@ -26808,7 +26836,7 @@ sprite.wait(5000).then(() => {
     	let fieldnumber0_props = {
     		name: "speed",
     		placeholder: "Speed (pixels per frame)",
-    		$$slots: { default: [create_default_slot_6$2] },
+    		$$slots: { default: [create_default_slot_7$2] },
     		$$scope: { ctx }
     	};
 
@@ -26828,7 +26856,7 @@ sprite.wait(5000).then(() => {
     	}
 
     	let fieldartpicker0_props = {
-    		$$slots: { default: [create_default_slot_5$2] },
+    		$$slots: { default: [create_default_slot_6$2] },
     		$$scope: { ctx }
     	};
 
@@ -26848,7 +26876,7 @@ sprite.wait(5000).then(() => {
     	}
 
     	let fieldartpicker1_props = {
-    		$$slots: { default: [create_default_slot_4$2] },
+    		$$slots: { default: [create_default_slot_5$2] },
     		$$scope: { ctx }
     	};
 
@@ -26870,7 +26898,7 @@ sprite.wait(5000).then(() => {
     	let fieldnumber1_props = {
     		name: "health",
     		placeholder: "Type a number...",
-    		$$slots: { default: [create_default_slot_3$3] },
+    		$$slots: { default: [create_default_slot_4$2] },
     		$$scope: { ctx }
     	};
 
@@ -26885,8 +26913,28 @@ sprite.wait(5000).then(() => {
 
     	binding_callbacks.push(() => bind$1(fieldnumber1, "value", fieldnumber1_value_binding));
 
+    	function fieldaudiopicker_value_binding(value) {
+    		/*fieldaudiopicker_value_binding*/ ctx[9](value);
+    	}
+
+    	let fieldaudiopicker_props = {
+    		$$slots: { default: [create_default_slot_3$3] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[1].audioOnDeath !== void 0) {
+    		fieldaudiopicker_props.value = /*input*/ ctx[1].audioOnDeath;
+    	}
+
+    	fieldaudiopicker = new FieldAudioPicker({
+    			props: fieldaudiopicker_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind$1(fieldaudiopicker, "value", fieldaudiopicker_value_binding));
+
     	function fieldabilities_value_binding(value) {
-    		/*fieldabilities_value_binding*/ ctx[9](value);
+    		/*fieldabilities_value_binding*/ ctx[10](value);
     	}
 
     	let fieldabilities_props = {
@@ -26908,13 +26956,13 @@ sprite.wait(5000).then(() => {
 
     	formbuttons = new FormButtons({
     			props: {
-    				hasChanges: /*hasChanges*/ ctx[14],
-    				canDelete: !/*isAdding*/ ctx[15]
+    				hasChanges: /*hasChanges*/ ctx[15],
+    				canDelete: !/*isAdding*/ ctx[16]
     			},
     			$$inline: true
     		});
 
-    	formbuttons.$on("delete", /*delete_handler*/ ctx[10]);
+    	formbuttons.$on("delete", /*delete_handler*/ ctx[11]);
 
     	const block = {
     		c: function create() {
@@ -26928,8 +26976,10 @@ sprite.wait(5000).then(() => {
     			t3 = space();
     			create_component(fieldnumber1.$$.fragment);
     			t4 = space();
-    			create_component(fieldabilities.$$.fragment);
+    			create_component(fieldaudiopicker.$$.fragment);
     			t5 = space();
+    			create_component(fieldabilities.$$.fragment);
+    			t6 = space();
     			create_component(formbuttons.$$.fragment);
     		},
     		m: function mount(target, anchor) {
@@ -26943,15 +26993,17 @@ sprite.wait(5000).then(() => {
     			insert_dev(target, t3, anchor);
     			mount_component(fieldnumber1, target, anchor);
     			insert_dev(target, t4, anchor);
-    			mount_component(fieldabilities, target, anchor);
+    			mount_component(fieldaudiopicker, target, anchor);
     			insert_dev(target, t5, anchor);
+    			mount_component(fieldabilities, target, anchor);
+    			insert_dev(target, t6, anchor);
     			mount_component(formbuttons, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 131072) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -26964,7 +27016,7 @@ sprite.wait(5000).then(() => {
     			fieldtext.$set(fieldtext_changes);
     			const fieldnumber0_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 131072) {
     				fieldnumber0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -26977,7 +27029,7 @@ sprite.wait(5000).then(() => {
     			fieldnumber0.$set(fieldnumber0_changes);
     			const fieldartpicker0_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 131072) {
     				fieldartpicker0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -26990,7 +27042,7 @@ sprite.wait(5000).then(() => {
     			fieldartpicker0.$set(fieldartpicker0_changes);
     			const fieldartpicker1_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 131072) {
     				fieldartpicker1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -27003,7 +27055,7 @@ sprite.wait(5000).then(() => {
     			fieldartpicker1.$set(fieldartpicker1_changes);
     			const fieldnumber1_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
+    			if (dirty & /*$$scope*/ 131072) {
     				fieldnumber1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -27014,22 +27066,35 @@ sprite.wait(5000).then(() => {
     			}
 
     			fieldnumber1.$set(fieldnumber1_changes);
-    			const fieldabilities_changes = {};
+    			const fieldaudiopicker_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
-    				fieldabilities_changes.$$scope = { dirty, ctx };
+    			if (dirty & /*$$scope*/ 131072) {
+    				fieldaudiopicker_changes.$$scope = { dirty, ctx };
     			}
 
     			if (!updating_value_5 && dirty & /*input*/ 2) {
     				updating_value_5 = true;
-    				fieldabilities_changes.value = /*input*/ ctx[1].abilities;
+    				fieldaudiopicker_changes.value = /*input*/ ctx[1].audioOnDeath;
     				add_flush_callback(() => updating_value_5 = false);
+    			}
+
+    			fieldaudiopicker.$set(fieldaudiopicker_changes);
+    			const fieldabilities_changes = {};
+
+    			if (dirty & /*$$scope*/ 131072) {
+    				fieldabilities_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_6 && dirty & /*input*/ 2) {
+    				updating_value_6 = true;
+    				fieldabilities_changes.value = /*input*/ ctx[1].abilities;
+    				add_flush_callback(() => updating_value_6 = false);
     			}
 
     			fieldabilities.$set(fieldabilities_changes);
     			const formbuttons_changes = {};
-    			if (dirty & /*hasChanges*/ 16384) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[14];
-    			if (dirty & /*isAdding*/ 32768) formbuttons_changes.canDelete = !/*isAdding*/ ctx[15];
+    			if (dirty & /*hasChanges*/ 32768) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[15];
+    			if (dirty & /*isAdding*/ 65536) formbuttons_changes.canDelete = !/*isAdding*/ ctx[16];
     			formbuttons.$set(formbuttons_changes);
     		},
     		i: function intro(local) {
@@ -27039,6 +27104,7 @@ sprite.wait(5000).then(() => {
     			transition_in(fieldartpicker0.$$.fragment, local);
     			transition_in(fieldartpicker1.$$.fragment, local);
     			transition_in(fieldnumber1.$$.fragment, local);
+    			transition_in(fieldaudiopicker.$$.fragment, local);
     			transition_in(fieldabilities.$$.fragment, local);
     			transition_in(formbuttons.$$.fragment, local);
     			current = true;
@@ -27049,6 +27115,7 @@ sprite.wait(5000).then(() => {
     			transition_out(fieldartpicker0.$$.fragment, local);
     			transition_out(fieldartpicker1.$$.fragment, local);
     			transition_out(fieldnumber1.$$.fragment, local);
+    			transition_out(fieldaudiopicker.$$.fragment, local);
     			transition_out(fieldabilities.$$.fragment, local);
     			transition_out(formbuttons.$$.fragment, local);
     			current = false;
@@ -27064,8 +27131,10 @@ sprite.wait(5000).then(() => {
     			if (detaching) detach_dev(t3);
     			destroy_component(fieldnumber1, detaching);
     			if (detaching) detach_dev(t4);
-    			destroy_component(fieldabilities, detaching);
+    			destroy_component(fieldaudiopicker, detaching);
     			if (detaching) detach_dev(t5);
+    			destroy_component(fieldabilities, detaching);
+    			if (detaching) detach_dev(t6);
     			destroy_component(formbuttons, detaching);
     		}
     	};
@@ -27153,7 +27222,7 @@ sprite.wait(5000).then(() => {
     	let current;
 
     	function itemtypebuilder_input_binding(value) {
-    		/*itemtypebuilder_input_binding*/ ctx[13](value);
+    		/*itemtypebuilder_input_binding*/ ctx[14](value);
     	}
 
     	let itemtypebuilder_props = {
@@ -27167,8 +27236,8 @@ sprite.wait(5000).then(() => {
     		$$slots: {
     			default: [
     				create_default_slot$5,
-    				({ hasChanges, isAdding }) => ({ 14: hasChanges, 15: isAdding }),
-    				({ hasChanges, isAdding }) => (hasChanges ? 16384 : 0) | (isAdding ? 32768 : 0)
+    				({ hasChanges, isAdding }) => ({ 15: hasChanges, 16: isAdding }),
+    				({ hasChanges, isAdding }) => (hasChanges ? 32768 : 0) | (isAdding ? 65536 : 0)
     			]
     		},
     		$$scope: { ctx }
@@ -27183,7 +27252,7 @@ sprite.wait(5000).then(() => {
     			$$inline: true
     		});
 
-    	/*itemtypebuilder_binding*/ ctx[12](itemtypebuilder);
+    	/*itemtypebuilder_binding*/ ctx[13](itemtypebuilder);
     	binding_callbacks.push(() => bind$1(itemtypebuilder, "input", itemtypebuilder_input_binding));
 
     	const block = {
@@ -27201,7 +27270,7 @@ sprite.wait(5000).then(() => {
     			const itemtypebuilder_changes = {};
     			if (dirty & /*params*/ 1) itemtypebuilder_changes.id = /*params*/ ctx[0].id;
 
-    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input*/ 114694) {
+    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input*/ 229382) {
     				itemtypebuilder_changes.$$scope = { dirty, ctx };
     			}
 
@@ -27223,7 +27292,7 @@ sprite.wait(5000).then(() => {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			/*itemtypebuilder_binding*/ ctx[12](null);
+    			/*itemtypebuilder_binding*/ ctx[13](null);
     			destroy_component(itemtypebuilder, detaching);
     		}
     	};
@@ -27255,7 +27324,8 @@ sprite.wait(5000).then(() => {
     		speed: 5,
     		graphics: { still: null, moving: null },
     		abilities: [],
-    		health: 100
+    		health: 100,
+    		audioOnDeath: null
     	};
 
     	const writable_props = ["params"];
@@ -27299,6 +27369,13 @@ sprite.wait(5000).then(() => {
     		}
     	}
 
+    	function fieldaudiopicker_value_binding(value) {
+    		if ($$self.$$.not_equal(input.audioOnDeath, value)) {
+    			input.audioOnDeath = value;
+    			$$invalidate(1, input);
+    		}
+    	}
+
     	function fieldabilities_value_binding(value) {
     		if ($$self.$$.not_equal(input.abilities, value)) {
     			input.abilities = value;
@@ -27334,6 +27411,7 @@ sprite.wait(5000).then(() => {
     		Form,
     		FormButtons,
     		ItemTypeBuilder,
+    		FieldAudioPicker,
     		params,
     		input,
     		itemTypeBuilder,
@@ -27361,6 +27439,7 @@ sprite.wait(5000).then(() => {
     		fieldartpicker0_value_binding,
     		fieldartpicker1_value_binding,
     		fieldnumber1_value_binding,
+    		fieldaudiopicker_value_binding,
     		fieldabilities_value_binding,
     		delete_handler,
     		submit_handler,
@@ -27592,35 +27671,8 @@ sprite.wait(5000).then(() => {
     	return block;
     }
 
-    // (22:8) <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">
+    // (22:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
     function create_default_slot_4$1(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = text("Sight radius (pixels)");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_4$1.name,
-    		type: "slot",
-    		source: "(22:8) <FieldNumber name=\\\"sight-radius\\\" bind:value={input.sightRadius} placeholder=\\\"Sight radius (pixels)\\\">",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (23:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
-    function create_default_slot_3$2(ctx) {
     	let t;
 
     	const block = {
@@ -27637,9 +27689,36 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_default_slot_4$1.name,
+    		type: "slot",
+    		source: "(22:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (23:8) <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">
+    function create_default_slot_3$2(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Sight radius (pixels)");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_default_slot_3$2.name,
     		type: "slot",
-    		source: "(23:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
+    		source: "(23:8) <FieldNumber name=\\\"sight-radius\\\" bind:value={input.sightRadius} placeholder=\\\"Sight radius (pixels)\\\">",
     		ctx
     	});
 
@@ -27690,10 +27769,10 @@ sprite.wait(5000).then(() => {
     	let fieldnumber1;
     	let updating_value_4;
     	let t4;
-    	let fieldnumber2;
+    	let fieldaudiopicker;
     	let updating_value_5;
     	let t5;
-    	let fieldaudiopicker;
+    	let fieldnumber2;
     	let updating_value_6;
     	let t6;
     	let fieldabilities;
@@ -27804,34 +27883,12 @@ sprite.wait(5000).then(() => {
 
     	binding_callbacks.push(() => bind$1(fieldnumber1, "value", fieldnumber1_value_binding));
 
-    	function fieldnumber2_value_binding(value) {
-    		/*fieldnumber2_value_binding*/ ctx[9](value);
-    	}
-
-    	let fieldnumber2_props = {
-    		name: "sight-radius",
-    		placeholder: "Sight radius (pixels)",
-    		$$slots: { default: [create_default_slot_4$1] },
-    		$$scope: { ctx }
-    	};
-
-    	if (/*input*/ ctx[1].sightRadius !== void 0) {
-    		fieldnumber2_props.value = /*input*/ ctx[1].sightRadius;
-    	}
-
-    	fieldnumber2 = new FieldNumber({
-    			props: fieldnumber2_props,
-    			$$inline: true
-    		});
-
-    	binding_callbacks.push(() => bind$1(fieldnumber2, "value", fieldnumber2_value_binding));
-
     	function fieldaudiopicker_value_binding(value) {
-    		/*fieldaudiopicker_value_binding*/ ctx[10](value);
+    		/*fieldaudiopicker_value_binding*/ ctx[9](value);
     	}
 
     	let fieldaudiopicker_props = {
-    		$$slots: { default: [create_default_slot_3$2] },
+    		$$slots: { default: [create_default_slot_4$1] },
     		$$scope: { ctx }
     	};
 
@@ -27845,6 +27902,28 @@ sprite.wait(5000).then(() => {
     		});
 
     	binding_callbacks.push(() => bind$1(fieldaudiopicker, "value", fieldaudiopicker_value_binding));
+
+    	function fieldnumber2_value_binding(value) {
+    		/*fieldnumber2_value_binding*/ ctx[10](value);
+    	}
+
+    	let fieldnumber2_props = {
+    		name: "sight-radius",
+    		placeholder: "Sight radius (pixels)",
+    		$$slots: { default: [create_default_slot_3$2] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[1].sightRadius !== void 0) {
+    		fieldnumber2_props.value = /*input*/ ctx[1].sightRadius;
+    	}
+
+    	fieldnumber2 = new FieldNumber({
+    			props: fieldnumber2_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind$1(fieldnumber2, "value", fieldnumber2_value_binding));
 
     	function fieldabilities_value_binding(value) {
     		/*fieldabilities_value_binding*/ ctx[11](value);
@@ -27889,9 +27968,9 @@ sprite.wait(5000).then(() => {
     			t3 = space();
     			create_component(fieldnumber1.$$.fragment);
     			t4 = space();
-    			create_component(fieldnumber2.$$.fragment);
-    			t5 = space();
     			create_component(fieldaudiopicker.$$.fragment);
+    			t5 = space();
+    			create_component(fieldnumber2.$$.fragment);
     			t6 = space();
     			create_component(fieldabilities.$$.fragment);
     			t7 = space();
@@ -27908,9 +27987,9 @@ sprite.wait(5000).then(() => {
     			insert_dev(target, t3, anchor);
     			mount_component(fieldnumber1, target, anchor);
     			insert_dev(target, t4, anchor);
-    			mount_component(fieldnumber2, target, anchor);
-    			insert_dev(target, t5, anchor);
     			mount_component(fieldaudiopicker, target, anchor);
+    			insert_dev(target, t5, anchor);
+    			mount_component(fieldnumber2, target, anchor);
     			insert_dev(target, t6, anchor);
     			mount_component(fieldabilities, target, anchor);
     			insert_dev(target, t7, anchor);
@@ -27983,32 +28062,32 @@ sprite.wait(5000).then(() => {
     			}
 
     			fieldnumber1.$set(fieldnumber1_changes);
-    			const fieldnumber2_changes = {};
-
-    			if (dirty & /*$$scope*/ 262144) {
-    				fieldnumber2_changes.$$scope = { dirty, ctx };
-    			}
-
-    			if (!updating_value_5 && dirty & /*input*/ 2) {
-    				updating_value_5 = true;
-    				fieldnumber2_changes.value = /*input*/ ctx[1].sightRadius;
-    				add_flush_callback(() => updating_value_5 = false);
-    			}
-
-    			fieldnumber2.$set(fieldnumber2_changes);
     			const fieldaudiopicker_changes = {};
 
     			if (dirty & /*$$scope*/ 262144) {
     				fieldaudiopicker_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_6 && dirty & /*input*/ 2) {
-    				updating_value_6 = true;
+    			if (!updating_value_5 && dirty & /*input*/ 2) {
+    				updating_value_5 = true;
     				fieldaudiopicker_changes.value = /*input*/ ctx[1].audioOnDeath;
-    				add_flush_callback(() => updating_value_6 = false);
+    				add_flush_callback(() => updating_value_5 = false);
     			}
 
     			fieldaudiopicker.$set(fieldaudiopicker_changes);
+    			const fieldnumber2_changes = {};
+
+    			if (dirty & /*$$scope*/ 262144) {
+    				fieldnumber2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_6 && dirty & /*input*/ 2) {
+    				updating_value_6 = true;
+    				fieldnumber2_changes.value = /*input*/ ctx[1].sightRadius;
+    				add_flush_callback(() => updating_value_6 = false);
+    			}
+
+    			fieldnumber2.$set(fieldnumber2_changes);
     			const fieldabilities_changes = {};
 
     			if (dirty & /*$$scope*/ 262144) {
@@ -28034,8 +28113,8 @@ sprite.wait(5000).then(() => {
     			transition_in(fieldartpicker0.$$.fragment, local);
     			transition_in(fieldartpicker1.$$.fragment, local);
     			transition_in(fieldnumber1.$$.fragment, local);
-    			transition_in(fieldnumber2.$$.fragment, local);
     			transition_in(fieldaudiopicker.$$.fragment, local);
+    			transition_in(fieldnumber2.$$.fragment, local);
     			transition_in(fieldabilities.$$.fragment, local);
     			transition_in(formbuttons.$$.fragment, local);
     			current = true;
@@ -28046,8 +28125,8 @@ sprite.wait(5000).then(() => {
     			transition_out(fieldartpicker0.$$.fragment, local);
     			transition_out(fieldartpicker1.$$.fragment, local);
     			transition_out(fieldnumber1.$$.fragment, local);
-    			transition_out(fieldnumber2.$$.fragment, local);
     			transition_out(fieldaudiopicker.$$.fragment, local);
+    			transition_out(fieldnumber2.$$.fragment, local);
     			transition_out(fieldabilities.$$.fragment, local);
     			transition_out(formbuttons.$$.fragment, local);
     			current = false;
@@ -28063,9 +28142,9 @@ sprite.wait(5000).then(() => {
     			if (detaching) detach_dev(t3);
     			destroy_component(fieldnumber1, detaching);
     			if (detaching) detach_dev(t4);
-    			destroy_component(fieldnumber2, detaching);
-    			if (detaching) detach_dev(t5);
     			destroy_component(fieldaudiopicker, detaching);
+    			if (detaching) detach_dev(t5);
+    			destroy_component(fieldnumber2, detaching);
     			if (detaching) detach_dev(t6);
     			destroy_component(fieldabilities, detaching);
     			if (detaching) detach_dev(t7);
@@ -28304,16 +28383,16 @@ sprite.wait(5000).then(() => {
     		}
     	}
 
-    	function fieldnumber2_value_binding(value) {
-    		if ($$self.$$.not_equal(input.sightRadius, value)) {
-    			input.sightRadius = value;
+    	function fieldaudiopicker_value_binding(value) {
+    		if ($$self.$$.not_equal(input.audioOnDeath, value)) {
+    			input.audioOnDeath = value;
     			$$invalidate(1, input);
     		}
     	}
 
-    	function fieldaudiopicker_value_binding(value) {
-    		if ($$self.$$.not_equal(input.audioOnDeath, value)) {
-    			input.audioOnDeath = value;
+    	function fieldnumber2_value_binding(value) {
+    		if ($$self.$$.not_equal(input.sightRadius, value)) {
+    			input.sightRadius = value;
     			$$invalidate(1, input);
     		}
     	}
@@ -28381,8 +28460,8 @@ sprite.wait(5000).then(() => {
     		fieldartpicker0_value_binding,
     		fieldartpicker1_value_binding,
     		fieldnumber1_value_binding,
-    		fieldnumber2_value_binding,
     		fieldaudiopicker_value_binding,
+    		fieldnumber2_value_binding,
     		fieldabilities_value_binding,
     		delete_handler,
     		submit_handler,
@@ -75165,7 +75244,7 @@ sprite.wait(5000).then(() => {
     }
 
     class LivingSprite extends Container {
-      constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths) {
+      constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
         super();
         this.world = world;
         this.getEnemies = getEnemies;
@@ -75174,6 +75253,8 @@ sprite.wait(5000).then(() => {
         this.y = y;
 
         this.abilities = abilities;
+
+        this.audioOnDeath = audioOnDeath;
 
         this.sortableChildren = true;
         this.config = config;
@@ -75411,12 +75492,13 @@ sprite.wait(5000).then(() => {
         this.health = Math.max(0, this.health - damage);
         this.drawHealthBar();
         if (this.health <= 0) {
-          if (this.config.audioOnDeath) {
-            audioService.play(this.config.audioOnDeath.data.base64);
-          }
-          this.parent.removeChild(this);
+          this.playAudioOnDeath();
           this.destroy();
         }
+      }
+
+      playAudioOnDeath() {
+        if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64);
       }
 
       heal(damage) {
@@ -75498,8 +75580,8 @@ sprite.wait(5000).then(() => {
     }
 
     class Player extends LivingSprite {
-      constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths, rendererWidth, rendererHeight) {
-        super(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths);
+      constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, rendererWidth, rendererHeight) {
+        super(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths);
         this.drawAbilityBar(0, rendererHeight / 2);
       }
 
@@ -75587,6 +75669,7 @@ sprite.wait(5000).then(() => {
         this.health = Math.max(0, this.health - damage);
         this.drawHealthBar();
         if (this.health <= 0) {
+          this.playAudioOnDeath();
           this.setTint(0xff0000);
           this.dead = true;
         }
@@ -75594,8 +75677,8 @@ sprite.wait(5000).then(() => {
     }
 
     class Enemy extends LivingSprite {
-      constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
-        super(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths);
+      constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
+        super(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths);
 
         // render a little sight radius circle
         if (showSightRadius) {
@@ -78490,12 +78573,12 @@ sprite.wait(5000).then(() => {
 
     		for (const enemyConfig of level.enemies) {
     			const e = $enemies.find(e => e.id == enemyConfig.id);
-    			e.audioOnDeath = $audio.find(au => au.id == e.audioOnDeath);
 
     			const enemy = new Enemy(world,
     			// function to get enemies for enemies
     				() => [player],
     			e,
+    			$audio.find(au => au.id == e.audioOnDeath),
     			buildGraphics(e.graphics),
     			buildAbilities(e.abilities),
     			enemyConfig.x * gridSize + gridSize / 2,
@@ -78542,11 +78625,13 @@ sprite.wait(5000).then(() => {
     			// create player
     			if (playable && $characters.length > 0) {
     				const charConfig = JSON.parse(JSON.stringify($characters[0]));
+    				const audioOnDeath = $audio.find(au => au.id === charConfig.audioOnDeath);
 
     				player = new Player(world,
     				// function to get enemies for player
     					() => world.enemyContainer?.children.filter(e => e.config != null),
     				charConfig,
+    				audioOnDeath,
     				buildGraphics(charConfig.graphics),
     				buildAbilities(charConfig.abilities),
     				1.5 * gridSize,

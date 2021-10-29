@@ -41,10 +41,11 @@ export const Cold = {
 export const Fire = {
   name: 'Fire',
   color: 0xf72702,
-  applyDamage: (source, target, ability, isDirectHit) => {
+  applyDamage: (source, target, ability, isDirectHit, projectile) => {
     // check if target is fire immune
     // tint target red
     // fire / smoke particles on target?
+
     applySimpleDamage(target, ability, isDirectHit)
   },
 }
@@ -71,8 +72,7 @@ export const Poison = {
     let ticks = poisonDuration / tickInterval
     const damageMultiplierPerTick = tickInterval / poisonDuration
 
-    Poison.tick(target, ability, isDirectHit, damageMultiplierPerTick)
-
+    target.setTint(Poison.color)
     const interval = setInterval(() => {
       if (ticks == 0 || target == null || target.health <= 0) {
         if (target?.health > 0) target.resetTint()
@@ -84,11 +84,9 @@ export const Poison = {
       }
     }, tickInterval)
   },
-
-  tick() {},
 }
 
-function applySimpleDamage(target, ability, isDirectHit, damageMultiplier) {
+function applySimpleDamage(target, ability, isDirectHit, damageMultiplier = 1.0) {
   if (isDirectHit && ability.damage > 0) {
     target.takeDamage(ability.damage * damageMultiplier)
   } else if (!isDirectHit && ability.areaDamage > 0) {

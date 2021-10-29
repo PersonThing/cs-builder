@@ -2,8 +2,8 @@ import * as PIXI from 'pixi.js'
 import LivingSprite from './LivingSprite.js'
 
 export default class Enemy extends LivingSprite {
-  constructor(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
-    super(world, getEnemies, config, graphics, abilities, x, y, levelGrid, showPaths)
+  constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
+    super(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
 
     // render a little sight radius circle
     if (showSightRadius) {

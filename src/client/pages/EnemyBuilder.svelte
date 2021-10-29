@@ -19,8 +19,8 @@
         <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
         <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
         <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">Health</FieldNumber>
-        <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">Sight radius (pixels)</FieldNumber>
         <FieldAudioPicker bind:value={input.audioOnDeath}>Audio on death</FieldAudioPicker>
+        <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">Sight radius (pixels)</FieldNumber>
         <FieldAbilities bind:value={input.abilities} keyAssignable={false}>Abilities</FieldAbilities>
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
       </Form>
