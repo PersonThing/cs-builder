@@ -22,7 +22,7 @@ export default class Item extends PIXI.Sprite {
     const customOnCollisionHandler = Function('item', 'sprite', 'world', 'PIXI', parseKidScript(itemConfig.onCollision))
     this.onCollision = (sprite, world) => {
       if (this.audioOnCollision?.data?.base64) {
-        audioService.play(this.audioOnCollision.data.base64)
+        audioService.play(this.audioOnCollision.data.base64, this.audioOnCollision.start)
       }
       customOnCollisionHandler(this, sprite, world, PIXI)
     }

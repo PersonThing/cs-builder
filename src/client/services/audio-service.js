@@ -1,29 +1,29 @@
-const blobCache = {}
+const audioCache = {}
 
 export default {
-  getUrl(base64) {
+  parseAudio(base64) {
     return new Promise((resolve, reject) => {
       if (base64 == null) reject()
-
-      if (blobCache[base64]) resolve(blobCache[base64])
-
+      if (audioCache[base64]) resolve(audioCache[base64])
       fetch(base64)
         .then(res => res.blob())
         .then(blob => {
+          const src = URL.createObjectURL(blob)
           const value = {
-            base64,
-            url: URL.createObjectURL(blob),
+            blob,
+            src,
           }
-          blobCache[base64] = value
+          audioCache[base64] = value
           resolve(value)
         })
     })
   },
 
-  play(base64) {
-    this.getUrl(base64).then(response => {
-      const audio = new Audio(response.url)
-      audio.currentTime = 0.2
+  play(base64, start = 0) {
+    start = parseFloat(start) ?? 0
+    return this.parseAudio(base64).then(au => {
+      const audio = new Audio(au.src)
+      audio.currentTime = start
       audio.play()
     })
   },

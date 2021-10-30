@@ -17,21 +17,19 @@
         <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
         <div class="form-group">
           <label>Audio</label>
-          <div class="flex-row flex-align-center">
-            {#if !isRecording}
-              <button class="btn btn-warning" type="button" on:click={startRecording}>{input.data ? 'Redo recording' : 'Start recording'}</button>
-            {:else}
-              <button class="btn btn-warning" type="button" on:click={stopRecording}>Stop recording</button>
-            {/if}
-
-            {#if input.data}
-              <button class="btn btn-success" type="button" on:click={playRecording}>Play</button>
-              <!-- <audio> tag works too, but doesn't let you quickly play / preview like play button does ^
-              might be nice for recording dialog / longer stuff though
-              <audio src={computedAudioUrl} controls /> -->
-            {/if}
-          </div>
+          {#if !isRecording}
+            <button class="btn btn-warning" type="button" on:click={startRecording}>{input.data ? 'Redo recording' : 'Start recording'}</button>
+          {:else}
+            <button class="btn btn-warning" type="button" on:click={stopRecording}>Stop recording</button>
+          {/if}
         </div>
+        {#if input.data}
+          <div class="form-group">
+            <label>Start {input.start} / {input.duration}</label>
+            <input type="range" min="0" max={input.duration} step="0.1" bind:value={input.start} />
+            <button class="btn btn-success" type="button" on:click={playRecording}>Play</button>
+          </div>
+        {/if}
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
       </Form>
     </div>
@@ -45,18 +43,35 @@
   import FormButtons from '../components/FormButtons.svelte'
   import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
   import audioService from '../services/audio-service.js'
+  import getBlobDuration from 'get-blob-duration'
 
   export let params = {}
   let input = null
   let itemTypeBuilder
 
+  $: _base64 = input?.data?.base64
+
+  $: if (_base64 != null) setDuration()
+
+  function setDuration() {
+    // get the duration of the audio.. gotta be a better way to do this, but this works for now
+    audioService.parseAudio(_base64).then(au => {
+      getBlobDuration(au.blob).then(dur => {
+        input.duration = dur
+        input.start = input.start < input.duration ? input.start : 0
+      })
+    })
+  }
+
   const itemTemplate = {
     name: '',
     data: null,
+    duration: null,
+    start: 0,
   }
 
   function playRecording() {
-    audioService.play(input.data.base64)
+    audioService.play(input.data.base64, input.start)
   }
 
   function getItemGraphic(item) {

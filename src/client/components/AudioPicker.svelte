@@ -2,7 +2,7 @@
   {option.name}
 </InputSelect>
 {#if selected}
-  <button class="btn btn-default" type="button" on:click={() => preview(selected.data.base64)}>Play</button>
+  <button class="btn btn-default" type="button" on:click={() => preview(selected)}>Play</button>
   <a href="#/audio/{value}" class="ml-1">Edit {selected.name} audio</a>
 {/if}
 
@@ -27,7 +27,7 @@
 
   $: selected = options?.find(o => o.value == value)
 
-  function preview(base64) {
-    audioService.play(base64)
+  function preview(audio) {
+    audioService.play(audio.data.base64, audio.start)
   }
 </script>

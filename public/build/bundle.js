@@ -2201,6 +2201,10 @@ var app = (function () {
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+    function getDefaultExportFromCjs (x) {
+    	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+    }
+
     function createCommonjsModule(fn) {
       var module = { exports: {} };
     	return fn(module, module.exports), module.exports;
@@ -17176,34 +17180,34 @@ var app = (function () {
     	}
     }
 
-    const blobCache = {};
+    const audioCache = {};
 
     var audioService = {
-      getUrl(base64) {
+      parseAudio(base64) {
         return new Promise((resolve, reject) => {
           if (base64 == null) reject();
-
-          if (blobCache[base64]) resolve(blobCache[base64]);
-
+          if (audioCache[base64]) resolve(audioCache[base64]);
           fetch(base64)
             .then(res => res.blob())
             .then(blob => {
+              const src = URL.createObjectURL(blob);
               const value = {
-                base64,
-                url: URL.createObjectURL(blob),
+                blob,
+                src,
               };
-              blobCache[base64] = value;
+              audioCache[base64] = value;
               resolve(value);
             });
         })
       },
 
-      play(base64) {
-        this.getUrl(base64).then(response => {
-          const audio = new Audio(response.url);
-          audio.currentTime = 0.2;
+      play(base64, start = 0) {
+        start = parseFloat(start) ?? 0;
+        return this.parseAudio(base64).then(au => {
+          const audio = new Audio(au.src);
+          audio.currentTime = start;
           audio.play();
-        });
+        })
       },
 
       startRecording() {
@@ -17236,6 +17240,817 @@ var app = (function () {
       },
     };
 
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {
+        "default": obj
+      };
+    }
+
+    var interopRequireDefault = _interopRequireDefault;
+
+    /**
+     * Copyright (c) 2014-present, Facebook, Inc.
+     *
+     * This source code is licensed under the MIT license found in the
+     * LICENSE file in the root directory of this source tree.
+     */
+
+    var runtime_1 = createCommonjsModule(function (module) {
+    var runtime = (function (exports) {
+
+      var Op = Object.prototype;
+      var hasOwn = Op.hasOwnProperty;
+      var undefined$1; // More compressible than void 0.
+      var $Symbol = typeof Symbol === "function" ? Symbol : {};
+      var iteratorSymbol = $Symbol.iterator || "@@iterator";
+      var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+      var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+      function define(obj, key, value) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+        return obj[key];
+      }
+      try {
+        // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+        define({}, "");
+      } catch (err) {
+        define = function(obj, key, value) {
+          return obj[key] = value;
+        };
+      }
+
+      function wrap(innerFn, outerFn, self, tryLocsList) {
+        // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+        var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+        var generator = Object.create(protoGenerator.prototype);
+        var context = new Context(tryLocsList || []);
+
+        // The ._invoke method unifies the implementations of the .next,
+        // .throw, and .return methods.
+        generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+        return generator;
+      }
+      exports.wrap = wrap;
+
+      // Try/catch helper to minimize deoptimizations. Returns a completion
+      // record like context.tryEntries[i].completion. This interface could
+      // have been (and was previously) designed to take a closure to be
+      // invoked without arguments, but in all the cases we care about we
+      // already have an existing method we want to call, so there's no need
+      // to create a new function object. We can even get away with assuming
+      // the method takes exactly one argument, since that happens to be true
+      // in every case, so we don't have to touch the arguments object. The
+      // only additional allocation required is the completion record, which
+      // has a stable shape and so hopefully should be cheap to allocate.
+      function tryCatch(fn, obj, arg) {
+        try {
+          return { type: "normal", arg: fn.call(obj, arg) };
+        } catch (err) {
+          return { type: "throw", arg: err };
+        }
+      }
+
+      var GenStateSuspendedStart = "suspendedStart";
+      var GenStateSuspendedYield = "suspendedYield";
+      var GenStateExecuting = "executing";
+      var GenStateCompleted = "completed";
+
+      // Returning this object from the innerFn has the same effect as
+      // breaking out of the dispatch switch statement.
+      var ContinueSentinel = {};
+
+      // Dummy constructor functions that we use as the .constructor and
+      // .constructor.prototype properties for functions that return Generator
+      // objects. For full spec compliance, you may wish to configure your
+      // minifier not to mangle the names of these two functions.
+      function Generator() {}
+      function GeneratorFunction() {}
+      function GeneratorFunctionPrototype() {}
+
+      // This is a polyfill for %IteratorPrototype% for environments that
+      // don't natively support it.
+      var IteratorPrototype = {};
+      define(IteratorPrototype, iteratorSymbol, function () {
+        return this;
+      });
+
+      var getProto = Object.getPrototypeOf;
+      var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+      if (NativeIteratorPrototype &&
+          NativeIteratorPrototype !== Op &&
+          hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+        // This environment has a native %IteratorPrototype%; use it instead
+        // of the polyfill.
+        IteratorPrototype = NativeIteratorPrototype;
+      }
+
+      var Gp = GeneratorFunctionPrototype.prototype =
+        Generator.prototype = Object.create(IteratorPrototype);
+      GeneratorFunction.prototype = GeneratorFunctionPrototype;
+      define(Gp, "constructor", GeneratorFunctionPrototype);
+      define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+      GeneratorFunction.displayName = define(
+        GeneratorFunctionPrototype,
+        toStringTagSymbol,
+        "GeneratorFunction"
+      );
+
+      // Helper for defining the .next, .throw, and .return methods of the
+      // Iterator interface in terms of a single ._invoke method.
+      function defineIteratorMethods(prototype) {
+        ["next", "throw", "return"].forEach(function(method) {
+          define(prototype, method, function(arg) {
+            return this._invoke(method, arg);
+          });
+        });
+      }
+
+      exports.isGeneratorFunction = function(genFun) {
+        var ctor = typeof genFun === "function" && genFun.constructor;
+        return ctor
+          ? ctor === GeneratorFunction ||
+            // For the native GeneratorFunction constructor, the best we can
+            // do is to check its .name property.
+            (ctor.displayName || ctor.name) === "GeneratorFunction"
+          : false;
+      };
+
+      exports.mark = function(genFun) {
+        if (Object.setPrototypeOf) {
+          Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+        } else {
+          genFun.__proto__ = GeneratorFunctionPrototype;
+          define(genFun, toStringTagSymbol, "GeneratorFunction");
+        }
+        genFun.prototype = Object.create(Gp);
+        return genFun;
+      };
+
+      // Within the body of any async function, `await x` is transformed to
+      // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+      // `hasOwn.call(value, "__await")` to determine if the yielded value is
+      // meant to be awaited.
+      exports.awrap = function(arg) {
+        return { __await: arg };
+      };
+
+      function AsyncIterator(generator, PromiseImpl) {
+        function invoke(method, arg, resolve, reject) {
+          var record = tryCatch(generator[method], generator, arg);
+          if (record.type === "throw") {
+            reject(record.arg);
+          } else {
+            var result = record.arg;
+            var value = result.value;
+            if (value &&
+                typeof value === "object" &&
+                hasOwn.call(value, "__await")) {
+              return PromiseImpl.resolve(value.__await).then(function(value) {
+                invoke("next", value, resolve, reject);
+              }, function(err) {
+                invoke("throw", err, resolve, reject);
+              });
+            }
+
+            return PromiseImpl.resolve(value).then(function(unwrapped) {
+              // When a yielded Promise is resolved, its final value becomes
+              // the .value of the Promise<{value,done}> result for the
+              // current iteration.
+              result.value = unwrapped;
+              resolve(result);
+            }, function(error) {
+              // If a rejected Promise was yielded, throw the rejection back
+              // into the async generator function so it can be handled there.
+              return invoke("throw", error, resolve, reject);
+            });
+          }
+        }
+
+        var previousPromise;
+
+        function enqueue(method, arg) {
+          function callInvokeWithMethodAndArg() {
+            return new PromiseImpl(function(resolve, reject) {
+              invoke(method, arg, resolve, reject);
+            });
+          }
+
+          return previousPromise =
+            // If enqueue has been called before, then we want to wait until
+            // all previous Promises have been resolved before calling invoke,
+            // so that results are always delivered in the correct order. If
+            // enqueue has not been called before, then it is important to
+            // call invoke immediately, without waiting on a callback to fire,
+            // so that the async generator function has the opportunity to do
+            // any necessary setup in a predictable way. This predictability
+            // is why the Promise constructor synchronously invokes its
+            // executor callback, and why async functions synchronously
+            // execute code before the first await. Since we implement simple
+            // async functions in terms of async generators, it is especially
+            // important to get this right, even though it requires care.
+            previousPromise ? previousPromise.then(
+              callInvokeWithMethodAndArg,
+              // Avoid propagating failures to Promises returned by later
+              // invocations of the iterator.
+              callInvokeWithMethodAndArg
+            ) : callInvokeWithMethodAndArg();
+        }
+
+        // Define the unified helper method that is used to implement .next,
+        // .throw, and .return (see defineIteratorMethods).
+        this._invoke = enqueue;
+      }
+
+      defineIteratorMethods(AsyncIterator.prototype);
+      define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+        return this;
+      });
+      exports.AsyncIterator = AsyncIterator;
+
+      // Note that simple async functions are implemented on top of
+      // AsyncIterator objects; they just return a Promise for the value of
+      // the final result produced by the iterator.
+      exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+        if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+        var iter = new AsyncIterator(
+          wrap(innerFn, outerFn, self, tryLocsList),
+          PromiseImpl
+        );
+
+        return exports.isGeneratorFunction(outerFn)
+          ? iter // If outerFn is a generator, return the full iterator.
+          : iter.next().then(function(result) {
+              return result.done ? result.value : iter.next();
+            });
+      };
+
+      function makeInvokeMethod(innerFn, self, context) {
+        var state = GenStateSuspendedStart;
+
+        return function invoke(method, arg) {
+          if (state === GenStateExecuting) {
+            throw new Error("Generator is already running");
+          }
+
+          if (state === GenStateCompleted) {
+            if (method === "throw") {
+              throw arg;
+            }
+
+            // Be forgiving, per 25.3.3.3.3 of the spec:
+            // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+            return doneResult();
+          }
+
+          context.method = method;
+          context.arg = arg;
+
+          while (true) {
+            var delegate = context.delegate;
+            if (delegate) {
+              var delegateResult = maybeInvokeDelegate(delegate, context);
+              if (delegateResult) {
+                if (delegateResult === ContinueSentinel) continue;
+                return delegateResult;
+              }
+            }
+
+            if (context.method === "next") {
+              // Setting context._sent for legacy support of Babel's
+              // function.sent implementation.
+              context.sent = context._sent = context.arg;
+
+            } else if (context.method === "throw") {
+              if (state === GenStateSuspendedStart) {
+                state = GenStateCompleted;
+                throw context.arg;
+              }
+
+              context.dispatchException(context.arg);
+
+            } else if (context.method === "return") {
+              context.abrupt("return", context.arg);
+            }
+
+            state = GenStateExecuting;
+
+            var record = tryCatch(innerFn, self, context);
+            if (record.type === "normal") {
+              // If an exception is thrown from innerFn, we leave state ===
+              // GenStateExecuting and loop back for another invocation.
+              state = context.done
+                ? GenStateCompleted
+                : GenStateSuspendedYield;
+
+              if (record.arg === ContinueSentinel) {
+                continue;
+              }
+
+              return {
+                value: record.arg,
+                done: context.done
+              };
+
+            } else if (record.type === "throw") {
+              state = GenStateCompleted;
+              // Dispatch the exception by looping back around to the
+              // context.dispatchException(context.arg) call above.
+              context.method = "throw";
+              context.arg = record.arg;
+            }
+          }
+        };
+      }
+
+      // Call delegate.iterator[context.method](context.arg) and handle the
+      // result, either by returning a { value, done } result from the
+      // delegate iterator, or by modifying context.method and context.arg,
+      // setting context.delegate to null, and returning the ContinueSentinel.
+      function maybeInvokeDelegate(delegate, context) {
+        var method = delegate.iterator[context.method];
+        if (method === undefined$1) {
+          // A .throw or .return when the delegate iterator has no .throw
+          // method always terminates the yield* loop.
+          context.delegate = null;
+
+          if (context.method === "throw") {
+            // Note: ["return"] must be used for ES3 parsing compatibility.
+            if (delegate.iterator["return"]) {
+              // If the delegate iterator has a return method, give it a
+              // chance to clean up.
+              context.method = "return";
+              context.arg = undefined$1;
+              maybeInvokeDelegate(delegate, context);
+
+              if (context.method === "throw") {
+                // If maybeInvokeDelegate(context) changed context.method from
+                // "return" to "throw", let that override the TypeError below.
+                return ContinueSentinel;
+              }
+            }
+
+            context.method = "throw";
+            context.arg = new TypeError(
+              "The iterator does not provide a 'throw' method");
+          }
+
+          return ContinueSentinel;
+        }
+
+        var record = tryCatch(method, delegate.iterator, context.arg);
+
+        if (record.type === "throw") {
+          context.method = "throw";
+          context.arg = record.arg;
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        var info = record.arg;
+
+        if (! info) {
+          context.method = "throw";
+          context.arg = new TypeError("iterator result is not an object");
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        if (info.done) {
+          // Assign the result of the finished delegate to the temporary
+          // variable specified by delegate.resultName (see delegateYield).
+          context[delegate.resultName] = info.value;
+
+          // Resume execution at the desired location (see delegateYield).
+          context.next = delegate.nextLoc;
+
+          // If context.method was "throw" but the delegate handled the
+          // exception, let the outer generator proceed normally. If
+          // context.method was "next", forget context.arg since it has been
+          // "consumed" by the delegate iterator. If context.method was
+          // "return", allow the original .return call to continue in the
+          // outer generator.
+          if (context.method !== "return") {
+            context.method = "next";
+            context.arg = undefined$1;
+          }
+
+        } else {
+          // Re-yield the result returned by the delegate method.
+          return info;
+        }
+
+        // The delegate iterator is finished, so forget it and continue with
+        // the outer generator.
+        context.delegate = null;
+        return ContinueSentinel;
+      }
+
+      // Define Generator.prototype.{next,throw,return} in terms of the
+      // unified ._invoke helper method.
+      defineIteratorMethods(Gp);
+
+      define(Gp, toStringTagSymbol, "Generator");
+
+      // A Generator should always return itself as the iterator object when the
+      // @@iterator function is called on it. Some browsers' implementations of the
+      // iterator prototype chain incorrectly implement this, causing the Generator
+      // object to not be returned from this call. This ensures that doesn't happen.
+      // See https://github.com/facebook/regenerator/issues/274 for more details.
+      define(Gp, iteratorSymbol, function() {
+        return this;
+      });
+
+      define(Gp, "toString", function() {
+        return "[object Generator]";
+      });
+
+      function pushTryEntry(locs) {
+        var entry = { tryLoc: locs[0] };
+
+        if (1 in locs) {
+          entry.catchLoc = locs[1];
+        }
+
+        if (2 in locs) {
+          entry.finallyLoc = locs[2];
+          entry.afterLoc = locs[3];
+        }
+
+        this.tryEntries.push(entry);
+      }
+
+      function resetTryEntry(entry) {
+        var record = entry.completion || {};
+        record.type = "normal";
+        delete record.arg;
+        entry.completion = record;
+      }
+
+      function Context(tryLocsList) {
+        // The root entry object (effectively a try statement without a catch
+        // or a finally block) gives us a place to store values thrown from
+        // locations where there is no enclosing try statement.
+        this.tryEntries = [{ tryLoc: "root" }];
+        tryLocsList.forEach(pushTryEntry, this);
+        this.reset(true);
+      }
+
+      exports.keys = function(object) {
+        var keys = [];
+        for (var key in object) {
+          keys.push(key);
+        }
+        keys.reverse();
+
+        // Rather than returning an object with a next method, we keep
+        // things simple and return the next function itself.
+        return function next() {
+          while (keys.length) {
+            var key = keys.pop();
+            if (key in object) {
+              next.value = key;
+              next.done = false;
+              return next;
+            }
+          }
+
+          // To avoid creating an additional object, we just hang the .value
+          // and .done properties off the next function object itself. This
+          // also ensures that the minifier will not anonymize the function.
+          next.done = true;
+          return next;
+        };
+      };
+
+      function values(iterable) {
+        if (iterable) {
+          var iteratorMethod = iterable[iteratorSymbol];
+          if (iteratorMethod) {
+            return iteratorMethod.call(iterable);
+          }
+
+          if (typeof iterable.next === "function") {
+            return iterable;
+          }
+
+          if (!isNaN(iterable.length)) {
+            var i = -1, next = function next() {
+              while (++i < iterable.length) {
+                if (hasOwn.call(iterable, i)) {
+                  next.value = iterable[i];
+                  next.done = false;
+                  return next;
+                }
+              }
+
+              next.value = undefined$1;
+              next.done = true;
+
+              return next;
+            };
+
+            return next.next = next;
+          }
+        }
+
+        // Return an iterator with no values.
+        return { next: doneResult };
+      }
+      exports.values = values;
+
+      function doneResult() {
+        return { value: undefined$1, done: true };
+      }
+
+      Context.prototype = {
+        constructor: Context,
+
+        reset: function(skipTempReset) {
+          this.prev = 0;
+          this.next = 0;
+          // Resetting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          this.sent = this._sent = undefined$1;
+          this.done = false;
+          this.delegate = null;
+
+          this.method = "next";
+          this.arg = undefined$1;
+
+          this.tryEntries.forEach(resetTryEntry);
+
+          if (!skipTempReset) {
+            for (var name in this) {
+              // Not sure about the optimal order of these conditions:
+              if (name.charAt(0) === "t" &&
+                  hasOwn.call(this, name) &&
+                  !isNaN(+name.slice(1))) {
+                this[name] = undefined$1;
+              }
+            }
+          }
+        },
+
+        stop: function() {
+          this.done = true;
+
+          var rootEntry = this.tryEntries[0];
+          var rootRecord = rootEntry.completion;
+          if (rootRecord.type === "throw") {
+            throw rootRecord.arg;
+          }
+
+          return this.rval;
+        },
+
+        dispatchException: function(exception) {
+          if (this.done) {
+            throw exception;
+          }
+
+          var context = this;
+          function handle(loc, caught) {
+            record.type = "throw";
+            record.arg = exception;
+            context.next = loc;
+
+            if (caught) {
+              // If the dispatched exception was caught by a catch block,
+              // then let that catch block handle the exception normally.
+              context.method = "next";
+              context.arg = undefined$1;
+            }
+
+            return !! caught;
+          }
+
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            var record = entry.completion;
+
+            if (entry.tryLoc === "root") {
+              // Exception thrown outside of any try block that could handle
+              // it, so set the completion value of the entire function to
+              // throw the exception.
+              return handle("end");
+            }
+
+            if (entry.tryLoc <= this.prev) {
+              var hasCatch = hasOwn.call(entry, "catchLoc");
+              var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+              if (hasCatch && hasFinally) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                } else if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else if (hasCatch) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                }
+
+              } else if (hasFinally) {
+                if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else {
+                throw new Error("try statement without catch or finally");
+              }
+            }
+          }
+        },
+
+        abrupt: function(type, arg) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc <= this.prev &&
+                hasOwn.call(entry, "finallyLoc") &&
+                this.prev < entry.finallyLoc) {
+              var finallyEntry = entry;
+              break;
+            }
+          }
+
+          if (finallyEntry &&
+              (type === "break" ||
+               type === "continue") &&
+              finallyEntry.tryLoc <= arg &&
+              arg <= finallyEntry.finallyLoc) {
+            // Ignore the finally entry if control is not jumping to a
+            // location outside the try/catch block.
+            finallyEntry = null;
+          }
+
+          var record = finallyEntry ? finallyEntry.completion : {};
+          record.type = type;
+          record.arg = arg;
+
+          if (finallyEntry) {
+            this.method = "next";
+            this.next = finallyEntry.finallyLoc;
+            return ContinueSentinel;
+          }
+
+          return this.complete(record);
+        },
+
+        complete: function(record, afterLoc) {
+          if (record.type === "throw") {
+            throw record.arg;
+          }
+
+          if (record.type === "break" ||
+              record.type === "continue") {
+            this.next = record.arg;
+          } else if (record.type === "return") {
+            this.rval = this.arg = record.arg;
+            this.method = "return";
+            this.next = "end";
+          } else if (record.type === "normal" && afterLoc) {
+            this.next = afterLoc;
+          }
+
+          return ContinueSentinel;
+        },
+
+        finish: function(finallyLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.finallyLoc === finallyLoc) {
+              this.complete(entry.completion, entry.afterLoc);
+              resetTryEntry(entry);
+              return ContinueSentinel;
+            }
+          }
+        },
+
+        "catch": function(tryLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc === tryLoc) {
+              var record = entry.completion;
+              if (record.type === "throw") {
+                var thrown = record.arg;
+                resetTryEntry(entry);
+              }
+              return thrown;
+            }
+          }
+
+          // The context.catch method must only be called with a location
+          // argument that corresponds to a known catch block.
+          throw new Error("illegal catch attempt");
+        },
+
+        delegateYield: function(iterable, resultName, nextLoc) {
+          this.delegate = {
+            iterator: values(iterable),
+            resultName: resultName,
+            nextLoc: nextLoc
+          };
+
+          if (this.method === "next") {
+            // Deliberately forget the last sent value so that we don't
+            // accidentally pass it on to the delegate.
+            this.arg = undefined$1;
+          }
+
+          return ContinueSentinel;
+        }
+      };
+
+      // Regardless of whether this script is executing as a CommonJS module
+      // or not, return the runtime object so that we can declare the variable
+      // regeneratorRuntime in the outer scope, which allows this module to be
+      // injected easily by `bin/regenerator --include-runtime script.js`.
+      return exports;
+
+    }(
+      // If this script is executing as a CommonJS module, use module.exports
+      // as the regeneratorRuntime namespace. Otherwise create a new empty
+      // object. Either way, the resulting object will be used to initialize
+      // the regeneratorRuntime variable at the top of this file.
+      module.exports 
+    ));
+
+    try {
+      regeneratorRuntime = runtime;
+    } catch (accidentalStrictMode) {
+      // This module should not be running in strict mode, so the above
+      // assignment should always work unless something is misconfigured. Just
+      // in case runtime.js accidentally runs in strict mode, in modern engines
+      // we can explicitly access globalThis. In older engines we can escape
+      // strict mode using a global Function call. This could conceivably fail
+      // if a Content Security Policy forbids using Function, but in that case
+      // the proper solution is to fix the accidental strict mode problem. If
+      // you've misconfigured your bundler to force strict mode and applied a
+      // CSP to forbid Function, and you're not willing to fix either of those
+      // problems, please detail your unique predicament in a GitHub issue.
+      if (typeof globalThis === "object") {
+        globalThis.regeneratorRuntime = runtime;
+      } else {
+        Function("r", "regeneratorRuntime = r")(runtime);
+      }
+    }
+    });
+
+    var regenerator = runtime_1;
+
+    function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+      try {
+        var info = gen[key](arg);
+        var value = info.value;
+      } catch (error) {
+        reject(error);
+        return;
+      }
+
+      if (info.done) {
+        resolve(value);
+      } else {
+        Promise.resolve(value).then(_next, _throw);
+      }
+    }
+
+    function _asyncToGenerator(fn) {
+      return function () {
+        var self = this,
+            args = arguments;
+        return new Promise(function (resolve, reject) {
+          var gen = fn.apply(self, args);
+
+          function _next(value) {
+            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+          }
+
+          function _throw(err) {
+            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+          }
+
+          _next(undefined);
+        });
+      };
+    }
+
+    var asyncToGenerator = _asyncToGenerator;
+
+    var getBlobDuration_1 = createCommonjsModule(function (module, exports) {
+    Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=getBlobDuration;var _regenerator=interopRequireDefault(regenerator),_asyncToGenerator2=interopRequireDefault(asyncToGenerator);function getBlobDuration(e){return _getBlobDuration.apply(this,arguments)}function _getBlobDuration(){return (_getBlobDuration=(0, _asyncToGenerator2.default)(_regenerator.default.mark(function e(r){var t,n;return _regenerator.default.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return t=document.createElement("video"),n=new Promise(function(e,r){t.addEventListener("loadedmetadata",function(){t.duration===1/0?(t.currentTime=Number.MAX_SAFE_INTEGER,t.ontimeupdate=function(){t.ontimeupdate=null,e(t.duration),t.currentTime=0;}):e(t.duration);}),t.onerror=function(e){return r(e.target.error)};}),t.src="string"==typeof r||r instanceof String?r:window.URL.createObjectURL(r),e.abrupt("return",n);case 4:case"end":return e.stop()}},e)}))).apply(this,arguments)}
+
+    });
+
+    var getBlobDuration = /*@__PURE__*/getDefaultExportFromCjs(getBlobDuration_1);
+
     /* src\client\pages\AudioBuilder.svelte generated by Svelte v3.38.3 */
     const file$k = "src\\client\\pages\\AudioBuilder.svelte";
 
@@ -17253,7 +18068,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	form.$on("submit", /*submit_handler*/ ctx[10]);
+    	form.$on("submit", /*submit_handler*/ ctx[12]);
 
     	const block = {
     		c: function create() {
@@ -17270,7 +18085,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input, isRecording*/ 57358) {
+    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input, isRecording*/ 458766) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -17329,7 +18144,7 @@ var app = (function () {
     	return block;
     }
 
-    // (23:12) {:else}
+    // (22:10) {:else}
     function create_else_block$2(ctx) {
     	let button;
     	let mounted;
@@ -17341,7 +18156,7 @@ var app = (function () {
     			button.textContent = "Stop recording";
     			attr_dev(button, "class", "btn btn-warning");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$k, 23, 14, 828);
+    			add_location(button, file$k, 22, 12, 768);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -17363,14 +18178,14 @@ var app = (function () {
     		block,
     		id: create_else_block$2.name,
     		type: "else",
-    		source: "(23:12) {:else}",
+    		source: "(22:10) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (21:12) {#if !isRecording}
+    // (20:10) {#if !isRecording}
     function create_if_block_2$2(ctx) {
     	let button;
 
@@ -17388,7 +18203,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(button, "class", "btn btn-warning");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$k, 21, 14, 659);
+    			add_location(button, file$k, 20, 12, 603);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -17415,40 +18230,95 @@ var app = (function () {
     		block,
     		id: create_if_block_2$2.name,
     		type: "if",
-    		source: "(21:12) {#if !isRecording}",
+    		source: "(20:10) {#if !isRecording}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:12) {#if input.data}
+    // (26:8) {#if input.data}
     function create_if_block_1$2(ctx) {
+    	let div;
+    	let label;
+    	let t0;
+    	let t1_value = /*input*/ ctx[1].start + "";
+    	let t1;
+    	let t2;
+    	let t3_value = /*input*/ ctx[1].duration + "";
+    	let t3;
+    	let t4;
+    	let input_1;
+    	let input_1_max_value;
+    	let t5;
     	let button;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
+    			div = element("div");
+    			label = element("label");
+    			t0 = text("Start ");
+    			t1 = text(t1_value);
+    			t2 = text(" / ");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			input_1 = element("input");
+    			t5 = space();
     			button = element("button");
     			button.textContent = "Play";
+    			add_location(label, file$k, 27, 12, 971);
+    			attr_dev(input_1, "type", "range");
+    			attr_dev(input_1, "min", "0");
+    			attr_dev(input_1, "max", input_1_max_value = /*input*/ ctx[1].duration);
+    			attr_dev(input_1, "step", "0.1");
+    			add_location(input_1, file$k, 28, 12, 1038);
     			attr_dev(button, "class", "btn btn-success");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$k, 27, 14, 989);
+    			add_location(button, file$k, 29, 12, 1139);
+    			attr_dev(div, "class", "form-group");
+    			add_location(div, file$k, 26, 10, 933);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, button, anchor);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, label);
+    			append_dev(label, t0);
+    			append_dev(label, t1);
+    			append_dev(label, t2);
+    			append_dev(label, t3);
+    			append_dev(div, t4);
+    			append_dev(div, input_1);
+    			set_input_value(input_1, /*input*/ ctx[1].start);
+    			append_dev(div, t5);
+    			append_dev(div, button);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*playRecording*/ ctx[5], false, false, false);
+    				dispose = [
+    					listen_dev(input_1, "change", /*input_1_change_input_handler*/ ctx[10]),
+    					listen_dev(input_1, "input", /*input_1_change_input_handler*/ ctx[10]),
+    					listen_dev(button, "click", /*playRecording*/ ctx[5], false, false, false)
+    				];
+
     				mounted = true;
     			}
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*input*/ 2 && t1_value !== (t1_value = /*input*/ ctx[1].start + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*input*/ 2 && t3_value !== (t3_value = /*input*/ ctx[1].duration + "")) set_data_dev(t3, t3_value);
+
+    			if (dirty & /*input*/ 2 && input_1_max_value !== (input_1_max_value = /*input*/ ctx[1].duration)) {
+    				attr_dev(input_1, "max", input_1_max_value);
+    			}
+
+    			if (dirty & /*input*/ 2) {
+    				set_input_value(input_1, /*input*/ ctx[1].start);
+    			}
+    		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(button);
+    			if (detaching) detach_dev(div);
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -17456,7 +18326,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(27:12) {#if input.data}",
+    		source: "(26:8) {#if input.data}",
     		ctx
     	});
 
@@ -17468,17 +18338,16 @@ var app = (function () {
     	let fieldtext;
     	let updating_value;
     	let t0;
-    	let div1;
+    	let div;
     	let label;
     	let t2;
-    	let div0;
     	let t3;
     	let t4;
     	let formbuttons;
     	let current;
 
     	function fieldtext_value_binding(value) {
-    		/*fieldtext_value_binding*/ ctx[8](value);
+    		/*fieldtext_value_binding*/ ctx[9](value);
     	}
 
     	let fieldtext_props = {
@@ -17506,44 +18375,40 @@ var app = (function () {
 
     	formbuttons = new FormButtons({
     			props: {
-    				hasChanges: /*hasChanges*/ ctx[13],
-    				canDelete: !/*isAdding*/ ctx[14]
+    				hasChanges: /*hasChanges*/ ctx[16],
+    				canDelete: !/*isAdding*/ ctx[17]
     			},
     			$$inline: true
     		});
 
-    	formbuttons.$on("delete", /*delete_handler*/ ctx[9]);
+    	formbuttons.$on("delete", /*delete_handler*/ ctx[11]);
 
     	const block = {
     		c: function create() {
     			create_component(fieldtext.$$.fragment);
     			t0 = space();
-    			div1 = element("div");
+    			div = element("div");
     			label = element("label");
     			label.textContent = "Audio";
     			t2 = space();
-    			div0 = element("div");
     			if_block0.c();
     			t3 = space();
     			if (if_block1) if_block1.c();
     			t4 = space();
     			create_component(formbuttons.$$.fragment);
     			add_location(label, file$k, 18, 10, 539);
-    			attr_dev(div0, "class", "flex-row flex-align-center");
-    			add_location(div0, file$k, 19, 10, 571);
-    			attr_dev(div1, "class", "form-group");
-    			add_location(div1, file$k, 17, 8, 503);
+    			attr_dev(div, "class", "form-group");
+    			add_location(div, file$k, 17, 8, 503);
     		},
     		m: function mount(target, anchor) {
     			mount_component(fieldtext, target, anchor);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, div1, anchor);
-    			append_dev(div1, label);
-    			append_dev(div1, t2);
-    			append_dev(div1, div0);
-    			if_block0.m(div0, null);
-    			append_dev(div0, t3);
-    			if (if_block1) if_block1.m(div0, null);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, label);
+    			append_dev(div, t2);
+    			if_block0.m(div, null);
+    			insert_dev(target, t3, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
     			insert_dev(target, t4, anchor);
     			mount_component(formbuttons, target, anchor);
     			current = true;
@@ -17551,7 +18416,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 32768) {
+    			if (dirty & /*$$scope*/ 262144) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -17571,7 +18436,7 @@ var app = (function () {
 
     				if (if_block0) {
     					if_block0.c();
-    					if_block0.m(div0, t3);
+    					if_block0.m(div, null);
     				}
     			}
 
@@ -17581,7 +18446,7 @@ var app = (function () {
     				} else {
     					if_block1 = create_if_block_1$2(ctx);
     					if_block1.c();
-    					if_block1.m(div0, null);
+    					if_block1.m(t4.parentNode, t4);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
@@ -17589,8 +18454,8 @@ var app = (function () {
     			}
 
     			const formbuttons_changes = {};
-    			if (dirty & /*hasChanges*/ 8192) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[13];
-    			if (dirty & /*isAdding*/ 16384) formbuttons_changes.canDelete = !/*isAdding*/ ctx[14];
+    			if (dirty & /*hasChanges*/ 65536) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[16];
+    			if (dirty & /*isAdding*/ 131072) formbuttons_changes.canDelete = !/*isAdding*/ ctx[17];
     			formbuttons.$set(formbuttons_changes);
     		},
     		i: function intro(local) {
@@ -17607,9 +18472,10 @@ var app = (function () {
     		d: function destroy(detaching) {
     			destroy_component(fieldtext, detaching);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(div);
     			if_block0.d();
-    			if (if_block1) if_block1.d();
+    			if (detaching) detach_dev(t3);
+    			if (if_block1) if_block1.d(detaching);
     			if (detaching) detach_dev(t4);
     			destroy_component(formbuttons, detaching);
     		}
@@ -17698,7 +18564,7 @@ var app = (function () {
     	let current;
 
     	function itemtypebuilder_input_binding(value) {
-    		/*itemtypebuilder_input_binding*/ ctx[12](value);
+    		/*itemtypebuilder_input_binding*/ ctx[14](value);
     	}
 
     	let itemtypebuilder_props = {
@@ -17712,8 +18578,8 @@ var app = (function () {
     		$$slots: {
     			default: [
     				create_default_slot$f,
-    				({ hasChanges, isAdding }) => ({ 13: hasChanges, 14: isAdding }),
-    				({ hasChanges, isAdding }) => (hasChanges ? 8192 : 0) | (isAdding ? 16384 : 0)
+    				({ hasChanges, isAdding }) => ({ 16: hasChanges, 17: isAdding }),
+    				({ hasChanges, isAdding }) => (hasChanges ? 65536 : 0) | (isAdding ? 131072 : 0)
     			]
     		},
     		$$scope: { ctx }
@@ -17728,7 +18594,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	/*itemtypebuilder_binding*/ ctx[11](itemtypebuilder);
+    	/*itemtypebuilder_binding*/ ctx[13](itemtypebuilder);
     	binding_callbacks.push(() => bind$1(itemtypebuilder, "input", itemtypebuilder_input_binding));
 
     	const block = {
@@ -17746,7 +18612,7 @@ var app = (function () {
     			const itemtypebuilder_changes = {};
     			if (dirty & /*params*/ 1) itemtypebuilder_changes.id = /*params*/ ctx[0].id;
 
-    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input, isRecording*/ 57358) {
+    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input, isRecording*/ 458766) {
     				itemtypebuilder_changes.$$scope = { dirty, ctx };
     			}
 
@@ -17768,7 +18634,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			/*itemtypebuilder_binding*/ ctx[11](null);
+    			/*itemtypebuilder_binding*/ ctx[13](null);
     			destroy_component(itemtypebuilder, detaching);
     		}
     	};
@@ -17789,15 +18655,32 @@ var app = (function () {
     }
 
     function instance$l($$self, $$props, $$invalidate) {
+    	let _base64;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("AudioBuilder", slots, []);
     	let { params = {} } = $$props;
     	let input = null;
     	let itemTypeBuilder;
-    	const itemTemplate = { name: "", data: null };
+
+    	function setDuration() {
+    		// get the duration of the audio.. gotta be a better way to do this, but this works for now
+    		audioService.parseAudio(_base64).then(au => {
+    			getBlobDuration(au.blob).then(dur => {
+    				$$invalidate(1, input.duration = dur, input);
+    				$$invalidate(1, input.start = input.start < input.duration ? input.start : 0, input);
+    			});
+    		});
+    	}
+
+    	const itemTemplate = {
+    		name: "",
+    		data: null,
+    		duration: null,
+    		start: 0
+    	};
 
     	function playRecording() {
-    		audioService.play(input.data.base64);
+    		audioService.play(input.data.base64, input.start);
     	}
 
     	let isRecording = false;
@@ -17828,6 +18711,11 @@ var app = (function () {
     		}
     	}
 
+    	function input_1_change_input_handler() {
+    		input.start = to_number(this.value);
+    		$$invalidate(1, input);
+    	}
+
     	const delete_handler = () => itemTypeBuilder.del();
     	const submit_handler = () => itemTypeBuilder.save();
 
@@ -17854,15 +18742,18 @@ var app = (function () {
     		FormButtons,
     		ItemTypeBuilder,
     		audioService,
+    		getBlobDuration,
     		params,
     		input,
     		itemTypeBuilder,
+    		setDuration,
     		itemTemplate,
     		playRecording,
     		getItemGraphic: getItemGraphic$5,
     		isRecording,
     		startRecording,
-    		stopRecording
+    		stopRecording,
+    		_base64
     	});
 
     	$$self.$inject_state = $$props => {
@@ -17870,11 +18761,22 @@ var app = (function () {
     		if ("input" in $$props) $$invalidate(1, input = $$props.input);
     		if ("itemTypeBuilder" in $$props) $$invalidate(2, itemTypeBuilder = $$props.itemTypeBuilder);
     		if ("isRecording" in $$props) $$invalidate(3, isRecording = $$props.isRecording);
+    		if ("_base64" in $$props) $$invalidate(8, _base64 = $$props._base64);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*input*/ 2) {
+    			$$invalidate(8, _base64 = input?.data?.base64);
+    		}
+
+    		if ($$self.$$.dirty & /*_base64*/ 256) {
+    			if (_base64 != null) setDuration();
+    		}
+    	};
 
     	return [
     		params,
@@ -17885,7 +18787,9 @@ var app = (function () {
     		playRecording,
     		startRecording,
     		stopRecording,
+    		_base64,
     		fieldtext_value_binding,
+    		input_1_change_input_handler,
     		delete_handler,
     		submit_handler,
     		itemtypebuilder_binding,
@@ -18489,7 +19393,7 @@ var app = (function () {
     			add_location(button, file$h, 4, 2, 151);
     			attr_dev(a, "href", a_href_value = "#/audio/" + /*value*/ ctx[0]);
     			attr_dev(a, "class", "ml-1");
-    			add_location(a, file$h, 5, 2, 261);
+    			add_location(a, file$h, 5, 2, 249);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -18654,8 +19558,8 @@ var app = (function () {
     	let { name = "audio-picker" } = $$props;
     	let { placeholder = "Select audio" } = $$props;
 
-    	function preview(base64) {
-    		audioService.play(base64);
+    	function preview(audio) {
+    		audioService.play(audio.data.base64, audio.start);
     	}
 
     	const writable_props = ["value", "name", "placeholder"];
@@ -18669,7 +19573,7 @@ var app = (function () {
     		$$invalidate(0, value);
     	}
 
-    	const click_handler = () => preview(selected.data.base64);
+    	const click_handler = () => preview(selected);
 
     	$$self.$$set = $$props => {
     		if ("value" in $$props) $$invalidate(0, value = $$props.value);
@@ -18969,10 +19873,12 @@ var app = (function () {
       name: 'Physical',
       color: 0x4d4d4d,
       applyDamage: (source, target, ability, isDirectHit) => {
+        const totalDamage = getTotalDamage(ability, isDirectHit);
+
         // check if target is physical immune
         // stun target briefly or something?
         // chance to critically hit?
-        applySimpleDamage(target, ability, isDirectHit);
+        target.takeDamage(totalDamage);
       },
     };
 
@@ -18980,17 +19886,18 @@ var app = (function () {
       name: 'Cold',
       color: 0x00aeed,
       applyDamage: (source, target, ability, isDirectHit) => {
+        const totalDamage = getTotalDamage(ability, isDirectHit);
         // check if target is cold immune
         // tint target blue
         // slow?  maybe chance to freeze?
         // ice / cold particles on target?
         target.setTint(Cold.color);
         target.speed *= 0.5;
-        applySimpleDamage(target, ability, isDirectHit);
+        target.takeDamage(totalDamage);
         setTimeout(() => {
           target.speed *= 2;
           target.resetTint();
-        });
+        }, 2000);
       },
     };
 
@@ -18998,21 +19905,40 @@ var app = (function () {
       name: 'Fire',
       color: 0xf72702,
       applyDamage: (source, target, ability, isDirectHit, projectile) => {
+        const totalDamage = getTotalDamage(ability, isDirectHit);
+
         // check if target is fire immune
         // tint target red
         // fire / smoke particles on target?
 
-        applySimpleDamage(target, ability, isDirectHit);
+        // do 50% of the damage right away
+        const halfDamage = totalDamage / 2;
+        target.takeDamage(halfDamage);
+
+        // the other 50% over time
+        const duration = 3000;
+        const tickInterval = 500;
+        const damagePerTick = (halfDamage * tickInterval) / duration;
+        applyTickDamage(target, duration, tickInterval, damagePerTick, Fire.color);
       },
     };
 
     const Lightning = {
       name: 'Lightning',
-      color: 0xadb300,
+      color: 0xfbff26,
       applyDamage: (source, target, ability, isDirectHit) => {
+        const totalDamage = getTotalDamage(ability, isDirectHit);
+
         // check if target is lightning immune
-        // draw a zap graphic around target
-        applySimpleDamage(target, ability, isDirectHit);
+
+        // lightning just tints them and does 1.5x damage for now
+        target.setTint(Lightning.color);
+        target.takeDamage(totalDamage * 1.5);
+        target.speed = 0;
+        setTimeout(() => {
+          target.resetTint();
+          target.speed = target.config.speed;
+        }, 500);
       },
     };
 
@@ -19022,32 +19948,31 @@ var app = (function () {
       applyDamage: (source, target, ability, isDirectHit) => {
         // divide damage over time instead of doing it all at once
         // let's just do all damage over 5s for poison for now
-        const poisonDuration = 5000;
+        const duration = 5000;
         const tickInterval = 500;
-
-        let ticks = poisonDuration / tickInterval;
-        const damageMultiplierPerTick = tickInterval / poisonDuration;
-
-        target.setTint(Poison.color);
-        const interval = setInterval(() => {
-          if (ticks == 0 || target == null || target.health <= 0) {
-            if (target?.health > 0) target.resetTint();
-            clearInterval(interval);
-          } else {
-            target.setTint(Poison.color);
-            applySimpleDamage(target, ability, isDirectHit, damageMultiplierPerTick);
-            ticks--;
-          }
-        }, tickInterval);
+        const totalDamage = getTotalDamage(ability, isDirectHit);
+        const damagePerTick = (totalDamage * tickInterval) / duration;
+        applyTickDamage(target, duration, tickInterval, damagePerTick, Poison.color);
       },
     };
 
-    function applySimpleDamage(target, ability, isDirectHit, damageMultiplier = 1.0) {
-      if (isDirectHit && ability.damage > 0) {
-        target.takeDamage(ability.damage * damageMultiplier);
-      } else if (!isDirectHit && ability.areaDamage > 0) {
-        target.takeDamage(ability.areaDamage * damageMultiplier);
-      }
+    function applyTickDamage(target, duration, tickInterval, damagePerTick, tintColor) {
+      let ticks = duration / tickInterval;
+      target.setTint(tintColor);
+      const damageInterval = setInterval(() => {
+        if (ticks <= 0 || target == null || target.health <= 0) {
+          if (target?.health > 0) target.resetTint();
+          clearInterval(damageInterval);
+        } else {
+          target.setTint(tintColor);
+          target.takeDamage(damagePerTick);
+          ticks--;
+        }
+      }, tickInterval);
+    }
+
+    function getTotalDamage(ability, isDirectHit) {
+      return isDirectHit ? ability.damage : ability.areaDamage
     }
 
     var damageTypes = {
@@ -75223,7 +76148,7 @@ sprite.wait(5000).then(() => {
 
         // if there's audio on hit and we hit something, play it
         if (weHitSomething && this.ability.audioOnHit?.data?.base64) {
-          audioService.play(this.ability.audioOnHit.data.base64);
+          audioService.play(this.ability.audioOnHit.data.base64, this.ability.audioOnHit.start);
         }
 
         if (this.particles) {
@@ -75498,7 +76423,7 @@ sprite.wait(5000).then(() => {
       }
 
       playAudioOnDeath() {
-        if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64);
+        if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64, this.audioOnDeath.start);
       }
 
       heal(damage) {
@@ -75538,7 +76463,7 @@ sprite.wait(5000).then(() => {
 
         // if there's sound, play it
         if (ability.audioOnUse?.data?.base64) {
-          audioService.play(ability.audioOnUse.data.base64);
+          audioService.play(ability.audioOnUse.data.base64, ability.audioOnUse.start);
         }
 
         // temporarily show this ability sprite
@@ -75750,7 +76675,7 @@ sprite.wait(5000).then(() => {
         const customOnCollisionHandler = Function('item', 'sprite', 'world', 'PIXI', parseKidScript(itemConfig.onCollision));
         this.onCollision = (sprite, world) => {
           if (this.audioOnCollision?.data?.base64) {
-            audioService.play(this.audioOnCollision.data.base64);
+            audioService.play(this.audioOnCollision.data.base64, this.audioOnCollision.start);
           }
           customOnCollisionHandler(this, sprite, world, PIXI);
         };

@@ -258,7 +258,7 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   playAudioOnDeath() {
-    if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64)
+    if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64, this.audioOnDeath.start)
   }
 
   heal(damage) {
@@ -298,7 +298,7 @@ export default class LivingSprite extends PIXI.Container {
 
     // if there's sound, play it
     if (ability.audioOnUse?.data?.base64) {
-      audioService.play(ability.audioOnUse.data.base64)
+      audioService.play(ability.audioOnUse.data.base64, ability.audioOnUse.start)
     }
 
     // temporarily show this ability sprite

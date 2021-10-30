@@ -124,7 +124,7 @@ export default class Projectile extends PIXI.Container {
 
     // if there's audio on hit and we hit something, play it
     if (weHitSomething && this.ability.audioOnHit?.data?.base64) {
-      audioService.play(this.ability.audioOnHit.data.base64)
+      audioService.play(this.ability.audioOnHit.data.base64, this.ability.audioOnHit.start)
     }
 
     if (this.particles) {
