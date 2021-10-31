@@ -1,7 +1,8 @@
-import { writable } from 'svelte/store'
+import Cookies from 'js-cookie'
 import api from '../services/api.js'
 import io from 'socket.io-client'
 import projectItemTypes from '../../server/project-item-types'
+import { writable } from 'svelte/store'
 
 const socket = io('/')
 
@@ -16,8 +17,9 @@ export const project = createActiveProjectStore()
 project.subscribe(p => {
   $project = p
 })
-export const projects = createProjectsStore()
 
+export const user = createUserStore()
+export const projects = createProjectsStore()
 export const art = createProjectItemStore('art')
 export const abilities = createProjectItemStore('abilities')
 export const audio = createProjectItemStore('audio')
@@ -29,6 +31,49 @@ export const particles = createProjectItemStore('particles')
 export const tiles = createProjectItemStore('tiles')
 
 const stores = { art, abilities, audio, characters, enemies, items, levels, particles, tiles }
+
+function createUserStore() {
+  const { subscribe, set, update } = writable(null)
+
+  // see if we already have a token in cookies
+  const token = Cookies.get('access_token')
+  if (token != null) {
+    // parse jwt and populate user from that initially
+    const jwt = JSON.parse(atob(token.split('.')[1]))
+    set(jwt)
+  }
+
+  return {
+    subscribe,
+    login(username, password) {
+      return api.users.login(username, password).then(user => {
+        set(user)
+        // socket.setUser(user)
+        return user
+      })
+    },
+
+    logout() {
+      api.users.logout().then(() => {
+        set(null)
+      })
+    },
+
+    apiGet() {
+      return api.users.get().then(res => {
+        set(res)
+        return res
+      })
+    },
+
+    apiUpdate(user) {
+      return api.users.update(user).then(res => {
+        set(res)
+        return res
+      })
+    },
+  }
+}
 
 function createActiveProjectStore() {
   const { subscribe, set, update } = writable({})

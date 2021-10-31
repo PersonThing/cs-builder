@@ -3,13 +3,20 @@
     <div>
       <h1>CSBuilder</h1>
       <div class="px1">
-        <strong>
-          {$project.name}
-        </strong>
+        {#if $user}
+          <strong>{$user.username}</strong>
+          <a href="/#/" title="Log out" on:click={() => user.logout()}>Log out</a>
 
-        <a href="/#/" title="Change project" class:active={active == 'projects'}>
-          {$project?.name ? 'Change' : 'Select'} project
-        </a>
+          {#if $project}
+            <strong>
+              {$project.name}
+            </strong>
+          {/if}
+
+          <a href="/#/" title="Change project" class:active={active == 'projects'}>
+            {$project?.name ? 'Change' : 'Select'} project
+          </a>
+        {/if}
       </div>
     </div>
     <div class="nav">
@@ -39,7 +46,7 @@
 </div>
 
 <script>
-  import { project } from '../stores/project-stores'
+  import { user, project } from '../stores/project-stores'
 
   export let active
 </script>

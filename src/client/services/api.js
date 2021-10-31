@@ -4,7 +4,7 @@ function status(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
   } else {
-    return Promise.reject(new Error(response.statusText))
+    return Promise.reject(response)
   }
 }
 
@@ -17,6 +17,9 @@ function _fetch(url, options = {}) {
     'Content-Type': 'application/json',
     ...options.headers,
   }
+  // if ($user?.token) {
+  //   options.headers.Authorization = `Bearer ${$user.token}`
+  // }
   if (options.body != null) options.body = JSON.stringify(options.body)
   return fetch(url, options).then(status).then(json)
 }
@@ -30,15 +33,21 @@ function stripProjectOfItems(project) {
 }
 
 const Api = {
-  // login(name, password) {
-  //   return _fetch('/api/login', {
-  //     method: 'POST',
-  //     body: {
-  //       name,
-  //       password,
-  //     },
-  //   })
-  // },
+  users: {
+    login(username, password) {
+      return _fetch('/api/login', {
+        method: 'POST',
+        body: {
+          username,
+          password,
+        },
+      })
+    },
+
+    logout() {
+      return _fetch('/api/logout')
+    },
+  },
 
   // return list of all projects on server
   // add search param here when list gets big

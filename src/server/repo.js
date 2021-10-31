@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb'
+import bcrypt from 'bcrypt'
 
 const mongoConnectionString = 'mongodb://localhost:27017/cs-builder'
 const client = new MongoClient(mongoConnectionString)
@@ -7,6 +8,54 @@ class Repo {
   connect() {
     this.db = client.db('cs-builder')
     return client.connect()
+  }
+
+  // seedUsers() {
+  //   this.insert('users', {
+  //     username: 'tim',
+  //     password: this.hashPassword('tim', ''),
+  //   })
+  //   this.insert('users', {
+  //     username: 'clay',
+  //     password: this.hashPassword('clay', ''),
+  //   })
+  //   this.insert('users', {
+  //     username: 'sam',
+  //     password: this.hashPassword('sam', ''),
+  //   })
+  // }
+
+  getUserByNameAndPassword(username, password) {
+    return this.db
+      .collection('users')
+      .findOne({
+        username: username,
+      })
+      .then(user => {
+        if (user && bcrypt.compareSync(password, user.password)) {
+          return {
+            userid: user._id,
+            username: user.username,
+          }
+        }
+        return null
+      })
+  }
+
+  hashPassword(username, password) {
+    const salt = bcrypt.genSaltSync(username.length)
+    return bcrypt.hashSync(password, salt)
+  }
+
+  createUser(username, password) {
+    this.insert('users', {
+      username: username,
+      password: this.hashPassword(username, password),
+    })
+  }
+
+  updateUserPassword(username, password) {
+    return this.update('users', { username: username }, { password: this.hashPassword(username, password) })
   }
 
   insert(collectionName, object) {

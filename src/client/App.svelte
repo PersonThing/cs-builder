@@ -1,15 +1,18 @@
-{#if $project == null}
+{#if $user == null}
+  <Login />
+{:else if $project == null}
   <SelectProject />
 {:else}
   <Router {routes} />
 {/if}
 
 <svelte:head>
-  <title>{$project != null ? $project.name : 'CSBuilder'}</title>
+  <title>{$project?.name ?? 'CSBuilder'}</title>
 </svelte:head>
 
 <script>
   import Router from 'svelte-spa-router'
+  import Login from './pages/Login.svelte'
   import ArtBuilder from './pages/ArtBuilder.svelte'
   import AudioBuilder from './pages/AudioBuilder.svelte'
   import AbilityBuilder from './pages/AbilityBuilder.svelte'
@@ -23,7 +26,7 @@
   import SelectProject from './pages/SelectProject.svelte'
   import ProjectSettings from './pages/ProjectSettings.svelte'
 
-  import { project } from './stores/project-stores'
+  import { user, project } from './stores/project-stores'
 
   const routes = {
     '/': SelectProject,
