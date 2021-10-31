@@ -1,11 +1,12 @@
 import * as PIXI from 'pixi.js'
+
+import { enemies, items, tiles } from '../stores/project-stores.js'
+
 import Enemy from '../classes/Enemy.js'
-import Tile from '../classes/Tile.js'
 import Item from '../classes/Item.js'
 import LevelGrid from '../classes/LevelGrid.js'
 import ParticleEmitter from './ParticleEmitter'
-
-import { tiles, items, enemies } from '../stores/project-stores.js'
+import Tile from '../classes/Tile.js'
 
 let $tiles, $items, $enemies
 tiles.subscribe(t => ($tiles = t))
@@ -41,61 +42,6 @@ export default class World extends PIXI.Container {
 
     this.particleContainer = new PIXI.Container()
     this.addChild(this.particleContainer)
-
-    this.redrawTiles()
-    this.redrawItems()
-    this.redrawEnemies()
-  }
-
-  redrawTiles() {
-    emptyContainer(this.tileContainer)
-    for (const tileConfig of this.level.tiles) {
-      const bc = $tiles.find(b => b.id == tileConfig.id)
-      if (bc == null) continue
-      const tile = new Tile(
-        bc,
-        $art.find(a => a.id == bc.graphic),
-        tileConfig,
-        gridSize
-      )
-      this.tileContainer.addChild(tile)
-    }
-  }
-
-  redrawItems() {
-    emptyContainer(this.itemContainer)
-    for (const itemConfig of this.level.items) {
-      const ic = $items.find(i => i.id == itemConfig.id)
-      const item = new Item(
-        ic,
-        $art.find(a => a.id == ic.graphics.still),
-        $audio.find(au => au.id == ic.audioOnCollision),
-        itemConfig,
-        gridSize
-      )
-      this.itemContainer.addChild(item)
-    }
-  }
-
-  redrawEnemies() {
-    emptyContainer(this.enemyContainer)
-    for (const enemyConfig of this.level.enemies) {
-      const e = $enemies.find(e => e.id == enemyConfig.id)
-      const enemy = new Enemy(
-        this,
-        // function to get enemies for enemies
-        () => [player],
-        e,
-        buildGraphics(e.graphics),
-        buildAbilities(e.abilities),
-        enemyConfig.x * gridSize + gridSize / 2,
-        enemyConfig.y * gridSize + gridSize / 2,
-        this.levelGrid,
-        this.level.showPaths,
-        this.level.showSightRadius
-      )
-      this.enemyContainer.addChild(enemy)
-    }
   }
 
   makeParticles(art) {

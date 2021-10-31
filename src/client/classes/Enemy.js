@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+
 import LivingSprite from './LivingSprite.js'
 
 export default class Enemy extends LivingSprite {
@@ -27,6 +28,8 @@ export default class Enemy extends LivingSprite {
           closestAbilityInRange.nextFire = time + 1000 / closestAbilityInRange.usePerSecond
           setTimeout(() => closestAbilityInRange.use(closestVisibleEnemy.enemy), 500)
         }
+
+        this.setTarget(closestVisibleEnemy.enemy)
       }
       this.nextGcd = time + this.config.gcd || 0
     }

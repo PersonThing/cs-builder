@@ -5552,39 +5552,39 @@ var app = (function () {
     			attr_dev(a0, "href", "/#/project");
     			attr_dev(a0, "class", "svelte-oumzzv");
     			toggle_class(a0, "active", /*active*/ ctx[0] == "project");
-    			add_location(a0, file$D, 16, 8, 401);
+    			add_location(a0, file$D, 16, 8, 417);
     			attr_dev(a1, "href", "/#/art");
     			attr_dev(a1, "class", "svelte-oumzzv");
     			toggle_class(a1, "active", /*active*/ ctx[0] == "art");
-    			add_location(a1, file$D, 17, 8, 486);
+    			add_location(a1, file$D, 17, 8, 503);
     			attr_dev(a2, "href", "/#/tiles");
     			attr_dev(a2, "class", "svelte-oumzzv");
     			toggle_class(a2, "active", /*active*/ ctx[0] == "tiles");
-    			add_location(a2, file$D, 18, 8, 550);
+    			add_location(a2, file$D, 18, 8, 568);
     			attr_dev(a3, "href", "/#/items");
     			attr_dev(a3, "class", "svelte-oumzzv");
     			toggle_class(a3, "active", /*active*/ ctx[0] == "items");
-    			add_location(a3, file$D, 19, 8, 620);
+    			add_location(a3, file$D, 19, 8, 639);
     			attr_dev(a4, "href", "/#/characters");
     			attr_dev(a4, "class", "svelte-oumzzv");
     			toggle_class(a4, "active", /*active*/ ctx[0] == "characters");
-    			add_location(a4, file$D, 20, 8, 690);
+    			add_location(a4, file$D, 20, 8, 710);
     			attr_dev(a5, "href", "/#/enemies");
     			attr_dev(a5, "class", "svelte-oumzzv");
     			toggle_class(a5, "active", /*active*/ ctx[0] == "enemies");
-    			add_location(a5, file$D, 22, 8, 866);
+    			add_location(a5, file$D, 22, 8, 888);
     			attr_dev(a6, "href", "/#/abilities");
     			attr_dev(a6, "class", "svelte-oumzzv");
     			toggle_class(a6, "active", /*active*/ ctx[0] == "abilities");
-    			add_location(a6, file$D, 23, 8, 942);
+    			add_location(a6, file$D, 23, 8, 965);
     			attr_dev(a7, "href", "/#/audio");
     			attr_dev(a7, "class", "svelte-oumzzv");
     			toggle_class(a7, "active", /*active*/ ctx[0] == "audio");
-    			add_location(a7, file$D, 24, 8, 1024);
+    			add_location(a7, file$D, 24, 8, 1048);
     			attr_dev(a8, "href", "/#/levels");
     			attr_dev(a8, "class", "svelte-oumzzv");
     			toggle_class(a8, "active", /*active*/ ctx[0] == "levels");
-    			add_location(a8, file$D, 25, 8, 1094);
+    			add_location(a8, file$D, 25, 8, 1119);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a0, anchor);
@@ -5720,22 +5720,22 @@ var app = (function () {
     			div4 = element("div");
     			if (default_slot) default_slot.c();
     			attr_dev(h1, "class", "svelte-oumzzv");
-    			add_location(h1, file$D, 3, 6, 63);
-    			add_location(strong, file$D, 5, 8, 114);
+    			add_location(h1, file$D, 3, 6, 66);
+    			add_location(strong, file$D, 5, 8, 119);
     			attr_dev(a, "href", "/#/");
     			attr_dev(a, "title", "Change project");
     			attr_dev(a, "class", "svelte-oumzzv");
     			toggle_class(a, "active", /*active*/ ctx[0] == "projects");
-    			add_location(a, file$D, 9, 8, 176);
+    			add_location(a, file$D, 9, 8, 185);
     			attr_dev(div0, "class", "px1");
-    			add_location(div0, file$D, 4, 6, 88);
-    			add_location(div1, file$D, 2, 4, 51);
+    			add_location(div0, file$D, 4, 6, 92);
+    			add_location(div1, file$D, 2, 4, 53);
     			attr_dev(div2, "class", "nav svelte-oumzzv");
-    			add_location(div2, file$D, 14, 4, 348);
+    			add_location(div2, file$D, 14, 4, 362);
     			attr_dev(div3, "class", "header svelte-oumzzv");
-    			add_location(div3, file$D, 1, 2, 26);
+    			add_location(div3, file$D, 1, 2, 27);
     			attr_dev(div4, "class", "main");
-    			add_location(div4, file$D, 30, 2, 1194);
+    			add_location(div4, file$D, 30, 2, 1224);
     			attr_dev(div5, "class", "container svelte-oumzzv");
     			add_location(div5, file$D, 0, 0, 0);
     		},
@@ -8344,7 +8344,7 @@ var app = (function () {
     var eraseIcon = { eraser: { width: 1920, height: 1792, paths: [{ d: 'M896 1408l336-384h-768l-336 384h768zM1909 331q15 34 9.5 71.5t-30.5 65.5l-896 1024q-38 44-96 44h-768q-38 0-69.5-20.5t-47.5-54.5q-15-34-9.5-71.5t30.5-65.5l896-1024q38-44 96-44h768q38 0 69.5 20.5t47.5 54.5z' }] } };
 
     /*!
-     * Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com
+     * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
      * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
      */
     var faExchangeAlt = {
@@ -77208,7 +77208,7 @@ sprite.wait(5000).then(() => {
           this.pathLine.parent.removeChild(this.pathLine);
           this.pathLine.destroy();
         }
-        this.parent.removeChild(this);
+        this.parent?.removeChild(this);
         super.destroy();
       }
 
@@ -77370,6 +77370,8 @@ sprite.wait(5000).then(() => {
               closestAbilityInRange.nextFire = time + 1000 / closestAbilityInRange.usePerSecond;
               setTimeout(() => closestAbilityInRange.use(closestVisibleEnemy.enemy), 500);
             }
+
+            this.setTarget(closestVisibleEnemy.enemy);
           }
           this.nextGcd = time + this.config.gcd || 0;
         }
@@ -78265,7 +78267,7 @@ sprite.wait(5000).then(() => {
                 }
             }
             if (blocked) {
-                var lastValidCoord = path[i - 1];
+                lastValidCoord = path[i - 1];
                 newPath.push(lastValidCoord);
                 sx = lastValidCoord[0];
                 sy = lastValidCoord[1];

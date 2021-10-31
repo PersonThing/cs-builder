@@ -1,7 +1,8 @@
 import * as PIXI from 'pixi.js'
-import makeArtSprite from '../services/make-art-sprite.js'
-import audioService from '../services/audio-service.js'
+
 import Ability from '../classes/Ability.js'
+import audioService from '../services/audio-service.js'
+import makeArtSprite from '../services/make-art-sprite.js'
 
 export default class LivingSprite extends PIXI.Container {
   constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
@@ -324,7 +325,7 @@ export default class LivingSprite extends PIXI.Container {
       this.pathLine.parent.removeChild(this.pathLine)
       this.pathLine.destroy()
     }
-    this.parent.removeChild(this)
+    this.parent?.removeChild(this)
     super.destroy()
   }
 
