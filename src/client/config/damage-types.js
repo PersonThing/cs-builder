@@ -44,7 +44,7 @@ export const Cold = {
 export const Fire = {
   name: 'Fire',
   color: 0xf72702,
-  applyDamage: (source, target, ability, isDirectHit, projectile) => {
+  applyDamage: (source, target, ability, isDirectHit) => {
     const totalDamage = getTotalDamage(ability, isDirectHit)
 
     // check if target is fire immune
@@ -57,7 +57,7 @@ export const Fire = {
 
     // the other 50% over time
     const duration = 3000
-    const tickInterval = 500
+    const tickInterval = 50
     const damagePerTick = (halfDamage * tickInterval) / duration
     applyTickDamage(target, duration, tickInterval, damagePerTick, Fire.color)
   },
@@ -89,7 +89,7 @@ export const Poison = {
     // divide damage over time instead of doing it all at once
     // let's just do all damage over 5s for poison for now
     const duration = 5000
-    const tickInterval = 500
+    const tickInterval = 50
     const totalDamage = getTotalDamage(ability, isDirectHit)
     const damagePerTick = (totalDamage * tickInterval) / duration
     applyTickDamage(target, duration, tickInterval, damagePerTick, Poison.color)

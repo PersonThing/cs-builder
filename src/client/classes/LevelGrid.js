@@ -46,7 +46,8 @@ export default class LevelGrid {
    * @param {x, y coordinates} to
    * @returns
    */
-  findPath(from, to) {
+  findPath(from, to, maxRange) {
+    // TODO: respect max range
     const [startX, startY] = this.toGridCoordinates(from)
     const [goalX, goalY] = this.toGridCoordinates(to)
 

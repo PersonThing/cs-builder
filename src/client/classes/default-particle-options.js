@@ -41,9 +41,9 @@ const oldStyleConfig = {
     max: 0.8,
   },
   blendMode: 'normal',
-  frequency: 0.01,
+  frequency: 0.04,
   emitterLifetime: -1,
-  maxParticles: 500,
+  maxParticles: 300,
   pos: {
     x: 0,
     y: -15,

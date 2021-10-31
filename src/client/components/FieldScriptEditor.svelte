@@ -9,7 +9,7 @@ https://playground.babylonjs.com/
   </label>
 
   <pre bind:this={element} class="lang-javascript">{value}</pre>
-  <pre>{parseKidScript(value)}</pre>
+  <!-- <pre>{parseKidScript(value)}</pre> -->
 
   {#if examples}
     <div class="examples">
@@ -23,7 +23,7 @@ https://playground.babylonjs.com/
   import { CodeJar } from 'codejar'
   import { onMount, onDestroy } from 'svelte'
   import { withLineNumbers } from 'codejar/linenumbers'
-  import parseKidScript from '../services/kid-script-parser.js'
+  // import parseKidScript from '../services/kid-script-parser.js'
   import Prism from 'prismjs'
 
   export let value = null
@@ -36,7 +36,6 @@ https://playground.babylonjs.com/
 
   // when value changes externally, refresh jar
   $: if (jar != null && value != jar.toString()) {
-    console.log('updating jar to value')
     jar.updateCode(value)
   }
 

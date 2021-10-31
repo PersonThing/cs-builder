@@ -1,5 +1,6 @@
 <InputSelect {name} bind:value let:option {options} filterable={options.length > 3} {placeholder}>
-  <div style="color: #{option.color.toString(16)}" class="strong">{option.name}</div>
+  <div style="background-color: #{option.color.toString(16)}; width: 30px; height: 30px;" />
+  {option.name}
 </InputSelect>
 
 <script>

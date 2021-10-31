@@ -1,23 +1,25 @@
 import * as PIXI from 'pixi.js'
 import makeArtSprite from '../services/make-art-sprite.js'
-import Projectile from './Projectile.js'
 import audioService from '../services/audio-service.js'
+import Ability from '../classes/Ability.js'
 
 export default class LivingSprite extends PIXI.Container {
   constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
     super()
     this.world = world
     this.getEnemies = getEnemies
+    this.config = config
 
     this.x = x
     this.y = y
 
-    this.abilities = abilities
+    this.abilities = abilities.map(a => new Ability(this, a))
+    this.config.gcd = this.config.gcd != null ? this.config.gcd : 500
+    this.nextGcd = 0
 
     this.audioOnDeath = audioOnDeath
 
     this.sortableChildren = true
-    this.config = config
     this.config.width = graphics.still.width // for radius collision checking
     this.speed = config.speed // so events can modify without affecting config
 
@@ -63,6 +65,8 @@ export default class LivingSprite extends PIXI.Container {
     this.healthBar.width = this.nameTag.width
     this.healthBar.x = -this.nameTag.width / 2
     this.healthBar.y = this.nameTag.y - 10
+
+    this.onTicks = []
   }
 
   bringToFront() {
@@ -82,24 +86,37 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites.moving.visible = this.isMoving && !this.useAttackingSprite
   }
 
-  canSee(target) {
+  getDistanceIfVisible(target, range, source) {
+    source = source ?? this
     // check distance between ourself and target
     // a^2 + b^2 = c^2
     // a = distance in x
-    const a = this.x - target.x
+    const a = source.x - target.x
 
     // b = distance in y
-    const b = this.y - target.y
+    const b = source.y - target.y
 
     // c = distance in straight line from x1,y1 to x2,y2
     const c = Math.sqrt(a * a + b * b)
 
     // check if we can find a visible path to target
-    return c <= this.config.sightRadius && this.levelGrid.canSee(this.position, target)
-      ? {
-          distance: c,
-        }
-      : false
+    return c <= range && this.levelGrid.canSee(source, target) ? c : null
+  }
+
+  canSee(sprite) {
+    return this.getDistanceIfVisible(sprite, this.config.sightRange) != null
+  }
+
+  getClosestVisibleEnemyInRange(range, source) {
+    source = source ?? this
+    return this.getEnemies()
+      .map(e => ({
+        enemy: e,
+        distance: this.getDistanceIfVisible(e, range, source),
+      }))
+      .filter(e => e.distance != null)
+      .sort((a, b) => a.distance - b.distance)
+      .shift()
   }
 
   clearPathAfterCurrentTarget() {
@@ -129,17 +146,24 @@ export default class LivingSprite extends PIXI.Container {
     this.targetNextPathPoint()
   }
 
+  getClosestPathablePoint(target, range) {
+    const path = this.levelGrid.findPath(this.position, target, range)
+    return path.pop()
+  }
+
   targetNextPathPoint() {
     this.target = this.path.shift()
     if (this.target == null) {
       this.endTarget = null
     } else {
-      this.rotateToward(this.target.x, this.target.y)
+      this.rotateToward(this.target)
     }
   }
 
-  rotateToward(x, y) {
-    this.sprites.rotation = Math.atan2(y - this.y, x - this.x) + (90 * Math.PI) / 180
+  rotateToward({ x, y }) {
+    if (x != null && y != null && this.sprites != null) {
+      this.sprites.rotation = Math.atan2(y - this.y, x - this.x) + (90 * Math.PI) / 180
+    }
   }
 
   getSquaredDistanceTo(sprite) {
@@ -180,7 +204,12 @@ export default class LivingSprite extends PIXI.Container {
     return this.sprites.scale.x
   }
 
+  addOnTick(callback) {
+    this.onTicks.push(callback)
+  }
+
   onTick() {
+    this.onTicks.forEach(() => callback())
     this.moveTowardTarget()
     this.showCorrectSprites()
   }
@@ -248,6 +277,14 @@ export default class LivingSprite extends PIXI.Container {
     })
   }
 
+  drawLine(source, target) {
+    const g = new PIXI.Graphics()
+    g.lineStyle(5, 0xffffff, 0.5)
+    g.moveTo(source.x, source.y)
+    g.lineTo(target.x, target.y)
+    this.parent.addChild(g)
+  }
+
   takeDamage(damage) {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
@@ -291,23 +328,13 @@ export default class LivingSprite extends PIXI.Container {
     super.destroy()
   }
 
-  fireAbility(time, ability, targetX, targetY) {
-    ability.nextFire = time + 1000 / ability.attacksPerSecond
-
-    this.rotateToward(targetX, targetY)
-
-    // if there's sound, play it
-    if (ability.audioOnUse?.data?.base64) {
-      audioService.play(ability.audioOnUse.data.base64, ability.audioOnUse.start)
-    }
-
-    // temporarily show this ability sprite
-    if (ability.characterArt) {
+  useAbilityCharacterArt(abilityCharacterArt) {
+    if (abilityCharacterArt) {
       if (this.sprites.attacking) {
         this.sprites.removeChild(this.sprites.attacking)
         this.sprites.attacking.destroy()
       }
-      this.sprites.attacking = makeArtSprite(ability.characterArt)
+      this.sprites.attacking = makeArtSprite(abilityCharacterArt)
       this.sprites.attacking.loop = false
       this.sprites.attacking.anchor.set(0.5)
       // TODO: setting on characterAbility to say whether to ONLY show this sprite, or layer it on top
@@ -318,9 +345,6 @@ export default class LivingSprite extends PIXI.Container {
       }
       this.sprites.addChild(this.sprites.attacking)
     }
-
-    const projectile = new Projectile(this.world, this, this.getEnemies, ability, this.x, this.y, targetX, targetY, time)
-    this.world.projectileContainer.addChild(projectile)
   }
 
   waitUntil(conditionFunc) {

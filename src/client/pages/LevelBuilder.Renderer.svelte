@@ -61,11 +61,15 @@
   let keys = {}
   function onKeyDown(event) {
     const key = event.key
-    if (abilityKeys.includes(key)) keys[key] = true
+    if (abilityKeys.includes(key)) {
+      keys[key] = true
+    }
   }
   function onKeyUp(event) {
     const key = event.key
-    if (abilityKeys.includes(key)) keys[key] = false
+    if (abilityKeys.includes(key)) {
+      keys[key] = false
+    }
 
     if (key == 'Enter') {
       player.dead = false
@@ -244,11 +248,14 @@
   function buildAbilities(charAbilities) {
     return charAbilities.map(charAbility => {
       const ability = $abilities.find(ab => ab.id == charAbility.id)
+      const graphics = {}
+      Object.keys(ability.graphics).forEach(k => {
+        graphics[k] = $art.find(a => a.id == ability.graphics[k])
+      })
       return {
         ...ability,
         key: charAbility.key,
-        projectileArt: $art.find(ar => ar.id == ability.graphic),
-        particleArt: $art.find(ar => ar.id == ability.particleGraphic),
+        graphics,
         characterArt: $art.find(ar => ar.id == charAbility.characterArt),
         audioOnUse: $audio.find(au => au.id == ability.audioOnUse),
         audioOnHit: $audio.find(au => au.id == ability.audioOnHit),
@@ -280,22 +287,27 @@
         return
       }
       const time = performance.now()
-      player?.onTick(time, keys, pointerPosition)
-      centerViewOnPlayer()
-      world?.enemyContainer?.children
-        .filter(e => e.config != null)
-        .forEach(enemy => {
-          // if enemy can see player, target player
-          // otherwise clear their target
-          if (enemy.canSee(player)) {
-            enemy.setTarget(player)
-          } else {
-            enemy.clearPathAfterCurrentTarget()
-          }
-          enemy.onTick(time)
-        })
-
-      world?.projectileContainer?.children.forEach(projectile => projectile.onTick(time))
+      if (player && world.enemyContainer) {
+        player.onTick(
+          time,
+          Object.keys(keys).filter(k => keys[k]),
+          pointerPosition
+        )
+        centerViewOnPlayer()
+        world.enemyContainer.children
+          .filter(e => e.config != null)
+          .forEach(enemy => {
+            // if enemy can see player, target player
+            // otherwise clear their target
+            if (enemy.canSee(player)) {
+              enemy.setTarget(player)
+            } else {
+              enemy.clearPathAfterCurrentTarget()
+            }
+            enemy.onTick(time)
+          })
+        world.projectileContainer.children.forEach(projectile => projectile.onTick(time))
+      }
       checkCollisions()
     }
   }

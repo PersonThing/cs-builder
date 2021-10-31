@@ -2,7 +2,7 @@ import * as particles from '@pixi/particle-emitter'
 import buildParticleEmitterConfig from './default-particle-options'
 
 export default class ParticleEmitter {
-  constructor(texture, container, rotation, time) {
+  constructor(texture, container, rotation) {
     this.emitter = new particles.Emitter(container, buildParticleEmitterConfig(texture))
     this.emitter.emit = true
     this.emitter.rotation = rotation
