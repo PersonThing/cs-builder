@@ -1,7 +1,7 @@
 <AppLayout active="project">
   <div class="grow">
     <Form on:submit={save}>
-      <div class="p1">
+      <div class="p10">
         <FieldText name="name" bind:value={input.name}>Name</FieldText>
         <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>Pixel size</FieldNumber>
         <!-- TODO: let users add/remove owners here

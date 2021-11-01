@@ -48,7 +48,13 @@ function createUserStore() {
     login(username, password) {
       return api.users.login(username, password).then(user => {
         set(user)
-        // socket.setUser(user)
+        return user
+      })
+    },
+
+    signup(username, password, confirmPassword) {
+      return api.users.signup(username, password, confirmPassword).then(user => {
+        set(user)
         return user
       })
     },

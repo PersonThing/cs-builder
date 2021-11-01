@@ -34,7 +34,7 @@
       {/if}
     </div>
 
-    <div class="col2 p1">
+    <div class="col2 p10">
       <Form on:submit={() => itemTypeBuilder.save()}>
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
         <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>

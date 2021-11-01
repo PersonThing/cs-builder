@@ -12,7 +12,7 @@
   let:isAdding
 >
   {#if input}
-    <div class="grow p1">
+    <div class="grow p10">
       <Form on:submit={() => itemTypeBuilder.save()}>
         <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
         <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>

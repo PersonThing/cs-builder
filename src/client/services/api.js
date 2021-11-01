@@ -1,11 +1,13 @@
 import projectItemTypes from '../../server/project-item-types'
 
 function status(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(response)
-  }
+  return new Promise((resolve, reject) => {
+    if (response.status >= 200 && response.status < 300) {
+      resolve(response)
+    } else {
+      json(response).then(res => reject(res))
+    }
+  })
 }
 
 function json(response) {
@@ -21,14 +23,12 @@ function _fetch(url, options = {}) {
   //   options.headers.Authorization = `Bearer ${$user.token}`
   // }
   if (options.body != null) options.body = JSON.stringify(options.body)
-  return fetch(url, options)
-    .then(status)
-    .then(json)
-    .catch(res => {
-      res.json().then(json => {
-        if (json?.message) alert(json.message)
-      })
-    })
+  return fetch(url, options).then(status).then(json)
+  // .catch(res => {
+  //   res.json().then(json => {
+  //     if (json?.message) alert(json.message)
+  //   })
+  // })
 }
 
 function stripProjectOfItems(project) {
@@ -47,6 +47,17 @@ const Api = {
         body: {
           username,
           password,
+        },
+      })
+    },
+
+    signup(username, password, confirmPassword) {
+      return _fetch('/api/signup', {
+        method: 'POST',
+        body: {
+          username,
+          password,
+          confirmPassword,
         },
       })
     },

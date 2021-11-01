@@ -1,5 +1,5 @@
 <AppLayout active="projects">
-  <div class="grow p2">
+  <div class="grow p20">
     {#if $user}
       <h2>My games</h2>
       {#if myProjects}

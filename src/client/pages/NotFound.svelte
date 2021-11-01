@@ -1,5 +1,5 @@
 <AppLayout>
-  <div class="grow p1">Page not found</div>
+  <div class="grow p10">Page not found</div>
 </AppLayout>
 
 <script>

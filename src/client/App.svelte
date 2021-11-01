@@ -150,21 +150,58 @@
     border-color: #666;
   }
 
-  .p1 {
-    padding: 10px;
-  }
+  $i: 5;
 
-  .p2 {
-    padding: 20px;
-  }
+  @while $i < 30 {
+    .p#{$i} {
+      padding: #{$i}px;
+    }
+    .pl#{$i} {
+      padding-left: #{$i}px;
+    }
+    .pr#{$i} {
+      padding-right: #{$i}px;
+    }
+    .pb#{$i} {
+      padding-bottom: #{$i}px;
+    }
+    .pt#{$i} {
+      padding-top: #{$i}px;
+    }
+    .px#{$i} {
+      padding-right: #{$i}px;
+      padding-left: #{$i}px;
+    }
+    .py#{$i} {
+      padding-top: #{$i}px;
+      padding-bottom: #{$i}px;
+    }
 
-  .p3 {
-    padding: 30px;
-  }
+    .m#{$i} {
+      margin: #{$i}px;
+    }
+    .ml#{$i} {
+      margin-left: #{$i}px;
+    }
+    .mr#{$i} {
+      margin-right: #{$i}px;
+    }
+    .mb#{$i} {
+      margin-bottom: #{$i}px;
+    }
+    .mt#{$i} {
+      margin-top: #{$i}px;
+    }
+    .mx#{$i} {
+      margin-right: #{$i}px;
+      margin-left: #{$i}px;
+    }
+    .my#{$i} {
+      margin-top: #{$i}px;
+      margin-bottom: #{$i}px;
+    }
 
-  .px1 {
-    padding-left: 10px;
-    padding-right: 10px;
+    $i: $i + 5;
   }
 
   .g05 {
@@ -300,6 +337,14 @@
 
   .text-right {
     text-align: right;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-danger {
+    color: $danger;
   }
 
   .absolute {

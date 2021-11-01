@@ -83,7 +83,7 @@
 
             <QuickDropdown label="{input.width}W x {input.height}H" on:open={startChangeSize} dropdownClass="below left">
               <Form on:submit={applyChangeSize}>
-                <div class="p1">
+                <div class="p10">
                   W
                   <input type="number" min={1} max={1500} bind:value={changeSize.width} />
                   <strong>x</strong>
@@ -150,13 +150,13 @@
 
         <div class="col2">
           <Form on:submit={() => itemTypeBuilder.save()}>
-            <div class="p1">
+            <div class="p10">
               <FieldText name="name" bind:value={input.name}>Name</FieldText>
               <FormButtons canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} {hasChanges} />
             </div>
           </Form>
 
-          <div class="p1">
+          <div class="p10">
             <FieldCheckbox name="animated" bind:checked={input.animated} on:change={animatedChanged}>Animated?</FieldCheckbox>
 
             <div class="preview flex">

@@ -47,17 +47,42 @@ const assertUserOwnsProject = (userId, projectId, response) => {
 // https://zellwk.com/blog/crud-express-mongodb/
 // this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
 repo.connect().then(() => {
+  // export all data
+  app.get('/api/export', (req, res) => {
+    repo.export().then(data => {
+      res.json(data)
+    })
+  })
+
   // login
+  const sendUserResponse = (res, user) => {
+    const token = jwt.sign(user, jwtSecret)
+    res.cookie(jwtCookieName, token, { secure: true }).json({
+      ...user,
+      token,
+    })
+  }
   app.post('/api/login', (req, res) => {
     repo.getUserByNameAndPassword(req.body.username, req.body.password).then(user => {
       if (user) {
-        const token = jwt.sign(user, jwtSecret)
-        res.cookie(jwtCookieName, token, { secure: true }).json({
-          ...user,
-          token,
-        })
+        sendUserResponse(res, user)
       } else {
-        res.status(401).json({ error: 'invalid credentials' })
+        res.status(401).json({ message: 'Invalid username or password' })
+      }
+    })
+  })
+
+  app.post('/api/signup', (req, res) => {
+    if (req.body.username.length < 3) return res.status(400).json({ message: 'Username must be at least 3 characters long' })
+    if (req.body.password.length < 6) return res.status(400).json({ message: 'Password must be at least 6 characters long' })
+    if (req.body.password != req.body.confirmPassword) return res.status(400).json({ message: 'Passwords do not match' })
+    repo.getUserByName(req.body.username).then(user => {
+      if (user) {
+        res.status(400).json({ message: 'Username already taken' })
+      } else {
+        repo.createUser(req.body.username, req.body.password).then(user => {
+          sendUserResponse(res, user)
+        })
       }
     })
   })

@@ -43,6 +43,20 @@ class Repo {
     // })
   }
 
+  getUserByName(username) {
+    return this.db
+      .collection('users')
+      .findOne({ username: username })
+      .then(user => {
+        return user
+          ? {
+              userid: user._id,
+              username: user.username,
+            }
+          : null
+      })
+  }
+
   getUserByNameAndPassword(username, password) {
     return this.db
       .collection('users')
@@ -66,10 +80,10 @@ class Repo {
   }
 
   createUser(username, password) {
-    this.insert('users', {
+    return this.insert('users', {
       username: username,
       password: this.hashPassword(username, password),
-    })
+    }).then(() => this.getUserByName(username))
   }
 
   updateUserPassword(username, password) {

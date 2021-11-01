@@ -3,7 +3,7 @@
     <div>
       <h1>CSBuilder</h1>
     </div>
-    <div class="px1">
+    <div class="px10">
       {#if $project}
         <div class="strong">{$project.name}</div>
       {/if}
@@ -28,7 +28,7 @@
         {/if}
       {/if}
     </div>
-    <div class="text-right px1">
+    <div class="text-right px10">
       {#if $user}
         <!-- todo: link to a user settings page to change username/password -->
         <div class="strong">{$user.username}</div>

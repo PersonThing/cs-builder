@@ -11,7 +11,7 @@
   {#if input != null}
     <slot {hasChanges} {isAdding} />
   {:else}
-    <div class="grow p1">
+    <div class="grow p10">
       <h2>{itemType}</h2>
       <p>{itemTypeDescription}</p>
     </div>
