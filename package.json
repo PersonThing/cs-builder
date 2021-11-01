@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "npm": "^7.19.1"
+  },
   "scripts": {
     "build": "rollup -c",
     "start": "node src/server/web-server.js",
