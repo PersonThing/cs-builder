@@ -2,14 +2,14 @@ import { MongoClient } from 'mongodb'
 import bcrypt from 'bcrypt'
 
 const mongoConnectionString = process.env.DATABASE_URL || 'mongodb://localhost:27017/cs-builder'
-const client = new MongoClient(mongoConnectionString)
+const client = new MongoClient(mongoConnectionString, {
+  tlsAllowInvalidCertificates: true,
+})
 
 class Repo {
   connect() {
     this.db = client.db('cs-builder')
-    return client.connect({
-      tlsAllowInvalidCertificates: true,
-    })
+    return client.connect()
   }
 
   export() {
