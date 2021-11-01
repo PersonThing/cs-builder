@@ -13,7 +13,7 @@
   import AppLayout from '../components/AppLayout.svelte'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ItemListNav from '../components/ItemListNav.svelte'
-  import { project, particles } from '../stores/project-stores'
+  import { particles } from '../stores/project-stores'
 
   export let params = {}
   $: paramId = decodeURIComponent(params.id) || 'new'

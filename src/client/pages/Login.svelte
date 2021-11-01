@@ -8,6 +8,7 @@
         <input type="password" class="form-control" bind:value={password} />
       </div>
 
+      <!-- todo: sign up if no user yet -->
       <button type="submit" class="btn btn-primary" class:disabled={loading} disabled={loading}>Login</button>
       {#if failedLogin}
         Invalid username or password
@@ -17,6 +18,7 @@
 </AppLayout>
 
 <script>
+  import { push } from 'svelte-spa-router'
   import AppLayout from '../components/AppLayout.svelte'
   import FieldText from '../components/FieldText.svelte'
   import Form from '../components/Form.svelte'
@@ -43,6 +45,7 @@
       .then(() => {
         loading = false
         failedLogin = false
+        push('/')
       })
   }
 </script>

@@ -10,20 +10,23 @@ class Repo {
     return client.connect()
   }
 
-  // seedUsers() {
-  //   this.insert('users', {
-  //     username: 'tim',
-  //     password: this.hashPassword('tim', ''),
-  //   })
-  //   this.insert('users', {
-  //     username: 'clay',
-  //     password: this.hashPassword('clay', ''),
-  //   })
-  //   this.insert('users', {
-  //     username: 'sam',
-  //     password: this.hashPassword('sam', ''),
-  //   })
-  // }
+  seedUsers() {
+    // this.update('users', { username: 'tim' }, { password: this.hashPassword('tim', '1Super') })
+    // this.update('users', { username: 'clay' }, { password: this.hashPassword('clay', 'cact') })
+    // this.update('users', { username: 'sam' }, { password: this.hashPassword('sam', 'sambam') })
+    // this.insert('users', {
+    //   username: 'tim',
+    //   password: this.hashPassword('tim', ''),
+    // })
+    // this.insert('users', {
+    //   username: 'clay',
+    //   password: this.hashPassword('clay', ''),
+    // })
+    // this.insert('users', {
+    //   username: 'sam',
+    //   password: this.hashPassword('sam', ''),
+    // })
+  }
 
   getUserByNameAndPassword(username, password) {
     return this.db
@@ -56,6 +59,18 @@ class Repo {
 
   updateUserPassword(username, password) {
     return this.update('users', { username: username }, { password: this.hashPassword(username, password) })
+  }
+
+  assertUserOwnsProject(userId, projectId) {
+    return this.db
+      .collection('projects')
+      .findOne({ id: projectId, owners: userId })
+      .then(result => {
+        return result != null ? Promise.resolve() : Promise.reject()
+      })
+      .catch(() => {
+        return Promise.reject()
+      })
   }
 
   insert(collectionName, object) {

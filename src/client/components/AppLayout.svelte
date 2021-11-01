@@ -2,35 +2,39 @@
   <div class="header">
     <div>
       <h1>CSBuilder</h1>
-      <div class="px1">
-        {#if $user}
-          <strong>{$user.username}</strong>
-          <a href="/#/" title="Log out" on:click={() => user.logout()}>Log out</a>
-
-          {#if $project}
-            <strong>
-              {$project.name}
-            </strong>
-          {/if}
-
-          <a href="/#/" title="Change project" class:active={active == 'projects'}>
-            {$project?.name ? 'Change' : 'Select'} project
-          </a>
-        {/if}
-      </div>
+    </div>
+    <div class="px1">
+      {#if $project}
+        <div class="strong">{$project.name}</div>
+      {/if}
+      <a href="/#/" title="Change project" class:active={active == 'projects'}>
+        {$project?.name ? 'Change' : 'Select'} game
+      </a>
     </div>
     <div class="nav">
       {#if $project?.name}
-        <a href="/#/project" class:active={active == 'project'}>Project settings</a>
-        <a href="/#/art" class:active={active == 'art'}>Art</a>
-        <a href="/#/tiles" class:active={active == 'tiles'}>Tiles</a>
-        <a href="/#/items" class:active={active == 'items'}>Items</a>
-        <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
-        <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->
-        <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
-        <a href="/#/abilities" class:active={active == 'abilities'}>Abilities</a>
-        <a href="/#/audio" class:active={active == 'audio'}>Audio</a>
-        <a href="/#/levels" class:active={active == 'levels'}>Levels</a>
+        <a href="/#/play" class:active={active == 'play'}>Play</a>
+        {#if $user && $project.owners.includes($user.userid)}
+          <a href="/#/art" class:active={active == 'art'}>Art</a>
+          <a href="/#/tiles" class:active={active == 'tiles'}>Tiles</a>
+          <a href="/#/audio" class:active={active == 'audio'}>Audio</a>
+          <a href="/#/abilities" class:active={active == 'abilities'}>Abilities</a>
+          <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
+          <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->
+          <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
+          <a href="/#/items" class:active={active == 'items'}>Items</a>
+          <a href="/#/levels" class:active={active == 'levels'}>Levels</a>
+          <a href="/#/project" class:active={active == 'project'}>Game settings</a>
+        {/if}
+      {/if}
+    </div>
+    <div class="text-right px1">
+      {#if $user}
+        <!-- todo: link to a user settings page to change username/password -->
+        <div class="strong">{$user.username}</div>
+        <a href="/#/" title="Log out" on:click={() => user.logout()}>Log out</a>
+      {:else}
+        <a href="/#/login" title="Sign up">Log in or sign up</a>
       {/if}
     </div>
   </div>
@@ -64,6 +68,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      font-size: 13px;
 
       background: linear-gradient(#fff, #ececec);
 
@@ -71,6 +76,7 @@
         font-weight: 400;
         margin: 5px 10px;
         padding: 0;
+        font-size: 20px;
       }
 
       .nav {
@@ -78,15 +84,16 @@
         flex-direction: row;
         align-items: center;
         height: 100%;
+        flex: 1;
 
         a {
           display: block;
-          padding: 22px;
+          padding: 13px;
           text-decoration: none;
-          color: #666;
 
-          &:hover {
-            color: rgb(16, 147, 253);
+          &:hover,
+          &.active {
+            color: #666;
           }
 
           &.active {

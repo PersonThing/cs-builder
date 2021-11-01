@@ -123,7 +123,7 @@
   import FieldCheckbox from '../components/FieldCheckbox.svelte'
   import FieldText from '../components/FieldText.svelte'
   import InputSelect from '../components/InputSelect.svelte'
-  import LevelRenderer from './LevelBuilder.Renderer.svelte'
+  import LevelRenderer from '../components/LevelRenderer.svelte'
   import LocalStorageStore from '../stores/local-storage-store'
 
   const gridSize = 40

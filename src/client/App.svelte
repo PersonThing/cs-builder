@@ -1,6 +1,4 @@
-{#if $user == null}
-  <Login />
-{:else if $project == null}
+{#if $project == null}
   <SelectProject />
 {:else}
   <Router {routes} />
@@ -25,11 +23,13 @@
   import NotFound from './pages/NotFound.svelte'
   import SelectProject from './pages/SelectProject.svelte'
   import ProjectSettings from './pages/ProjectSettings.svelte'
+  import Play from './pages/Play.svelte'
 
   import { user, project } from './stores/project-stores'
 
   const routes = {
     '/': SelectProject,
+    '/login': Login,
     '/project': ProjectSettings,
     '/art/:id?': ArtBuilder,
     '/audio/:id?': AudioBuilder,
@@ -40,6 +40,7 @@
     '/characters/:id?': CharacterBuilder,
     '/enemies/:id?': EnemyBuilder,
     '/levels/:id?': LevelBuilder,
+    '/play/:id?': Play,
     '*': NotFound,
   }
 </script>

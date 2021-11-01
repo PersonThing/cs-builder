@@ -33,6 +33,17 @@ const authorization = (req, res, next) => {
   }
 }
 
+const assertUserOwnsProject = (userId, projectId, response) => {
+  return new Promise((resolve, reject) => {
+    repo
+      .assertUserOwnsProject(userId, projectId)
+      .then(resolve)
+      .catch(() => {
+        response.status(403).json({ message: 'You are not allowed to change this project' })
+      })
+  })
+}
+
 // https://zellwk.com/blog/crud-express-mongodb/
 // this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
 repo.connect().then(() => {
@@ -55,20 +66,27 @@ repo.connect().then(() => {
     res.clearCookie(jwtCookieName).json(true)
   })
 
-  // app.get('/api/seed-users', (req, res) => {
-  //   repo.seedUsers()
-  //   res.json({ success: true })
-  // })
+  app.get('/api/seed-users', (req, res) => {
+    repo.seedUsers()
+    res.json({ success: true })
+  })
 
-  // list projects
-  app.get('/api/projects', authorization, (req, res) => {
+  // list all projects
+  app.get('/api/projects', (req, res) => {
     repo.find('projects').then(projects => {
       res.json(projects)
     })
   })
 
+  // list my projects
+  app.get('/api/my-projects', authorization, (req, res) => {
+    repo.find('projects', { owners: req.userid }).then(projects => {
+      res.json(projects)
+    })
+  })
+
   // get project
-  app.get('/api/projects/:id', authorization, (req, res) => {
+  app.get('/api/projects/:id', (req, res) => {
     // get project from db
     repo.get('projects', { id: req.params.id }).then(project => {
       if (project == null) return {}
@@ -111,21 +129,23 @@ repo.connect().then(() => {
   app.put('/api/projects/:id', authorization, (req, res) => {
     const project = req.body
     project.id = req.params.id
-    project.owners = [req.userid] // TODO: remove this once all projects have an owner
-    repo.update('projects', { id: project.id }, project).then(() => {
-      io.emit('projects.update', project)
-      res.json(project)
+    // make sure user owns this project first
+    assertUserOwnsProject(req.userid, project.id, res).then(() => {
+      repo.update('projects', { id: project.id }, project).then(() => {
+        io.emit('projects.update', project)
+        res.json(project)
+      })
     })
   })
 
-  // delete project
   app.delete('/api/projects/:id', authorization, (req, res) => {
-    // delete project
-    repo.delete('projects', { id: req.params.id }).then(() => {
-      // delete project items
-      Promise.all(projectItemTypes.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
-        io.emit('projects.delete', req.params.id)
-        res.json(true)
+    assertUserOwnsProject(req.userid, req.params.id, res).then(() => {
+      repo.delete('projects', { id: req.params.id }).then(() => {
+        // delete project items
+        Promise.all(projectItemTypes.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
+          io.emit('projects.delete', req.params.id)
+          res.json(true)
+        })
       })
     })
   })
@@ -144,43 +164,49 @@ repo.connect().then(() => {
 
     // add
     app.post(`/api/projects/:projectId/${c}`, authorization, (req, res) => {
-      repo.find(c, { projectId: req.params.projectId }).then(collection => {
-        const item = req.body
-        item.id = (
-          collection.length
-            ? collection
-                .map(c => parseInt(c.id))
-                .sort((a, b) => (a < b ? -1 : 1))
-                .pop() + 1
-            : 0
-        ).toString()
-        repo.insert(c, item).then(dbres => {
-          item._id = dbres.insertedid
-          io.emit(`${c}.insert`, item)
-          res.json(item)
+      assertUserOwnsProject(req.userid, req.params.projectId, res).then(() => {
+        repo.find(c, { projectId: req.params.projectId }).then(collection => {
+          const item = req.body
+          item.id = (
+            collection.length
+              ? collection
+                  .map(c => parseInt(c.id))
+                  .sort((a, b) => (a < b ? -1 : 1))
+                  .pop() + 1
+              : 0
+          ).toString()
+          repo.insert(c, item).then(dbres => {
+            item._id = dbres.insertedid
+            io.emit(`${c}.insert`, item)
+            res.json(item)
+          })
         })
       })
     })
 
     // update
     app.put(`/api/projects/:projectId/${c}/:id`, authorization, (req, res) => {
-      const item = req.body
-      item.projectId = req.params.projectId
-      item.id = req.params.id
-      repo.update(c, { projectId: item.projectId, id: item.id }, item).then(() => {
-        io.emit(`${c}.update`, item)
-        res.json(item)
+      assertUserOwnsProject(req.userid, req.params.projectId, res).then(() => {
+        const item = req.body
+        item.projectId = req.params.projectId
+        item.id = req.params.id
+        repo.update(c, { projectId: item.projectId, id: item.id }, item).then(() => {
+          io.emit(`${c}.update`, item)
+          res.json(item)
+        })
       })
     })
 
     // delete
     app.delete(`/api/projects/:projectId/${c}/:id`, authorization, (req, res) => {
-      repo.delete(c, { projectId: req.params.projectId, id: req.params.id }).then(() => {
-        io.emit(`${c}.delete`, {
-          projectId: req.params.projectId,
-          id: req.params.id,
+      assertUserOwnsProject(req.userid, req.params.projectId, res).then(() => {
+        repo.delete(c, { projectId: req.params.projectId, id: req.params.id }).then(() => {
+          io.emit(`${c}.delete`, {
+            projectId: req.params.projectId,
+            id: req.params.id,
+          })
+          res.json(true)
         })
-        res.json(true)
       })
     })
   })
