@@ -217,7 +217,7 @@ repo.connect().then(() => {
     //   socket.user = db.users.find(u => u.name == name && u.password == password) || { name: `Guest ${socket.id}` }
     // })
 
-    socket.on('disconnect', () => console.log(`socket ${socket.user?.name ?? 'guest'} disconnected`))
+    socket.on('disconnect', () => console.log(`socket disconnected`))
     // listen for socket events / send socket events
     // socket.on('event-name', payload => { /* client sent something */ })
     // socket.emit('event-name', payload) send to just this socket
