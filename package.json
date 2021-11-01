@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "start": "nodemon src/server/web-server.js",
-    "dev": "start http://localhost:4999 && rollup -c -w"
+    "start": "node src/server/web-server.js",
+    "startdev": "nodemon src/server/web-server.js",
+    "dev": "startdev http://localhost:4999 && rollup -c -w"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",

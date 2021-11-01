@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 import bcrypt from 'bcrypt'
 
-const mongoConnectionString = 'mongodb://localhost:27017/cs-builder'
+const mongoConnectionString = process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/cs-builder'
 const client = new MongoClient(mongoConnectionString)
 
 class Repo {
