@@ -8,11 +8,61 @@
           <div class="art-preview-item" style="background-image: url('{art.png}');" />
         {/each}
       </div>
-      <div class="level-picker">
-        <h2>Choose a level</h2>
-        {#each $levels as level}
-          <a href="#/play/{level.id}" class="play-level-btn">Play {level.name}</a>
-        {/each}
+      <div class="flex-row">
+        <!-- todo: allow creating/deleting/picking existing character
+        <div class="character-picker">
+          <h2>My characters</h2>
+
+            character {
+              class: character class from $characters
+              name: string
+              equipped: {
+                mainhand
+                offhand
+                helm
+                chest
+                belt
+                gloves
+                boots
+                neck
+                ring1
+                ring2
+              }
+              inventory: items they've picked up
+              gold: amount of gold they've picked up
+              level: 1 for now, figure out leveling/exp gain later
+              skills: later, for now just hard-coded by class
+            }
+
+            potential item mods:
+              damage reduction for all damage types
+              damage reduction for individual damage type
+              damage bonus for all damage types
+              damage bonus for individual damage type
+              health
+              health regeneration
+              mana/energy/whatever
+              mana/energy/whatever regeneration
+              global cooldown reduction
+              skill cooldown reduction
+              individual skill damage bonus
+              add projectiles
+              add max turret
+              add ability
+              speed %
+              range %
+              size %
+
+            whenever equipped items change, sum up stats and update the character
+            <a href="#/play/create-character">Create character</a>
+          </div>
+        -->
+        <div class="level-picker">
+          <h2>Choose a level</h2>
+          {#each $levels as level}
+            <a href="#/play/{level.id}" class="play-level-btn">{level.name}</a>
+          {/each}
+        </div>
       </div>
     {/if}
   </div>
@@ -20,7 +70,6 @@
 
 <script>
   import AppLayout from '../components/AppLayout.svelte'
-  import ArtThumb from '../components/ArtThumb.svelte'
   import LevelRenderer from '../components/LevelRenderer.svelte'
   import { levels, art } from '../stores/project-stores'
 
@@ -37,9 +86,8 @@
 <style lang="scss">
   .art-preview {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px;
+    flex-direction: row;
+    padding: 20px;
 
     .art-preview-item {
       width: 40px;
@@ -50,8 +98,12 @@
     }
   }
 
+  .character-picker {
+    padding: 20px;
+  }
+
   .level-picker {
-    text-align: center;
+    padding: 20px;
   }
 
   .play-level-btn {
