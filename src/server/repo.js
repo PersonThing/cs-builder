@@ -1,13 +1,26 @@
 import { MongoClient } from 'mongodb'
 import bcrypt from 'bcrypt'
 
-const mongoConnectionString = process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/cs-builder'
+const mongoConnectionString = process.env.DATABASE_URL || 'mongodb://localhost:27017/cs-builder'
 const client = new MongoClient(mongoConnectionString)
 
 class Repo {
   connect() {
     this.db = client.db('cs-builder')
     return client.connect()
+  }
+
+  export() {
+    const collections = ['abilities', 'art', 'audio', 'characters', 'enemies', 'items', 'levels', 'projects', 'tiles', 'users']
+    const results = {}
+    const promises = collections.map(collectionName => {
+      return this.find(collectionName).then(rows => {
+        results[collectionName] = rows
+      })
+    })
+    return Promise.all(promises).then(() => {
+      return results
+    })
   }
 
   seedUsers() {
