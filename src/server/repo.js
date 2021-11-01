@@ -7,7 +7,9 @@ const client = new MongoClient(mongoConnectionString)
 class Repo {
   connect() {
     this.db = client.db('cs-builder')
-    return client.connect()
+    return client.connect({
+      tlsAllowInvalidCertificates: true,
+    })
   }
 
   export() {
