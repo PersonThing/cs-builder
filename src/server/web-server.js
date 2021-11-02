@@ -142,7 +142,7 @@ repo.connect().then(() => {
 
       // mark as owned by this user
       item.owners = [req.userid]
-      repo.insert('projects', authorization, item).then(dbres => {
+      repo.insert('projects', item).then(dbres => {
         item._id = dbres.insertedid
         io.emit('projects.insert', item)
         res.json(item)
