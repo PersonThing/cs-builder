@@ -54,7 +54,7 @@
             <a href="#/play/create-character">Create character</a>
           </div>
         -->
-        <div class="level-picker">
+        <div class="p20">
           <h2>Choose a level</h2>
           {#each $levels as level}
             <a href="#/play/{level.id}" class="play-level-btn">{level.name}</a>
@@ -93,14 +93,6 @@
       background-position: left top;
       opacity: 0.4;
     }
-  }
-
-  .character-picker {
-    padding: 20px;
-  }
-
-  .level-picker {
-    padding: 20px;
   }
 
   .play-level-btn {

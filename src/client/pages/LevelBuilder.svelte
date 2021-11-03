@@ -39,7 +39,7 @@
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
         <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
         <div class="form-group">
-          <label>Background color</label>
+          <div class="strong">Background color</div>
           <ColorPicker bind:value={input.backgroundColor} dropdownClass="below right" />
         </div>
         <FieldCheckbox bind:checked={input.smoothPathing} name="smooth-pathing" on:change={forceRender}>Smooth pathing</FieldCheckbox>
@@ -51,7 +51,7 @@
         <div class="flex-column">
           <div class="draw-option" class:selected={drawMode == DrawMode.Tiles} on:click={() => setDrawMode(DrawMode.Tiles)}>
             <div class="form-group">
-              <label>Place a tile</label>
+              <div class="strong">Place a tile</div>
               <InputSelect bind:value={selectedTileId} options={tileOptions} let:option>
                 {#if option.graphic != null}
                   <ArtThumb id={option.graphic} />
@@ -63,7 +63,7 @@
 
           <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
             <div class="form-group">
-              <label>Place an item</label>
+              <div class="strong">Place an item</div>
               <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
                 {#if option.graphics?.still != null}
                   <ArtThumb id={option.graphics.still} />
@@ -75,7 +75,7 @@
 
           <div class="draw-option" class:selected={drawMode == DrawMode.Enemies} on:click={() => setDrawMode(DrawMode.Enemies)}>
             <div class="form-group">
-              <label>Place an enemy</label>
+              <div class="strong">Place an enemy</div>
               <InputSelect bind:value={selectedEnemyId} options={enemyOptions} let:option>
                 {#if option.graphics?.still != null}
                   <ArtThumb id={option.graphics.still} />

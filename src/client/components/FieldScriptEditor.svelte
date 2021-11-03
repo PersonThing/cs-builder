@@ -13,7 +13,7 @@ https://playground.babylonjs.com/
 
   {#if examples}
     <div class="examples">
-      <label>Sample code:</label>
+      <div class="strong">Sample code:</div>
       <pre bind:this={examplesElement} class="lang-javascript">{examples}</pre>
     </div>
   {/if}

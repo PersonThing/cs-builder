@@ -107,10 +107,10 @@ class Repo {
     return this.update('users', { username: username }, { password: this.hashPassword(username, password) })
   }
 
-  assertUserOwnsProject(userId, projectId) {
+  assertUserOwnsProject(username, projectId) {
     return this.db
       .collection('projects')
-      .findOne({ id: projectId, owners: userId })
+      .findOne({ id: projectId, owners: username })
       .then(result => {
         return result != null ? Promise.resolve() : Promise.reject()
       })

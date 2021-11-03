@@ -34,8 +34,8 @@
   import { user, project, projects } from '../stores/project-stores.js'
   const PROJECT_VERSION = 1
 
-  $: publicProjects = $projects?.filter(p => !p.owners.includes($user?.userid))
-  $: myProjects = $projects?.filter(p => p.owners.includes($user?.userid))
+  $: publicProjects = $projects?.filter(p => !p.owners.includes($user?.username))
+  $: myProjects = $projects?.filter(p => p.owners.includes($user?.username))
 
   // refresh projects whenever this page is hit - at least until sockets handle that for us
   projects.refresh()

@@ -33,10 +33,10 @@ const authorization = (req, res, next) => {
   }
 }
 
-const assertUserOwnsProject = (userId, projectId, response) => {
+const assertUserOwnsProject = (username, projectId, response) => {
   return new Promise((resolve, reject) => {
     repo
-      .assertUserOwnsProject(userId, projectId)
+      .assertUserOwnsProject(username, projectId)
       .then(resolve)
       .catch(() => {
         response.status(403).json({ message: 'You are not allowed to change this project' })
@@ -105,7 +105,7 @@ repo.connect().then(() => {
 
   // list my projects
   app.get('/api/my-projects', authorization, (req, res) => {
-    repo.find('projects', { owners: req.userid }).then(projects => {
+    repo.find('projects', { owners: req.username }).then(projects => {
       res.json(projects)
     })
   })
@@ -141,7 +141,7 @@ repo.connect().then(() => {
       ).toString()
 
       // mark as owned by this user
-      item.owners = [req.userid]
+      item.owners = [req.username]
       repo.insert('projects', item).then(dbres => {
         item._id = dbres.insertedid
         io.emit('projects.insert', item)
@@ -155,7 +155,7 @@ repo.connect().then(() => {
     const project = req.body
     project.id = req.params.id
     // make sure user owns this project first
-    assertUserOwnsProject(req.userid, project.id, res).then(() => {
+    assertUserOwnsProject(req.username, project.id, res).then(() => {
       repo.update('projects', { id: project.id }, project).then(() => {
         io.emit('projects.update', project)
         res.json(project)
@@ -164,7 +164,7 @@ repo.connect().then(() => {
   })
 
   app.delete('/api/projects/:id', authorization, (req, res) => {
-    assertUserOwnsProject(req.userid, req.params.id, res).then(() => {
+    assertUserOwnsProject(req.username, req.params.id, res).then(() => {
       repo.delete('projects', { id: req.params.id }).then(() => {
         // delete project items
         Promise.all(projectItemTypes.map(it => repo.deleteMany(it, { projectId: req.params.id }))).then(() => {
@@ -189,7 +189,7 @@ repo.connect().then(() => {
 
     // add
     app.post(`/api/projects/:projectId/${c}`, authorization, (req, res) => {
-      assertUserOwnsProject(req.userid, req.params.projectId, res).then(() => {
+      assertUserOwnsProject(req.username, req.params.projectId, res).then(() => {
         repo.find(c, { projectId: req.params.projectId }).then(collection => {
           const item = req.body
           item.id = (
@@ -211,7 +211,7 @@ repo.connect().then(() => {
 
     // update
     app.put(`/api/projects/:projectId/${c}/:id`, authorization, (req, res) => {
-      assertUserOwnsProject(req.userid, req.params.projectId, res).then(() => {
+      assertUserOwnsProject(req.username, req.params.projectId, res).then(() => {
         const item = req.body
         item.projectId = req.params.projectId
         item.id = req.params.id
@@ -224,7 +224,7 @@ repo.connect().then(() => {
 
     // delete
     app.delete(`/api/projects/:projectId/${c}/:id`, authorization, (req, res) => {
-      assertUserOwnsProject(req.userid, req.params.projectId, res).then(() => {
+      assertUserOwnsProject(req.username, req.params.projectId, res).then(() => {
         repo.delete(c, { projectId: req.params.projectId, id: req.params.id }).then(() => {
           io.emit(`${c}.delete`, {
             projectId: req.params.projectId,

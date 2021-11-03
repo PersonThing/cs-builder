@@ -111,8 +111,8 @@
               {option.value}
             </InputSelect>
             <div>
-              <label>
-                <input type="checkbox" bind:checked={showGrid} />
+              <label for="show-grid">
+                <input type="checkbox" name="show-grid" id="show-grid" bind:checked={showGrid} />
                 Show grid
               </label>
             </div>

@@ -11,7 +11,7 @@
 
 <!-- <div style="position: absolute; top: 10px; left: 10px; color: red;">{debugInfo}</div> -->
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onDestroy } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
   import { abilities, art, tiles, characters, enemies, items, audio } from '../stores/project-stores.js'
   import Player from '../classes/Player.js'
@@ -100,6 +100,10 @@
 
     renderLevel()
   }
+
+  onDestroy(() => {
+    pixiApp.destroy()
+  })
 
   export function restartPixi() {
     if (pixiApp != null) {

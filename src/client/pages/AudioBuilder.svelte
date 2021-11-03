@@ -16,7 +16,7 @@
       <Form on:submit={() => itemTypeBuilder.save()}>
         <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
         <div class="form-group">
-          <label>Audio</label>
+          <div class="strong">Audio</div>
           {#if !isRecording}
             <button class="btn btn-warning" type="button" on:click={startRecording}>{input.data ? 'Redo recording' : 'Start recording'}</button>
           {:else}
@@ -25,7 +25,7 @@
         </div>
         {#if input.data}
           <div class="form-group">
-            <label>Start {input.start} / {input.duration}</label>
+            <div class="strong">Start {input.start} / {input.duration}</div>
             <input type="range" min="0" max={input.duration} step="0.1" bind:value={input.start} />
             <button class="btn btn-success" type="button" on:click={playRecording}>Play</button>
           </div>

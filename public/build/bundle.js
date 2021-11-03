@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -5750,9 +5750,9 @@ var app = (function () {
     function create_if_block_1$b(ctx) {
     	let a;
     	let t1;
-    	let show_if = /*$user*/ ctx[2] && /*$project*/ ctx[1].owners.includes(/*$user*/ ctx[2].userid);
+    	let show_if = /*$user*/ ctx[2] && /*$project*/ ctx[1].owners.includes(/*$user*/ ctx[2].username);
     	let if_block_anchor;
-    	let if_block = show_if && create_if_block_2$8(ctx);
+    	let if_block = show_if && create_if_block_2$7(ctx);
 
     	const block = {
     		c: function create() {
@@ -5777,13 +5777,13 @@ var app = (function () {
     				toggle_class(a, "active", /*active*/ ctx[0] == "play");
     			}
 
-    			if (dirty & /*$user, $project*/ 6) show_if = /*$user*/ ctx[2] && /*$project*/ ctx[1].owners.includes(/*$user*/ ctx[2].userid);
+    			if (dirty & /*$user, $project*/ 6) show_if = /*$user*/ ctx[2] && /*$project*/ ctx[1].owners.includes(/*$user*/ ctx[2].username);
 
     			if (show_if) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_2$8(ctx);
+    					if_block = create_if_block_2$7(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -5811,8 +5811,8 @@ var app = (function () {
     	return block;
     }
 
-    // (17:8) {#if $user && $project.owners.includes($user.userid)}
-    function create_if_block_2$8(ctx) {
+    // (17:8) {#if $user && $project.owners.includes($user.username)}
+    function create_if_block_2$7(ctx) {
     	let a0;
     	let t1;
     	let a1;
@@ -5862,39 +5862,39 @@ var app = (function () {
     			attr_dev(a0, "href", "/#/art");
     			attr_dev(a0, "class", "svelte-4iebt4");
     			toggle_class(a0, "active", /*active*/ ctx[0] == "art");
-    			add_location(a0, file$G, 17, 10, 558);
+    			add_location(a0, file$G, 17, 10, 560);
     			attr_dev(a1, "href", "/#/tiles");
     			attr_dev(a1, "class", "svelte-4iebt4");
     			toggle_class(a1, "active", /*active*/ ctx[0] == "tiles");
-    			add_location(a1, file$G, 18, 10, 625);
+    			add_location(a1, file$G, 18, 10, 627);
     			attr_dev(a2, "href", "/#/audio");
     			attr_dev(a2, "class", "svelte-4iebt4");
     			toggle_class(a2, "active", /*active*/ ctx[0] == "audio");
-    			add_location(a2, file$G, 19, 10, 698);
+    			add_location(a2, file$G, 19, 10, 700);
     			attr_dev(a3, "href", "/#/abilities");
     			attr_dev(a3, "class", "svelte-4iebt4");
     			toggle_class(a3, "active", /*active*/ ctx[0] == "abilities");
-    			add_location(a3, file$G, 20, 10, 771);
+    			add_location(a3, file$G, 20, 10, 773);
     			attr_dev(a4, "href", "/#/characters");
     			attr_dev(a4, "class", "svelte-4iebt4");
     			toggle_class(a4, "active", /*active*/ ctx[0] == "characters");
-    			add_location(a4, file$G, 21, 10, 856);
+    			add_location(a4, file$G, 21, 10, 858);
     			attr_dev(a5, "href", "/#/enemies");
     			attr_dev(a5, "class", "svelte-4iebt4");
     			toggle_class(a5, "active", /*active*/ ctx[0] == "enemies");
-    			add_location(a5, file$G, 23, 10, 1038);
+    			add_location(a5, file$G, 23, 10, 1040);
     			attr_dev(a6, "href", "/#/items");
     			attr_dev(a6, "class", "svelte-4iebt4");
     			toggle_class(a6, "active", /*active*/ ctx[0] == "items");
-    			add_location(a6, file$G, 24, 10, 1117);
+    			add_location(a6, file$G, 24, 10, 1119);
     			attr_dev(a7, "href", "/#/levels");
     			attr_dev(a7, "class", "svelte-4iebt4");
     			toggle_class(a7, "active", /*active*/ ctx[0] == "levels");
-    			add_location(a7, file$G, 25, 10, 1190);
+    			add_location(a7, file$G, 25, 10, 1192);
     			attr_dev(a8, "href", "/#/project");
     			attr_dev(a8, "class", "svelte-4iebt4");
     			toggle_class(a8, "active", /*active*/ ctx[0] == "project");
-    			add_location(a8, file$G, 26, 10, 1266);
+    			add_location(a8, file$G, 26, 10, 1268);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a0, anchor);
@@ -5975,9 +5975,9 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$8.name,
+    		id: create_if_block_2$7.name,
     		type: "if",
-    		source: "(17:8) {#if $user && $project.owners.includes($user.userid)}",
+    		source: "(17:8) {#if $user && $project.owners.includes($user.username)}",
     		ctx
     	});
 
@@ -5995,7 +5995,7 @@ var app = (function () {
     			attr_dev(a, "href", "/#/login");
     			attr_dev(a, "title", "Sign up");
     			attr_dev(a, "class", "svelte-4iebt4");
-    			add_location(a, file$G, 36, 8, 1673);
+    			add_location(a, file$G, 36, 8, 1675);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -6035,11 +6035,11 @@ var app = (function () {
     			a = element("a");
     			a.textContent = "Log out";
     			attr_dev(div, "class", "strong");
-    			add_location(div, file$G, 33, 8, 1524);
+    			add_location(div, file$G, 33, 8, 1526);
     			attr_dev(a, "href", "/#/");
     			attr_dev(a, "title", "Log out");
     			attr_dev(a, "class", "svelte-4iebt4");
-    			add_location(a, file$G, 34, 8, 1576);
+    			add_location(a, file$G, 34, 8, 1578);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -6143,11 +6143,11 @@ var app = (function () {
     			attr_dev(div2, "class", "nav svelte-4iebt4");
     			add_location(div2, file$G, 13, 4, 370);
     			attr_dev(div3, "class", "text-right px10");
-    			add_location(div3, file$G, 30, 4, 1385);
+    			add_location(div3, file$G, 30, 4, 1387);
     			attr_dev(div4, "class", "header svelte-4iebt4");
     			add_location(div4, file$G, 1, 2, 27);
     			attr_dev(div5, "class", "main");
-    			add_location(div5, file$G, 41, 2, 1770);
+    			add_location(div5, file$G, 41, 2, 1772);
     			attr_dev(div6, "class", "container svelte-4iebt4");
     			add_location(div6, file$G, 0, 0, 0);
     		},
@@ -8474,7 +8474,7 @@ var app = (function () {
 
     const file$z = "src\\client\\components\\ItemListNav.svelte";
 
-    function get_each_context$7(ctx, list, i) {
+    function get_each_context$8(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[6] = list[i];
     	return child_ctx;
@@ -8515,7 +8515,7 @@ var app = (function () {
     }
 
     // (5:2) {#each collection as item (item.id)}
-    function create_each_block$7(key_1, ctx) {
+    function create_each_block$8(key_1, ctx) {
     	let a;
     	let t;
     	let a_href_value;
@@ -8585,7 +8585,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$7.name,
+    		id: create_each_block$8.name,
     		type: "each",
     		source: "(5:2) {#each collection as item (item.id)}",
     		ctx
@@ -8607,12 +8607,12 @@ var app = (function () {
     	let each_value = /*collection*/ ctx[0];
     	validate_each_argument(each_value);
     	const get_key = ctx => /*item*/ ctx[6].id;
-    	validate_each_keys(ctx, each_value, get_each_context$7, get_key);
+    	validate_each_keys(ctx, each_value, get_each_context$8, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		let child_ctx = get_each_context$7(ctx, each_value, i);
+    		let child_ctx = get_each_context$8(ctx, each_value, i);
     		let key = get_key(child_ctx);
-    		each_1_lookup.set(key, each_blocks[i] = create_each_block$7(key, child_ctx));
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block$8(key, child_ctx));
     	}
 
     	const block = {
@@ -8665,8 +8665,8 @@ var app = (function () {
     				each_value = /*collection*/ ctx[0];
     				validate_each_argument(each_value);
     				group_outros();
-    				validate_each_keys(ctx, each_value, get_each_context$7, get_key);
-    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div, outro_and_destroy_block, create_each_block$7, null, get_each_context$7);
+    				validate_each_keys(ctx, each_value, get_each_context$8, get_key);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div, outro_and_destroy_block, create_each_block$8, null, get_each_context$8);
     				check_outros();
     			}
     		},
@@ -10834,7 +10834,7 @@ var app = (function () {
 
     const { Object: Object_1$3, console: console_1$1 } = globals;
 
-    function get_each_context$6(ctx, list, i) {
+    function get_each_context$7(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[29] = list[i];
     	child_ctx[31] = i;
@@ -10855,7 +10855,7 @@ var app = (function () {
     	let if_block2_anchor;
     	let current;
     	let if_block0 = /*self*/ ctx[0].paths && create_if_block_3$3(ctx);
-    	let if_block1 = /*self*/ ctx[0].polygons && create_if_block_2$7(ctx);
+    	let if_block1 = /*self*/ ctx[0].polygons && create_if_block_2$6(ctx);
     	let if_block2 = /*self*/ ctx[0].raw && create_if_block_1$8(ctx);
 
     	const block = {
@@ -10908,7 +10908,7 @@ var app = (function () {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_2$7(ctx);
+    					if_block1 = create_if_block_2$6(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(t1.parentNode, t1);
@@ -11128,7 +11128,7 @@ var app = (function () {
     }
 
     // (10:6) {#if self.polygons}
-    function create_if_block_2$7(ctx) {
+    function create_if_block_2$6(ctx) {
     	let each_1_anchor;
     	let current;
     	let each_value = /*self*/ ctx[0].polygons;
@@ -11136,7 +11136,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$6(get_each_context$6(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$7(get_each_context$7(ctx, each_value, i));
     	}
 
     	const out = i => transition_out(each_blocks[i], 1, 1, () => {
@@ -11166,13 +11166,13 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$6(ctx, each_value, i);
+    					const child_ctx = get_each_context$7(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     						transition_in(each_blocks[i], 1);
     					} else {
-    						each_blocks[i] = create_each_block$6(child_ctx);
+    						each_blocks[i] = create_each_block$7(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
@@ -11214,7 +11214,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$7.name,
+    		id: create_if_block_2$6.name,
     		type: "if",
     		source: "(10:6) {#if self.polygons}",
     		ctx
@@ -11224,7 +11224,7 @@ var app = (function () {
     }
 
     // (11:8) {#each self.polygons as polygon, i}
-    function create_each_block$6(ctx) {
+    function create_each_block$7(ctx) {
     	let polygon;
     	let current;
 
@@ -11265,7 +11265,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$6.name,
+    		id: create_each_block$7.name,
     		type: "each",
     		source: "(11:8) {#each self.polygons as polygon, i}",
     		ctx
@@ -11941,7 +11941,7 @@ var app = (function () {
     const get_label_slot_context = ctx => ({});
 
     // (16:6) {#if label != null}
-    function create_if_block_2$6(ctx) {
+    function create_if_block_2$5(ctx) {
     	let span;
 
     	const block = {
@@ -11962,7 +11962,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$6.name,
+    		id: create_if_block_2$5.name,
     		type: "if",
     		source: "(16:6) {#if label != null}",
     		ctx
@@ -11974,7 +11974,7 @@ var app = (function () {
     // (15:23)         
     function fallback_block$1(ctx) {
     	let if_block_anchor;
-    	let if_block = /*label*/ ctx[6] != null && create_if_block_2$6(ctx);
+    	let if_block = /*label*/ ctx[6] != null && create_if_block_2$5(ctx);
 
     	const block = {
     		c: function create() {
@@ -11990,7 +11990,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_2$6(ctx);
+    					if_block = create_if_block_2$5(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -12915,7 +12915,7 @@ var app = (function () {
     /* src\client\components\ColorPicker.svelte generated by Svelte v3.38.3 */
     const file$p = "src\\client\\components\\ColorPicker.svelte";
 
-    function get_each_context$5(ctx, list, i) {
+    function get_each_context$6(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[17] = list[i];
     	return child_ctx;
@@ -13078,7 +13078,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$5(get_each_context$5(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$6(get_each_context$6(ctx, each_value, i));
     	}
 
     	const block = {
@@ -13117,12 +13117,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$5(ctx, each_value, i);
+    					const child_ctx = get_each_context$6(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block$5(child_ctx);
+    						each_blocks[i] = create_each_block$6(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(div0, null);
     					}
@@ -13153,7 +13153,7 @@ var app = (function () {
     }
 
     // (24:10) {#each $recentColors as color}
-    function create_each_block$5(ctx) {
+    function create_each_block$6(ctx) {
     	let div;
     	let div_title_value;
     	let mounted;
@@ -13206,7 +13206,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$5.name,
+    		id: create_each_block$6.name,
     		type: "each",
     		source: "(24:10) {#each $recentColors as color}",
     		ctx
@@ -13861,7 +13861,7 @@ var app = (function () {
     /* src\client\components\InputSelect.svelte generated by Svelte v3.38.3 */
     const file$n = "src\\client\\components\\InputSelect.svelte";
 
-    function get_each_context$4(ctx, list, i) {
+    function get_each_context$5(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[42] = list[i];
     	child_ctx[44] = i;
@@ -14177,13 +14177,13 @@ var app = (function () {
     	let div;
     	let t;
     	let current;
-    	let if_block = /*filterable*/ ctx[6] && create_if_block_2$5(ctx);
+    	let if_block = /*filterable*/ ctx[6] && create_if_block_2$4(ctx);
     	let each_value = /*filteredOptions*/ ctx[14];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$4(get_each_context$4(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$5(get_each_context$5(ctx, each_value, i));
     	}
 
     	const out = i => transition_out(each_blocks[i], 1, 1, () => {
@@ -14238,7 +14238,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block_2$5(ctx);
+    					if_block = create_if_block_2$4(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div, t);
@@ -14259,13 +14259,13 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$4(ctx, each_value, i);
+    					const child_ctx = get_each_context$5(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     						transition_in(each_blocks[i], 1);
     					} else {
-    						each_blocks[i] = create_each_block$4(child_ctx);
+    						each_blocks[i] = create_each_block$5(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
     						each_blocks[i].m(div, null);
@@ -14336,7 +14336,7 @@ var app = (function () {
     }
 
     // (36:6) {#if filterable}
-    function create_if_block_2$5(ctx) {
+    function create_if_block_2$4(ctx) {
     	let div;
     	let input;
     	let t;
@@ -14422,7 +14422,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$5.name,
+    		id: create_if_block_2$4.name,
     		type: "if",
     		source: "(36:6) {#if filterable}",
     		ctx
@@ -14554,7 +14554,7 @@ var app = (function () {
     }
 
     // (46:6) {#each filteredOptions as option, index}
-    function create_each_block$4(ctx) {
+    function create_each_block$5(ctx) {
     	let div;
     	let t;
     	let current;
@@ -14638,7 +14638,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$4.name,
+    		id: create_each_block$5.name,
     		type: "each",
     		source: "(46:6) {#each filteredOptions as option, index}",
     		ctx
@@ -15467,7 +15467,7 @@ var app = (function () {
     /* src\client\pages\ArtBuilder.svelte generated by Svelte v3.38.3 */
     const file$m = "src\\client\\pages\\ArtBuilder.svelte";
 
-    function get_each_context$3(ctx, list, i) {
+    function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[85] = list[i];
     	return child_ctx;
@@ -15948,7 +15948,10 @@ var app = (function () {
     			add_location(button13, file$m, 102, 14, 4387);
     			add_location(div4, file$m, 96, 12, 4162);
     			attr_dev(input_1, "type", "checkbox");
-    			add_location(input_1, file$m, 114, 16, 4875);
+    			attr_dev(input_1, "name", "show-grid");
+    			attr_dev(input_1, "id", "show-grid");
+    			add_location(input_1, file$m, 114, 16, 4891);
+    			attr_dev(label, "for", "show-grid");
     			add_location(label, file$m, 113, 14, 4850);
     			add_location(div5, file$m, 112, 12, 4829);
     			attr_dev(div6, "class", "art-actions svelte-1gatncs");
@@ -15956,20 +15959,20 @@ var app = (function () {
     			attr_dev(div7, "class", "col1");
     			add_location(div7, file$m, 21, 8, 562);
     			attr_dev(canvas0, "class", "draw-canvas svelte-1gatncs");
-    			add_location(canvas0, file$m, 136, 10, 5585);
+    			add_location(canvas0, file$m, 136, 10, 5633);
     			attr_dev(canvas1, "class", "grid-canvas svelte-1gatncs");
     			toggle_class(canvas1, "paint-cursor", /*mode*/ ctx[5] == "paint");
     			toggle_class(canvas1, "fill-cursor", /*mode*/ ctx[5] == "fill");
     			toggle_class(canvas1, "erase-cursor", /*mode*/ ctx[5] == "erase");
-    			add_location(canvas1, file$m, 137, 10, 5650);
+    			add_location(canvas1, file$m, 137, 10, 5698);
     			attr_dev(div8, "class", "grow canvas-container svelte-1gatncs");
-    			add_location(div8, file$m, 135, 8, 5538);
+    			add_location(div8, file$m, 135, 8, 5586);
     			attr_dev(div9, "class", "preview flex");
-    			add_location(div9, file$m, 161, 12, 6651);
+    			add_location(div9, file$m, 161, 12, 6699);
     			attr_dev(div10, "class", "p10");
-    			add_location(div10, file$m, 158, 10, 6490);
+    			add_location(div10, file$m, 158, 10, 6538);
     			attr_dev(div11, "class", "col2");
-    			add_location(div11, file$m, 150, 8, 6144);
+    			add_location(div11, file$m, 150, 8, 6192);
     			attr_dev(div12, "class", "grow columns");
     			add_location(div12, file$m, 20, 6, 526);
     			attr_dev(div13, "class", "grow rows");
@@ -16582,7 +16585,7 @@ var app = (function () {
     			if (img.src !== (img_src_value = /*option*/ ctx[94].png)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "height", "40");
     			attr_dev(img, "alt", "");
-    			add_location(img, file$m, 131, 14, 5423);
+    			add_location(img, file$m, 131, 14, 5471);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -16684,7 +16687,7 @@ var app = (function () {
     			t = space();
     			create_component(formbuttons.$$.fragment);
     			attr_dev(div, "class", "p10");
-    			add_location(div, file$m, 152, 12, 6235);
+    			add_location(div, file$m, 152, 12, 6283);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -16887,12 +16890,12 @@ var app = (function () {
     			attr_dev(img, "width", img_width_value = /*pngCanvas*/ ctx[10].width * artScale);
     			attr_dev(img, "height", img_height_value = /*pngCanvas*/ ctx[10].height * artScale);
     			attr_dev(img, "alt", "preview frame splits");
-    			add_location(img, file$m, 172, 22, 7433);
+    			add_location(img, file$m, 172, 22, 7481);
     			attr_dev(div0, "class", "frame-editor svelte-1gatncs");
-    			add_location(div0, file$m, 171, 20, 7383);
+    			add_location(div0, file$m, 171, 20, 7431);
     			attr_dev(div1, "class", "flex-column");
-    			add_location(div1, file$m, 169, 18, 7216);
-    			add_location(div2, file$m, 163, 16, 6731);
+    			add_location(div1, file$m, 169, 18, 7264);
+    			add_location(div2, file$m, 163, 16, 6779);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -17132,14 +17135,14 @@ var app = (function () {
     			t1 = space();
     			attr_dev(a0, "href", "#/");
     			attr_dev(a0, "class", "text-danger svelte-1gatncs");
-    			add_location(a0, file$m, 175, 26, 7800);
+    			add_location(a0, file$m, 175, 26, 7848);
     			attr_dev(a1, "href", "#/");
     			attr_dev(a1, "class", "text-info svelte-1gatncs");
-    			add_location(a1, file$m, 178, 26, 8006);
+    			add_location(a1, file$m, 178, 26, 8054);
     			attr_dev(div, "class", "frame svelte-1gatncs");
     			set_style(div, "left", /*frameNumber*/ ctx[93] * /*input*/ ctx[1].frameWidth * artScale + "px");
     			set_style(div, "width", /*input*/ ctx[1].frameWidth * artScale + "px");
-    			add_location(div, file$m, 174, 24, 7652);
+    			add_location(div, file$m, 174, 24, 7700);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -17216,7 +17219,7 @@ var app = (function () {
     			attr_dev(img, "width", img_width_value = /*pngCanvas*/ ctx[10].width * artScale);
     			attr_dev(img, "height", img_height_value = /*pngCanvas*/ ctx[10].height * artScale);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$m, 206, 14, 9172);
+    			add_location(img, file$m, 206, 14, 9220);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -17262,7 +17265,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < 3; i += 1) {
-    		each_blocks[i] = create_each_block$3(get_each_context$3(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$4(get_each_context$4(ctx, each_value, i));
     	}
 
     	const out = i => transition_out(each_blocks[i], 1, 1, () => {
@@ -17279,7 +17282,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", "ml-2");
-    			add_location(div, file$m, 191, 14, 8468);
+    			add_location(div, file$m, 191, 14, 8516);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -17298,13 +17301,13 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < 3; i += 1) {
-    					const child_ctx = get_each_context$3(ctx, each_value, i);
+    					const child_ctx = get_each_context$4(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     						transition_in(each_blocks[i], 1);
     					} else {
-    						each_blocks[i] = create_each_block$3(child_ctx);
+    						each_blocks[i] = create_each_block$4(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
     						each_blocks[i].m(div, null);
@@ -17369,7 +17372,7 @@ var app = (function () {
     			attr_dev(img, "alt", "tiling preview");
     			attr_dev(img, "width", img_width_value = /*input*/ ctx[1].width * artScale);
     			attr_dev(img, "height", img_height_value = /*input*/ ctx[1].height * artScale);
-    			add_location(img, file$m, 199, 24, 8877);
+    			add_location(img, file$m, 199, 24, 8925);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -17406,7 +17409,7 @@ var app = (function () {
     }
 
     // (197:22) {#if input.animated}
-    function create_if_block_2$4(ctx) {
+    function create_if_block_2$3(ctx) {
     	let animationpreview;
     	let current;
 
@@ -17466,7 +17469,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$4.name,
+    		id: create_if_block_2$3.name,
     		type: "if",
     		source: "(197:22) {#if input.animated}",
     		ctx
@@ -17481,7 +17484,7 @@ var app = (function () {
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block_2$4, create_else_block$6];
+    	const if_block_creators = [create_if_block_2$3, create_else_block$6];
     	const if_blocks = [];
 
     	function select_block_type_1(ctx, dirty) {
@@ -17556,7 +17559,7 @@ var app = (function () {
     }
 
     // (194:16) {#each [0, 0, 0] as r}
-    function create_each_block$3(ctx) {
+    function create_each_block$4(ctx) {
     	let div;
     	let t;
     	let current;
@@ -17582,7 +17585,7 @@ var app = (function () {
 
     			t = space();
     			attr_dev(div, "class", "flex");
-    			add_location(div, file$m, 194, 18, 8578);
+    			add_location(div, file$m, 194, 18, 8626);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -17649,7 +17652,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$3.name,
+    		id: create_each_block$4.name,
     		type: "each",
     		source: "(194:16) {#each [0, 0, 0] as r}",
     		ctx
@@ -19642,7 +19645,7 @@ var app = (function () {
     			button.textContent = "Stop recording";
     			attr_dev(button, "class", "btn btn-warning");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$l, 22, 12, 769);
+    			add_location(button, file$l, 22, 12, 780);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -19672,7 +19675,7 @@ var app = (function () {
     }
 
     // (20:10) {#if !isRecording}
-    function create_if_block_2$3(ctx) {
+    function create_if_block_2$2(ctx) {
     	let button;
 
     	let t_value = (/*input*/ ctx[1].data
@@ -19689,7 +19692,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(button, "class", "btn btn-warning");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$l, 20, 12, 604);
+    			add_location(button, file$l, 20, 12, 615);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -19714,7 +19717,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$3.name,
+    		id: create_if_block_2$2.name,
     		type: "if",
     		source: "(20:10) {#if !isRecording}",
     		ctx
@@ -19725,8 +19728,8 @@ var app = (function () {
 
     // (26:8) {#if input.data}
     function create_if_block_1$4(ctx) {
-    	let div;
-    	let label;
+    	let div1;
+    	let div0;
     	let t0;
     	let t1_value = /*input*/ ctx[1].start + "";
     	let t1;
@@ -19743,8 +19746,8 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
-    			label = element("label");
+    			div1 = element("div");
+    			div0 = element("div");
     			t0 = text("Start ");
     			t1 = text(t1_value);
     			t2 = text(" / ");
@@ -19754,30 +19757,31 @@ var app = (function () {
     			t5 = space();
     			button = element("button");
     			button.textContent = "Play";
-    			add_location(label, file$l, 27, 12, 972);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$l, 27, 12, 983);
     			attr_dev(input_1, "type", "range");
     			attr_dev(input_1, "min", "0");
     			attr_dev(input_1, "max", input_1_max_value = /*input*/ ctx[1].duration);
     			attr_dev(input_1, "step", "0.1");
-    			add_location(input_1, file$l, 28, 12, 1039);
+    			add_location(input_1, file$l, 28, 12, 1061);
     			attr_dev(button, "class", "btn btn-success");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$l, 29, 12, 1140);
-    			attr_dev(div, "class", "form-group");
-    			add_location(div, file$l, 26, 10, 934);
+    			add_location(button, file$l, 29, 12, 1162);
+    			attr_dev(div1, "class", "form-group");
+    			add_location(div1, file$l, 26, 10, 945);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, label);
-    			append_dev(label, t0);
-    			append_dev(label, t1);
-    			append_dev(label, t2);
-    			append_dev(label, t3);
-    			append_dev(div, t4);
-    			append_dev(div, input_1);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, t0);
+    			append_dev(div0, t1);
+    			append_dev(div0, t2);
+    			append_dev(div0, t3);
+    			append_dev(div1, t4);
+    			append_dev(div1, input_1);
     			set_input_value(input_1, /*input*/ ctx[1].start);
-    			append_dev(div, t5);
-    			append_dev(div, button);
+    			append_dev(div1, t5);
+    			append_dev(div1, button);
 
     			if (!mounted) {
     				dispose = [
@@ -19802,7 +19806,7 @@ var app = (function () {
     			}
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div1);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -19824,8 +19828,8 @@ var app = (function () {
     	let fieldtext;
     	let updating_value;
     	let t0;
-    	let div;
-    	let label;
+    	let div1;
+    	let div0;
     	let t2;
     	let t3;
     	let t4;
@@ -19851,7 +19855,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind$1(fieldtext, "value", fieldtext_value_binding));
 
     	function select_block_type(ctx, dirty) {
-    		if (!/*isRecording*/ ctx[3]) return create_if_block_2$3;
+    		if (!/*isRecording*/ ctx[3]) return create_if_block_2$2;
     		return create_else_block$5;
     	}
 
@@ -19873,26 +19877,27 @@ var app = (function () {
     		c: function create() {
     			create_component(fieldtext.$$.fragment);
     			t0 = space();
-    			div = element("div");
-    			label = element("label");
-    			label.textContent = "Audio";
+    			div1 = element("div");
+    			div0 = element("div");
+    			div0.textContent = "Audio";
     			t2 = space();
     			if_block0.c();
     			t3 = space();
     			if (if_block1) if_block1.c();
     			t4 = space();
     			create_component(formbuttons.$$.fragment);
-    			add_location(label, file$l, 18, 10, 540);
-    			attr_dev(div, "class", "form-group");
-    			add_location(div, file$l, 17, 8, 504);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$l, 18, 10, 540);
+    			attr_dev(div1, "class", "form-group");
+    			add_location(div1, file$l, 17, 8, 504);
     		},
     		m: function mount(target, anchor) {
     			mount_component(fieldtext, target, anchor);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, div, anchor);
-    			append_dev(div, label);
-    			append_dev(div, t2);
-    			if_block0.m(div, null);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div1, t2);
+    			if_block0.m(div1, null);
     			insert_dev(target, t3, anchor);
     			if (if_block1) if_block1.m(target, anchor);
     			insert_dev(target, t4, anchor);
@@ -19922,7 +19927,7 @@ var app = (function () {
 
     				if (if_block0) {
     					if_block0.c();
-    					if_block0.m(div, null);
+    					if_block0.m(div1, null);
     				}
     			}
 
@@ -19958,7 +19963,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			destroy_component(fieldtext, detaching);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div1);
     			if_block0.d();
     			if (detaching) detach_dev(t3);
     			if (if_block1) if_block1.d(detaching);
@@ -24199,31 +24204,32 @@ var app = (function () {
 
     // (14:2) {#if examples}
     function create_if_block$b(ctx) {
-    	let div;
-    	let label;
+    	let div1;
+    	let div0;
     	let t1;
     	let pre;
     	let t2;
 
     	const block = {
     		c: function create() {
-    			div = element("div");
-    			label = element("label");
-    			label.textContent = "Sample code:";
+    			div1 = element("div");
+    			div0 = element("div");
+    			div0.textContent = "Sample code:";
     			t1 = space();
     			pre = element("pre");
     			t2 = text(/*examples*/ ctx[2]);
-    			add_location(label, file$e, 15, 6, 366);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$e, 15, 6, 366);
     			attr_dev(pre, "class", "lang-javascript");
-    			add_location(pre, file$e, 16, 6, 401);
-    			attr_dev(div, "class", "examples");
-    			add_location(div, file$e, 14, 4, 336);
+    			add_location(pre, file$e, 16, 6, 412);
+    			attr_dev(div1, "class", "examples");
+    			add_location(div1, file$e, 14, 4, 336);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, label);
-    			append_dev(div, t1);
-    			append_dev(div, pre);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div1, t1);
+    			append_dev(div1, pre);
     			append_dev(pre, t2);
     			/*pre_binding_1*/ ctx[9](pre);
     		},
@@ -24231,7 +24237,7 @@ var app = (function () {
     			if (dirty & /*examples*/ 4) set_data_dev(t2, /*examples*/ ctx[2]);
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div1);
     			/*pre_binding_1*/ ctx[9](null);
     		}
     	};
@@ -28707,7 +28713,7 @@ sprite.wait(5000).then(() => {
     /* src\client\components\FieldAbilities.svelte generated by Svelte v3.38.3 */
     const file$8 = "src\\client\\components\\FieldAbilities.svelte";
 
-    function get_each_context$2(ctx, list, i) {
+    function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[11] = list[i];
     	child_ctx[12] = list;
@@ -28715,22 +28721,7 @@ sprite.wait(5000).then(() => {
     	return child_ctx;
     }
 
-    // (7:6) {#if keyAssignable}
-    function create_if_block_2$2(ctx) {
-    	const block = { c: noop$1, m: noop$1, d: noop$1 };
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block_2$2.name,
-    		type: "if",
-    		source: "(7:6) {#if keyAssignable}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (9:8) {#if value?.length}
+    // (8:8) {#if value?.length}
     function create_if_block$6(ctx) {
     	let each_1_anchor;
     	let current;
@@ -28739,7 +28730,7 @@ sprite.wait(5000).then(() => {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$3(get_each_context$3(ctx, each_value, i));
     	}
 
     	const out = i => transition_out(each_blocks[i], 1, 1, () => {
@@ -28769,13 +28760,13 @@ sprite.wait(5000).then(() => {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$2(ctx, each_value, i);
+    					const child_ctx = get_each_context$3(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     						transition_in(each_blocks[i], 1);
     					} else {
-    						each_blocks[i] = create_each_block$2(child_ctx);
+    						each_blocks[i] = create_each_block$3(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
@@ -28819,14 +28810,14 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_if_block$6.name,
     		type: "if",
-    		source: "(9:8) {#if value?.length}",
+    		source: "(8:8) {#if value?.length}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (15:14) {#if keyAssignable}
+    // (14:14) {#if keyAssignable}
     function create_if_block_1$2(ctx) {
     	let td;
     	let inputselect;
@@ -28863,8 +28854,8 @@ sprite.wait(5000).then(() => {
     		c: function create() {
     			td = element("td");
     			create_component(inputselect.$$.fragment);
-    			attr_dev(td, "class", "svelte-2zp23x");
-    			add_location(td, file$8, 15, 16, 441);
+    			attr_dev(td, "class", "svelte-g7r532");
+    			add_location(td, file$8, 14, 16, 420);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, td, anchor);
@@ -28906,14 +28897,14 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(15:14) {#if keyAssignable}",
+    		source: "(14:14) {#if keyAssignable}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (17:18) <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key} placeholder="Key"                      >
+    // (16:18) <InputSelect name="ability-key-{i}" inline options={abilityKeys} let:option bind:value={itemAbility.key} placeholder="Key"                      >
     function create_default_slot$7(ctx) {
     	let t_value = /*option*/ ctx[14].value.toUpperCase() + "";
     	let t;
@@ -28937,15 +28928,15 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_default_slot$7.name,
     		type: "slot",
-    		source: "(17:18) <InputSelect name=\\\"ability-key-{i}\\\" inline options={abilityKeys} let:option bind:value={itemAbility.key} placeholder=\\\"Key\\\"                      >",
+    		source: "(16:18) <InputSelect name=\\\"ability-key-{i}\\\" inline options={abilityKeys} let:option bind:value={itemAbility.key} placeholder=\\\"Key\\\"                      >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (10:10) {#each value as itemAbility, i}
-    function create_each_block$2(ctx) {
+    // (9:10) {#each value as itemAbility, i}
+    function create_each_block$3(ctx) {
     	let tr;
     	let td0;
     	let abilitypicker;
@@ -29019,16 +29010,16 @@ sprite.wait(5000).then(() => {
     			a = element("a");
     			a.textContent = "Remove";
     			t4 = space();
-    			attr_dev(td0, "class", "svelte-2zp23x");
-    			add_location(td0, file$8, 11, 14, 252);
-    			attr_dev(td1, "class", "svelte-2zp23x");
-    			add_location(td1, file$8, 21, 14, 732);
+    			attr_dev(td0, "class", "svelte-g7r532");
+    			add_location(td0, file$8, 10, 14, 231);
+    			attr_dev(td1, "class", "svelte-g7r532");
+    			add_location(td1, file$8, 20, 14, 711);
     			attr_dev(a, "href", null);
-    			attr_dev(a, "class", "svelte-2zp23x");
-    			add_location(a, file$8, 25, 16, 945);
-    			attr_dev(td2, "class", "svelte-2zp23x");
-    			add_location(td2, file$8, 24, 14, 923);
-    			add_location(tr, file$8, 10, 12, 232);
+    			attr_dev(a, "class", "svelte-g7r532");
+    			add_location(a, file$8, 24, 16, 924);
+    			attr_dev(td2, "class", "svelte-g7r532");
+    			add_location(td2, file$8, 23, 14, 902);
+    			add_location(tr, file$8, 9, 12, 211);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -29120,9 +29111,9 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$2.name,
+    		id: create_each_block$3.name,
     		type: "each",
-    		source: "(10:10) {#each value as itemAbility, i}",
+    		source: "(9:10) {#each value as itemAbility, i}",
     		ctx
     	});
 
@@ -29130,14 +29121,13 @@ sprite.wait(5000).then(() => {
     }
 
     function create_fragment$9(ctx) {
-    	let div1;
-    	let label;
-    	let t0;
+    	let div2;
     	let div0;
+    	let t0;
+    	let div1;
     	let table;
-    	let t1;
     	let tbody;
-    	let t2;
+    	let t1;
     	let tr;
     	let td;
     	let a;
@@ -29146,60 +29136,56 @@ sprite.wait(5000).then(() => {
     	let dispose;
     	const default_slot_template = /*#slots*/ ctx[4].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[9], null);
-    	let if_block0 = /*keyAssignable*/ ctx[1] && create_if_block_2$2(ctx);
-    	let if_block1 = /*value*/ ctx[0]?.length && create_if_block$6(ctx);
+    	let if_block = /*value*/ ctx[0]?.length && create_if_block$6(ctx);
 
     	const block = {
     		c: function create() {
-    			div1 = element("div");
-    			label = element("label");
+    			div2 = element("div");
+    			div0 = element("div");
     			if (default_slot) default_slot.c();
     			t0 = space();
-    			div0 = element("div");
+    			div1 = element("div");
     			table = element("table");
-    			if (if_block0) if_block0.c();
-    			t1 = space();
     			tbody = element("tbody");
-    			if (if_block1) if_block1.c();
-    			t2 = space();
+    			if (if_block) if_block.c();
+    			t1 = space();
     			tr = element("tr");
     			td = element("td");
     			a = element("a");
     			a.textContent = "Add ability";
-    			add_location(label, file$8, 1, 2, 28);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$8, 1, 2, 28);
     			attr_dev(a, "href", null);
-    			attr_dev(a, "class", "svelte-2zp23x");
-    			add_location(a, file$8, 32, 12, 1149);
+    			attr_dev(a, "class", "svelte-g7r532");
+    			add_location(a, file$8, 31, 12, 1128);
     			attr_dev(td, "colspan", "3");
-    			attr_dev(td, "class", "svelte-2zp23x");
-    			add_location(td, file$8, 31, 10, 1119);
-    			add_location(tr, file$8, 30, 8, 1103);
-    			add_location(tbody, file$8, 7, 6, 139);
+    			attr_dev(td, "class", "svelte-g7r532");
+    			add_location(td, file$8, 30, 10, 1098);
+    			add_location(tr, file$8, 29, 8, 1082);
+    			add_location(tbody, file$8, 6, 6, 118);
     			attr_dev(table, "cellspacing", "0");
-    			add_location(table, file$8, 5, 4, 76);
-    			add_location(div0, file$8, 4, 2, 65);
-    			attr_dev(div1, "class", "form-group");
-    			add_location(div1, file$8, 0, 0, 0);
+    			add_location(table, file$8, 5, 4, 87);
+    			add_location(div1, file$8, 4, 2, 76);
+    			attr_dev(div2, "class", "form-group");
+    			add_location(div2, file$8, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div1, anchor);
-    			append_dev(div1, label);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div0);
 
     			if (default_slot) {
-    				default_slot.m(label, null);
+    				default_slot.m(div0, null);
     			}
 
-    			append_dev(div1, t0);
-    			append_dev(div1, div0);
-    			append_dev(div0, table);
-    			if (if_block0) if_block0.m(table, null);
-    			append_dev(table, t1);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, table);
     			append_dev(table, tbody);
-    			if (if_block1) if_block1.m(tbody, null);
-    			append_dev(tbody, t2);
+    			if (if_block) if_block.m(tbody, null);
+    			append_dev(tbody, t1);
     			append_dev(tbody, tr);
     			append_dev(tr, td);
     			append_dev(td, a);
@@ -29217,35 +29203,24 @@ sprite.wait(5000).then(() => {
     				}
     			}
 
-    			if (/*keyAssignable*/ ctx[1]) {
-    				if (if_block0) ; else {
-    					if_block0 = create_if_block_2$2(ctx);
-    					if_block0.c();
-    					if_block0.m(table, t1);
-    				}
-    			} else if (if_block0) {
-    				if_block0.d(1);
-    				if_block0 = null;
-    			}
-
     			if (/*value*/ ctx[0]?.length) {
-    				if (if_block1) {
-    					if_block1.p(ctx, dirty);
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
 
     					if (dirty & /*value*/ 1) {
-    						transition_in(if_block1, 1);
+    						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block1 = create_if_block$6(ctx);
-    					if_block1.c();
-    					transition_in(if_block1, 1);
-    					if_block1.m(tbody, t2);
+    					if_block = create_if_block$6(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(tbody, t1);
     				}
-    			} else if (if_block1) {
+    			} else if (if_block) {
     				group_outros();
 
-    				transition_out(if_block1, 1, 1, () => {
-    					if_block1 = null;
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
     				});
 
     				check_outros();
@@ -29254,19 +29229,18 @@ sprite.wait(5000).then(() => {
     		i: function intro(local) {
     			if (current) return;
     			transition_in(default_slot, local);
-    			transition_in(if_block1);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(default_slot, local);
-    			transition_out(if_block1);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(div2);
     			if (default_slot) default_slot.d(detaching);
-    			if (if_block0) if_block0.d();
-    			if (if_block1) if_block1.d();
+    			if (if_block) if_block.d();
     			mounted = false;
     			dispose();
     		}
@@ -79752,7 +79726,7 @@ sprite.wait(5000).then(() => {
                 }
             }
             if (blocked) {
-                var lastValidCoord = path[i - 1];
+                lastValidCoord = path[i - 1];
                 newPath.push(lastValidCoord);
                 sx = lastValidCoord[0];
                 sy = lastValidCoord[1];
@@ -81415,7 +81389,7 @@ sprite.wait(5000).then(() => {
 
     var JumpPointFinder_1 = JumpPointFinder;
 
-    var PathFinding = {
+    var PathFinding$1 = {
         'Heap'                      : heap,
         'Node'                      : Node_1,
         'Grid'                      : Grid_1,
@@ -81434,7 +81408,7 @@ sprite.wait(5000).then(() => {
         'JumpPointFinder'           : JumpPointFinder_1,
     };
 
-    var pathfinding = PathFinding;
+    var PathFinding = PathFinding$1;
 
     class LevelGrid {
       constructor(tiles, level, gridSize) {
@@ -81456,7 +81430,7 @@ sprite.wait(5000).then(() => {
         if (highestX == null) highestX = 10;
         if (highestY == null) highestY = 10;
 
-        this.grid = new pathfinding.Grid(highestX + 1, highestY + 1);
+        this.grid = new PathFinding.Grid(highestX + 1, highestY + 1);
 
         // make only walkable tiles work
         for (let x = 0; x <= highestX; x++) {
@@ -81466,7 +81440,7 @@ sprite.wait(5000).then(() => {
         }
         walkableTiles.forEach(b => this.grid.setWalkableAt(b.x, b.y, true));
 
-        this.finder = new pathfinding.AStarFinder({
+        this.finder = new PathFinding.AStarFinder({
           allowDiagonal: true,
           dontCrossCorners: true,
         });
@@ -81490,7 +81464,7 @@ sprite.wait(5000).then(() => {
         // find all points in a line between from and to
         // filter to only walkable points
         // loop walkable points backward, trying to find paths to them.  use the first path found.
-        const lineBetween = pathfinding.Util.interpolate(startX, startY, goalX, goalY).filter(([x, y]) => this.grid.isWalkableAt(x, y));
+        const lineBetween = PathFinding.Util.interpolate(startX, startY, goalX, goalY).filter(([x, y]) => this.grid.isWalkableAt(x, y));
         let path = null;
         for (let i = lineBetween.length - 1; i >= 0; i--) {
           let [x, y] = lineBetween[i];
@@ -81499,7 +81473,7 @@ sprite.wait(5000).then(() => {
         }
         if (path == null || path.length == 0) return []
 
-        path = this.smoothPathing ? pathfinding.Util.smoothenPath(this.grid, path) : pathfinding.Util.compressPath(path);
+        path = this.smoothPathing ? PathFinding.Util.smoothenPath(this.grid, path) : PathFinding.Util.compressPath(path);
 
         // remove the first point if it's the same as start
         if (path.length && path[0][0] == startX && path[0][1] == startY) path.shift();
@@ -81510,7 +81484,7 @@ sprite.wait(5000).then(() => {
       canSee(from, to) {
         const [startX, startY] = this.toGridCoordinates(from);
         const [goalX, goalY] = this.toGridCoordinates(to);
-        const line = pathfinding.Util.interpolate(startX, startY, goalX, goalY);
+        const line = PathFinding.Util.interpolate(startX, startY, goalX, goalY);
         const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y));
         // console.log(
         //   'cansee',
@@ -81701,6 +81675,10 @@ sprite.wait(5000).then(() => {
     		pixiApp.stage.on("pointermove", onPixiPointerMove);
     		renderLevel();
     	}
+
+    	onDestroy(() => {
+    		pixiApp.destroy();
+    	});
 
     	function restartPixi() {
     		if (pixiApp != null) {
@@ -81965,6 +81943,7 @@ sprite.wait(5000).then(() => {
 
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
+    		onDestroy,
     		rgbaStringToHex,
     		abilities,
     		art,
@@ -82606,8 +82585,8 @@ sprite.wait(5000).then(() => {
     	let fieldtext;
     	let updating_value;
     	let t1;
-    	let div;
-    	let label;
+    	let div1;
+    	let div0;
     	let t3;
     	let colorpicker;
     	let updating_value_1;
@@ -82735,9 +82714,9 @@ sprite.wait(5000).then(() => {
     			t0 = space();
     			create_component(fieldtext.$$.fragment);
     			t1 = space();
-    			div = element("div");
-    			label = element("label");
-    			label.textContent = "Background color";
+    			div1 = element("div");
+    			div0 = element("div");
+    			div0.textContent = "Background color";
     			t3 = space();
     			create_component(colorpicker.$$.fragment);
     			t4 = space();
@@ -82746,19 +82725,20 @@ sprite.wait(5000).then(() => {
     			create_component(fieldcheckbox1.$$.fragment);
     			t6 = space();
     			create_component(fieldcheckbox2.$$.fragment);
-    			add_location(label, file$4, 41, 10, 1445);
-    			attr_dev(div, "class", "form-group");
-    			add_location(div, file$4, 40, 8, 1409);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$4, 41, 10, 1445);
+    			attr_dev(div1, "class", "form-group");
+    			add_location(div1, file$4, 40, 8, 1409);
     		},
     		m: function mount(target, anchor) {
     			mount_component(formbuttons, target, anchor);
     			insert_dev(target, t0, anchor);
     			mount_component(fieldtext, target, anchor);
     			insert_dev(target, t1, anchor);
-    			insert_dev(target, div, anchor);
-    			append_dev(div, label);
-    			append_dev(div, t3);
-    			mount_component(colorpicker, div, null);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div1, t3);
+    			mount_component(colorpicker, div1, null);
     			insert_dev(target, t4, anchor);
     			mount_component(fieldcheckbox0, target, anchor);
     			insert_dev(target, t5, anchor);
@@ -82858,7 +82838,7 @@ sprite.wait(5000).then(() => {
     			if (detaching) detach_dev(t0);
     			destroy_component(fieldtext, detaching);
     			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div1);
     			destroy_component(colorpicker);
     			if (detaching) detach_dev(t4);
     			destroy_component(fieldcheckbox0, detaching);
@@ -82882,24 +82862,24 @@ sprite.wait(5000).then(() => {
 
     // (50:6) {#if $isDrawing}
     function create_if_block_1$1(ctx) {
-    	let div6;
+    	let div9;
+    	let div2;
     	let div1;
     	let div0;
-    	let label0;
     	let t1;
     	let inputselect0;
     	let updating_value;
     	let t2;
+    	let div5;
+    	let div4;
     	let div3;
-    	let div2;
-    	let label1;
     	let t4;
     	let inputselect1;
     	let updating_value_1;
     	let t5;
-    	let div5;
-    	let div4;
-    	let label2;
+    	let div8;
+    	let div7;
+    	let div6;
     	let t7;
     	let inputselect2;
     	let updating_value_2;
@@ -82990,74 +82970,77 @@ sprite.wait(5000).then(() => {
 
     	const block = {
     		c: function create() {
-    			div6 = element("div");
+    			div9 = element("div");
+    			div2 = element("div");
     			div1 = element("div");
     			div0 = element("div");
-    			label0 = element("label");
-    			label0.textContent = "Place a tile";
+    			div0.textContent = "Place a tile";
     			t1 = space();
     			create_component(inputselect0.$$.fragment);
     			t2 = space();
+    			div5 = element("div");
+    			div4 = element("div");
     			div3 = element("div");
-    			div2 = element("div");
-    			label1 = element("label");
-    			label1.textContent = "Place an item";
+    			div3.textContent = "Place an item";
     			t4 = space();
     			create_component(inputselect1.$$.fragment);
     			t5 = space();
-    			div5 = element("div");
-    			div4 = element("div");
-    			label2 = element("label");
-    			label2.textContent = "Place an enemy";
+    			div8 = element("div");
+    			div7 = element("div");
+    			div6 = element("div");
+    			div6.textContent = "Place an enemy";
     			t7 = space();
     			create_component(inputselect2.$$.fragment);
-    			add_location(label0, file$4, 53, 14, 2242);
-    			attr_dev(div0, "class", "form-group svelte-f2zpmb");
-    			add_location(div0, file$4, 52, 12, 2202);
-    			attr_dev(div1, "class", "draw-option svelte-f2zpmb");
-    			toggle_class(div1, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Tiles);
-    			add_location(div1, file$4, 51, 10, 2074);
-    			add_location(label1, file$4, 65, 14, 2761);
-    			attr_dev(div2, "class", "form-group svelte-f2zpmb");
-    			add_location(div2, file$4, 64, 12, 2721);
-    			attr_dev(div3, "class", "draw-option svelte-f2zpmb");
-    			toggle_class(div3, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Items);
-    			add_location(div3, file$4, 63, 10, 2593);
-    			add_location(label2, file$4, 77, 14, 3300);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$4, 53, 14, 2253);
+    			attr_dev(div1, "class", "form-group svelte-f2zpmb");
+    			add_location(div1, file$4, 52, 12, 2213);
+    			attr_dev(div2, "class", "draw-option svelte-f2zpmb");
+    			toggle_class(div2, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Tiles);
+    			add_location(div2, file$4, 51, 10, 2085);
+    			attr_dev(div3, "class", "strong");
+    			add_location(div3, file$4, 65, 14, 2783);
     			attr_dev(div4, "class", "form-group svelte-f2zpmb");
-    			add_location(div4, file$4, 76, 12, 3260);
+    			add_location(div4, file$4, 64, 12, 2743);
     			attr_dev(div5, "class", "draw-option svelte-f2zpmb");
-    			toggle_class(div5, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Enemies);
-    			add_location(div5, file$4, 75, 10, 3128);
-    			attr_dev(div6, "class", "flex-column");
-    			add_location(div6, file$4, 50, 8, 2037);
+    			toggle_class(div5, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Items);
+    			add_location(div5, file$4, 63, 10, 2615);
+    			attr_dev(div6, "class", "strong");
+    			add_location(div6, file$4, 77, 14, 3333);
+    			attr_dev(div7, "class", "form-group svelte-f2zpmb");
+    			add_location(div7, file$4, 76, 12, 3293);
+    			attr_dev(div8, "class", "draw-option svelte-f2zpmb");
+    			toggle_class(div8, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Enemies);
+    			add_location(div8, file$4, 75, 10, 3161);
+    			attr_dev(div9, "class", "flex-column");
+    			add_location(div9, file$4, 50, 8, 2048);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div6, anchor);
-    			append_dev(div6, div1);
+    			insert_dev(target, div9, anchor);
+    			append_dev(div9, div2);
+    			append_dev(div2, div1);
     			append_dev(div1, div0);
-    			append_dev(div0, label0);
-    			append_dev(div0, t1);
-    			mount_component(inputselect0, div0, null);
-    			append_dev(div6, t2);
-    			append_dev(div6, div3);
-    			append_dev(div3, div2);
-    			append_dev(div2, label1);
-    			append_dev(div2, t4);
-    			mount_component(inputselect1, div2, null);
-    			append_dev(div6, t5);
-    			append_dev(div6, div5);
+    			append_dev(div1, t1);
+    			mount_component(inputselect0, div1, null);
+    			append_dev(div9, t2);
+    			append_dev(div9, div5);
     			append_dev(div5, div4);
-    			append_dev(div4, label2);
-    			append_dev(div4, t7);
-    			mount_component(inputselect2, div4, null);
+    			append_dev(div4, div3);
+    			append_dev(div4, t4);
+    			mount_component(inputselect1, div4, null);
+    			append_dev(div9, t5);
+    			append_dev(div9, div8);
+    			append_dev(div8, div7);
+    			append_dev(div7, div6);
+    			append_dev(div7, t7);
+    			mount_component(inputselect2, div7, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div1, "click", /*click_handler_2*/ ctx[36], false, false, false),
-    					listen_dev(div3, "click", /*click_handler_3*/ ctx[38], false, false, false),
-    					listen_dev(div5, "click", /*click_handler_4*/ ctx[40], false, false, false)
+    					listen_dev(div2, "click", /*click_handler_2*/ ctx[36], false, false, false),
+    					listen_dev(div5, "click", /*click_handler_3*/ ctx[38], false, false, false),
+    					listen_dev(div8, "click", /*click_handler_4*/ ctx[40], false, false, false)
     				];
 
     				mounted = true;
@@ -83080,7 +83063,7 @@ sprite.wait(5000).then(() => {
     			inputselect0.$set(inputselect0_changes);
 
     			if (dirty[0] & /*drawMode, DrawMode*/ 16512) {
-    				toggle_class(div1, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Tiles);
+    				toggle_class(div2, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Tiles);
     			}
 
     			const inputselect1_changes = {};
@@ -83099,7 +83082,7 @@ sprite.wait(5000).then(() => {
     			inputselect1.$set(inputselect1_changes);
 
     			if (dirty[0] & /*drawMode, DrawMode*/ 16512) {
-    				toggle_class(div3, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Items);
+    				toggle_class(div5, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Items);
     			}
 
     			const inputselect2_changes = {};
@@ -83118,7 +83101,7 @@ sprite.wait(5000).then(() => {
     			inputselect2.$set(inputselect2_changes);
 
     			if (dirty[0] & /*drawMode, DrawMode*/ 16512) {
-    				toggle_class(div5, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Enemies);
+    				toggle_class(div8, "selected", /*drawMode*/ ctx[7] == /*DrawMode*/ ctx[14].Enemies);
     			}
     		},
     		i: function intro(local) {
@@ -83135,7 +83118,7 @@ sprite.wait(5000).then(() => {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div6);
+    			if (detaching) detach_dev(div9);
     			destroy_component(inputselect0);
     			destroy_component(inputselect1);
     			destroy_component(inputselect2);
@@ -84192,7 +84175,7 @@ sprite.wait(5000).then(() => {
     /* src\client\pages\SelectProject.svelte generated by Svelte v3.38.3 */
     const file$2 = "src\\client\\pages\\SelectProject.svelte";
 
-    function get_each_context$1(ctx, list, i) {
+    function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[11] = list[i];
     	return child_ctx;
@@ -84472,7 +84455,7 @@ sprite.wait(5000).then(() => {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
     	}
 
     	const block = {
@@ -84505,12 +84488,12 @@ sprite.wait(5000).then(() => {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$1(ctx, each_value, i);
+    					const child_ctx = get_each_context$2(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i] = create_each_block$2(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
@@ -84543,7 +84526,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (22:6) {#each publicProjects as p}
-    function create_each_block$1(ctx) {
+    function create_each_block$2(ctx) {
     	let div;
     	let a;
     	let t0_value = /*p*/ ctx[11].name + "";
@@ -84592,7 +84575,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$1.name,
+    		id: create_each_block$2.name,
     		type: "each",
     		source: "(22:6) {#each publicProjects as p}",
     		ctx
@@ -84808,11 +84791,11 @@ sprite.wait(5000).then(() => {
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*$projects, $user*/ 65) {
-    			$$invalidate(1, publicProjects = $projects?.filter(p => !p.owners.includes($user?.userid)));
+    			$$invalidate(1, publicProjects = $projects?.filter(p => !p.owners.includes($user?.username)));
     		}
 
     		if ($$self.$$.dirty & /*$projects, $user*/ 65) {
-    			$$invalidate(2, myProjects = $projects?.filter(p => p.owners.includes($user?.userid)));
+    			$$invalidate(2, myProjects = $projects?.filter(p => p.owners.includes($user?.username)));
     		}
     	};
 
@@ -84847,7 +84830,14 @@ sprite.wait(5000).then(() => {
     /* src\client\pages\ProjectSettings.svelte generated by Svelte v3.38.3 */
     const file$1 = "src\\client\\pages\\ProjectSettings.svelte";
 
-    // (5:8) <FieldText name="name" bind:value={input.name}>
+    function get_each_context$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[13] = list[i];
+    	child_ctx[15] = i;
+    	return child_ctx;
+    }
+
+    // (5:6) <FieldText name="name" bind:value={input.name}>
     function create_default_slot_3(ctx) {
     	let t;
 
@@ -84867,14 +84857,14 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(5:8) <FieldText name=\\\"name\\\" bind:value={input.name}>",
+    		source: "(5:6) <FieldText name=\\\"name\\\" bind:value={input.name}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (6:8) <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>
+    // (6:6) <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>
     function create_default_slot_2(ctx) {
     	let t;
 
@@ -84894,27 +84884,96 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(6:8) <FieldNumber name=\\\"pixel-size\\\" bind:value={input.pixelSize} min={1} max={10} step={0.1}>",
+    		source: "(6:6) <FieldNumber name=\\\"pixel-size\\\" bind:value={input.pixelSize} min={1} max={10} step={0.1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (3:4) <Form on:submit={save}>
-    function create_default_slot_1(ctx) {
+    // (10:10) {#each input.owners as owner, i}
+    function create_each_block$1(ctx) {
     	let div;
+    	let t0_value = /*owner*/ ctx[13] + "";
+    	let t0;
+    	let t1;
+    	let a;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[10](/*owner*/ ctx[13]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			a = element("a");
+    			a.textContent = "Remove";
+    			attr_dev(a, "href", null);
+    			add_location(a, file$1, 10, 25, 503);
+    			add_location(div, file$1, 10, 12, 490);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t0);
+    			append_dev(div, t1);
+    			append_dev(div, a);
+
+    			if (!mounted) {
+    				dispose = listen_dev(a, "click", click_handler, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if (dirty & /*input*/ 1 && t0_value !== (t0_value = /*owner*/ ctx[13] + "")) set_data_dev(t0, t0_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(10:10) {#each input.owners as owner, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (4:4) <Form on:submit={save}>
+    function create_default_slot_1(ctx) {
     	let fieldtext;
     	let updating_value;
     	let t0;
     	let fieldnumber;
     	let updating_value_1;
     	let t1;
+    	let div3;
+    	let div0;
+    	let t3;
+    	let div2;
+    	let t4;
+    	let div1;
+    	let input_1;
+    	let t5;
+    	let button;
+    	let t7;
     	let formbuttons;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	function fieldtext_value_binding(value) {
-    		/*fieldtext_value_binding*/ ctx[4](value);
+    		/*fieldtext_value_binding*/ ctx[8](value);
     	}
 
     	let fieldtext_props = {
@@ -84931,7 +84990,7 @@ sprite.wait(5000).then(() => {
     	binding_callbacks.push(() => bind$1(fieldtext, "value", fieldtext_value_binding));
 
     	function fieldnumber_value_binding(value) {
-    		/*fieldnumber_value_binding*/ ctx[5](value);
+    		/*fieldnumber_value_binding*/ ctx[9](value);
     	}
 
     	let fieldnumber_props = {
@@ -84949,36 +85008,94 @@ sprite.wait(5000).then(() => {
 
     	fieldnumber = new FieldNumber({ props: fieldnumber_props, $$inline: true });
     	binding_callbacks.push(() => bind$1(fieldnumber, "value", fieldnumber_value_binding));
+    	let each_value = /*input*/ ctx[0].owners;
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
 
     	formbuttons = new FormButtons({
-    			props: { hasChanges: /*hasChanges*/ ctx[1] },
+    			props: { hasChanges: /*hasChanges*/ ctx[3] },
     			$$inline: true
     		});
 
     	const block = {
     		c: function create() {
-    			div = element("div");
     			create_component(fieldtext.$$.fragment);
     			t0 = space();
     			create_component(fieldnumber.$$.fragment);
     			t1 = space();
+    			div3 = element("div");
+    			div0 = element("div");
+    			div0.textContent = "People who can edit this project";
+    			t3 = space();
+    			div2 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t4 = space();
+    			div1 = element("div");
+    			input_1 = element("input");
+    			t5 = space();
+    			button = element("button");
+    			button.textContent = "Add owner";
+    			t7 = space();
     			create_component(formbuttons.$$.fragment);
-    			attr_dev(div, "class", "p10");
-    			add_location(div, file$1, 3, 6, 87);
+    			attr_dev(div0, "class", "strong");
+    			add_location(div0, file$1, 7, 8, 344);
+    			attr_dev(input_1, "type", "text");
+    			attr_dev(input_1, "placeholder", "New owner username");
+    			add_location(input_1, file$1, 13, 12, 620);
+    			attr_dev(button, "type", "button");
+    			add_location(button, file$1, 14, 12, 736);
+    			add_location(div1, file$1, 12, 10, 601);
+    			attr_dev(div2, "class", "owners");
+    			add_location(div2, file$1, 8, 8, 412);
+    			attr_dev(div3, "class", "form-group");
+    			add_location(div3, file$1, 6, 6, 310);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			mount_component(fieldtext, div, null);
-    			append_dev(div, t0);
-    			mount_component(fieldnumber, div, null);
-    			append_dev(div, t1);
-    			mount_component(formbuttons, div, null);
+    			mount_component(fieldtext, target, anchor);
+    			insert_dev(target, t0, anchor);
+    			mount_component(fieldnumber, target, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div0);
+    			append_dev(div3, t3);
+    			append_dev(div3, div2);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div2, null);
+    			}
+
+    			append_dev(div2, t4);
+    			append_dev(div2, div1);
+    			append_dev(div1, input_1);
+    			/*input_1_binding*/ ctx[11](input_1);
+    			set_input_value(input_1, /*newOwner*/ ctx[1]);
+    			append_dev(div1, t5);
+    			append_dev(div1, button);
+    			insert_dev(target, t7, anchor);
+    			mount_component(formbuttons, target, anchor);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[12]),
+    					listen_dev(button, "click", /*addOwner*/ ctx[5], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 64) {
+    			if (dirty & /*$$scope*/ 65536) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -84991,7 +85108,7 @@ sprite.wait(5000).then(() => {
     			fieldtext.$set(fieldtext_changes);
     			const fieldnumber_changes = {};
 
-    			if (dirty & /*$$scope*/ 64) {
+    			if (dirty & /*$$scope*/ 65536) {
     				fieldnumber_changes.$$scope = { dirty, ctx };
     			}
 
@@ -85002,8 +85119,37 @@ sprite.wait(5000).then(() => {
     			}
 
     			fieldnumber.$set(fieldnumber_changes);
+
+    			if (dirty & /*removeOwner, input*/ 65) {
+    				each_value = /*input*/ ctx[0].owners;
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div2, t4);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+
+    			if (dirty & /*newOwner*/ 2 && input_1.value !== /*newOwner*/ ctx[1]) {
+    				set_input_value(input_1, /*newOwner*/ ctx[1]);
+    			}
+
     			const formbuttons_changes = {};
-    			if (dirty & /*hasChanges*/ 2) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[1];
+    			if (dirty & /*hasChanges*/ 8) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[3];
     			formbuttons.$set(formbuttons_changes);
     		},
     		i: function intro(local) {
@@ -85020,10 +85166,17 @@ sprite.wait(5000).then(() => {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			destroy_component(fieldtext);
-    			destroy_component(fieldnumber);
-    			destroy_component(formbuttons);
+    			destroy_component(fieldtext, detaching);
+    			if (detaching) detach_dev(t0);
+    			destroy_component(fieldnumber, detaching);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(div3);
+    			destroy_each(each_blocks, detaching);
+    			/*input_1_binding*/ ctx[11](null);
+    			if (detaching) detach_dev(t7);
+    			destroy_component(formbuttons, detaching);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -85031,7 +85184,7 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(3:4) <Form on:submit={save}>",
+    		source: "(4:4) <Form on:submit={save}>",
     		ctx
     	});
 
@@ -85041,6 +85194,8 @@ sprite.wait(5000).then(() => {
     // (1:0) <AppLayout active="project">
     function create_default_slot$1(ctx) {
     	let div;
+    	let h2;
+    	let t1;
     	let form;
     	let current;
 
@@ -85052,24 +85207,30 @@ sprite.wait(5000).then(() => {
     			$$inline: true
     		});
 
-    	form.$on("submit", /*save*/ ctx[2]);
+    	form.$on("submit", /*save*/ ctx[4]);
 
     	const block = {
     		c: function create() {
     			div = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "Game settings";
+    			t1 = space();
     			create_component(form.$$.fragment);
-    			attr_dev(div, "class", "grow");
+    			add_location(h2, file$1, 2, 4, 60);
+    			attr_dev(div, "class", "grow p10");
     			add_location(div, file$1, 1, 2, 32);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
+    			append_dev(div, h2);
+    			append_dev(div, t1);
     			mount_component(form, div, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, input*/ 67) {
+    			if (dirty & /*$$scope, hasChanges, newOwnerField, newOwner, input*/ 65551) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -85128,7 +85289,7 @@ sprite.wait(5000).then(() => {
     		p: function update(ctx, [dirty]) {
     			const applayout_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, input*/ 67) {
+    			if (dirty & /*$$scope, hasChanges, newOwnerField, newOwner, input*/ 65551) {
     				applayout_changes.$$scope = { dirty, ctx };
     			}
 
@@ -85160,27 +85321,45 @@ sprite.wait(5000).then(() => {
     }
 
     function createDefaultInput() {
-    	return { id: null, name: "", pixelSize: 1 };
+    	return {
+    		id: null,
+    		name: "",
+    		pixelSize: 1,
+    		owners: []
+    	};
     }
 
     function instance$2($$self, $$props, $$invalidate) {
     	let hasChanges;
     	let $project;
     	validate_store(project, "project");
-    	component_subscribe($$self, project, $$value => $$invalidate(3, $project = $$value));
+    	component_subscribe($$self, project, $$value => $$invalidate(7, $project = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("ProjectSettings", slots, []);
     	let input = createDefaultInput();
+    	let newOwner = "";
+    	let newOwnerField;
 
     	function save() {
     		const p = {
     			...$project,
     			name: input.name,
-    			pixelSize: input.pixelSize
+    			pixelSize: input.pixelSize,
+    			owners: input.owners
     		};
 
     		project.set(p);
     		projects.apiUpdate(p);
+    	}
+
+    	function addOwner() {
+    		$$invalidate(0, input.owners = [...input.owners, newOwner], input);
+    		$$invalidate(1, newOwner = "");
+    		newOwnerField.focus();
+    	}
+
+    	function removeOwner(username) {
+    		$$invalidate(0, input.owners = input.owners.filter(o => o !== username), input);
     	}
 
     	const writable_props = [];
@@ -85192,15 +85371,29 @@ sprite.wait(5000).then(() => {
     	function fieldtext_value_binding(value) {
     		if ($$self.$$.not_equal(input.name, value)) {
     			input.name = value;
-    			($$invalidate(0, input), $$invalidate(3, $project));
+    			($$invalidate(0, input), $$invalidate(7, $project));
     		}
     	}
 
     	function fieldnumber_value_binding(value) {
     		if ($$self.$$.not_equal(input.pixelSize, value)) {
     			input.pixelSize = value;
-    			($$invalidate(0, input), $$invalidate(3, $project));
+    			($$invalidate(0, input), $$invalidate(7, $project));
     		}
+    	}
+
+    	const click_handler = owner => removeOwner(owner);
+
+    	function input_1_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			newOwnerField = $$value;
+    			$$invalidate(2, newOwnerField);
+    		});
+    	}
+
+    	function input_1_input_handler() {
+    		newOwner = this.value;
+    		$$invalidate(1, newOwner);
     	}
 
     	$$self.$capture_state = () => ({
@@ -85213,15 +85406,21 @@ sprite.wait(5000).then(() => {
     		FormButtons,
     		validator,
     		input,
+    		newOwner,
+    		newOwnerField,
     		createDefaultInput,
     		save,
+    		addOwner,
+    		removeOwner,
     		hasChanges,
     		$project
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("input" in $$props) $$invalidate(0, input = $$props.input);
-    		if ("hasChanges" in $$props) $$invalidate(1, hasChanges = $$props.hasChanges);
+    		if ("newOwner" in $$props) $$invalidate(1, newOwner = $$props.newOwner);
+    		if ("newOwnerField" in $$props) $$invalidate(2, newOwnerField = $$props.newOwnerField);
+    		if ("hasChanges" in $$props) $$invalidate(3, hasChanges = $$props.hasChanges);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -85229,24 +85428,31 @@ sprite.wait(5000).then(() => {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*input, $project*/ 9) {
+    		if ($$self.$$.dirty & /*input, $project*/ 129) {
     			if (input.id == null && $project.id != null) {
     				$$invalidate(0, input = { ...createDefaultInput(), ...$project });
     			}
     		}
 
-    		if ($$self.$$.dirty & /*input, $project*/ 9) {
-    			$$invalidate(1, hasChanges = !validator.equals(input, $project));
+    		if ($$self.$$.dirty & /*input, $project*/ 129) {
+    			$$invalidate(3, hasChanges = !validator.equals(input, $project));
     		}
     	};
 
     	return [
     		input,
+    		newOwner,
+    		newOwnerField,
     		hasChanges,
     		save,
+    		addOwner,
+    		removeOwner,
     		$project,
     		fieldtext_value_binding,
-    		fieldnumber_value_binding
+    		fieldnumber_value_binding,
+    		click_handler,
+    		input_1_binding,
+    		input_1_input_handler
     	];
     }
 
@@ -85322,10 +85528,10 @@ sprite.wait(5000).then(() => {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "art-preview svelte-v7iud");
+    			attr_dev(div0, "class", "art-preview svelte-b2nwt8");
     			add_location(div0, file, 5, 6, 186);
-    			add_location(h2, file, 57, 10, 2038);
-    			attr_dev(div1, "class", "level-picker svelte-v7iud");
+    			add_location(h2, file, 57, 10, 2029);
+    			attr_dev(div1, "class", "p20");
     			add_location(div1, file, 56, 8, 2000);
     			attr_dev(div2, "class", "flex-row");
     			add_location(div2, file, 10, 6, 378);
@@ -85482,7 +85688,7 @@ sprite.wait(5000).then(() => {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "art-preview-item svelte-v7iud");
+    			attr_dev(div, "class", "art-preview-item svelte-b2nwt8");
     			set_style(div, "background-image", "url('" + /*art*/ ctx[10].png + "')");
     			add_location(div, file, 7, 10, 263);
     		},
@@ -85522,8 +85728,8 @@ sprite.wait(5000).then(() => {
     			a = element("a");
     			t = text(t_value);
     			attr_dev(a, "href", a_href_value = "#/play/" + /*level*/ ctx[7].id);
-    			attr_dev(a, "class", "play-level-btn svelte-v7iud");
-    			add_location(a, file, 59, 12, 2111);
+    			attr_dev(a, "class", "play-level-btn svelte-b2nwt8");
+    			add_location(a, file, 59, 12, 2102);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);

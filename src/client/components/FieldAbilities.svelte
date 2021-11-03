@@ -1,10 +1,9 @@
 <div class="form-group">
-  <label>
+  <div class="strong">
     <slot />
-  </label>
+  </div>
   <div>
     <table cellspacing="0">
-      {#if keyAssignable}{/if}
       <tbody>
         {#if value?.length}
           {#each value as itemAbility, i}
@@ -72,11 +71,6 @@
 </script>
 
 <style>
-  th {
-    text-align: left;
-  }
-
-  th,
   td {
     padding: 5px;
     border-bottom: 1px solid #ccc;

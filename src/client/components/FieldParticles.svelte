@@ -1,7 +1,7 @@
 <div class="form-group">
-  <label>
+  <<div class="strong">
     <slot>Particles</slot>
-  </label>
+  </div>
   <ParticlesPicker {name} bind:value />
 </div>
 

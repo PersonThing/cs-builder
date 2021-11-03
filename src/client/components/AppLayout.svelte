@@ -14,7 +14,7 @@
     <div class="nav">
       {#if $project?.name}
         <a href="/#/play" class:active={active == 'play'}>Play</a>
-        {#if $user && $project.owners.includes($user.userid)}
+        {#if $user && $project.owners.includes($user.username)}
           <a href="/#/art" class:active={active == 'art'}>Art</a>
           <a href="/#/tiles" class:active={active == 'tiles'}>Tiles</a>
           <a href="/#/audio" class:active={active == 'audio'}>Audio</a>
