@@ -24,14 +24,11 @@
                 belt
                 gloves
                 boots
-                neck
-                ring1
-                ring2
               }
               inventory: items they've picked up
-              gold: amount of gold they've picked up
+              gold/currency: amount of gold they've picked up
               level: 1 for now, figure out leveling/exp gain later
-              skills: later, for now just hard-coded by class
+              abilities: later, for now just hard-coded by class
             }
 
             potential item mods:
@@ -44,8 +41,8 @@
               mana/energy/whatever
               mana/energy/whatever regeneration
               global cooldown reduction
-              skill cooldown reduction
-              individual skill damage bonus
+              ability cooldown reduction
+              individual ability damage bonus
               add projectiles
               add max turret
               add ability

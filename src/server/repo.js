@@ -12,6 +12,41 @@ class Repo {
     return client.connect()
   }
 
+  insert(collectionName, object) {
+    return this.db.collection(collectionName).insertOne(object)
+  }
+
+  update(collectionName, keys, newValue) {
+    if (newValue._id != null) delete newValue._id
+    return this.db.collection(collectionName).updateOne(keys, {
+      $set: newValue,
+    })
+  }
+
+  delete(collectionName, filter) {
+    return this.db.collection(collectionName).deleteOne(filter)
+  }
+
+  deleteMany(collectionName, filter) {
+    return this.db.collection(collectionName).deleteMany(filter)
+  }
+
+  get(collectionName, filters) {
+    return this.db.collection(collectionName).findOne(filters)
+  }
+
+  find(collectionName, filters = {}) {
+    return (
+      this.db
+        .collection(collectionName)
+        .find(filters)
+        // sort case-insensitive
+        .collation({ locale: 'en' })
+        .sort({ name: 1 })
+        .toArray()
+    )
+  }
+
   export() {
     const collections = ['abilities', 'art', 'audio', 'characters', 'enemies', 'items', 'levels', 'projects', 'tiles', 'users']
     const results = {}
@@ -23,24 +58,6 @@ class Repo {
     return Promise.all(promises).then(() => {
       return results
     })
-  }
-
-  seedUsers() {
-    // this.update('users', { username: 'tim' }, { password: this.hashPassword('tim', '1Super') })
-    // this.update('users', { username: 'clay' }, { password: this.hashPassword('clay', 'cact') })
-    // this.update('users', { username: 'sam' }, { password: this.hashPassword('sam', 'sambam') })
-    // this.insert('users', {
-    //   username: 'tim',
-    //   password: this.hashPassword('tim', ''),
-    // })
-    // this.insert('users', {
-    //   username: 'clay',
-    //   password: this.hashPassword('clay', ''),
-    // })
-    // this.insert('users', {
-    //   username: 'sam',
-    //   password: this.hashPassword('sam', ''),
-    // })
   }
 
   getUserByName(username) {
@@ -100,41 +117,6 @@ class Repo {
       .catch(() => {
         return Promise.reject()
       })
-  }
-
-  insert(collectionName, object) {
-    return this.db.collection(collectionName).insertOne(object)
-  }
-
-  update(collectionName, keys, newValue) {
-    if (newValue._id != null) delete newValue._id
-    return this.db.collection(collectionName).updateOne(keys, {
-      $set: newValue,
-    })
-  }
-
-  delete(collectionName, filter) {
-    return this.db.collection(collectionName).deleteOne(filter)
-  }
-
-  deleteMany(collectionName, filter) {
-    return this.db.collection(collectionName).deleteMany(filter)
-  }
-
-  get(collectionName, filters) {
-    return this.db.collection(collectionName).findOne(filters)
-  }
-
-  find(collectionName, filters = {}) {
-    return (
-      this.db
-        .collection(collectionName)
-        .find(filters)
-        // sort case-insensitive
-        .collation({ locale: 'en' })
-        .sort({ name: 1 })
-        .toArray()
-    )
   }
 }
 

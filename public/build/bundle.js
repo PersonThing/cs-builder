@@ -85324,9 +85324,9 @@ sprite.wait(5000).then(() => {
 
     			attr_dev(div0, "class", "art-preview svelte-v7iud");
     			add_location(div0, file, 5, 6, 186);
-    			add_location(h2, file, 60, 10, 2090);
+    			add_location(h2, file, 57, 10, 2038);
     			attr_dev(div1, "class", "level-picker svelte-v7iud");
-    			add_location(div1, file, 59, 8, 2052);
+    			add_location(div1, file, 56, 8, 2000);
     			attr_dev(div2, "class", "flex-row");
     			add_location(div2, file, 10, 6, 378);
     		},
@@ -85510,7 +85510,7 @@ sprite.wait(5000).then(() => {
     	return block;
     }
 
-    // (62:10) {#each $levels as level}
+    // (59:10) {#each $levels as level}
     function create_each_block(ctx) {
     	let a;
     	let t_value = /*level*/ ctx[7].name + "";
@@ -85523,7 +85523,7 @@ sprite.wait(5000).then(() => {
     			t = text(t_value);
     			attr_dev(a, "href", a_href_value = "#/play/" + /*level*/ ctx[7].id);
     			attr_dev(a, "class", "play-level-btn svelte-v7iud");
-    			add_location(a, file, 62, 12, 2163);
+    			add_location(a, file, 59, 12, 2111);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -85545,7 +85545,7 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(62:10) {#each $levels as level}",
+    		source: "(59:10) {#each $levels as level}",
     		ctx
     	});
 
