@@ -17,7 +17,7 @@
   import ParticleBuilder from './pages/ParticleBuilder.svelte'
   import TileBuilder from './pages/TileBuilder.svelte'
   import ItemBuilder from './pages/ItemBuilder.svelte'
-  import CharacterBuilder from './pages/CharacterBuilder.svelte'
+  import CharacterClassBuilder from './pages/CharacterClassBuilder.svelte'
   import EnemyBuilder from './pages/EnemyBuilder.svelte'
   import LevelBuilder from './pages/LevelBuilder.svelte'
   import NotFound from './pages/NotFound.svelte'
@@ -37,10 +37,11 @@
     '/particles/:id?': ParticleBuilder,
     '/tiles/:id?': TileBuilder,
     '/items/:id?': ItemBuilder,
-    '/characters/:id?': CharacterBuilder,
+    '/characterclasses/:id?': CharacterClassBuilder,
     '/enemies/:id?': EnemyBuilder,
     '/levels/:id?': LevelBuilder,
-    '/play/:id?': Play,
+    '/play': Play,
+    '/play/*': Play,
     '*': NotFound,
   }
 </script>

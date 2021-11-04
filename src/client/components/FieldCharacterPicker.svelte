@@ -1,9 +1,9 @@
 <div class="form-group">
   <label for="graphic">
-    <slot>Characters</slot>
+    <slot>Character classes</slot>
   </label>
   <div>
-    <InputSelect multiple {options} bind:value let:option inline filterable={options.length > 2}>
+    <InputSelect {multiple} {options} bind:value let:option inline filterable={options.length > 2}>
       <ArtThumb id={option.graphics.moving} />
       {option.name}
     </InputSelect>
@@ -12,12 +12,14 @@
 
 <script>
   import { sortByName } from '../services/object-utils'
-  import { characters } from './stores/project-stores'
+  import { characterclasses } from '../stores/project-stores'
   import ArtThumb from './ArtThumb.svelte'
   import InputSelect from './InputSelect.svelte'
   export let value = []
 
-  $: options = $characters
+  export let multiple = false
+
+  $: options = $characterclasses
     .map(c => ({
       ...c,
       value: c.id,

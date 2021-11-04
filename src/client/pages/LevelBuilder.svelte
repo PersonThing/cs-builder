@@ -112,11 +112,11 @@
   }
 
   function getItemGraphic(item) {
-    return $characters.length ? $characters[0].graphics.still : null
+    return $characterclasses.length ? $characterclasses[0].graphics.still : null
   }
 
   //////////// things unique to level builder ////////////
-  import { tiles, enemies, items, characters, levels } from '../stores/project-stores'
+  import { tiles, enemies, items, characterclasses, levels } from '../stores/project-stores'
   import { sortByName } from '../services/object-utils'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ColorPicker from '../components/ColorPicker.svelte'

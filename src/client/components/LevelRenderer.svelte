@@ -13,7 +13,7 @@
 <script>
   import { createEventDispatcher, onDestroy } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
-  import { abilities, art, tiles, characters, enemies, items, audio } from '../stores/project-stores.js'
+  import { abilities, art, tiles, characterclasses, enemies, items, audio } from '../stores/project-stores.js'
   import Player from '../classes/Player.js'
   import Enemy from '../classes/Enemy.js'
   import Tile from '../classes/Tile.js'
@@ -35,6 +35,7 @@
   }
 
   export let level
+  export let character
   export let playable = false
   export let gridSize
 
@@ -207,8 +208,8 @@
       pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
 
       // create player
-      if (playable && $characters.length > 0) {
-        const charConfig = JSON.parse(JSON.stringify($characters[0]))
+      if (playable && $characterclasses.length > 0) {
+        const charConfig = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)))
         const audioOnDeath = $audio.find(au => au.id === charConfig.audioOnDeath)
         player = new Player(
           world,

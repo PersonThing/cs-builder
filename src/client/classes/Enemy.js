@@ -18,6 +18,7 @@ export default class Enemy extends LivingSprite {
     if (this.nextGcd < time && this.abilities?.length) {
       const closestVisibleEnemy = this.getClosestVisibleEnemyInRange(this.config.sightRadius)
       if (closestVisibleEnemy) {
+        this.setTarget(closestVisibleEnemy.enemy)
         const distance = closestVisibleEnemy.distance
         const closestAbilityInRange = this.abilities
           .filter(a => a.nextFire < time && a.config.range > distance)
@@ -28,8 +29,6 @@ export default class Enemy extends LivingSprite {
           closestAbilityInRange.nextFire = time + 1000 / closestAbilityInRange.usePerSecond
           setTimeout(() => closestAbilityInRange.use(closestVisibleEnemy.enemy), 500)
         }
-
-        this.setTarget(closestVisibleEnemy.enemy)
       }
       this.nextGcd = time + this.config.gcd || 0
     }

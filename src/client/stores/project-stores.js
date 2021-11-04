@@ -20,17 +20,19 @@ project.subscribe(p => {
 
 export const user = createUserStore()
 export const projects = createProjectsStore()
+export const characters = createCharactersStore()
+
 export const art = createProjectItemStore('art')
 export const abilities = createProjectItemStore('abilities')
 export const audio = createProjectItemStore('audio')
-export const characters = createProjectItemStore('characters')
+export const characterclasses = createProjectItemStore('characterclasses')
 export const enemies = createProjectItemStore('enemies')
 export const items = createProjectItemStore('items')
 export const levels = createProjectItemStore('levels')
 export const particles = createProjectItemStore('particles')
 export const tiles = createProjectItemStore('tiles')
 
-const stores = { art, abilities, audio, characters, enemies, items, levels, particles, tiles }
+const itemTypeStores = { art, abilities, audio, characterclasses, enemies, items, levels, particles, tiles }
 
 function createUserStore() {
   const { subscribe, set, update } = writable(null)
@@ -82,7 +84,7 @@ function createUserStore() {
 }
 
 function createActiveProjectStore() {
-  const { subscribe, set, update } = writable({})
+  const { subscribe, set, update } = writable(null)
 
   const customSet = p => {
     set(p)
@@ -107,7 +109,9 @@ function createActiveProjectStore() {
     })
 
     // populate item stores with this project's stuff
-    Object.keys(stores).forEach(key => stores[key].set(p[key]))
+    Object.keys(itemTypeStores).forEach(key => itemTypeStores[key].set(p[key]))
+    characters.set([])
+    characters.refresh()
   }
 
   const loadFromApi = id => {
@@ -141,15 +145,15 @@ function createActiveProjectStore() {
   projectItemTypes.forEach(it => {
     socket.on(`${it}.insert`, item => {
       console.log(it, 'insert from server', item)
-      if (item.projectId == $project.id) addToStore(stores[it].update, item)
+      if (item.projectId == $project.id) addToStore(itemTypeStores[it].update, item)
     })
     socket.on(`${it}.update`, item => {
       console.log(it, 'update from server', item)
-      if (item.projectId == $project.id) replaceInStore(stores[it].update, item)
+      if (item.projectId == $project.id) replaceInStore(itemTypeStores[it].update, item)
     })
     socket.on(`${it}.delete`, ({ id, projectId }) => {
       console.log(it, 'delete from server', id, projectId)
-      if (projectId == $project.id) removeFromStore(stores[it].update, id)
+      if (projectId == $project.id) removeFromStore(itemTypeStores[it].update, id)
     })
   })
 
@@ -197,6 +201,52 @@ function createProjectsStore() {
 
     apiDelete(id) {
       return api.projects.delete(id).then(() => {
+        removeFromStore(update, id)
+      })
+    },
+  }
+}
+
+function createCharactersStore() {
+  const { set, update, subscribe } = writable([])
+
+  const refresh = () => {
+    const projectId = $project.id
+    console.log('loading characters for project', projectId)
+    return api.characters.find(projectId).then(characters => {
+      set(characters)
+      return characters
+    })
+  }
+
+  return {
+    subscribe,
+    set,
+    update,
+    refresh,
+
+    loadForProject(projectId) {
+      api.characters.find(projectId).then(response => {
+        set(response)
+      })
+    },
+
+    apiInsert(item) {
+      return api.characters.insert(item).then(res => {
+        addToStore(update, res)
+        return res
+      })
+    },
+
+    apiUpdate(item) {
+      return api.characters.update(item).then(res => {
+        replaceInStore(update, res)
+        return res
+      })
+    },
+
+    apiDelete(id) {
+      return api.characters.delete(id).then(() => {
         removeFromStore(update, id)
       })
     },

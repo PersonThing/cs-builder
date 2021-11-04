@@ -104,6 +104,36 @@ const Api = {
       })
     },
   },
+
+  characters: {
+    find(projectId) {
+      console.log('api.characters.find')
+      return _fetch(`/api/characters/${projectId}`)
+    },
+
+    insert(item) {
+      console.log('api.characters.insert')
+      return _fetch(`/api/characters`, {
+        method: 'POST',
+        body: item,
+      })
+    },
+
+    update(item) {
+      console.log('api.characters.update')
+      return _fetch(`/api/characters/${item.id}`, {
+        method: 'PUT',
+        body: item,
+      })
+    },
+
+    delete(id) {
+      console.log('api.characters.delete')
+      return _fetch(`/api/characters/${id}`, {
+        method: 'DELETE',
+      })
+    },
+  },
 }
 
 projectItemTypes.forEach(c => {

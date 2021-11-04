@@ -44,6 +44,17 @@ const assertUserOwnsProject = (username, projectId, response) => {
   })
 }
 
+const assertUserOwnsCharacter = (username, characterId, response) => {
+  return new Promise((resolve, reject) => {
+    repo
+      .assertUserOwnsCharacter(username, characterId)
+      .then(resolve)
+      .catch(() => {
+        response.status(403).json({ message: 'You are not allowed to change this character' })
+      })
+  })
+}
+
 // https://zellwk.com/blog/crud-express-mongodb/
 // this article recommended connecting then putting handlers inside callback.. seems like it'd be flaky, but mongodb is supposed to handle connection pooling internally, so maybe fine?
 repo.connect().then(() => {
@@ -171,6 +182,61 @@ repo.connect().then(() => {
           io.emit('projects.delete', req.params.id)
           res.json(true)
         })
+      })
+    })
+  })
+
+  // character crud
+  app.get('/api/characters/:projectId', authorization, (req, res) => {
+    console.log('finding characters for project', req.params.projectId, req.username)
+    repo.find('characters', { projectId: req.params.projectId, username: req.username }).then(characters => {
+      res.json(characters)
+    })
+  })
+
+  app.post('/api/characters', authorization, (req, res) => {
+    const item = req.body
+    item.projectId = req.body.projectId
+    item.username = req.username
+    item.level = 1
+    item.xp = 0
+
+    repo.find('characters', { username: req.username }).then(characters => {
+      const item = req.body
+      item.id = (
+        characters.length
+          ? characters
+              .map(ch => parseInt(ch.id))
+              .sort((a, b) => (a < b ? -1 : 1))
+              .pop() + 1
+          : 0
+      ).toString()
+
+      repo.insert('characters', item).then(dbres => {
+        item._id = dbres.insertedid
+        io.emit('characters.insert', item)
+        res.json(item)
+      })
+    })
+  })
+
+  app.put('/api/characters', authorization, (req, res) => {
+    // TODO: validate changes they're making...
+    // if we make the game server-side, we won't need this api at all, server can just periodically sync character state to mongo
+    assertUserOwnsCharacter(req.username, req.body.id, res).then(() => {
+      repo.update('characters', { username: req.username, id: req.body.id }, req.body).then(() => {
+        io.emit('characters.update', req.body)
+        res.json(req.body)
+      })
+    })
+  })
+
+  app.delete('/api/characters/:id', authorization, (req, res) => {
+    console.log('trying to delete', req.params.id, req.username)
+    assertUserOwnsCharacter(req.username, req.params.id, res).then(() => {
+      repo.delete('characters', { username: req.username, id: req.params.id }).then(() => {
+        io.emit('characters.delete', req.params.id)
+        res.json(true)
       })
     })
   })

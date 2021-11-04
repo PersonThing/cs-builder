@@ -47,19 +47,6 @@ class Repo {
     )
   }
 
-  export() {
-    const collections = ['abilities', 'art', 'audio', 'characters', 'enemies', 'items', 'levels', 'projects', 'tiles', 'users']
-    const results = {}
-    const promises = collections.map(collectionName => {
-      return this.find(collectionName).then(rows => {
-        results[collectionName] = rows
-      })
-    })
-    return Promise.all(promises).then(() => {
-      return results
-    })
-  }
-
   getUserByName(username) {
     return this.db
       .collection('users')
@@ -118,51 +105,31 @@ class Repo {
         return Promise.reject()
       })
   }
+
+  assertUserOwnsCharacter(username, characterId) {
+    return this.db
+      .collection('characters')
+      .findOne({ id: characterId, username })
+      .then(result => {
+        return result != null ? Promise.resolve() : Promise.reject()
+      })
+      .catch(() => {
+        return Promise.reject()
+      })
+  }
+
+  export() {
+    const collections = ['abilities', 'art', 'audio', 'characterclasses', 'characters', 'enemies', 'items', 'levels', 'projects', 'tiles', 'users']
+    const results = {}
+    const promises = collections.map(collectionName => {
+      return this.find(collectionName).then(rows => {
+        results[collectionName] = rows
+      })
+    })
+    return Promise.all(promises).then(() => {
+      return results
+    })
+  }
 }
 
 export default new Repo()
-
-// migrateToTiles() {
-//   const blocks = this.db
-//     .collection('blocks')
-//     .find({})
-//     .toArray()
-//     .then(blocks => {
-//       this.db.collection('tiles').insertMany(blocks)
-//     })
-// }
-
-// resetMongo() {
-//   const projectItemTypes = ['art', 'tiles', 'items', 'characters', 'levels', 'enemies']
-
-//   projectItemTypes.forEach(cn => {
-//     let items = database.projects.flatMap(p =>
-//       Object.values(p[cn]).map(e => ({
-//         ...e,
-//         projectId: p.id.toString(),
-//         id: e.id.toString(),
-//       }))
-//     )
-
-//     // strip some unused stuff on tiles
-//     if (cn == 'tiles') {
-//       items = items.map(b => ({
-//         id: b.id,
-//         projectId: b.projectId,
-//         name: b.name,
-//         graphic: b.graphic,
-//         canWalk: b.canWalk,
-//         canSee: b.canSee,
-//       }))
-//     }
-
-//     // delete everything that was there
-//     this.db
-//       .collection(cn)
-//       .deleteMany({})
-//       .then(() => {
-//         // insert new ones
-//         this.db.collection(cn).insertMany(items)
-//       })
-//   })
-// }

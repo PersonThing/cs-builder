@@ -1,7 +1,9 @@
 <div class="container">
   <div class="header">
     <div>
-      <h1>CSBuilder</h1>
+      <h1>
+        <a href="/#/">CSBuilder</a>
+      </h1>
     </div>
     <div class="px10">
       {#if $project}
@@ -19,7 +21,7 @@
           <a href="/#/tiles" class:active={active == 'tiles'}>Tiles</a>
           <a href="/#/audio" class:active={active == 'audio'}>Audio</a>
           <a href="/#/abilities" class:active={active == 'abilities'}>Abilities</a>
-          <a href="/#/characters" class:active={active == 'characters'}>Characters</a>
+          <a href="/#/characterclasses" class:active={active == 'characterclasses'}>Character classes</a>
           <!-- <a href="/#/particles" class:active={active == 'particles'}>Particles</a> -->
           <a href="/#/enemies" class:active={active == 'enemies'}>Enemies</a>
           <a href="/#/items" class:active={active == 'items'}>Items</a>
@@ -77,6 +79,10 @@
         margin: 5px 10px;
         padding: 0;
         font-size: 20px;
+
+        a {
+          text-decoration: none;
+        }
       }
 
       .nav {
