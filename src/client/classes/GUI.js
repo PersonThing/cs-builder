@@ -159,7 +159,7 @@ export default class GUI extends PIXI.Container {
     currencyText.zIndex = 11
     this.inventoryPanel.addChild(currencyText)
 
-    // this.hideInventoryPanel()
+    this.hideInventoryPanel()
   }
 
   drawAbilityBar() {

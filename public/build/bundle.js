@@ -75527,7 +75527,7 @@ sprite.wait(5000).then(() => {
         currencyText.zIndex = 11;
         this.inventoryPanel.addChild(currencyText);
 
-        // this.hideInventoryPanel()
+        this.hideInventoryPanel();
       }
 
       drawAbilityBar() {
