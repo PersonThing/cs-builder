@@ -16,7 +16,11 @@
   {#if input}
     <div class="grow">
       <div class="btn-group play-edit-toggle">
-        <button type="button" class="btn {!$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = false)}>Play test</button>
+        {#each $characters as c}
+          <button type="button" class="btn {!$isDrawing && $testingWithId == c.id ? 'btn-success' : ''}" on:click={() => playTest(c)}>
+            Test with {c.name}
+          </button>
+        {/each}
         <button type="button" class="btn {$isDrawing ? 'btn-success' : ''}" on:click={() => ($isDrawing = true)}>Edit</button>
       </div>
       {#if $isDrawing}
@@ -29,8 +33,10 @@
           on:pointerup={onDrawPointerUp}
           on:pointermove={onDrawPointerMove}
         />
+      {:else if character != null}
+        <LevelRenderer level={input} {character} playable {gridSize} bind:this={levelRenderer} />
       {:else}
-        <LevelRenderer level={input} playable {gridSize} bind:this={levelRenderer} />
+        <p>Cannot play test until you have at least 1 character created.</p>
       {/if}
     </div>
 
@@ -116,7 +122,7 @@
   }
 
   //////////// things unique to level builder ////////////
-  import { tiles, enemies, items, characterclasses, levels } from '../stores/project-stores'
+  import { tiles, enemies, items, characters, characterclasses, levels } from '../stores/project-stores'
   import { sortByName } from '../services/object-utils'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ColorPicker from '../components/ColorPicker.svelte'
@@ -125,6 +131,7 @@
   import InputSelect from '../components/InputSelect.svelte'
   import LevelRenderer from '../components/LevelRenderer.svelte'
   import LocalStorageStore from '../stores/local-storage-store'
+  import { tick } from 'svelte'
 
   const gridSize = 40
   const DrawMode = {
@@ -134,12 +141,24 @@
   }
 
   let isDrawing = LocalStorageStore('is-drawing', false)
+  let testingWithId = LocalStorageStore('testing-with', null)
   let levelRenderer
   let selectedTileId = 0
   let selectedItemId = null
   let selectedEnemyId = null
   let drawMode = DrawMode.Tiles
   let pointerIsDown = false
+
+  async function playTest(c) {
+    // force it to re-render if switching between characters when you were already play-testing
+    $isDrawing = true
+    await tick()
+
+    $testingWithId = c.id
+    $isDrawing = false
+  }
+
+  $: character = $testingWithId != null ? $characters.find(c => c.id == $testingWithId) : null
 
   $: tileOptions = [
     { value: null, name: 'Erase tiles' },
@@ -217,15 +236,15 @@
     switch (drawMode) {
       case DrawMode.Tiles:
         input.tiles = replaceAtCoord(input.tiles, x, y, selectedTileId)
-        levelRenderer.redrawTiles()
+        levelRenderer.getWorld().redrawTiles()
         break
       case DrawMode.Items:
         input.items = replaceAtCoord(input.items, x, y, selectedItemId)
-        levelRenderer.redrawItems()
+        levelRenderer.getWorld().redrawItems()
         break
       case DrawMode.Enemies:
         input.enemies = replaceAtCoord(input.enemies, x, y, selectedEnemyId)
-        levelRenderer.redrawEnemies()
+        levelRenderer.getWorld().redrawEnemies()
         break
     }
   }

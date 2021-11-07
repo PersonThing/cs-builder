@@ -3,8 +3,8 @@ import * as PIXI from 'pixi.js'
 import LivingSprite from './LivingSprite.js'
 
 export default class Enemy extends LivingSprite {
-  constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
-    super(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
+  constructor(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
+    super(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
 
     this.config.sightRadius = config.sightRadius ?? 150
 
@@ -42,5 +42,10 @@ export default class Enemy extends LivingSprite {
     this.radiusPreview.drawCircle(0, 0, this.config.sightRadius)
     this.radiusPreview.zIndex = 1
     this.addChild(this.radiusPreview)
+  }
+
+  destroy() {
+    console.log('enemy died, roll to drop items')
+    super.destroy()
   }
 }

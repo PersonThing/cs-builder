@@ -5,10 +5,11 @@ import audioService from '../services/audio-service.js'
 import makeArtSprite from '../services/make-art-sprite.js'
 
 export default class LivingSprite extends PIXI.Container {
-  constructor(world, getEnemies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
+  constructor(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
     super()
     this.world = world
     this.getEnemies = getEnemies
+    this.getAllies = getAllies
     this.config = config
 
     this.x = x
