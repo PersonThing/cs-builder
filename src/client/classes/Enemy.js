@@ -37,8 +37,8 @@ export default class Enemy extends LivingSprite {
 
   drawSightRadius() {
     this.radiusPreview = new PIXI.Graphics()
-    // this.radiusPreview.beginFill(0xff0000, 0.2)
-    this.radiusPreview.lineStyle(2, 0xffffff, 0.2)
+    this.radiusPreview.beginFill(0xffffff, 0.1)
+    // this.radiusPreview.lineStyle(2, 0xffffff, 0.2)
     this.radiusPreview.drawCircle(0, 0, this.config.sightRadius)
     this.radiusPreview.zIndex = 1
     this.addChild(this.radiusPreview)

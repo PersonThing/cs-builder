@@ -66,7 +66,10 @@
       keys[key] = true
     }
     if (key === 'b') {
-      gui.toggleInventory()
+      gui.toggleInventoryPanel()
+    }
+    if (key === 'c') {
+      gui.toggleCharacterPanel()
     }
   }
   function onKeyUp(event) {
@@ -140,8 +143,8 @@
 
       // create player
       if (playable && $characterclasses.length > 0) {
-        const charConfig = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)))
-        player = world.createPlayer(charConfig)
+        const characterClass = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)))
+        player = world.createPlayer(character, characterClass)
         gui = new GUI(player, pixiApp.renderer.width, pixiApp.renderer.height)
         gui.x = 0
         gui.y = 0

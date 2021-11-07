@@ -1,10 +1,18 @@
 import LivingSprite from './LivingSprite.js'
 
 export default class Player extends LivingSprite {
-  constructor(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
-    super(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
+  constructor(world, getEnemies, getAllies, character, characterClass, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
+    super(world, getEnemies, getAllies, characterClass, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
 
-    this.inventory = [] // TODO: populate this from character
+    this.character = character
+
+    // TODO: populate these elsewhere
+    this.level = 1
+    this.xp = 0
+    this.gold = 0
+    this.inventory = []
+    this.maxHealth = characterClass.health ?? 0
+    this.maxPower = characterClass.power ?? 0
   }
 
   onTick(time, pressedKeys, pointerPosition) {

@@ -1,5 +1,8 @@
 import * as PIXI from 'pixi.js'
 import makeArtSprite from '../services/make-art-sprite.js'
+import { project } from '../stores/project-stores.js'
+let $project
+project.subscribe(p => ($project = p))
 
 export default class GUI extends PIXI.Container {
   constructor(player, rendererWidth, rendererHeight) {
@@ -9,74 +12,154 @@ export default class GUI extends PIXI.Container {
     this.rendererHeight = rendererHeight
     this.sortableChildren = true
 
-    this.drawInventory()
+    this.drawCharacterPanel()
+    this.drawInventoryPanel()
     this.drawAbilityBar()
   }
 
-  toggleInventory() {
-    this.inventoryOpen = !this.inventoryOpen
-    this.inventory.visible = this.inventoryOpen
+  toggleCharacterPanel() {
+    this.characterPanel.visible = !this.characterPanel.visible
   }
 
-  showInventory() {
-    this.inventoryOpen = false
-    this.inventory.visible = false
+  showCharacterPanel() {
+    this.characterPanel.visible = true
   }
 
-  hideInventory() {
-    this.inventoryOpen = false
-    this.inventory.visible = false
+  hideCharacterPanel() {
+    this.characterPanel.visible = false
   }
 
-  drawInventory() {
-    this.inventory = new PIXI.Container()
-    this.inventory.zIndex = 10
-    this.addChild(this.inventory)
+  toggleInventoryPanel() {
+    this.inventoryPanel.visible = !this.inventoryPanel.visible
+  }
+
+  showInventoryPanel() {
+    this.inventoryPanel.visible = true
+  }
+
+  hideInventoryPanel() {
+    this.inventoryPanel.visible = false
+  }
+
+  drawCharacterPanel() {
+    this.characterPanel = new PIXI.Container()
+    this.characterPanel.zIndex = 10
+    this.addChild(this.characterPanel)
 
     const graphics = new PIXI.Graphics()
-    this.inventory.addChild(graphics)
+    this.characterPanel.addChild(graphics)
+    this.characterPanel.x = 10
+    this.characterPanel.y = 10
 
-    // figure out sizing for inventory grid
-    const gridSquareSize = 30 //rendererWidth / 2 / 10
-    const gridPadding = 4
+    const panelWidth = this.rendererWidth / 2 - 15
+    const panelHeight = this.rendererHeight - 20
+    const panelPadding = 10
+
+    // panel background
+    graphics.beginFill(0xffffff, 0.8)
+    graphics.lineStyle(2, 0x000000, 1.0)
+    graphics.drawRect(0, 0, panelWidth, panelHeight)
+
+    // character name
+    const nameText = new PIXI.Text(`${this.player.character.name}`, { fontFamily: 'Arial', fontSize: 30, fill: 0x000000 })
+    nameText.x = panelWidth - panelPadding - nameText.width
+    nameText.y = panelPadding
+    nameText.zIndex = 11
+    this.characterPanel.addChild(nameText)
+
+    // level + class
+    const levelClassText = new PIXI.Text(`Level ${this.player.character.level} ${this.player.config.name}`, {
+      fontFamily: 'Arial',
+      fontSize: 30,
+      fill: 0x000000,
+    })
+    levelClassText.x = panelPadding
+    levelClassText.y = panelPadding
+    levelClassText.zIndex = 11
+    this.characterPanel.addChild(levelClassText)
+
+    // health
+    const healthText = new PIXI.Text(`Health: ${this.player.maxHealth}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
+    healthText.x = panelPadding
+    healthText.y = panelPadding + nameText.height + panelPadding
+    healthText.zIndex = 11
+    this.characterPanel.addChild(healthText)
+
+    // power
+    const powerText = new PIXI.Text(`Power: ${this.player.maxPower}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
+    powerText.x = panelPadding
+    powerText.y = panelPadding + nameText.height + panelPadding + healthText.height + panelPadding
+    powerText.zIndex = 11
+    this.characterPanel.addChild(powerText)
+
+    // xp
+    const xpText = new PIXI.Text(`XP: ${this.player.character.xp}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
+    xpText.x = panelPadding
+    xpText.y = panelPadding + nameText.height + panelPadding + healthText.height + panelPadding + powerText.height + panelPadding
+    xpText.zIndex = 11
+    this.characterPanel.addChild(xpText)
+
+    this.hideCharacterPanel()
+  }
+
+  drawInventoryPanel() {
+    this.inventoryPanel = new PIXI.Container()
+    this.inventoryPanel.zIndex = 10
+    this.addChild(this.inventoryPanel)
+    const graphics = new PIXI.Graphics()
+    this.inventoryPanel.x = this.rendererWidth / 2 + 5
+    this.inventoryPanel.y = 10
+    this.inventoryPanel.addChild(graphics)
+
+    const panelWidth = this.rendererWidth / 2 - 15
+    const panelHeight = this.rendererHeight - 20
+
+    // panel background
+    graphics.beginFill(0xffffff, 0.8)
+    graphics.lineStyle(2, 0x000000, 1.0)
+    graphics.drawRect(0, 0, panelWidth, panelHeight)
+
+    // inventory
+    // sizing for inventory grid
+    const gridSquareSize = 50 //rendererWidth / 2 / 10
+    const gridPadding = 3
     const gridSpacing = gridSquareSize + gridPadding
-    const rows = 10
-    const cols = 15
-    const yOffset = this.rendererHeight - gridSpacing * rows - 50
-    const xOffset = gridPadding + 50
-    const width = xOffset * 2 + gridSpacing * cols
-
-    // background color to cover enough space for inventory
-    graphics.beginFill(0x000000, 0.8)
-    graphics.lineStyle(0x000000, 1.0)
-    graphics.drawRect(0, 0, width, this.rendererHeight)
+    const rows = 5
+    const cols = 10
+    const gridX = (panelWidth - gridSpacing * cols) / 2
+    const gridY = panelHeight - gridSpacing * rows - 30
 
     // draw inventory grid
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
-        graphics.beginFill(0xffffff, 0.5)
-        graphics.lineStyle(0x000000, 1.0)
-        graphics.drawRect(xOffset + i * gridSpacing, yOffset + j * gridSpacing, gridSquareSize, gridSquareSize)
+        graphics.beginFill(0x000000, 0.5)
+        graphics.lineStyle(2, 0x000000, 0.5)
+        graphics.drawRect(gridX + i * gridSpacing, gridY + j * gridSpacing, gridSquareSize, gridSquareSize)
       }
     }
 
     // container for item graphics in the grid squares
     this.inventoryItems = new PIXI.Container()
-    this.inventory.addChild(this.inventoryItems)
-
+    this.inventoryPanel.addChild(this.inventoryItems)
     this.player.inventory.forEach(inventorySlot => {
       const item = inventorySlot.item
       if (item) {
         const itemGraphic = makeArtSprite(item.graphic)
-        itemGraphic.x = xOffset + inventorySlot.x * gridSpacing + gridSquareSize / 2
-        itemGraphic.y = yOffset + inventorySlot.y * gridSpacing + gridSquareSize / 2
+        itemGraphic.x = gridX + inventorySlot.x * gridSpacing + gridSquareSize / 2
+        itemGraphic.y = gridY + inventorySlot.y * gridSpacing + gridSquareSize / 2
         itemGraphic.anchor.set(0.5)
         this.inventoryItems.addChild(itemGraphic)
       }
     })
 
-    this.inventoryOpen = false
-    this.inventory.visible = false
+    // currency
+    const currencyText = new PIXI.Text(`${$project?.currency}: ${this.player.gold}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
+    currencyText.x = gridX
+    currencyText.y = gridY - currencyText.height - 5
+    currencyText.zIndex = 11
+    this.inventoryPanel.addChild(currencyText)
+
+    // this.hideInventoryPanel()
   }
 
   drawAbilityBar() {
@@ -85,7 +168,7 @@ export default class GUI extends PIXI.Container {
     const buttonPadding = 10
 
     this.abilityBar = new PIXI.Container()
-    this.inventory.zIndex = 5
+    this.inventoryPanel.zIndex = 5
     this.addChild(this.abilityBar)
 
     let x = 0
@@ -145,7 +228,8 @@ export default class GUI extends PIXI.Container {
   }
 
   showDeathScreen() {
-    this.hideInventory()
+    this.hideInventoryPanel()
+    this.hideCharacterPanel()
 
     const graphics = new PIXI.Graphics()
     graphics.beginFill(0x000000, 0.5)
@@ -161,8 +245,11 @@ export default class GUI extends PIXI.Container {
   }
 
   destroy() {
-    this.inventory.destroy()
-    this.removeChild(this.inventory)
+    this.characterPanel.destroy()
+    this.removeChild(this.characterPanel)
+
+    this.inventoryPanel.destroy()
+    this.removeChild(this.inventoryPanel)
 
     this.abilityBar.destroy()
     this.removeChild(this.abilityBar)

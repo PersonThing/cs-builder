@@ -5509,10 +5509,10 @@ var app = (function () {
     const addToStore = (update, item) => update(items => [...items.filter(i => i.id != item.id), item]);
     const removeFromStore = (update, id) => update(items => items.filter(i => i.id != id));
 
-    let $project;
+    let $project$1;
     const project = createActiveProjectStore();
     project.subscribe(p => {
-      $project = p;
+      $project$1 = p;
     });
 
     const user = createUserStore();
@@ -5622,7 +5622,7 @@ var app = (function () {
       // listen for changes on server
       socket.on('projects.update', p => {
         console.log('project update from server', p);
-        if ($project.id == p.id) {
+        if ($project$1.id == p.id) {
           update(v => {
             v.name = p.name;
             v.pixelSize = p.pixelSize;
@@ -5642,15 +5642,15 @@ var app = (function () {
       projectItemTypes.forEach(it => {
         socket.on(`${it}.insert`, item => {
           console.log(it, 'insert from server', item);
-          if (item.projectId == $project.id) addToStore(itemTypeStores[it].update, item);
+          if (item.projectId == $project$1.id) addToStore(itemTypeStores[it].update, item);
         });
         socket.on(`${it}.update`, item => {
           console.log(it, 'update from server', item);
-          if (item.projectId == $project.id) replaceInStore(itemTypeStores[it].update, item);
+          if (item.projectId == $project$1.id) replaceInStore(itemTypeStores[it].update, item);
         });
         socket.on(`${it}.delete`, ({ id, projectId }) => {
           console.log(it, 'delete from server', id, projectId);
-          if (projectId == $project.id) removeFromStore(itemTypeStores[it].update, id);
+          if (projectId == $project$1.id) removeFromStore(itemTypeStores[it].update, id);
         });
       });
 
@@ -5708,7 +5708,7 @@ var app = (function () {
       const { set, update, subscribe } = writable([]);
 
       const refresh = () => {
-        const projectId = $project.id;
+        const projectId = $project$1.id;
         console.log('loading characters for project', projectId);
         return Api.characters.find(projectId).then(characters => {
           set(characters);
@@ -7144,7 +7144,7 @@ var app = (function () {
     }
 
     // (16:10) <FieldText name="username" bind:value={signupInput.username}>
-    function create_default_slot_4$7(ctx) {
+    function create_default_slot_4$8(ctx) {
     	let t;
 
     	const block = {
@@ -7161,7 +7161,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$7.name,
+    		id: create_default_slot_4$8.name,
     		type: "slot",
     		source: "(16:10) <FieldText name=\\\"username\\\" bind:value={signupInput.username}>",
     		ctx
@@ -7245,7 +7245,7 @@ var app = (function () {
 
     	let fieldtext_props = {
     		name: "username",
-    		$$slots: { default: [create_default_slot_4$7] },
+    		$$slots: { default: [create_default_slot_4$8] },
     		$$scope: { ctx }
     	};
 
@@ -15897,7 +15897,7 @@ var app = (function () {
 
     	form = new Form({
     			props: {
-    				$$slots: { default: [create_default_slot_4$6] },
+    				$$slots: { default: [create_default_slot_4$7] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -16789,7 +16789,7 @@ var app = (function () {
     }
 
     // (152:10) <Form on:submit={() => itemTypeBuilder.save()}>
-    function create_default_slot_4$6(ctx) {
+    function create_default_slot_4$7(ctx) {
     	let div;
     	let fieldtext;
     	let updating_value;
@@ -16879,7 +16879,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$6.name,
+    		id: create_default_slot_4$7.name,
     		type: "slot",
     		source: "(152:10) <Form on:submit={() => itemTypeBuilder.save()}>",
     		ctx
@@ -25200,7 +25200,7 @@ var app = (function () {
     	let fieldnumber2_props = {
     		name: "damage",
     		placeholder: "Type a number",
-    		$$slots: { default: [create_default_slot_4$5] },
+    		$$slots: { default: [create_default_slot_4$6] },
     		$$scope: { ctx }
     	};
 
@@ -25602,7 +25602,7 @@ var app = (function () {
     }
 
     // (36:10) <FieldNumber name="damage" bind:value={input.damage} placeholder="Type a number">
-    function create_default_slot_4$5(ctx) {
+    function create_default_slot_4$6(ctx) {
     	let t;
 
     	const block = {
@@ -25619,7 +25619,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$5.name,
+    		id: create_default_slot_4$6.name,
     		type: "slot",
     		source: "(36:10) <FieldNumber name=\\\"damage\\\" bind:value={input.damage} placeholder=\\\"Type a number\\\">",
     		ctx
@@ -26943,7 +26943,7 @@ var app = (function () {
     }
 
     // (18:8) <FieldArtPicker bind:value={input.graphic}>
-    function create_default_slot_4$4(ctx) {
+    function create_default_slot_4$5(ctx) {
     	let t;
 
     	const block = {
@@ -26960,7 +26960,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$4.name,
+    		id: create_default_slot_4$5.name,
     		type: "slot",
     		source: "(18:8) <FieldArtPicker bind:value={input.graphic}>",
     		ctx
@@ -27077,7 +27077,7 @@ var app = (function () {
     	}
 
     	let fieldartpicker_props = {
-    		$$slots: { default: [create_default_slot_4$4] },
+    		$$slots: { default: [create_default_slot_4$5] },
     		$$scope: { ctx }
     	};
 
@@ -27734,7 +27734,7 @@ var app = (function () {
     }
 
     // (21:8) <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">
-    function create_default_slot_4$3(ctx) {
+    function create_default_slot_4$4(ctx) {
     	let t;
 
     	const block = {
@@ -27751,7 +27751,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$3.name,
+    		id: create_default_slot_4$4.name,
     		type: "slot",
     		source: "(21:8) <FieldCheckbox bind:checked={input.playersCanUse} name=\\\"players-can-use\\\">",
     		ctx
@@ -27925,7 +27925,7 @@ var app = (function () {
 
     	let fieldcheckbox1_props = {
     		name: "players-can-use",
-    		$$slots: { default: [create_default_slot_4$3] },
+    		$$slots: { default: [create_default_slot_4$4] },
     		$$scope: { ctx }
     	};
 
@@ -29735,7 +29735,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (22:8) <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">
-    function create_default_slot_4$2(ctx) {
+    function create_default_slot_4$3(ctx) {
     	let t;
 
     	const block = {
@@ -29752,7 +29752,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$2.name,
+    		id: create_default_slot_4$3.name,
     		type: "slot",
     		source: "(22:8) <FieldNumber name=\\\"gcd\\\" bind:value={input.gcd} placeholder=\\\"Type a number...\\\">",
     		ctx
@@ -29953,7 +29953,7 @@ sprite.wait(5000).then(() => {
     	let fieldnumber2_props = {
     		name: "gcd",
     		placeholder: "Type a number...",
-    		$$slots: { default: [create_default_slot_4$2] },
+    		$$slots: { default: [create_default_slot_4$3] },
     		$$scope: { ctx }
     	};
 
@@ -30784,7 +30784,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (23:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
-    function create_default_slot_4$1(ctx) {
+    function create_default_slot_4$2(ctx) {
     	let t;
 
     	const block = {
@@ -30801,7 +30801,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$1.name,
+    		id: create_default_slot_4$2.name,
     		type: "slot",
     		source: "(23:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
     		ctx
@@ -31025,7 +31025,7 @@ sprite.wait(5000).then(() => {
     	}
 
     	let fieldaudiopicker_props = {
-    		$$slots: { default: [create_default_slot_4$1] },
+    		$$slots: { default: [create_default_slot_4$2] },
     		$$scope: { ctx }
     	};
 
@@ -75369,6 +75369,9 @@ sprite.wait(5000).then(() => {
       }
     }
 
+    let $project;
+    project.subscribe(p => ($project = p));
+
     class GUI extends Container {
       constructor(player, rendererWidth, rendererHeight) {
         super();
@@ -75377,74 +75380,154 @@ sprite.wait(5000).then(() => {
         this.rendererHeight = rendererHeight;
         this.sortableChildren = true;
 
-        this.drawInventory();
+        this.drawCharacterPanel();
+        this.drawInventoryPanel();
         this.drawAbilityBar();
       }
 
-      toggleInventory() {
-        this.inventoryOpen = !this.inventoryOpen;
-        this.inventory.visible = this.inventoryOpen;
+      toggleCharacterPanel() {
+        this.characterPanel.visible = !this.characterPanel.visible;
       }
 
-      showInventory() {
-        this.inventoryOpen = false;
-        this.inventory.visible = false;
+      showCharacterPanel() {
+        this.characterPanel.visible = true;
       }
 
-      hideInventory() {
-        this.inventoryOpen = false;
-        this.inventory.visible = false;
+      hideCharacterPanel() {
+        this.characterPanel.visible = false;
       }
 
-      drawInventory() {
-        this.inventory = new Container();
-        this.inventory.zIndex = 10;
-        this.addChild(this.inventory);
+      toggleInventoryPanel() {
+        this.inventoryPanel.visible = !this.inventoryPanel.visible;
+      }
+
+      showInventoryPanel() {
+        this.inventoryPanel.visible = true;
+      }
+
+      hideInventoryPanel() {
+        this.inventoryPanel.visible = false;
+      }
+
+      drawCharacterPanel() {
+        this.characterPanel = new Container();
+        this.characterPanel.zIndex = 10;
+        this.addChild(this.characterPanel);
 
         const graphics = new Graphics();
-        this.inventory.addChild(graphics);
+        this.characterPanel.addChild(graphics);
+        this.characterPanel.x = 10;
+        this.characterPanel.y = 10;
 
-        // figure out sizing for inventory grid
-        const gridSquareSize = 30; //rendererWidth / 2 / 10
-        const gridPadding = 4;
+        const panelWidth = this.rendererWidth / 2 - 15;
+        const panelHeight = this.rendererHeight - 20;
+        const panelPadding = 10;
+
+        // panel background
+        graphics.beginFill(0xffffff, 0.8);
+        graphics.lineStyle(2, 0x000000, 1.0);
+        graphics.drawRect(0, 0, panelWidth, panelHeight);
+
+        // character name
+        const nameText = new Text(`${this.player.character.name}`, { fontFamily: 'Arial', fontSize: 30, fill: 0x000000 });
+        nameText.x = panelWidth - panelPadding - nameText.width;
+        nameText.y = panelPadding;
+        nameText.zIndex = 11;
+        this.characterPanel.addChild(nameText);
+
+        // level + class
+        const levelClassText = new Text(`Level ${this.player.character.level} ${this.player.config.name}`, {
+          fontFamily: 'Arial',
+          fontSize: 30,
+          fill: 0x000000,
+        });
+        levelClassText.x = panelPadding;
+        levelClassText.y = panelPadding;
+        levelClassText.zIndex = 11;
+        this.characterPanel.addChild(levelClassText);
+
+        // health
+        const healthText = new Text(`Health: ${this.player.maxHealth}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 });
+        healthText.x = panelPadding;
+        healthText.y = panelPadding + nameText.height + panelPadding;
+        healthText.zIndex = 11;
+        this.characterPanel.addChild(healthText);
+
+        // power
+        const powerText = new Text(`Power: ${this.player.maxPower}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 });
+        powerText.x = panelPadding;
+        powerText.y = panelPadding + nameText.height + panelPadding + healthText.height + panelPadding;
+        powerText.zIndex = 11;
+        this.characterPanel.addChild(powerText);
+
+        // xp
+        const xpText = new Text(`XP: ${this.player.character.xp}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 });
+        xpText.x = panelPadding;
+        xpText.y = panelPadding + nameText.height + panelPadding + healthText.height + panelPadding + powerText.height + panelPadding;
+        xpText.zIndex = 11;
+        this.characterPanel.addChild(xpText);
+
+        this.hideCharacterPanel();
+      }
+
+      drawInventoryPanel() {
+        this.inventoryPanel = new Container();
+        this.inventoryPanel.zIndex = 10;
+        this.addChild(this.inventoryPanel);
+        const graphics = new Graphics();
+        this.inventoryPanel.x = this.rendererWidth / 2 + 5;
+        this.inventoryPanel.y = 10;
+        this.inventoryPanel.addChild(graphics);
+
+        const panelWidth = this.rendererWidth / 2 - 15;
+        const panelHeight = this.rendererHeight - 20;
+
+        // panel background
+        graphics.beginFill(0xffffff, 0.8);
+        graphics.lineStyle(2, 0x000000, 1.0);
+        graphics.drawRect(0, 0, panelWidth, panelHeight);
+
+        // inventory
+        // sizing for inventory grid
+        const gridSquareSize = 50; //rendererWidth / 2 / 10
+        const gridPadding = 3;
         const gridSpacing = gridSquareSize + gridPadding;
-        const rows = 10;
-        const cols = 15;
-        const yOffset = this.rendererHeight - gridSpacing * rows - 50;
-        const xOffset = gridPadding + 50;
-        const width = xOffset * 2 + gridSpacing * cols;
-
-        // background color to cover enough space for inventory
-        graphics.beginFill(0x000000, 0.8);
-        graphics.lineStyle(0x000000, 1.0);
-        graphics.drawRect(0, 0, width, this.rendererHeight);
+        const rows = 5;
+        const cols = 10;
+        const gridX = (panelWidth - gridSpacing * cols) / 2;
+        const gridY = panelHeight - gridSpacing * rows - 30;
 
         // draw inventory grid
         for (let i = 0; i < cols; i++) {
           for (let j = 0; j < rows; j++) {
-            graphics.beginFill(0xffffff, 0.5);
-            graphics.lineStyle(0x000000, 1.0);
-            graphics.drawRect(xOffset + i * gridSpacing, yOffset + j * gridSpacing, gridSquareSize, gridSquareSize);
+            graphics.beginFill(0x000000, 0.5);
+            graphics.lineStyle(2, 0x000000, 0.5);
+            graphics.drawRect(gridX + i * gridSpacing, gridY + j * gridSpacing, gridSquareSize, gridSquareSize);
           }
         }
 
         // container for item graphics in the grid squares
         this.inventoryItems = new Container();
-        this.inventory.addChild(this.inventoryItems);
-
+        this.inventoryPanel.addChild(this.inventoryItems);
         this.player.inventory.forEach(inventorySlot => {
           const item = inventorySlot.item;
           if (item) {
             const itemGraphic = makeArtSprite(item.graphic);
-            itemGraphic.x = xOffset + inventorySlot.x * gridSpacing + gridSquareSize / 2;
-            itemGraphic.y = yOffset + inventorySlot.y * gridSpacing + gridSquareSize / 2;
+            itemGraphic.x = gridX + inventorySlot.x * gridSpacing + gridSquareSize / 2;
+            itemGraphic.y = gridY + inventorySlot.y * gridSpacing + gridSquareSize / 2;
             itemGraphic.anchor.set(0.5);
             this.inventoryItems.addChild(itemGraphic);
           }
         });
 
-        this.inventoryOpen = false;
-        this.inventory.visible = false;
+        // currency
+        const currencyText = new Text(`${$project?.currency}: ${this.player.gold}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 });
+        currencyText.x = gridX;
+        currencyText.y = gridY - currencyText.height - 5;
+        currencyText.zIndex = 11;
+        this.inventoryPanel.addChild(currencyText);
+
+        // this.hideInventoryPanel()
       }
 
       drawAbilityBar() {
@@ -75453,7 +75536,7 @@ sprite.wait(5000).then(() => {
         const buttonPadding = 10;
 
         this.abilityBar = new Container();
-        this.inventory.zIndex = 5;
+        this.inventoryPanel.zIndex = 5;
         this.addChild(this.abilityBar);
 
         let x = 0;
@@ -75513,7 +75596,8 @@ sprite.wait(5000).then(() => {
       }
 
       showDeathScreen() {
-        this.hideInventory();
+        this.hideInventoryPanel();
+        this.hideCharacterPanel();
 
         const graphics = new Graphics();
         graphics.beginFill(0x000000, 0.5);
@@ -75529,8 +75613,11 @@ sprite.wait(5000).then(() => {
       }
 
       destroy() {
-        this.inventory.destroy();
-        this.removeChild(this.inventory);
+        this.characterPanel.destroy();
+        this.removeChild(this.characterPanel);
+
+        this.inventoryPanel.destroy();
+        this.removeChild(this.inventoryPanel);
 
         this.abilityBar.destroy();
         this.removeChild(this.abilityBar);
@@ -79062,8 +79149,8 @@ sprite.wait(5000).then(() => {
 
       drawSightRadius() {
         this.radiusPreview = new Graphics();
-        // this.radiusPreview.beginFill(0xff0000, 0.2)
-        this.radiusPreview.lineStyle(2, 0xffffff, 0.2);
+        this.radiusPreview.beginFill(0xffffff, 0.1);
+        // this.radiusPreview.lineStyle(2, 0xffffff, 0.2)
         this.radiusPreview.drawCircle(0, 0, this.config.sightRadius);
         this.radiusPreview.zIndex = 1;
         this.addChild(this.radiusPreview);
@@ -79121,10 +79208,18 @@ sprite.wait(5000).then(() => {
     }
 
     class Player extends LivingSprite {
-      constructor(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
-        super(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths);
+      constructor(world, getEnemies, getAllies, character, characterClass, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
+        super(world, getEnemies, getAllies, characterClass, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths);
 
-        this.inventory = []; // TODO: populate this from character
+        this.character = character;
+
+        // TODO: populate these elsewhere
+        this.level = 1;
+        this.xp = 0;
+        this.gold = 0;
+        this.inventory = [];
+        this.maxHealth = characterClass.health ?? 0;
+        this.maxPower = characterClass.power ?? 0;
       }
 
       onTick(time, pressedKeys, pointerPosition) {
@@ -79274,16 +79369,17 @@ sprite.wait(5000).then(() => {
         }
       }
 
-      createPlayer(charConfig) {
-        const audioOnDeath = $audio.find(au => au.id === charConfig.audioOnDeath);
+      createPlayer(character, characterClass) {
+        const audioOnDeath = $audio.find(au => au.id === characterClass.audioOnDeath);
         this.player = new Player(
           this,
           () => this.getEnemies(),
           () => this.getAllies(),
-          charConfig,
+          character,
+          characterClass,
           audioOnDeath,
-          buildGraphics(charConfig.graphics),
-          buildAbilities(charConfig.abilities),
+          buildGraphics(characterClass.graphics),
+          buildAbilities(characterClass.abilities),
           1.5 * this.levelGrid.gridSize,
           1.5 * this.levelGrid.gridSize,
           this.levelGrid,
@@ -82067,7 +82163,11 @@ sprite.wait(5000).then(() => {
     		}
 
     		if (key === "b") {
-    			gui.toggleInventory();
+    			gui.toggleInventoryPanel();
+    		}
+
+    		if (key === "c") {
+    			gui.toggleCharacterPanel();
     		}
     	}
 
@@ -82140,8 +82240,8 @@ sprite.wait(5000).then(() => {
 
     			// create player
     			if (playable && $characterclasses.length > 0) {
-    				const charConfig = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)));
-    				player = world.createPlayer(charConfig);
+    				const characterClass = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)));
+    				player = world.createPlayer(character, characterClass);
     				gui = new GUI(player, pixiApp.renderer.width, pixiApp.renderer.height);
     				gui.x = 0;
     				gui.y = 0;
@@ -82457,7 +82557,7 @@ sprite.wait(5000).then(() => {
 
     	form = new Form({
     			props: {
-    				$$slots: { default: [create_default_slot_4] },
+    				$$slots: { default: [create_default_slot_4$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -82968,7 +83068,7 @@ sprite.wait(5000).then(() => {
     }
 
     // (44:6) <Form on:submit={() => itemTypeBuilder.save()}>
-    function create_default_slot_4(ctx) {
+    function create_default_slot_4$1(ctx) {
     	let formbuttons;
     	let t0;
     	let fieldtext;
@@ -83240,7 +83340,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4.name,
+    		id: create_default_slot_4$1.name,
     		type: "slot",
     		source: "(44:6) <Form on:submit={() => itemTypeBuilder.save()}>",
     		ctx
@@ -85258,13 +85358,13 @@ sprite.wait(5000).then(() => {
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
-    	child_ctx[15] = i;
+    	child_ctx[14] = list[i];
+    	child_ctx[16] = i;
     	return child_ctx;
     }
 
     // (5:6) <FieldText name="name" bind:value={input.name}>
-    function create_default_slot_3(ctx) {
+    function create_default_slot_4(ctx) {
     	let t;
 
     	const block = {
@@ -85281,7 +85381,7 @@ sprite.wait(5000).then(() => {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3.name,
+    		id: create_default_slot_4.name,
     		type: "slot",
     		source: "(5:6) <FieldText name=\\\"name\\\" bind:value={input.name}>",
     		ctx
@@ -85290,7 +85390,34 @@ sprite.wait(5000).then(() => {
     	return block;
     }
 
-    // (6:6) <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>
+    // (6:6) <FieldText name="currency" bind:value={input.currency}>
+    function create_default_slot_3(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Currency label (Gold, etc)");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_3.name,
+    		type: "slot",
+    		source: "(6:6) <FieldText name=\\\"currency\\\" bind:value={input.currency}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (7:6) <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>
     function create_default_slot_2$1(ctx) {
     	let t;
 
@@ -85310,17 +85437,17 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_default_slot_2$1.name,
     		type: "slot",
-    		source: "(6:6) <FieldNumber name=\\\"pixel-size\\\" bind:value={input.pixelSize} min={1} max={10} step={0.1}>",
+    		source: "(7:6) <FieldNumber name=\\\"pixel-size\\\" bind:value={input.pixelSize} min={1} max={10} step={0.1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (10:10) {#each input.owners as owner, i}
+    // (11:10) {#each input.owners as owner, i}
     function create_each_block$2(ctx) {
     	let div;
-    	let t0_value = /*owner*/ ctx[13] + "";
+    	let t0_value = /*owner*/ ctx[14] + "";
     	let t0;
     	let t1;
     	let a;
@@ -85328,7 +85455,7 @@ sprite.wait(5000).then(() => {
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[10](/*owner*/ ctx[13]);
+    		return /*click_handler*/ ctx[11](/*owner*/ ctx[14]);
     	}
 
     	const block = {
@@ -85339,8 +85466,8 @@ sprite.wait(5000).then(() => {
     			a = element("a");
     			a.textContent = "Remove";
     			attr_dev(a, "href", null);
-    			add_location(a, file$5, 10, 25, 503);
-    			add_location(div, file$5, 10, 12, 490);
+    			add_location(a, file$5, 11, 25, 604);
+    			add_location(div, file$5, 11, 12, 591);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -85355,7 +85482,7 @@ sprite.wait(5000).then(() => {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*input*/ 1 && t0_value !== (t0_value = /*owner*/ ctx[13] + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*input*/ 1 && t0_value !== (t0_value = /*owner*/ ctx[14] + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -85368,7 +85495,7 @@ sprite.wait(5000).then(() => {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(10:10) {#each input.owners as owner, i}",
+    		source: "(11:10) {#each input.owners as owner, i}",
     		ctx
     	});
 
@@ -85377,46 +85504,66 @@ sprite.wait(5000).then(() => {
 
     // (4:4) <Form on:submit={save}>
     function create_default_slot_1$1(ctx) {
-    	let fieldtext;
+    	let fieldtext0;
     	let updating_value;
     	let t0;
-    	let fieldnumber;
+    	let fieldtext1;
     	let updating_value_1;
     	let t1;
+    	let fieldnumber;
+    	let updating_value_2;
+    	let t2;
     	let div3;
     	let div0;
-    	let t3;
-    	let div2;
     	let t4;
+    	let div2;
+    	let t5;
     	let div1;
     	let input_1;
-    	let t5;
+    	let t6;
     	let button;
-    	let t7;
+    	let t8;
     	let formbuttons;
     	let current;
     	let mounted;
     	let dispose;
 
-    	function fieldtext_value_binding(value) {
-    		/*fieldtext_value_binding*/ ctx[8](value);
+    	function fieldtext0_value_binding(value) {
+    		/*fieldtext0_value_binding*/ ctx[8](value);
     	}
 
-    	let fieldtext_props = {
+    	let fieldtext0_props = {
     		name: "name",
-    		$$slots: { default: [create_default_slot_3] },
+    		$$slots: { default: [create_default_slot_4] },
     		$$scope: { ctx }
     	};
 
     	if (/*input*/ ctx[0].name !== void 0) {
-    		fieldtext_props.value = /*input*/ ctx[0].name;
+    		fieldtext0_props.value = /*input*/ ctx[0].name;
     	}
 
-    	fieldtext = new FieldText({ props: fieldtext_props, $$inline: true });
-    	binding_callbacks.push(() => bind$1(fieldtext, "value", fieldtext_value_binding));
+    	fieldtext0 = new FieldText({ props: fieldtext0_props, $$inline: true });
+    	binding_callbacks.push(() => bind$1(fieldtext0, "value", fieldtext0_value_binding));
+
+    	function fieldtext1_value_binding(value) {
+    		/*fieldtext1_value_binding*/ ctx[9](value);
+    	}
+
+    	let fieldtext1_props = {
+    		name: "currency",
+    		$$slots: { default: [create_default_slot_3] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[0].currency !== void 0) {
+    		fieldtext1_props.value = /*input*/ ctx[0].currency;
+    	}
+
+    	fieldtext1 = new FieldText({ props: fieldtext1_props, $$inline: true });
+    	binding_callbacks.push(() => bind$1(fieldtext1, "value", fieldtext1_value_binding));
 
     	function fieldnumber_value_binding(value) {
-    		/*fieldnumber_value_binding*/ ctx[9](value);
+    		/*fieldnumber_value_binding*/ ctx[10](value);
     	}
 
     	let fieldnumber_props = {
@@ -85449,69 +85596,73 @@ sprite.wait(5000).then(() => {
 
     	const block = {
     		c: function create() {
-    			create_component(fieldtext.$$.fragment);
+    			create_component(fieldtext0.$$.fragment);
     			t0 = space();
-    			create_component(fieldnumber.$$.fragment);
+    			create_component(fieldtext1.$$.fragment);
     			t1 = space();
+    			create_component(fieldnumber.$$.fragment);
+    			t2 = space();
     			div3 = element("div");
     			div0 = element("div");
     			div0.textContent = "People who can edit this project";
-    			t3 = space();
+    			t4 = space();
     			div2 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t4 = space();
+    			t5 = space();
     			div1 = element("div");
     			input_1 = element("input");
-    			t5 = space();
+    			t6 = space();
     			button = element("button");
     			button.textContent = "Add owner";
-    			t7 = space();
+    			t8 = space();
     			create_component(formbuttons.$$.fragment);
     			attr_dev(div0, "class", "strong");
-    			add_location(div0, file$5, 7, 8, 344);
+    			add_location(div0, file$5, 8, 8, 445);
     			attr_dev(input_1, "type", "text");
     			attr_dev(input_1, "placeholder", "New owner username");
-    			add_location(input_1, file$5, 13, 12, 620);
+    			add_location(input_1, file$5, 14, 12, 721);
     			attr_dev(button, "type", "button");
-    			add_location(button, file$5, 14, 12, 736);
-    			add_location(div1, file$5, 12, 10, 601);
+    			add_location(button, file$5, 15, 12, 837);
+    			add_location(div1, file$5, 13, 10, 702);
     			attr_dev(div2, "class", "owners");
-    			add_location(div2, file$5, 8, 8, 412);
+    			add_location(div2, file$5, 9, 8, 513);
     			attr_dev(div3, "class", "form-group");
-    			add_location(div3, file$5, 6, 6, 310);
+    			add_location(div3, file$5, 7, 6, 411);
     		},
     		m: function mount(target, anchor) {
-    			mount_component(fieldtext, target, anchor);
+    			mount_component(fieldtext0, target, anchor);
     			insert_dev(target, t0, anchor);
-    			mount_component(fieldnumber, target, anchor);
+    			mount_component(fieldtext1, target, anchor);
     			insert_dev(target, t1, anchor);
+    			mount_component(fieldnumber, target, anchor);
+    			insert_dev(target, t2, anchor);
     			insert_dev(target, div3, anchor);
     			append_dev(div3, div0);
-    			append_dev(div3, t3);
+    			append_dev(div3, t4);
     			append_dev(div3, div2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div2, null);
     			}
 
-    			append_dev(div2, t4);
+    			append_dev(div2, t5);
     			append_dev(div2, div1);
     			append_dev(div1, input_1);
-    			/*input_1_binding*/ ctx[11](input_1);
+    			/*input_1_binding*/ ctx[12](input_1);
     			set_input_value(input_1, /*newOwner*/ ctx[1]);
-    			append_dev(div1, t5);
+    			append_dev(div1, t6);
     			append_dev(div1, button);
-    			insert_dev(target, t7, anchor);
+    			insert_dev(target, t8, anchor);
     			mount_component(formbuttons, target, anchor);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[12]),
+    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[13]),
     					listen_dev(button, "click", /*addOwner*/ ctx[5], false, false, false)
     				];
 
@@ -85519,29 +85670,42 @@ sprite.wait(5000).then(() => {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			const fieldtext_changes = {};
+    			const fieldtext0_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
-    				fieldtext_changes.$$scope = { dirty, ctx };
+    			if (dirty & /*$$scope*/ 131072) {
+    				fieldtext0_changes.$$scope = { dirty, ctx };
     			}
 
     			if (!updating_value && dirty & /*input*/ 1) {
     				updating_value = true;
-    				fieldtext_changes.value = /*input*/ ctx[0].name;
+    				fieldtext0_changes.value = /*input*/ ctx[0].name;
     				add_flush_callback(() => updating_value = false);
     			}
 
-    			fieldtext.$set(fieldtext_changes);
-    			const fieldnumber_changes = {};
+    			fieldtext0.$set(fieldtext0_changes);
+    			const fieldtext1_changes = {};
 
-    			if (dirty & /*$$scope*/ 65536) {
-    				fieldnumber_changes.$$scope = { dirty, ctx };
+    			if (dirty & /*$$scope*/ 131072) {
+    				fieldtext1_changes.$$scope = { dirty, ctx };
     			}
 
     			if (!updating_value_1 && dirty & /*input*/ 1) {
     				updating_value_1 = true;
-    				fieldnumber_changes.value = /*input*/ ctx[0].pixelSize;
+    				fieldtext1_changes.value = /*input*/ ctx[0].currency;
     				add_flush_callback(() => updating_value_1 = false);
+    			}
+
+    			fieldtext1.$set(fieldtext1_changes);
+    			const fieldnumber_changes = {};
+
+    			if (dirty & /*$$scope*/ 131072) {
+    				fieldnumber_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_2 && dirty & /*input*/ 1) {
+    				updating_value_2 = true;
+    				fieldnumber_changes.value = /*input*/ ctx[0].pixelSize;
+    				add_flush_callback(() => updating_value_2 = false);
     			}
 
     			fieldnumber.$set(fieldnumber_changes);
@@ -85559,7 +85723,7 @@ sprite.wait(5000).then(() => {
     					} else {
     						each_blocks[i] = create_each_block$2(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div2, t4);
+    						each_blocks[i].m(div2, t5);
     					}
     				}
 
@@ -85580,26 +85744,30 @@ sprite.wait(5000).then(() => {
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(fieldtext.$$.fragment, local);
+    			transition_in(fieldtext0.$$.fragment, local);
+    			transition_in(fieldtext1.$$.fragment, local);
     			transition_in(fieldnumber.$$.fragment, local);
     			transition_in(formbuttons.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(fieldtext.$$.fragment, local);
+    			transition_out(fieldtext0.$$.fragment, local);
+    			transition_out(fieldtext1.$$.fragment, local);
     			transition_out(fieldnumber.$$.fragment, local);
     			transition_out(formbuttons.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			destroy_component(fieldtext, detaching);
+    			destroy_component(fieldtext0, detaching);
     			if (detaching) detach_dev(t0);
-    			destroy_component(fieldnumber, detaching);
+    			destroy_component(fieldtext1, detaching);
     			if (detaching) detach_dev(t1);
+    			destroy_component(fieldnumber, detaching);
+    			if (detaching) detach_dev(t2);
     			if (detaching) detach_dev(div3);
     			destroy_each(each_blocks, detaching);
-    			/*input_1_binding*/ ctx[11](null);
-    			if (detaching) detach_dev(t7);
+    			/*input_1_binding*/ ctx[12](null);
+    			if (detaching) detach_dev(t8);
     			destroy_component(formbuttons, detaching);
     			mounted = false;
     			run_all(dispose);
@@ -85656,7 +85824,7 @@ sprite.wait(5000).then(() => {
     		p: function update(ctx, dirty) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, newOwnerField, newOwner, input*/ 65551) {
+    			if (dirty & /*$$scope, hasChanges, newOwnerField, newOwner, input*/ 131087) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -85715,7 +85883,7 @@ sprite.wait(5000).then(() => {
     		p: function update(ctx, [dirty]) {
     			const applayout_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, newOwnerField, newOwner, input*/ 65551) {
+    			if (dirty & /*$$scope, hasChanges, newOwnerField, newOwner, input*/ 131087) {
     				applayout_changes.$$scope = { dirty, ctx };
     			}
 
@@ -85751,7 +85919,8 @@ sprite.wait(5000).then(() => {
     		id: null,
     		name: "",
     		pixelSize: 1,
-    		owners: []
+    		owners: [],
+    		currency: "Gold"
     	};
     }
 
@@ -85771,7 +85940,8 @@ sprite.wait(5000).then(() => {
     			...$project,
     			name: input.name,
     			pixelSize: input.pixelSize,
-    			owners: input.owners
+    			owners: input.owners,
+    			currency: input.currency
     		};
 
     		project.set(p);
@@ -85794,9 +85964,16 @@ sprite.wait(5000).then(() => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<ProjectSettings> was created with unknown prop '${key}'`);
     	});
 
-    	function fieldtext_value_binding(value) {
+    	function fieldtext0_value_binding(value) {
     		if ($$self.$$.not_equal(input.name, value)) {
     			input.name = value;
+    			($$invalidate(0, input), $$invalidate(7, $project));
+    		}
+    	}
+
+    	function fieldtext1_value_binding(value) {
+    		if ($$self.$$.not_equal(input.currency, value)) {
+    			input.currency = value;
     			($$invalidate(0, input), $$invalidate(7, $project));
     		}
     	}
@@ -85874,7 +86051,8 @@ sprite.wait(5000).then(() => {
     		addOwner,
     		removeOwner,
     		$project,
-    		fieldtext_value_binding,
+    		fieldtext0_value_binding,
+    		fieldtext1_value_binding,
     		fieldnumber_value_binding,
     		click_handler,
     		input_1_binding,

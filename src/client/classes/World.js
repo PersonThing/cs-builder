@@ -118,16 +118,17 @@ export default class World extends PIXI.Container {
     }
   }
 
-  createPlayer(charConfig) {
-    const audioOnDeath = $audio.find(au => au.id === charConfig.audioOnDeath)
+  createPlayer(character, characterClass) {
+    const audioOnDeath = $audio.find(au => au.id === characterClass.audioOnDeath)
     this.player = new Player(
       this,
       () => this.getEnemies(),
       () => this.getAllies(),
-      charConfig,
+      character,
+      characterClass,
       audioOnDeath,
-      buildGraphics(charConfig.graphics),
-      buildAbilities(charConfig.abilities),
+      buildGraphics(characterClass.graphics),
+      buildAbilities(characterClass.abilities),
       1.5 * this.levelGrid.gridSize,
       1.5 * this.levelGrid.gridSize,
       this.levelGrid,

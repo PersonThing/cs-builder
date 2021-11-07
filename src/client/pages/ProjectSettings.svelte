@@ -3,6 +3,7 @@
     <h2>Game settings</h2>
     <Form on:submit={save}>
       <FieldText name="name" bind:value={input.name}>Name</FieldText>
+      <FieldText name="currency" bind:value={input.currency}>Currency label (Gold, etc)</FieldText>
       <FieldNumber name="pixel-size" bind:value={input.pixelSize} min={1} max={10} step={0.1}>Pixel size</FieldNumber>
       <div class="form-group">
         <div class="strong">People who can edit this project</div>
@@ -49,6 +50,7 @@
       name: '',
       pixelSize: 1,
       owners: [],
+      currency: 'Gold',
     }
   }
 
@@ -58,6 +60,7 @@
       name: input.name,
       pixelSize: input.pixelSize,
       owners: input.owners,
+      currency: input.currency,
     }
     project.set(p)
     projects.apiUpdate(p)
