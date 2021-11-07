@@ -67,10 +67,10 @@
             </div>
           </div>
 
-          <div class="draw-option" class:selected={drawMode == DrawMode.Items} on:click={() => setDrawMode(DrawMode.Items)}>
+          <div class="draw-option" class:selected={drawMode == DrawMode.Interactables} on:click={() => setDrawMode(DrawMode.Interactables)}>
             <div class="form-group">
-              <div class="strong">Place an item</div>
-              <InputSelect bind:value={selectedItemId} options={itemOptions} let:option>
+              <div class="strong">Place an interactable</div>
+              <InputSelect bind:value={selectedInteractableId} options={interactableOptions} let:option>
                 {#if option.graphics?.still != null}
                   <ArtThumb id={option.graphics.still} />
                 {/if}
@@ -122,7 +122,7 @@
   }
 
   //////////// things unique to level builder ////////////
-  import { tiles, enemies, items, characters, characterclasses, levels } from '../stores/project-stores'
+  import { tiles, enemies, interactables, characters, characterclasses, levels } from '../stores/project-stores'
   import { sortByName } from '../services/object-utils'
   import ArtThumb from '../components/ArtThumb.svelte'
   import ColorPicker from '../components/ColorPicker.svelte'
@@ -136,7 +136,7 @@
   const gridSize = 40
   const DrawMode = {
     Tiles: 0,
-    Items: 1,
+    Interactables: 1,
     Enemies: 2,
   }
 
@@ -144,7 +144,7 @@
   let testingWithId = LocalStorageStore('testing-with', null)
   let levelRenderer
   let selectedTileId = 0
-  let selectedItemId = null
+  let selectedInteractableId = null
   let selectedEnemyId = null
   let drawMode = DrawMode.Tiles
   let pointerIsDown = false
@@ -170,9 +170,9 @@
       .sort(sortByName),
   ]
 
-  $: itemOptions = [
-    { value: null, name: 'Erase items' },
-    ...$items
+  $: interactableOptions = [
+    { value: null, name: 'Erase interactables' },
+    ...$interactables
       .map(i => ({
         ...i,
         value: i.id,
@@ -203,8 +203,8 @@
         case DrawMode.Tiles:
           selectedTileId = input.tiles.find(t => t.x == x && t.y == y)?.id
           break
-        case DrawMode.Items:
-          selectedItemId = input.items.find(i => i.x == x && i.y == y)?.id
+        case DrawMode.Interactables:
+          selectedInteractableId = input.interactables.find(i => i.x == x && i.y == y)?.id
           break
         case DrawMode.Enemies:
           selectedEnemyId = input.enemies.find(i => i.x == x && i.y == y)?.id
@@ -238,8 +238,8 @@
         input.tiles = replaceAtCoord(input.tiles, x, y, selectedTileId)
         levelRenderer.getWorld().redrawTiles()
         break
-      case DrawMode.Items:
-        input.items = replaceAtCoord(input.items, x, y, selectedItemId)
+      case DrawMode.Interactables:
+        input.items = replaceAtCoord(input.items, x, y, selectedInteractableId)
         levelRenderer.getWorld().redrawItems()
         break
       case DrawMode.Enemies:
@@ -299,7 +299,6 @@
   }
 
   .play-edit-toggle {
-    background: rgba(255, 255, 255, 0.3);
     position: absolute;
     top: 0;
     right: 0;

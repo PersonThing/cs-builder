@@ -4,7 +4,7 @@ import LivingSprite from './LivingSprite.js'
 
 export default class Enemy extends LivingSprite {
   constructor(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths, showSightRadius) {
-    super(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
+    super(world, config.name, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths)
 
     this.config.sightRadius = config.sightRadius ?? 150
 
@@ -45,7 +45,17 @@ export default class Enemy extends LivingSprite {
   }
 
   destroy() {
-    console.log('enemy died, roll to drop items')
+    // todo: grant xp to whoever killed me
+    this.dropCurrency()
+    this.dropItems()
     super.destroy()
+  }
+
+  dropCurrency() {
+    this.world.dropRandomCurrency(1, 50)
+  }
+
+  dropItems() {
+    this.world.dropRandomItem(this.x, this.y)
   }
 }

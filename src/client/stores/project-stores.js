@@ -27,12 +27,13 @@ export const abilities = createProjectItemStore('abilities')
 export const audio = createProjectItemStore('audio')
 export const characterclasses = createProjectItemStore('characterclasses')
 export const enemies = createProjectItemStore('enemies')
+export const interactables = createProjectItemStore('interactables')
 export const items = createProjectItemStore('items')
 export const levels = createProjectItemStore('levels')
 export const particles = createProjectItemStore('particles')
 export const tiles = createProjectItemStore('tiles')
 
-const itemTypeStores = { art, abilities, audio, characterclasses, enemies, items, levels, particles, tiles }
+const itemTypeStores = { art, abilities, audio, characterclasses, enemies, interactables, items, levels, particles, tiles }
 
 function createUserStore() {
   const { subscribe, set, update } = writable(null)

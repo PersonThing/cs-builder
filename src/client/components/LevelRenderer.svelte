@@ -13,7 +13,7 @@
 <script>
   import { createEventDispatcher, onDestroy } from 'svelte'
   import { rgbaStringToHex } from '../services/rgba-to-hex.js'
-  import { art, tiles, characterclasses } from '../stores/project-stores.js'
+  import { art, tiles, characterclasses, characters } from '../stores/project-stores.js'
   import GUI from '../classes/GUI.js'
   import World from '../classes/World.js'
   import emptyContainer from '../services/empty-container.js'
@@ -179,6 +179,8 @@
     player.setTarget(worldCoordinates)
   }
 
+  let lastCharacterSave = 0
+
   function onTick() {
     if (playable && world && player) {
       if (player.dead) {
@@ -190,6 +192,14 @@
       screenCenter.y = pixiApp.renderer.height / 2
       world.centerViewOnPlayer(screenCenter)
       world.onTick(pointerPosition, keys)
+
+      // save intermittently, but only if character is dirty
+      const time = performance.now()
+      if (time - lastCharacterSave > 3000 && player.character.dirty) {
+        // character.dirty = false
+        characters.apiUpdate(player.character)
+        lastCharacterSave = time
+      }
     }
   }
 

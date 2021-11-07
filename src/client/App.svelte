@@ -17,6 +17,7 @@
   import ParticleBuilder from './pages/ParticleBuilder.svelte'
   import TileBuilder from './pages/TileBuilder.svelte'
   import ItemBuilder from './pages/ItemBuilder.svelte'
+  import InteractableBuilder from './pages/InteractableBuilder.svelte'
   import CharacterClassBuilder from './pages/CharacterClassBuilder.svelte'
   import EnemyBuilder from './pages/EnemyBuilder.svelte'
   import LevelBuilder from './pages/LevelBuilder.svelte'
@@ -36,6 +37,7 @@
     '/abilities/:id?': AbilityBuilder,
     '/particles/:id?': ParticleBuilder,
     '/tiles/:id?': TileBuilder,
+    '/interactables/:id?': InteractableBuilder,
     '/items/:id?': ItemBuilder,
     '/characterclasses/:id?': CharacterClassBuilder,
     '/enemies/:id?': EnemyBuilder,

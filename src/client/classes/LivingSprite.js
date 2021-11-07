@@ -5,7 +5,7 @@ import audioService from '../services/audio-service.js'
 import makeArtSprite from '../services/make-art-sprite.js'
 
 export default class LivingSprite extends PIXI.Container {
-  constructor(world, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
+  constructor(world, name, getEnemies, getAllies, config, audioOnDeath, graphics, abilities, x, y, levelGrid, showPaths) {
     super()
     this.world = world
     this.getEnemies = getEnemies
@@ -47,7 +47,7 @@ export default class LivingSprite extends PIXI.Container {
     this.showPaths = showPaths
 
     // render a little health bar
-    this.nameTag = new PIXI.Text(config.name, {
+    this.nameTag = new PIXI.Text(name, {
       fontFamily: 'consolas',
       fontSize: 12,
       strokeThickness: 3,

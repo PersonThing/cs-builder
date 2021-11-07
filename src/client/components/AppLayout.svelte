@@ -19,6 +19,7 @@
         {#if $user && $project.owners.includes($user.username)}
           <a href="/#/art" class:active={active == 'art'}>Art</a>
           <a href="/#/tiles" class:active={active == 'tiles'}>Tiles</a>
+          <a href="/#/interactables" class:active={active == 'interactables'}>Interactables</a>
           <a href="/#/audio" class:active={active == 'audio'}>Audio</a>
           <a href="/#/abilities" class:active={active == 'abilities'}>Abilities</a>
           <a href="/#/characterclasses" class:active={active == 'characterclasses'}>Character classes</a>

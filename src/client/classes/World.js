@@ -1,15 +1,17 @@
 import * as PIXI from 'pixi.js'
 import emptyContainer from '../services/empty-container.js'
 import Enemy from './Enemy.js'
-import Item from './Item.js'
+import Interactable from './Interactable.js'
 import Player from './Player.js'
 import Tile from './Tile.js'
-import { art, abilities, audio, enemies, items, tiles } from '../stores/project-stores.js'
-let $art, $abilities, $audio, $enemies, $items, $tiles
+import { art, abilities, audio, enemies, interactables, items, tiles } from '../stores/project-stores.js'
+
+let $art, $abilities, $audio, $enemies, $interactables, $items, $tiles
 art.subscribe(v => ($art = v))
 abilities.subscribe(v => ($abilities = v))
 audio.subscribe(v => ($audio = v))
 enemies.subscribe(v => ($enemies = v))
+interactables.subscribe(v => ($interactables = v))
 items.subscribe(v => ($items = v))
 tiles.subscribe(v => ($tiles = v))
 
@@ -48,22 +50,32 @@ export default class World extends PIXI.Container {
     this.sortableChildren = true
 
     this.tileContainer = new PIXI.Container()
+    this.tileContainer.zIndex = 1
     this.addChild(this.tileContainer)
     this.redrawTiles()
 
-    this.itemContainer = new PIXI.Container()
-    this.addChild(this.itemContainer)
-    this.redrawItems()
+    this.interactableContainer = new PIXI.Container()
+    this.interactableContainer.zIndex = 2
+    this.addChild(this.interactableContainer)
+    this.redrawInteractables()
 
-    this.enemyContainer = new PIXI.Container()
-    this.addChild(this.enemyContainer)
-    this.redrawEnemies()
+    // TODO: when items drop they should go in this container
+    this.itemContainer = new PIXI.Container()
+    this.itemContainer.zIndex = 3
+    this.addChild(this.itemContainer)
 
     this.projectileContainer = new PIXI.Container()
+    this.projectileContainer.zIndex = 4
     this.addChild(this.projectileContainer)
 
     this.particleContainer = new PIXI.Container()
+    this.particleContainer.zIndex = 5
     this.addChild(this.particleContainer)
+
+    this.enemyContainer = new PIXI.Container()
+    this.enemyContainer.zIndex = 11
+    this.addChild(this.enemyContainer)
+    this.redrawEnemies()
   }
 
   redrawTiles() {
@@ -81,18 +93,18 @@ export default class World extends PIXI.Container {
     }
   }
 
-  redrawItems() {
-    emptyContainer(this.itemContainer)
-    for (const itemConfig of this.level.items) {
-      const ic = $items.find(i => i.id == itemConfig.id)
-      const item = new Item(
+  redrawInteractables() {
+    emptyContainer(this.interactableContainer)
+    for (const intConfig of this.level.interactables) {
+      const ic = $interactables.find(i => i.id == intConfig.id)
+      const interactable = new Interactable(
         ic,
         $art.find(a => a.id == ic.graphics.still),
         $audio.find(au => au.id == ic.audioOnCollision),
-        itemConfig,
+        intConfig,
         this.levelGrid.gridSize
       )
-      this.itemContainer.addChild(item)
+      this.interactableContainer.addChild(interactable)
     }
   }
 
@@ -134,6 +146,7 @@ export default class World extends PIXI.Container {
       this.levelGrid,
       this.level.showPaths
     )
+    this.player.zIndex = 10
     this.addChild(this.player)
     return this.player
   }
@@ -170,20 +183,20 @@ export default class World extends PIXI.Container {
   }
 
   checkCollisions() {
-    this.itemContainer?.children.forEach(item => {
-      if (item.config.playersCanUse && this.player) this.checkAndHandleItemCollision(this.player, item)
-      if (item.config.enemiesCanUse) {
-        this.getEnemies().forEach(enemy => this.checkAndHandleItemCollision(enemy, item))
+    this.interactableContainer?.children.forEach(interactable => {
+      if (interactable.config.playersCanUse && this.player) this.checkAndHandleInteractableCollision(this.player, interactable)
+      if (interactable.config.enemiesCanUse) {
+        this.getEnemies().forEach(enemy => this.checkAndHandleInteractableCollision(enemy, interactable))
       }
     })
   }
 
-  checkAndHandleItemCollision(sprite, item) {
-    if (sprite.isTouching(item)) {
-      item.onCollision(sprite, this)
-      if (item.config.removeOnCollision) {
-        this.itemContainer.removeChild(item)
-        item.destroy()
+  checkAndHandleInteractableCollision(sprite, interactable) {
+    if (sprite.isTouching(interactable)) {
+      interactable.onCollision(sprite, this)
+      if (interactable.config.removeOnCollision) {
+        this.interactableContainer.removeChild(interactable)
+        interactable.destroy()
       }
     }
   }
@@ -193,5 +206,46 @@ export default class World extends PIXI.Container {
     this.y = screenCenter.y
     this.pivot.x = this.player.x
     this.pivot.y = this.player.y
+  }
+
+  dropRandomCurrency(min, max) {
+    // todo: should drop on ground / need to be hoovered up
+    // temp code
+    // give a random amount of currency between 1 and 50
+    const amount = Math.floor(Math.random() * (max - min + 1)) + min
+    this.player.pickupCurrency(amount)
+  }
+
+  dropRandomItem(x, y) {
+    if ($items?.length > 0) {
+      // get a random item from $items array
+      const itemTemplate = $items[Math.floor(Math.random() * $items.length)]
+      const art = $art.find(a => a.id === itemTemplate.graphics.still)
+      const item = {
+        id: itemTemplate.id,
+        stats: {
+          ...itemTemplate.stats,
+        },
+      }
+
+      // add it to our item container on ground at current location
+      // const sprite = makeArtSprite(art)
+      // sprite.x = x
+      // sprite.y = y
+
+      // // when player clicks the item, pick it up
+      // sprite.interactive = true
+      // sprite.anchor.set(0.5)
+      // // sprite.scale.x = 0.5
+      // // sprite.scale.y = 0.5
+      // sprite.on('pointerdown', () => {
+      //   this.player.pickupItem(item)
+      //   this.itemContainer.removeChild(sprite)
+      //   sprite.destroy()
+      // })
+      // this.itemContainer.addChild(sprite)
+
+      this.player.pickupItem(item)
+    }
   }
 }

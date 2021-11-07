@@ -3,7 +3,7 @@
   bind:this={itemTypeBuilder}
   itemType="items"
   singular="item"
-  itemTypeDescription="For now, items are things you can place in a level that detect collisions with players or enemies, and run a script when those collisions happen."
+  itemTypeDescription="Items that can be found by players."
   store={items}
   {itemTemplate}
   bind:input
@@ -16,11 +16,13 @@
       <Form on:submit={() => itemTypeBuilder.save()}>
         <FieldText name="name" bind:value={input.name} placeholder="Type a name...">Name</FieldText>
         <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
-        <FieldAudioPicker bind:value={input.audioOnCollision}>Audio on collision</FieldAudioPicker>
-        <FieldCheckbox bind:checked={input.removeOnCollision} name="remove-on-collision">Remove on collision</FieldCheckbox>
-        <FieldCheckbox bind:checked={input.playersCanUse} name="players-can-use">Players can use</FieldCheckbox>
-        <FieldCheckbox bind:checked={input.enemiesCanUse} name="enemies-can-use">Enemies can use</FieldCheckbox>
-        <FieldScriptEditor bind:value={input.onCollision} {examples}>onCollision(item, sprite, world, PIXI)</FieldScriptEditor>
+        <FieldItemSlotPicker bind:value={input.slot}>Slot</FieldItemSlotPicker>
+
+        {#each numberStats as statName}
+          <FieldNumber name={statName} bind:value={input.stats[statName]}>{statName}</FieldNumber>
+        {/each}
+
+        <!-- todo: item type, stats, etc -->
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
       </Form>
     </div>
@@ -30,10 +32,9 @@
 <script>
   import { items } from '../stores/project-stores.js'
   import FieldArtPicker from '../components/FieldArtPicker.svelte'
-  import FieldAudioPicker from '../components/FieldAudioPicker.svelte'
-  import FieldCheckbox from '../components/FieldCheckbox.svelte'
-  import FieldScriptEditor from '../components/FieldScriptEditor.svelte'
   import FieldText from '../components/FieldText.svelte'
+  import FieldNumber from '../components/FieldNumber.svelte'
+  import FieldItemSlotPicker from '../components/FieldItemSlotPicker.svelte'
   import Form from '../components/Form.svelte'
   import FormButtons from '../components/FormButtons.svelte'
   import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
@@ -42,37 +43,40 @@
   let input = null
   let itemTypeBuilder
 
-  let examples = `// Examples:
-// change speed
-sprite.speed += 1
-
-sprite.speed = sprite.speed * sprite.speed
-
-// change size
-sprite.scale.x *= 2
-sprite.scale.y *= 2
-
-// create text
-const text = new PIXI.Text('Your text here', { fontFamily: 'Arial', fontSize: 18, fill : 0xffffff })
-text.x = -100
-text.y = -50
-sprite.addChild(text)
-
-// turn off an effect after 5 seconds
-sprite.wait(5000).then(() => {
-  sprite.speed -= 1
-})`
+  const numberStats = [
+    'health',
+    'health_regen_per_second',
+    'power',
+    'power_regen',
+    'cooldown_reduction',
+    'max_projectiles',
+    'max_turrets',
+    'speed_percent',
+    'damage_bonus_percent',
+    'damage_bonus_percent_fire',
+    'damage_bonus_percent_cold',
+    'damage_bonus_percent_poison',
+    'damage_bonus_percent_physical',
+    'damage_bonus_percent_lightning',
+    'damage_reduction_percent',
+    'damage_reduction_percent_fire',
+    'damage_reduction_percent_cold',
+    'damage_reduction_percent_poison',
+    'damage_reduction_percent_physical',
+    'damage_reduction_percent_lightning',
+  ]
 
   const itemTemplate = {
     name: '',
     graphics: {
       still: null,
     },
-    onCollision: '',
-    audioOnCollision: null,
-    removeOnCollision: true,
-    playersCanUse: true,
-    enemiesCanUse: false,
+    stats: {},
+
+    // todo: consider how these could/should work
+    // abilities: null,
+    // on_hit_abilities: null,
+    // on_struck_abilities: null,
   }
 
   function getItemGraphic(item) {

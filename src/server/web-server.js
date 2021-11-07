@@ -65,6 +65,13 @@ repo.connect().then(() => {
     })
   })
 
+  // rename items to interactables (remove this once it's done on prod)
+  app.get('/api/rename-items', (req, res) => {
+    repo.renameItems().then(() => {
+      res.status(200).json(true)
+    })
+  })
+
   // login
   const sendUserResponse = (res, user) => {
     const token = jwt.sign(user, jwtSecret)
@@ -220,11 +227,12 @@ repo.connect().then(() => {
     })
   })
 
-  app.put('/api/characters', authorization, (req, res) => {
+  app.put('/api/characters/:id', authorization, (req, res) => {
     // TODO: validate changes they're making...
     // if we make the game server-side, we won't need this api at all, server can just periodically sync character state to mongo
     assertUserOwnsCharacter(req.username, req.body.id, res).then(() => {
-      repo.update('characters', { username: req.username, id: req.body.id }, req.body).then(() => {
+      req.body.id = req.params.id
+      repo.update('characters', { username: req.username, id: req.params.id }, req.body).then(() => {
         io.emit('characters.update', req.body)
         res.json(req.body)
       })

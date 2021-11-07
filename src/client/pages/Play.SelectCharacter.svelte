@@ -23,12 +23,9 @@
       username (who created it)
       level
       xp
-      gold
-      spellDice
-      spellSlots
-      spellList
+      currency
       inventory
-      equipment:
+      equipped:
         helm
         chest
         legs
@@ -36,30 +33,14 @@
         hands
         mainHand
         offHand
+        extra1
+        extra2
+        extra3
 
       inventory: [
         item: itemId, quantity
         ... up to 40 slots? 100? 500?
       ]
-
-    potential item mods:
-      damage reduction for all damage types
-      damage reduction for individual damage type
-      damage bonus for all damage types
-      damage bonus for individual damage type
-      health
-      health regeneration
-      mana/energy/whatever
-      mana/energy/whatever regeneration
-      global cooldown reduction
-      ability cooldown reduction
-      individual ability damage bonus
-      add projectiles
-      add max turret
-      add ability
-      speed %
-      range %
-      size %
 
     whenever equipped items or level change, sum up stats from character class, level, and items, and update character -->
 </div>

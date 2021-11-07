@@ -1,13 +1,18 @@
 import * as PIXI from 'pixi.js'
+import emptyContainer from '../services/empty-container.js'
 import makeArtSprite from '../services/make-art-sprite.js'
-import { project } from '../stores/project-stores.js'
-let $project
-project.subscribe(p => ($project = p))
+import { project, items, art } from '../stores/project-stores.js'
+let $project, $items, $art
+project.subscribe(v => ($project = v))
+items.subscribe(v => ($items = v))
+art.subscribe(v => ($art = v))
 
 export default class GUI extends PIXI.Container {
   constructor(player, rendererWidth, rendererHeight) {
     super()
     this.player = player
+    this.player.addItemPickupListener(() => this.redrawItems())
+    this.player.addCurrencyPickupListener(() => this.redrawCurrencyText())
     this.rendererWidth = rendererWidth
     this.rendererHeight = rendererHeight
     this.sortableChildren = true
@@ -30,10 +35,16 @@ export default class GUI extends PIXI.Container {
   }
 
   toggleInventoryPanel() {
-    this.inventoryPanel.visible = !this.inventoryPanel.visible
+    if (this.inventoryPanel.visible) {
+      this.hideInventoryPanel()
+    } else {
+      this.showInventoryPanel()
+    }
   }
 
   showInventoryPanel() {
+    this.redrawItems()
+    this.redrawCurrencyText()
     this.inventoryPanel.visible = true
   }
 
@@ -123,43 +134,145 @@ export default class GUI extends PIXI.Container {
     // sizing for inventory grid
     const gridSquareSize = 50 //rendererWidth / 2 / 10
     const gridPadding = 3
-    const gridSpacing = gridSquareSize + gridPadding
-    const rows = 5
-    const cols = 10
-    const gridX = (panelWidth - gridSpacing * cols) / 2
-    const gridY = panelHeight - gridSpacing * rows - 30
+    this.gridSpacing = gridSquareSize + gridPadding
+    this.gridRows = 5
+    this.gridCols = 10
+    this.gridX = (panelWidth - this.gridSpacing * this.gridCols) / 2
+    this.gridY = panelHeight - this.gridSpacing * this.gridRows - 30
 
     // draw inventory grid
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        graphics.beginFill(0x000000, 0.5)
-        graphics.lineStyle(2, 0x000000, 0.5)
-        graphics.drawRect(gridX + i * gridSpacing, gridY + j * gridSpacing, gridSquareSize, gridSquareSize)
+    const drawItemSlot = (g, x, y, size) => {
+      g.beginFill(0x000000, 0.5)
+      g.lineStyle(2, 0x000000, 0.5)
+      g.drawRect(x, y, size, size)
+    }
+
+    for (let x = 0; x < this.gridCols; x++) {
+      for (let y = 0; y < this.gridRows; y++) {
+        drawItemSlot(graphics, this.gridX + x * this.gridSpacing, this.gridY + y * this.gridSpacing, gridSquareSize)
       }
     }
 
-    // container for item graphics in the grid squares
-    this.inventoryItems = new PIXI.Container()
-    this.inventoryPanel.addChild(this.inventoryItems)
-    this.player.inventory.forEach(inventorySlot => {
-      const item = inventorySlot.item
-      if (item) {
-        const itemGraphic = makeArtSprite(item.graphic)
-        itemGraphic.x = gridX + inventorySlot.x * gridSpacing + gridSquareSize / 2
-        itemGraphic.y = gridY + inventorySlot.y * gridSpacing + gridSquareSize / 2
-        itemGraphic.anchor.set(0.5)
-        this.inventoryItems.addChild(itemGraphic)
-      }
+    // draw equipped item slots
+    const equippedSlots = new PIXI.Container()
+    const equippedSlotsGraphics = new PIXI.Graphics()
+    equippedSlots.addChild(equippedSlotsGraphics)
+    this.inventoryPanel.addChild(equippedSlots)
+    const equippedSlotSize = this.gridSpacing * 1.5 + 20
+    const slots = [
+      {
+        slot: 'Head',
+        x: equippedSlotSize,
+        y: 0,
+      },
+      {
+        slot: 'Chest',
+        x: equippedSlotSize,
+        y: equippedSlotSize,
+      },
+      {
+        slot: 'Legs',
+        x: equippedSlotSize,
+        y: equippedSlotSize * 2,
+      },
+      {
+        slot: 'Feet',
+        x: equippedSlotSize * 2,
+        y: equippedSlotSize * 2,
+      },
+      {
+        slot: 'Hands',
+        x: 0,
+        y: equippedSlotSize * 2,
+      },
+      {
+        slot: 'Mainhand',
+        x: 0,
+        y: equippedSlotSize,
+      },
+      {
+        slot: 'Offhand',
+        x: equippedSlotSize * 2,
+        y: equippedSlotSize,
+      },
+      {
+        slot: 'Accessory 1',
+        x: 0,
+        y: equippedSlotSize * 4,
+      },
+      {
+        slot: 'Accessory 2',
+        x: equippedSlotSize,
+        y: equippedSlotSize * 4,
+      },
+      {
+        slot: 'Accessory 3',
+        x: equippedSlotSize * 2,
+        y: equippedSlotSize * 4,
+      },
+    ]
+    slots.forEach(slot => {
+      const text = new PIXI.Text(slot.slot, { fontFamily: 'Arial', fontSize: 14, fill: 0x000000 })
+      text.x = slot.x + (gridSquareSize * 1.5) / 2 - text.width / 2
+      text.y = slot.y - text.height
+      equippedSlots.addChild(text)
+      drawItemSlot(equippedSlotsGraphics, slot.x, slot.y, gridSquareSize * 1.5)
     })
+    equippedSlots.x = panelWidth / 2 - equippedSlots.width / 2
+    equippedSlots.y = this.gridY - 600
 
     // currency
-    const currencyText = new PIXI.Text(`${$project?.currency}: ${this.player.gold}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
-    currencyText.x = gridX
-    currencyText.y = gridY - currencyText.height - 5
-    currencyText.zIndex = 11
-    this.inventoryPanel.addChild(currencyText)
+    this.redrawCurrencyText()
 
+    // containers for item sprites
+    this.itemSprites = new PIXI.Container()
+    this.inventoryPanel.addChild(this.itemSprites)
+
+    this.redrawItems()
     this.hideInventoryPanel()
+  }
+
+  redrawCurrencyText() {
+    if (this.currencyText) {
+      this.inventoryPanel.removeChild(this.currencyText)
+      this.currencyText.destroy()
+    }
+    this.currencyText = new PIXI.Text(`${$project?.currency}: ${this.player.character.currency}`, {
+      fontFamily: 'Arial',
+      fontSize: 20,
+      fill: 0x000000,
+    })
+    this.currencyText.x = this.gridX
+    this.currencyText.y = this.gridY - this.currencyText.height - 5
+    this.currencyText.zIndex = 11
+    this.inventoryPanel.addChild(this.currencyText)
+  }
+
+  redrawItems() {
+    emptyContainer(this.itemSprites)
+
+    this.player.character.inventory.forEach((item, i) => {
+      const itemTemplate = $items.find(i => i.id === item.id)
+      const art = $art.find(a => a.id === itemTemplate.graphics.still)
+      const itemSprite = makeArtSprite(art)
+      // put it somewhere in the grid...
+      itemSprite.x = this.gridX + (i % this.gridCols) * this.gridSpacing + 5
+      itemSprite.y = this.gridY + Math.floor(i / this.gridCols) * this.gridSpacing + 5
+      itemSprite.zIndex = 11
+      itemSprite.interactive = true
+      itemSprite.buttonMode = true
+      itemSprite.on('pointerdown', event => {
+        // temp code for now..
+        // if left click, equip it
+        if (event.data.isPrimary) {
+          this.player.equipItem(i)
+        } else {
+          this.player.dropItem(i)
+        }
+        this.redrawItems()
+      })
+      this.itemSprites.addChild(itemSprite)
+    })
   }
 
   drawAbilityBar() {
