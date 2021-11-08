@@ -132,24 +132,7 @@ class Repo {
   }
 
   renameItems() {
-    Promise.all(
-      this.db.collection('items').rename('interactables'),
-      ...this.db
-        .collection('levels')
-        .find({})
-        .toArray()
-        .then(levels => {
-          return Promise.all(
-            levels.map(level => {
-              level.interactables = level.items
-              return this.update('levels', { id: level.id, projectId: level.projectId }, level)
-            })
-          )
-        })
-    ).then(() => {
-      this.db.collection('levels').updateMany({}, { $unset: { items: 1 } })
-    })
-    return
+    return this.db.collection('levels').updateMany({}, { $unset: { items: 1 } })
   }
 }
 
