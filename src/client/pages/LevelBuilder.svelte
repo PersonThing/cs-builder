@@ -113,7 +113,7 @@
     showPaths: true,
     showSightRadius: true,
     tiles: [],
-    items: [],
+    interactables: [],
     enemies: [],
   }
 

@@ -85496,7 +85496,7 @@ sprite.speed -= 1`;
     		showPaths: true,
     		showSightRadius: true,
     		tiles: [],
-    		items: [],
+    		interactables: [],
     		enemies: []
     	};
 
