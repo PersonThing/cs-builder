@@ -2,20 +2,24 @@ import * as PIXI from 'pixi.js'
 import emptyContainer from '../services/empty-container.js'
 import makeArtSprite from '../services/make-art-sprite.js'
 import { project, items, art } from '../stores/project-stores.js'
+import ItemSlotType from '../config/item-slot-types'
 let $project, $items, $art
 project.subscribe(v => ($project = v))
 items.subscribe(v => ($items = v))
 art.subscribe(v => ($art = v))
 
 export default class GUI extends PIXI.Container {
-  constructor(player, rendererWidth, rendererHeight) {
+  constructor() {
     super()
+    this.sortableChildren = true
+  }
+
+  init(player, rendererWidth, rendererHeight) {
     this.player = player
-    this.player.addItemPickupListener(() => this.redrawItems())
-    this.player.addCurrencyPickupListener(() => this.redrawCurrencyText())
+    this.character = player.character
+
     this.rendererWidth = rendererWidth
     this.rendererHeight = rendererHeight
-    this.sortableChildren = true
 
     this.drawCharacterPanel()
     this.drawInventoryPanel()
@@ -72,14 +76,14 @@ export default class GUI extends PIXI.Container {
     graphics.drawRect(0, 0, panelWidth, panelHeight)
 
     // character name
-    const nameText = new PIXI.Text(`${this.player.character.name}`, { fontFamily: 'Arial', fontSize: 30, fill: 0x000000 })
+    const nameText = new PIXI.Text(`${this.character.name}`, { fontFamily: 'Arial', fontSize: 30, fill: 0x000000 })
     nameText.x = panelWidth - panelPadding - nameText.width
     nameText.y = panelPadding
     nameText.zIndex = 11
     this.characterPanel.addChild(nameText)
 
     // level + class
-    const levelClassText = new PIXI.Text(`Level ${this.player.character.level} ${this.player.config.name}`, {
+    const levelClassText = new PIXI.Text(`Level ${this.character.level} ${this.player.config.name}`, {
       fontFamily: 'Arial',
       fontSize: 30,
       fill: 0x000000,
@@ -104,7 +108,7 @@ export default class GUI extends PIXI.Container {
     this.characterPanel.addChild(powerText)
 
     // xp
-    const xpText = new PIXI.Text(`XP: ${this.player.character.xp}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
+    const xpText = new PIXI.Text(`XP: ${this.character.xp}`, { fontFamily: 'Arial', fontSize: 20, fill: 0x000000 })
     xpText.x = panelPadding
     xpText.y = panelPadding + nameText.height + panelPadding + healthText.height + panelPadding + powerText.height + panelPadding
     xpText.zIndex = 11
@@ -159,64 +163,88 @@ export default class GUI extends PIXI.Container {
     equippedSlots.addChild(equippedSlotsGraphics)
     this.inventoryPanel.addChild(equippedSlots)
     const equippedSlotSize = this.gridSpacing * 1.5 + 20
-    const slots = [
+    this.availableItemSlots = [
       {
-        slot: 'Head',
+        slot: ItemSlotType.Head,
         x: equippedSlotSize,
         y: 0,
       },
       {
-        slot: 'Chest',
+        slot: ItemSlotType.Chest,
         x: equippedSlotSize,
         y: equippedSlotSize,
       },
       {
-        slot: 'Legs',
+        slot: ItemSlotType.Legs,
         x: equippedSlotSize,
         y: equippedSlotSize * 2,
       },
       {
-        slot: 'Feet',
+        slot: ItemSlotType.Feet,
         x: equippedSlotSize * 2,
         y: equippedSlotSize * 2,
       },
       {
-        slot: 'Hands',
+        slot: ItemSlotType.Hands,
         x: 0,
         y: equippedSlotSize * 2,
       },
       {
-        slot: 'Mainhand',
+        slot: ItemSlotType.Mainhand,
         x: 0,
         y: equippedSlotSize,
       },
       {
-        slot: 'Offhand',
+        slot: ItemSlotType.Offhand,
         x: equippedSlotSize * 2,
         y: equippedSlotSize,
       },
       {
-        slot: 'Accessory 1',
+        slot: ItemSlotType.Accessory,
         x: 0,
         y: equippedSlotSize * 4,
       },
       {
-        slot: 'Accessory 2',
+        slot: ItemSlotType.Accessory,
         x: equippedSlotSize,
         y: equippedSlotSize * 4,
       },
       {
-        slot: 'Accessory 3',
+        slot: ItemSlotType.Accessory,
         x: equippedSlotSize * 2,
         y: equippedSlotSize * 4,
       },
     ]
-    slots.forEach(slot => {
+    this.availableItemSlots.forEach(slot => {
       const text = new PIXI.Text(slot.slot, { fontFamily: 'Arial', fontSize: 14, fill: 0x000000 })
       text.x = slot.x + (gridSquareSize * 1.5) / 2 - text.width / 2
       text.y = slot.y - text.height
       equippedSlots.addChild(text)
       drawItemSlot(equippedSlotsGraphics, slot.x, slot.y, gridSquareSize * 1.5)
+
+      if (this.character.equipped != null && this.character.equipped[slot.slot] != null) {
+        // if accessory, it should be an array
+        if (slot.slot === ItemSlotType.Accessory) {
+        } else {
+          // render the item
+          const item = this.character.equipped[slot.slot]
+          const itemSprite = this.createItemSprite(item.id, slot.x + 15, slot.y + 15)
+          itemSprite.on('pointerdown', event => {
+            // if left click, put it in inventory
+            // anything else will just delete it instead
+            if (event.data.button === 0) {
+              // swap item to inventory
+              this.pickupItem(this.character.equipped[slot.slot])
+            } else {
+              // drop it, don't need to do anything here
+            }
+
+            this.character.equipped[slot.slot] = null
+            this.redrawItems()
+          })
+          equippedSlots.addChild(itemSprite)
+        }
+      }
     })
     equippedSlots.x = panelWidth / 2 - equippedSlots.width / 2
     equippedSlots.y = this.gridY - 600
@@ -225,8 +253,8 @@ export default class GUI extends PIXI.Container {
     this.redrawCurrencyText()
 
     // containers for item sprites
-    this.itemSprites = new PIXI.Container()
-    this.inventoryPanel.addChild(this.itemSprites)
+    this.inventorySprites = new PIXI.Container()
+    this.inventoryPanel.addChild(this.inventorySprites)
 
     this.redrawItems()
     this.hideInventoryPanel()
@@ -237,7 +265,7 @@ export default class GUI extends PIXI.Container {
       this.inventoryPanel.removeChild(this.currencyText)
       this.currencyText.destroy()
     }
-    this.currencyText = new PIXI.Text(`${$project?.currency}: ${this.player.character.currency}`, {
+    this.currencyText = new PIXI.Text(`${$project?.currency}: ${this.character.currency}`, {
       fontFamily: 'Arial',
       fontSize: 20,
       fill: 0x000000,
@@ -249,30 +277,99 @@ export default class GUI extends PIXI.Container {
   }
 
   redrawItems() {
-    emptyContainer(this.itemSprites)
+    emptyContainer(this.inventorySprites)
 
-    this.player.character.inventory.forEach((item, i) => {
-      const itemTemplate = $items.find(i => i.id === item.id)
-      const art = $art.find(a => a.id === itemTemplate.graphics.still)
-      const itemSprite = makeArtSprite(art)
-      // put it somewhere in the grid...
-      itemSprite.x = this.gridX + (i % this.gridCols) * this.gridSpacing + 5
-      itemSprite.y = this.gridY + Math.floor(i / this.gridCols) * this.gridSpacing + 5
-      itemSprite.zIndex = 11
-      itemSprite.interactive = true
-      itemSprite.buttonMode = true
+    // items in inventory
+    this.character.inventory.forEach((item, i) => {
+      if (item == null) return
+
+      const itemSprite = this.createItemSprite(
+        item.id,
+        this.gridX + (i % this.gridCols) * this.gridSpacing + 5,
+        this.gridY + Math.floor(i / this.gridCols) * this.gridSpacing + 5
+      )
+
       itemSprite.on('pointerdown', event => {
         // temp code for now..
         // if left click, equip it
-        if (event.data.isPrimary) {
-          this.player.equipItem(i)
+        if (event.data.button === 0) {
+          this.equipItem(i)
         } else {
-          this.player.dropItem(i)
+          this.dropItem(i)
         }
         this.redrawItems()
       })
-      this.itemSprites.addChild(itemSprite)
+
+      this.inventorySprites.addChild(itemSprite)
     })
+  }
+
+  createItemSprite(itemId, x, y) {
+    const itemTemplate = this.getItemTemplateById(itemId)
+    const art = $art.find(a => a.id === itemTemplate.graphics.still)
+    const itemSprite = makeArtSprite(art)
+    itemSprite.x = x
+    itemSprite.y = y
+    itemSprite.zIndex = 11
+    itemSprite.interactive = true
+    itemSprite.buttonMode = true
+    return itemSprite
+  }
+
+  getItemTemplateById(id) {
+    return $items.find(i => i.id === id)
+  }
+
+  pickupCurrency(amount) {
+    this.character.currency += amount
+    this.character.dirty = true
+    this.redrawCurrencyText()
+  }
+
+  pickupItem(item) {
+    // find first null slot in inventory
+    const emptySlotIndex = this.character.inventory.findIndex(i => i == null)
+    if (emptySlotIndex != -1) {
+      this.character.inventory[emptySlotIndex] = item
+    } else if (this.character.inventory.length < 50) {
+      this.character.inventory.push(item)
+    }
+    this.character.dirty = true
+    this.redrawItems()
+  }
+
+  equipItem(index) {
+    if (this.character.equipped == null) this.character.equipped = {}
+
+    const item = this.character.inventory[index]
+    const itemTemplate = this.getItemTemplateById(item.id)
+
+    if (itemTemplate.slot === ItemSlotType.Accessory) {
+      // TODO figure out logic for equipping among the 3
+    } else {
+      let swapItem = this.character.equipped[itemTemplate.slot] // if nothing was equipped, will be null, and that's fine
+      this.character.equipped[itemTemplate.slot] = item
+      this.character.inventory[index] = swapItem
+    }
+
+    console.log('item equipped', this.character.equipped)
+
+    this.character.dirty = true
+    this.redrawItems()
+  }
+
+  dropItem(index) {
+    // todo: drop it on ground so someone else can pick up instead of just deleting it
+    this.character.inventory[index] = null
+    this.character.dirty = true
+    this.redrawItems()
+  }
+
+  // TODO: remove me, only here for debugging purposes
+  dropEverything() {
+    this.character.inventory = []
+    this.character.dirty = true
+    this.redrawItems()
   }
 
   drawAbilityBar() {

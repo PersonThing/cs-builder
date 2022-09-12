@@ -10,9 +10,6 @@ export default class Player extends LivingSprite {
 
     this.maxHealth = characterClass.health ?? 0
     this.maxPower = characterClass.power ?? 0
-
-    this.onItemPickupListeners = []
-    this.onCurrencyPickupListeners = []
   }
 
   onTick(time, pressedKeys, pointerPosition) {
@@ -33,44 +30,5 @@ export default class Player extends LivingSprite {
       this.setTint(0xff0000)
       this.dead = true
     }
-  }
-
-  pickupCurrency(amount) {
-    this.character.currency += amount
-    this.onCurrencyPickupListeners.forEach(l => l())
-    this.character.dirty = true
-  }
-
-  pickupItem(item) {
-    // find first null slot in inventory
-    const emptySlotIndex = this.character.inventory.findIndex(i => i == null)
-    if (emptySlotIndex != -1) {
-      this.character.inventory[emptySlotIndex] = item
-    } else if (this.character.inventory.length < 50) {
-      this.character.inventory.push(item)
-    }
-    this.onItemPickupListeners.forEach(l => l())
-    this.character.dirty = true
-  }
-
-  addItemPickupListener(listener) {
-    this.onItemPickupListeners.push(listener)
-  }
-
-  addCurrencyPickupListener(listener) {
-    this.onCurrencyPickupListeners.push(listener)
-  }
-
-  equipItem(index) {
-    const item = this.inventory[index]
-    // remove from inventory
-    // add to equipped
-    this.character.dirty = true
-  }
-
-  dropItem(index) {
-    // todo: drop it on ground so someone else can pick up instead of just deleting it
-    this.inventory[index] = null
-    this.character.dirty = true
   }
 }

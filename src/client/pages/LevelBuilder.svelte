@@ -27,6 +27,7 @@
         <LevelRenderer
           level={input}
           playable={false}
+          character={spawnPreviewTestCharacter}
           {gridSize}
           bind:this={levelRenderer}
           on:pointerdown={onDrawPointerDown}
@@ -55,6 +56,12 @@
 
       {#if $isDrawing}
         <div class="flex-column">
+          <div class="draw-option" class:selected={drawMode == DrawMode.Spawn} on:click={() => setDrawMode(DrawMode.Spawn)}>
+            <div class="form-group">
+              <div class="strong">Set spawn point</div>
+            </div>
+          </div>
+
           <div class="draw-option" class:selected={drawMode == DrawMode.Tiles} on:click={() => setDrawMode(DrawMode.Tiles)}>
             <div class="form-group">
               <div class="strong">Place a tile</div>
@@ -115,6 +122,10 @@
     tiles: [],
     interactables: [],
     enemies: [],
+    spawn: {
+      x: 0,
+      y: 0,
+    },
   }
 
   function getItemGraphic(item) {
@@ -138,6 +149,7 @@
     Tiles: 0,
     Interactables: 1,
     Enemies: 2,
+    Spawn: 3,
   }
 
   let isDrawing = LocalStorageStore('is-drawing', false)
@@ -159,6 +171,7 @@
   }
 
   $: character = $testingWithId != null ? $characters.find(c => c.id == $testingWithId) : null
+  $: spawnPreviewTestCharacter = $characters.length > 0 ? $characters[0] : null
 
   $: tileOptions = [
     { value: null, name: 'Erase tiles' },
@@ -245,6 +258,10 @@
       case DrawMode.Enemies:
         input.enemies = replaceAtCoord(input.enemies, x, y, selectedEnemyId)
         levelRenderer.getWorld().redrawEnemies()
+        break
+      case DrawMode.Spawn:
+        input.spawn = { x, y }
+        levelRenderer.movePlayerToGridPoint(input.spawn)
         break
     }
   }

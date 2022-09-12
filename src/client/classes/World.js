@@ -43,10 +43,11 @@ function buildAbilities(charAbilities) {
 }
 
 export default class World extends PIXI.Container {
-  constructor(levelGrid, level) {
+  constructor(levelGrid, level, gui) {
     super()
     this.levelGrid = levelGrid
     this.level = level
+    this.gui = gui
     this.sortableChildren = true
 
     this.tileContainer = new PIXI.Container()
@@ -130,7 +131,7 @@ export default class World extends PIXI.Container {
     }
   }
 
-  createPlayer(character, characterClass) {
+  createPlayer(character, characterClass, x, y) {
     const audioOnDeath = $audio.find(au => au.id === characterClass.audioOnDeath)
     this.player = new Player(
       this,
@@ -141,8 +142,8 @@ export default class World extends PIXI.Container {
       audioOnDeath,
       buildGraphics(characterClass.graphics),
       buildAbilities(characterClass.abilities),
-      1.5 * this.levelGrid.gridSize,
-      1.5 * this.levelGrid.gridSize,
+      x,
+      y,
       this.levelGrid,
       this.level.showPaths
     )
@@ -213,10 +214,12 @@ export default class World extends PIXI.Container {
     // temp code
     // give a random amount of currency between 1 and 50
     const amount = Math.floor(Math.random() * (max - min + 1)) + min
-    this.player.pickupCurrency(amount)
+    this.gui.pickupCurrency(amount)
   }
 
   dropRandomItem(x, y) {
+    console.log('dropping item at ', x, y)
+
     if ($items?.length > 0) {
       // get a random item from $items array
       const itemTemplate = $items[Math.floor(Math.random() * $items.length)]
@@ -245,7 +248,7 @@ export default class World extends PIXI.Container {
       // })
       // this.itemContainer.addChild(sprite)
 
-      this.player.pickupItem(item)
+      this.gui.pickupItem(item)
     }
   }
 }

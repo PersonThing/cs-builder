@@ -39,13 +39,19 @@
   export let playable = false
   export let gridSize
 
+  export function movePlayerToGridPoint(x, y) {
+    const coords = levelGrid.toGameCoordinates(x, y)
+    player.x = coords.x
+    player.y = coords.y
+  }
+
   $: if (pixiContainer != null) startPixi()
 
   ////// input
   let pointerIsDown = false
   function onPointerDown(event) {
     pointerIsDown = true
-    if (playable) setScreenTargetToEvent(event)
+    if (playable && !gui.inventoryPanel.visible) setScreenTargetToEvent(event)
     dispatch('pointerdown', event)
   }
 
@@ -124,6 +130,8 @@
     return world
   }
 
+  let levelGrid
+
   function renderLevel() {
     // clear pixi stage to re-render everything
     emptyContainer(pixiApp.stage)
@@ -134,18 +142,21 @@
       pixiApp.renderer.backgroundColor = rgbaStringToHex(level.backgroundColor)
 
       // helper for pathing - set on world so collisions and other places can access it
-      const levelGrid = new LevelGrid($tiles, level, gridSize)
+      levelGrid = new LevelGrid($tiles, level, gridSize)
 
       // world contains everything
-      world = new World(levelGrid, level)
+      gui = new GUI()
+      world = new World(levelGrid, level, gui)
       pixiApp.stage.addChild(world)
       pixiApp.stage.sortableChildren = true // makes pixi automatically sort children by zIndex
 
       // create player
+      const spawn = levelGrid.toGameCoordinates(level.spawn ?? { x: 0, y: 0 })
+      const characterClass = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)))
+      player = world.createPlayer(character, characterClass, spawn.x, spawn.y)
+
       if (playable && $characterclasses.length > 0) {
-        const characterClass = JSON.parse(JSON.stringify($characterclasses.find(cc => cc.id == character.classId)))
-        player = world.createPlayer(character, characterClass)
-        gui = new GUI(player, pixiApp.renderer.width, pixiApp.renderer.height)
+        gui.init(player, pixiApp.renderer.width, pixiApp.renderer.height)
         gui.x = 0
         gui.y = 0
         pixiApp.stage.addChild(gui)
