@@ -15,10 +15,12 @@ export default class Projectile extends PIXI.Container {
     this.source = source
     this.createdAtMs = time
     this.config = config
-    this.startX = sourcePosition.x
-    this.startY = sourcePosition.y
-    this.x = sourcePosition.x
-    this.y = sourcePosition.y
+    this.startPosition = {
+      x: sourcePosition.x,
+      y: sourcePosition.y,
+    }
+    this.x = this.startPosition.x
+    this.y = this.startPosition.y
     this.target = target
 
     // make a sprite to represent projectile if ability has any art
@@ -82,8 +84,17 @@ export default class Projectile extends PIXI.Container {
       }
     }
 
-    // have we moved more than config.range from startx / y?
-    if (this.getDistanceTo(this.startX, this.startY) > this.config.range) {
+    // check for hits on solid tiles
+    // could do here.. or could use collision stuff...
+    if (!this.config.ignoreTiles) {
+      const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouching(t))
+      if (touchingTiles.length > 0) {
+        this.destroy()
+      }
+    }
+
+    // have we moved more than config.range from startPosition?
+    if (this.getDistanceTo(this.startPosition) > this.config.range) {
       this.destroy()
     }
 
@@ -93,13 +104,21 @@ export default class Projectile extends PIXI.Container {
     }
   }
 
+  // TODO: centralize
+  isTouching(sprite, padDistance = 0) {
+    let combinedRadius = this.getTouchRadius() + sprite.getTouchRadius()
+    let distance = this.getDistanceTo(sprite)
+    console.log(distance, combinedRadius + padDistance)
+    return distance < combinedRadius + padDistance
+  }
+
   getTouchRadius() {
     return this.width / 2
   }
 
-  getDistanceTo(x, y) {
-    const a = x - this.x
-    const b = y - this.y
+  getDistanceTo(coords) {
+    const a = coords.x - this.x
+    const b = coords.y - this.y
     return Math.sqrt(a * a + b * b)
   }
 
