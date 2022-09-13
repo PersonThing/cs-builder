@@ -85,9 +85,9 @@ export default class Projectile extends PIXI.Container {
     }
 
     // check for hits on solid tiles
-    // could do here.. or could use collision stuff...
     if (!this.config.ignoreTiles) {
-      const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouching(t))
+      // TODO: optimize this, it works well enough, but could do some sorting or grid logic instead to be much faster
+      const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouchingTile(t))
       if (touchingTiles.length > 0) {
         this.destroy()
       }
@@ -105,6 +105,15 @@ export default class Projectile extends PIXI.Container {
   }
 
   // TODO: centralize
+
+  isTouchingTile(tile) {
+    return this.isTouching({
+      x: tile.x + tile.width / 2,
+      y: tile.y + tile.height / 2,
+      getTouchRadius: () => tile.getTouchRadius(),
+    })
+  }
+
   isTouching(sprite, padDistance = 0) {
     let combinedRadius = this.getTouchRadius() + sprite.getTouchRadius()
     let distance = this.getDistanceTo(sprite)

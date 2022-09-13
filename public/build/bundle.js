@@ -79891,9 +79891,9 @@ sprite.speed -= 1`;
         }
 
         // check for hits on solid tiles
-        // could do here.. or could use collision stuff...
         if (!this.config.ignoreTiles) {
-          const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouching(t));
+          // TODO: optimize this, it works well enough, but could do some sorting or grid logic instead to be much faster
+          const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouchingTile(t));
           if (touchingTiles.length > 0) {
             this.destroy();
           }
@@ -79911,6 +79911,15 @@ sprite.speed -= 1`;
       }
 
       // TODO: centralize
+
+      isTouchingTile(tile) {
+        return this.isTouching({
+          x: tile.x + tile.width / 2,
+          y: tile.y + tile.height / 2,
+          getTouchRadius: () => tile.getTouchRadius(),
+        })
+      }
+
       isTouching(sprite, padDistance = 0) {
         let combinedRadius = this.getTouchRadius() + sprite.getTouchRadius();
         let distance = this.getDistanceTo(sprite);
@@ -83376,6 +83385,7 @@ sprite.speed -= 1`;
         const [goalX, goalY] = this.toGridCoordinates(to);
         const line = pathfinding.Util.interpolate(startX, startY, goalX, goalY);
         const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y));
+        // TODO: this is looking at walkable, not visible
         // console.log(
         //   'cansee',
         //   line.map(([x, y]) => `${x},${y},${this.grid.isWalkableAt(x, y)}`),

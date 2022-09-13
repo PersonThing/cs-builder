@@ -76,6 +76,7 @@ export default class LevelGrid {
     const [goalX, goalY] = this.toGridCoordinates(to)
     const line = PF.Util.interpolate(startX, startY, goalX, goalY)
     const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y))
+    // TODO: this is looking at walkable, not visible
     // console.log(
     //   'cansee',
     //   line.map(([x, y]) => `${x},${y},${this.grid.isWalkableAt(x, y)}`),
