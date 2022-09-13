@@ -108,7 +108,6 @@ export default class Projectile extends PIXI.Container {
   isTouching(sprite, padDistance = 0) {
     let combinedRadius = this.getTouchRadius() + sprite.getTouchRadius()
     let distance = this.getDistanceTo(sprite)
-    console.log(distance, combinedRadius + padDistance)
     return distance < combinedRadius + padDistance
   }
 

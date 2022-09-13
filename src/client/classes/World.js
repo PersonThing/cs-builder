@@ -218,8 +218,6 @@ export default class World extends PIXI.Container {
   }
 
   dropRandomItem(x, y) {
-    console.log('dropping item at ', x, y)
-
     if ($items?.length > 0) {
       // get a random item from $items array
       const itemTemplate = $items[Math.floor(Math.random() * $items.length)]

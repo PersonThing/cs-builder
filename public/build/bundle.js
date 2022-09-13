@@ -79914,7 +79914,6 @@ sprite.speed -= 1`;
       isTouching(sprite, padDistance = 0) {
         let combinedRadius = this.getTouchRadius() + sprite.getTouchRadius();
         let distance = this.getDistanceTo(sprite);
-        console.log(distance, combinedRadius + padDistance);
         return distance < combinedRadius + padDistance
       }
 
@@ -80763,8 +80762,6 @@ sprite.speed -= 1`;
       }
 
       dropRandomItem(x, y) {
-        console.log('dropping item at ', x, y);
-
         if ($items?.length > 0) {
           // get a random item from $items array
           const itemTemplate = $items[Math.floor(Math.random() * $items.length)];
