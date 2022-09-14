@@ -90,12 +90,14 @@ export default class Projectile extends PIXI.Container {
       const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouchingTile(t))
       if (touchingTiles.length > 0) {
         this.destroy()
+        return
       }
     }
 
     // have we moved more than config.range from startPosition?
     if (this.getDistanceTo(this.startPosition) > this.config.range) {
       this.destroy()
+      return
     }
 
     // have we run out of time?

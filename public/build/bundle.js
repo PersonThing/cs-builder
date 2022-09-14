@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -79896,12 +79896,14 @@ sprite.speed -= 1`;
           const touchingTiles = this.source.world.tileContainer.children.filter(t => t.config != null && !t.config.canSee && this.isTouchingTile(t));
           if (touchingTiles.length > 0) {
             this.destroy();
+            return
           }
         }
 
         // have we moved more than config.range from startPosition?
         if (this.getDistanceTo(this.startPosition) > this.config.range) {
           this.destroy();
+          return
         }
 
         // have we run out of time?
@@ -80551,7 +80553,7 @@ sprite.speed -= 1`;
         };
         this.x = levelTileConfig.x * gridSize;
         this.y = levelTileConfig.y * gridSize;
-        this.touchRadius = gridSize / 2;
+        this.touchRadius = gridSize / 3;
       }
 
       getTouchRadius() {

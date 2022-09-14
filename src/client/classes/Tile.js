@@ -10,7 +10,7 @@ export default class Tile extends PIXI.Sprite {
     }
     this.x = levelTileConfig.x * gridSize
     this.y = levelTileConfig.y * gridSize
-    this.touchRadius = gridSize / 2
+    this.touchRadius = gridSize / 3
   }
 
   getTouchRadius() {
