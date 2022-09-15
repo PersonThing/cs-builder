@@ -76458,6 +76458,19 @@ sprite.speed -= 1`;
         this.drawCharacterPanel();
         this.drawInventoryPanel();
         this.drawAbilityBar();
+        this.drawSightRadiusMask();
+      }
+
+      drawSightRadiusMask() {
+        console.log('drawing sight radius mask at ', this.rendererWidth / 2, this.rendererHeight / 2);
+        const sightRadiusMask = new Graphics();
+        sightRadiusMask.beginFill(0x000000, 0.5);
+
+        sightRadiusMask.drawRect(0, 0, this.rendererWidth, this.rendererHeight);
+
+        sightRadiusMask.drawCircle(this.rendererWidth / 2, this.rendererHeight / 2, 200);
+        sightRadiusMask.zIndex = 1;
+        this.addChild(sightRadiusMask);
       }
 
       toggleCharacterPanel() {
@@ -85722,8 +85735,8 @@ sprite.speed -= 1`;
     				levelRenderer.getWorld().redrawTiles();
     				break;
     			case DrawMode.Interactables:
-    				$$invalidate(3, input.items = replaceAtCoord(input.items, x, y, selectedInteractableId), input);
-    				levelRenderer.getWorld().redrawItems();
+    				$$invalidate(3, input.interactables = replaceAtCoord(input.interactables, x, y, selectedInteractableId), input);
+    				levelRenderer.getWorld().redrawInteractables();
     				break;
     			case DrawMode.Enemies:
     				$$invalidate(3, input.enemies = replaceAtCoord(input.enemies, x, y, selectedEnemyId), input);

@@ -252,8 +252,8 @@
         levelRenderer.getWorld().redrawTiles()
         break
       case DrawMode.Interactables:
-        input.items = replaceAtCoord(input.items, x, y, selectedInteractableId)
-        levelRenderer.getWorld().redrawItems()
+        input.interactables = replaceAtCoord(input.interactables, x, y, selectedInteractableId)
+        levelRenderer.getWorld().redrawInteractables()
         break
       case DrawMode.Enemies:
         input.enemies = replaceAtCoord(input.enemies, x, y, selectedEnemyId)
