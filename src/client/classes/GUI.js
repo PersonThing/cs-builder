@@ -24,7 +24,20 @@ export default class GUI extends PIXI.Container {
     this.drawCharacterPanel()
     this.drawInventoryPanel()
     this.drawAbilityBar()
+    // this.drawSightRadiusMask()
   }
+
+  // drawSightRadiusMask() {
+  //   console.log('drawing sight radius mask at ', this.rendererWidth / 2, this.rendererHeight / 2)
+  //   const sightRadiusMask = new PIXI.Graphics()
+  //   sightRadiusMask.beginFill(0x000000, 0.5)
+
+  //   sightRadiusMask.drawRect(0, 0, this.rendererWidth, this.rendererHeight)
+
+  //   sightRadiusMask.drawCircle(this.rendererWidth / 2, this.rendererHeight / 2, 200)
+  //   sightRadiusMask.zIndex = 1
+  //   this.addChild(sightRadiusMask)
+  // }
 
   toggleCharacterPanel() {
     this.characterPanel.visible = !this.characterPanel.visible

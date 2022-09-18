@@ -26,7 +26,7 @@
   import ProjectSettings from './pages/ProjectSettings.svelte'
   import Play from './pages/Play.svelte'
 
-  import { user, project } from './stores/project-stores'
+  import { project } from './stores/project-stores'
 
   const routes = {
     '/': SelectProject,

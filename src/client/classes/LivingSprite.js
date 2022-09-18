@@ -164,7 +164,14 @@ export default class LivingSprite extends PIXI.Container {
 
   rotateToward({ x, y }) {
     if (x != null && y != null && this.sprites != null) {
-      this.sprites.rotation = Math.atan2(y - this.y, x - this.x) + (90 * Math.PI) / 180
+      const angle = Math.atan2(y - this.y, x - this.x) + (90 * Math.PI) / 180
+      if (this.config.rotateTowardTarget !== false) {
+        // rotate at an exact angle
+        this.sprites.rotation = angle
+      } else {
+        // else just flip left/right
+        this.sprites.scale.x = angle < Math.PI && angle > 0 ? 1 : -1
+      }
     }
   }
 

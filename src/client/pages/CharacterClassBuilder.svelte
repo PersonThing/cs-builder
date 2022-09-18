@@ -18,6 +18,10 @@
         <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
         <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
         <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
+        <FieldCheckbox name="rotate-toward-target" bind:checked={input.rotateTowardTarget}>
+          Rotate toward their target
+          <div class="help-text">When moving, should character rotate toward their target?</div>
+        </FieldCheckbox>
         <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">Health</FieldNumber>
         <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">Global cooldown (ms) between ability uses</FieldNumber>
         <FieldAudioPicker bind:value={input.audioOnDeath}>Audio on death</FieldAudioPicker>
@@ -38,6 +42,7 @@
   import FormButtons from '../components/FormButtons.svelte'
   import ItemTypeBuilder from '../components/ItemTypeBuilder.svelte'
   import FieldAudioPicker from '../components/FieldAudioPicker.svelte'
+  import FieldCheckbox from '../components/FieldCheckbox.svelte'
 
   export let params = {}
   let input = null
@@ -54,6 +59,7 @@
     gcd: 300,
     health: 100,
     audioOnDeath: null,
+    rotateTowardTarget: true,
   }
 
   function getItemGraphic(item) {

@@ -3,7 +3,6 @@
 </AppLayout>
 
 <script>
-  import { project } from '../stores/project-stores.js'
   import AppLayout from '../components/AppLayout.svelte'
   import PlayCreateCharacter from './Play.CreateCharacter.svelte'
   import PlayLevelRenderer from './Play.LevelRenderer.svelte'

@@ -14,7 +14,7 @@ export default class Ability {
   }
 
   use(target) {
-    if (this.source == null) return
+    if (!this.source || !target) return
 
     const time = performance.now()
     this.nextFire = time + (this.config.cooldown || 0)
