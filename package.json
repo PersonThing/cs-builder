@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@pixi/layers": "^1.0.11",
     "@pixi/particle-emitter": "^5.0.2",
     "bcrypt": "^5.0.1",
     "codejar": "^3.5.0",
@@ -42,7 +41,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.3",
     "pathfinding": "https://github.com/PersonThing/PathFinding.js.git#fix-smoothing",
-    "pixi-lights": "^3.0.0",
     "pixi.js": "^6.1.3",
     "prismjs": "^1.25.0",
     "sirv-cli": "^1.0.0",
