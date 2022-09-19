@@ -16,6 +16,8 @@ export default class LevelGrid {
       // sort by x, then y
       .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x))
 
+    const visibleTiles = levelTiles.filter(t => t.x >= 0 && t.y >= 0).filter(t => tiles.find(tc => tc.id == t.id).canSee)
+
     let highestX = walkableTiles.map(t => t.x).sort((a, b) => b - a)[0]
     let highestY = walkableTiles.map(t => t.y).sort((a, b) => b - a)[0]
 
@@ -28,9 +30,11 @@ export default class LevelGrid {
     for (let x = 0; x <= highestX; x++) {
       for (let y = 0; y <= highestY; y++) {
         this.grid.setWalkableAt(x, y, false)
+        this.grid.setVisibleAt(x, y, false)
       }
     }
     walkableTiles.forEach(b => this.grid.setWalkableAt(b.x, b.y, true))
+    visibleTiles.forEach(b => this.grid.setVisibleAt(b.x, b.y, true))
 
     this.finder = new AStarFinder({
       allowDiagonal: true,
@@ -77,13 +81,13 @@ export default class LevelGrid {
     const [startX, startY] = this.toGridCoordinates(from)
     const [goalX, goalY] = this.toGridCoordinates(to)
     const line = Util.interpolate(startX, startY, goalX, goalY)
-    const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y))
+    const allwalkable = line.every(([x, y]) => this.grid.isVisibleAt(x, y))
     // TODO: this is looking at walkable, not visible
-    // console.log(
-    //   'cansee',
-    //   line.map(([x, y]) => `${x},${y},${this.grid.isWalkableAt(x, y)}`),
-    //   allwalkable
-    // )
+    console.log(
+      'cansee',
+      line.map(([x, y]) => `${x},${y},${this.grid.isVisibleAt(x, y)}`),
+      allwalkable
+    )
     return allwalkable
   }
 

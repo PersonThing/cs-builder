@@ -81105,6 +81105,10 @@ sprite.speed -= 1`;
             // 0, false, null will be walkable
             // while others will be un-walkable
             nodes[i][j].walkable = false;
+
+            // 0, false, null will be visible
+            // while others will be un-visible
+            nodes[i][j].visible = false;
           }
         }
       }
@@ -81125,6 +81129,17 @@ sprite.speed -= 1`;
      */
     Grid.prototype.isWalkableAt = function (x, y) {
       return this.isInside(x, y) && this.nodes[y][x].walkable
+    };
+
+    /**
+     * Determine whether the node at the given position is visible.
+     * (Also returns false if the position is outside the grid.)
+     * @param {number} x - The x coordinate of the node.
+     * @param {number} y - The y coordinate of the node.
+     * @return {boolean} - The visibility of the node.
+     */
+    Grid.prototype.isVisibleAt = function (x, y) {
+      return this.isInside(x, y) && this.nodes[y][x].visible
     };
 
     /**
@@ -81149,6 +81164,17 @@ sprite.speed -= 1`;
      */
     Grid.prototype.setWalkableAt = function (x, y, walkable) {
       this.nodes[y][x].walkable = walkable;
+    };
+
+    /**
+     * Set whether the node on the given position is visible.
+     * NOTE: throws exception if the coordinate is not inside the grid.
+     * @param {number} x - The x coordinate of the node.
+     * @param {number} y - The y coordinate of the node.
+     * @param {boolean} visible - Whether the position is visible.
+     */
+    Grid.prototype.setVisibleAt = function (x, y, visible) {
+      this.nodes[y][x].visible = visible;
     };
 
     /**
@@ -82103,6 +82129,8 @@ sprite.speed -= 1`;
           // sort by x, then y
           .sort((a, b) => (a.x == b.x ? a.y - b.y : a.x - b.x));
 
+        const visibleTiles = levelTiles.filter(t => t.x >= 0 && t.y >= 0).filter(t => tiles.find(tc => tc.id == t.id).canSee);
+
         let highestX = walkableTiles.map(t => t.x).sort((a, b) => b - a)[0];
         let highestY = walkableTiles.map(t => t.y).sort((a, b) => b - a)[0];
 
@@ -82115,9 +82143,11 @@ sprite.speed -= 1`;
         for (let x = 0; x <= highestX; x++) {
           for (let y = 0; y <= highestY; y++) {
             this.grid.setWalkableAt(x, y, false);
+            this.grid.setVisibleAt(x, y, false);
           }
         }
         walkableTiles.forEach(b => this.grid.setWalkableAt(b.x, b.y, true));
+        visibleTiles.forEach(b => this.grid.setVisibleAt(b.x, b.y, true));
 
         this.finder = new AStarFinder({
           allowDiagonal: true,
@@ -82164,13 +82194,13 @@ sprite.speed -= 1`;
         const [startX, startY] = this.toGridCoordinates(from);
         const [goalX, goalY] = this.toGridCoordinates(to);
         const line = Util.interpolate(startX, startY, goalX, goalY);
-        const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y));
+        const allwalkable = line.every(([x, y]) => this.grid.isVisibleAt(x, y));
         // TODO: this is looking at walkable, not visible
-        // console.log(
-        //   'cansee',
-        //   line.map(([x, y]) => `${x},${y},${this.grid.isWalkableAt(x, y)}`),
-        //   allwalkable
-        // )
+        console.log(
+          'cansee',
+          line.map(([x, y]) => `${x},${y},${this.grid.isVisibleAt(x, y)}`),
+          allwalkable
+        );
         return allwalkable
       }
 

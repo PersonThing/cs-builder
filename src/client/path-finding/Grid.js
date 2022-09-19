@@ -72,6 +72,10 @@ Grid.prototype._buildNodes = function (width, height, matrix) {
         // 0, false, null will be walkable
         // while others will be un-walkable
         nodes[i][j].walkable = false
+
+        // 0, false, null will be visible
+        // while others will be un-visible
+        nodes[i][j].visible = false
       }
     }
   }
@@ -92,6 +96,17 @@ Grid.prototype.getNodeAt = function (x, y) {
  */
 Grid.prototype.isWalkableAt = function (x, y) {
   return this.isInside(x, y) && this.nodes[y][x].walkable
+}
+
+/**
+ * Determine whether the node at the given position is visible.
+ * (Also returns false if the position is outside the grid.)
+ * @param {number} x - The x coordinate of the node.
+ * @param {number} y - The y coordinate of the node.
+ * @return {boolean} - The visibility of the node.
+ */
+Grid.prototype.isVisibleAt = function (x, y) {
+  return this.isInside(x, y) && this.nodes[y][x].visible
 }
 
 /**
@@ -116,6 +131,17 @@ Grid.prototype.isInside = function (x, y) {
  */
 Grid.prototype.setWalkableAt = function (x, y, walkable) {
   this.nodes[y][x].walkable = walkable
+}
+
+/**
+ * Set whether the node on the given position is visible.
+ * NOTE: throws exception if the coordinate is not inside the grid.
+ * @param {number} x - The x coordinate of the node.
+ * @param {number} y - The y coordinate of the node.
+ * @param {boolean} visible - Whether the position is visible.
+ */
+Grid.prototype.setVisibleAt = function (x, y, visible) {
+  this.nodes[y][x].visible = visible
 }
 
 /**
