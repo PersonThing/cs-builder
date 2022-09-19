@@ -82196,11 +82196,11 @@ sprite.speed -= 1`;
         const line = Util.interpolate(startX, startY, goalX, goalY);
         const allwalkable = line.every(([x, y]) => this.grid.isVisibleAt(x, y));
         // TODO: this is looking at walkable, not visible
-        console.log(
-          'cansee',
-          line.map(([x, y]) => `${x},${y},${this.grid.isVisibleAt(x, y)}`),
-          allwalkable
-        );
+        // console.log(
+        //   'cansee',
+        //   line.map(([x, y]) => `${x},${y},${this.grid.isVisibleAt(x, y)}`),
+        //   allwalkable
+        // )
         return allwalkable
       }
 
