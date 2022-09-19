@@ -1,4 +1,6 @@
-import PF from 'pathfinding'
+import Grid from '../path-finding/Grid.js'
+import Util from '../path-finding/Util.js'
+import AStarFinder from '../path-finding/AStarFinder.js'
 
 export default class LevelGrid {
   constructor(tiles, level, gridSize) {
@@ -20,7 +22,7 @@ export default class LevelGrid {
     if (highestX == null) highestX = 10
     if (highestY == null) highestY = 10
 
-    this.grid = new PF.Grid(highestX + 1, highestY + 1)
+    this.grid = new Grid(highestX + 1, highestY + 1)
 
     // make only walkable tiles work
     for (let x = 0; x <= highestX; x++) {
@@ -30,7 +32,7 @@ export default class LevelGrid {
     }
     walkableTiles.forEach(b => this.grid.setWalkableAt(b.x, b.y, true))
 
-    this.finder = new PF.AStarFinder({
+    this.finder = new AStarFinder({
       allowDiagonal: true,
       dontCrossCorners: true,
     })
@@ -54,7 +56,7 @@ export default class LevelGrid {
     // find all points in a line between from and to
     // filter to only walkable points
     // loop walkable points backward, trying to find paths to them.  use the first path found.
-    const lineBetween = PF.Util.interpolate(startX, startY, goalX, goalY).filter(([x, y]) => this.grid.isWalkableAt(x, y))
+    const lineBetween = Util.interpolate(startX, startY, goalX, goalY).filter(([x, y]) => this.grid.isWalkableAt(x, y))
     let path = null
     for (let i = lineBetween.length - 1; i >= 0; i--) {
       let [x, y] = lineBetween[i]
@@ -63,7 +65,7 @@ export default class LevelGrid {
     }
     if (path == null || path.length == 0) return []
 
-    path = this.smoothPathing ? PF.Util.smoothenPath(this.grid, path) : PF.Util.compressPath(path)
+    path = this.smoothPathing ? Util.smoothenPath(this.grid, path) : Util.compressPath(path)
 
     // remove the first point if it's the same as start
     if (path.length && path[0][0] == startX && path[0][1] == startY) path.shift()
@@ -74,7 +76,7 @@ export default class LevelGrid {
   canSee(from, to) {
     const [startX, startY] = this.toGridCoordinates(from)
     const [goalX, goalY] = this.toGridCoordinates(to)
-    const line = PF.Util.interpolate(startX, startY, goalX, goalY)
+    const line = Util.interpolate(startX, startY, goalX, goalY)
     const allwalkable = line.every(([x, y]) => this.grid.isWalkableAt(x, y))
     // TODO: this is looking at walkable, not visible
     // console.log(
