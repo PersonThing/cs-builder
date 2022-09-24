@@ -1,4 +1,5 @@
 import projectItemTypes from '../../server/project-item-types'
+import stripProjectOfItems from '../services/strip-project-of-items'
 
 function status(response) {
   return new Promise((resolve, reject) => {
@@ -29,14 +30,6 @@ function _fetch(url, options = {}) {
   //     if (json?.message) alert(json.message)
   //   })
   // })
-}
-
-function stripProjectOfItems(project) {
-  const body = JSON.parse(JSON.stringify(project))
-  projectItemTypes.forEach(it => {
-    if (body.hasOwnProperty(it)) delete body[it]
-  })
-  return body
 }
 
 const Api = {
@@ -85,7 +78,7 @@ const Api = {
       console.log('api.projects.insert')
       return _fetch(`/api/projects`, {
         method: 'POST',
-        body: stripProjectOfItems(project),
+        body: project,
       })
     },
 

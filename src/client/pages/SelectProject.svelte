@@ -12,9 +12,6 @@
       {:else}
         <p>You have no projects yet.</p>
       {/if}
-      <div class="project-item">
-        <a href="#/" on:click|preventDefault={createNewProject}>+ New game</a>
-      </div>
     {/if}
 
     {#if publicProjects}
@@ -25,12 +22,24 @@
         </div>
       {/each}
     {/if}
+
+    {#if $user}
+      <h2>New game</h2>
+      <Form on:submit={createNewProject}>
+        <FieldText name="name" bind:value={input.name}>Name</FieldText>
+        <FieldTextarea name="importJson" bind:value={input.importJson}>Import JSON (if you want to copy from an existing game)</FieldTextarea>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </Form>
+    {/if}
   </div>
 </AppLayout>
 
 <script>
   import { push } from 'svelte-spa-router'
   import AppLayout from '../components/AppLayout.svelte'
+  import FieldText from '../components/FieldText.svelte'
+  import FieldTextarea from '../components/FieldTextarea.svelte'
+  import Form from '../components/Form.svelte'
   import { user, project, projects } from '../stores/project-stores.js'
   const PROJECT_VERSION = 1
 
@@ -44,16 +53,26 @@
     project.loadFromApi(p.id).then(() => push('/play'))
   }
 
+  const input = {
+    name: '',
+    importJson: '',
+  }
+
   function createNewProject() {
-    const name = prompt('Project name?', '')
-    if (name?.trim().length > 0) {
-      const p = {
-        version: PROJECT_VERSION,
-        name,
-        pixelSize: 1,
-      }
-      projects.apiInsert(p)
+    input.name = input.name.trim()
+    if (input.name.length == 0) {
+      alert('Please enter a name')
+      return
     }
+
+    const json = input.importJson != null ? JSON.parse(input.importJson) : {}
+    const p = {
+      ...json,
+      version: PROJECT_VERSION,
+      name: input.name,
+      pixelSize: 1,
+    }
+    projects.apiInsert(p)
   }
 
   function deleteProject(p) {

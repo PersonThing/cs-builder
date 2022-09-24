@@ -26,6 +26,8 @@
         <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">Global cooldown (ms) between ability uses</FieldNumber>
         <FieldAudioPicker bind:value={input.audioOnDeath}>Audio on death</FieldAudioPicker>
         <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">Sight radius (pixels)</FieldNumber>
+
+        <FieldCheckbox name="layer-ability-art" bind:checked={input.layerAbilityArt}>Layer ability art on top of moving art?</FieldCheckbox>
         <FieldAbilities bind:value={input.abilities} keyAssignable={false}>Abilities</FieldAbilities>
         <FormButtons {hasChanges} canDelete={!isAdding} on:delete={() => itemTypeBuilder.del()} />
       </Form>
@@ -62,6 +64,7 @@
     health: 100,
     audioOnDeath: null,
     rotateTowardTarget: true,
+    layerAbilityArt: true,
   }
 
   function getItemGraphic(item) {

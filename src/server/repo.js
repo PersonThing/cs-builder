@@ -16,6 +16,10 @@ class Repo {
     return this.db.collection(collectionName).insertOne(object)
   }
 
+  insertMany(collectionName, objects) {
+    return this.db.collection(collectionName).insertMany(objects)
+  }
+
   update(collectionName, keys, newValue) {
     if (newValue._id != null) delete newValue._id
     return this.db.collection(collectionName).updateOne(keys, {

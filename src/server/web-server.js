@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import path from 'path'
 import projectItemTypes from './project-item-types.js'
 import repo from './repo.js'
+import stripProjectOfItems from '../client/services/strip-project-of-items.js'
 
 const app = express()
 const http = Server(app)
@@ -13,7 +14,7 @@ const staticPath = path.resolve('public')
 const io = new SocketIO(http)
 
 app.use(express.static(staticPath))
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 app.use(cookieParser())
 
 const jwtCookieName = 'access_token'
@@ -146,10 +147,10 @@ repo.connect().then(() => {
 
   // add project
   app.post('/api/projects', authorization, (req, res) => {
-    console.log('adding project', req.body)
+    console.log('adding project', stripProjectOfItems(req.body))
     repo.find('projects').then(projects => {
-      const item = req.body
-      item.id = (
+      const project = req.body
+      project.id = (
         projects.length
           ? projects
               .map(p => parseInt(p.id))
@@ -159,11 +160,27 @@ repo.connect().then(() => {
       ).toString()
 
       // mark as owned by this user
-      item.owners = [req.username]
-      repo.insert('projects', item).then(dbres => {
-        item._id = dbres.insertedid
-        io.emit('projects.insert', item)
-        res.json(item)
+      project.owners = [req.username]
+
+      // for any items in the project, set the projectId to the new one
+      const definedProjectItemTypes = projectItemTypes.filter(it => project[it] != null && project[it].length > 0)
+
+      definedProjectItemTypes.map(it => {
+        project[it].map(item => {
+          item.projectId = project.id
+        })
+      })
+
+      // insert the stripped-down project
+      const strippedProject = stripProjectOfItems(project)
+      repo.insert('projects', strippedProject).then(dbres => {
+        strippedProject._id = dbres.insertedid
+
+        // insert any items it had
+        Promise.all(definedProjectItemTypes.map(it => repo.insertMany(it, project[it]))).then(() => {
+          io.emit('projects.insert', strippedProject)
+          res.json(strippedProject)
+        })
       })
     })
   })
@@ -181,6 +198,7 @@ repo.connect().then(() => {
     })
   })
 
+  // delete project
   app.delete('/api/projects/:id', authorization, (req, res) => {
     assertUserOwnsProject(req.username, req.params.id, res).then(() => {
       repo.delete('projects', { id: req.params.id }).then(() => {

@@ -19,6 +19,15 @@
       </div>
       <FormButtons {hasChanges} />
     </Form>
+
+    <h2>Export game</h2>
+    <Form on:submit={exportProject}>
+      <div class="form-group">
+        <div class="strong">Export game</div>
+        <div>Export the game to a JSON file. This file can be imported into another project.</div>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </Form>
   </div>
 </AppLayout>
 
@@ -74,5 +83,15 @@
 
   function removeOwner(username) {
     input.owners = input.owners.filter(o => o !== username)
+  }
+
+  function exportProject() {
+    const data = JSON.stringify($project, null, 2)
+    const blob = new Blob([data], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${$project.name}.json`
+    a.click()
   }
 </script>

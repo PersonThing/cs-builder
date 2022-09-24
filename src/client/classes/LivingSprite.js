@@ -37,7 +37,7 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites.addChild(this.sprites.moving)
 
     this.isMoving = false
-    this.useAttackingSprite = false
+    this.showOnlyAttackingSprite = false
 
     this.path = []
     this.target = null
@@ -84,8 +84,8 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   showCorrectSprites() {
-    this.sprites.still.visible = !this.isMoving && !this.useAttackingSprite
-    this.sprites.moving.visible = this.isMoving && !this.useAttackingSprite
+    this.sprites.still.visible = !this.isMoving && !this.showOnlyAttackingSprite
+    this.sprites.moving.visible = this.isMoving && !this.showOnlyAttackingSprite
   }
 
   getDistanceIfVisible(target, range, source) {
@@ -338,6 +338,7 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   useAbilityCharacterArt(abilityCharacterArt) {
+    clearTimeout(this.sprites.attacking?.resetTimeout)
     if (abilityCharacterArt) {
       if (this.sprites.attacking) {
         this.sprites.removeChild(this.sprites.attacking)
@@ -346,11 +347,22 @@ export default class LivingSprite extends PIXI.Container {
       this.sprites.attacking = makeArtSprite(abilityCharacterArt)
       this.sprites.attacking.loop = false
       this.sprites.attacking.anchor.set(0.5)
-      // TODO: setting on characterAbility to say whether to ONLY show this sprite, or layer it on top
-      // this.useAttackingSprite = true
-      this.sprites.attacking.onComplete = () => {
-        // this.useAttackingSprite = false
+
+      this.showOnlyAttackingSprite = !this.config.layerAbilityArt
+
+      const spriteReset = () => {
+        this.showOnlyAttackingSprite = false
         this.sprites.removeChild(this.sprites.attacking)
+      }
+
+      if (this.sprites.attacking.onComplete != null) {
+        // animation sprite - turn off attacking graphic after animation is done
+        this.sprites.attacking.onComplete = () => spriteReset()
+      } else {
+        // static sprite - turn off attacking graphic manually
+        this.sprites.attacking.resetTimeout = setTimeout(() => {
+          spriteReset()
+        }, this.config.gcd)
       }
       this.sprites.addChild(this.sprites.attacking)
     }

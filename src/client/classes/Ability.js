@@ -2,7 +2,6 @@ import parseKidScript from '../services/kid-script-parser.js'
 import Projectile from './Projectile.js'
 import AbilityType from '../config/ability-types.js'
 import audioService from '../services/audio-service.js'
-import damageTypes from '../config/damage-types.js'
 
 export default class Ability {
   constructor(source, abilityConfig) {
