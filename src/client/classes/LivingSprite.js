@@ -338,34 +338,35 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   useAbilityCharacterArt(abilityCharacterArt) {
+    if (!abilityCharacterArt) return
+
     clearTimeout(this.sprites.attacking?.resetTimeout)
-    if (abilityCharacterArt) {
-      if (this.sprites.attacking) {
-        this.sprites.removeChild(this.sprites.attacking)
-        this.sprites.attacking.destroy()
-      }
-      this.sprites.attacking = makeArtSprite(abilityCharacterArt)
-      this.sprites.attacking.loop = false
-      this.sprites.attacking.anchor.set(0.5)
-
-      this.showOnlyAttackingSprite = !this.config.layerAbilityArt
-
-      const spriteReset = () => {
-        this.showOnlyAttackingSprite = false
-        this.sprites.removeChild(this.sprites.attacking)
-      }
-
-      if (this.sprites.attacking.onComplete != null) {
-        // animation sprite - turn off attacking graphic after animation is done
-        this.sprites.attacking.onComplete = () => spriteReset()
-      } else {
-        // static sprite - turn off attacking graphic manually
-        this.sprites.attacking.resetTimeout = setTimeout(() => {
-          spriteReset()
-        }, this.config.gcd)
-      }
-      this.sprites.addChild(this.sprites.attacking)
+    if (this.sprites.attacking) {
+      this.sprites.removeChild(this.sprites.attacking)
+      this.sprites.attacking.destroy()
     }
+    this.sprites.attacking = makeArtSprite(abilityCharacterArt)
+    this.sprites.attacking.loop = false
+    this.sprites.attacking.anchor.set(0.5)
+
+    this.showOnlyAttackingSprite = !this.config.layerAbilityArt
+
+    const spriteReset = () => {
+      this.showOnlyAttackingSprite = false
+      this.sprites.removeChild(this.sprites.attacking)
+      console.log('attack sprite reset')
+    }
+
+    if (this.sprites.attacking instanceof PIXI.AnimatedSprite) {
+      // animation sprite - turn off attacking graphic after animation is done
+      this.sprites.attacking.onComplete = () => spriteReset()
+    } else {
+      // static sprite - turn off attacking graphic manually
+      this.sprites.attacking.resetTimeout = setTimeout(() => {
+        spriteReset()
+      }, this.config.gcd)
+    }
+    this.sprites.addChild(this.sprites.attacking)
   }
 
   waitUntil(conditionFunc) {
