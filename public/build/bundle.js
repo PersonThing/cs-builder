@@ -25250,7 +25250,7 @@ var app = (function () {
     }
 
     // (26:8) <FieldArtPicker bind:value={input.graphics.projectile}>
-    function create_default_slot_13(ctx) {
+    function create_default_slot_13$1(ctx) {
     	let t;
 
     	const block = {
@@ -25267,7 +25267,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_13.name,
+    		id: create_default_slot_13$1.name,
     		type: "slot",
     		source: "(26:8) <FieldArtPicker bind:value={input.graphics.projectile}>",
     		ctx
@@ -25277,7 +25277,7 @@ var app = (function () {
     }
 
     // (27:8) <FieldArtPicker bind:value={input.graphics.particle}>
-    function create_default_slot_12$1(ctx) {
+    function create_default_slot_12$2(ctx) {
     	let t;
 
     	const block = {
@@ -25294,7 +25294,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_12$1.name,
+    		id: create_default_slot_12$2.name,
     		type: "slot",
     		source: "(27:8) <FieldArtPicker bind:value={input.graphics.particle}>",
     		ctx
@@ -26241,7 +26241,7 @@ var app = (function () {
     	}
 
     	let fieldartpicker0_props = {
-    		$$slots: { default: [create_default_slot_13] },
+    		$$slots: { default: [create_default_slot_13$1] },
     		$$scope: { ctx }
     	};
 
@@ -26261,7 +26261,7 @@ var app = (function () {
     	}
 
     	let fieldartpicker1_props = {
-    		$$slots: { default: [create_default_slot_12$1] },
+    		$$slots: { default: [create_default_slot_12$2] },
     		$$scope: { ctx }
     	};
 
@@ -31014,7 +31014,7 @@ sprite.speed -= 1`;
     			$$inline: true
     		});
 
-    	form.$on("submit", /*submit_handler*/ ctx[15]);
+    	form.$on("submit", /*submit_handler*/ ctx[16]);
 
     	const block = {
     		c: function create() {
@@ -31031,7 +31031,7 @@ sprite.speed -= 1`;
     		p: function update(ctx, dirty) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input*/ 1835014) {
+    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input*/ 3670022) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31064,7 +31064,7 @@ sprite.speed -= 1`;
     }
 
     // (17:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_11$1(ctx) {
+    function create_default_slot_12$1(ctx) {
     	let t;
 
     	const block = {
@@ -31081,7 +31081,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_11$1.name,
+    		id: create_default_slot_12$1.name,
     		type: "slot",
     		source: "(17:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
@@ -31091,7 +31091,7 @@ sprite.speed -= 1`;
     }
 
     // (18:8) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
-    function create_default_slot_10$1(ctx) {
+    function create_default_slot_11$1(ctx) {
     	let t;
 
     	const block = {
@@ -31108,7 +31108,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_10$1.name,
+    		id: create_default_slot_11$1.name,
     		type: "slot",
     		source: "(18:8) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
     		ctx
@@ -31118,7 +31118,7 @@ sprite.speed -= 1`;
     }
 
     // (19:8) <FieldArtPicker bind:value={input.graphics.still}>
-    function create_default_slot_9$1(ctx) {
+    function create_default_slot_10$1(ctx) {
     	let t;
 
     	const block = {
@@ -31135,7 +31135,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_9$1.name,
+    		id: create_default_slot_10$1.name,
     		type: "slot",
     		source: "(19:8) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
@@ -31145,7 +31145,7 @@ sprite.speed -= 1`;
     }
 
     // (20:8) <FieldArtPicker bind:value={input.graphics.moving}>
-    function create_default_slot_8$2(ctx) {
+    function create_default_slot_9$1(ctx) {
     	let t;
 
     	const block = {
@@ -31162,7 +31162,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8$2.name,
+    		id: create_default_slot_9$1.name,
     		type: "slot",
     		source: "(20:8) <FieldArtPicker bind:value={input.graphics.moving}>",
     		ctx
@@ -31171,7 +31171,34 @@ sprite.speed -= 1`;
     	return block;
     }
 
-    // (21:8) <FieldCheckbox name="rotate-toward-target" bind:checked={input.rotateTowardTarget}>
+    // (21:8) <FieldArtPicker bind:value={input.graphics.death}>
+    function create_default_slot_8$2(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Death graphics");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_8$2.name,
+    		type: "slot",
+    		source: "(21:8) <FieldArtPicker bind:value={input.graphics.death}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (22:8) <FieldCheckbox name="rotate-toward-target" bind:checked={input.rotateTowardTarget}>
     function create_default_slot_7$2(ctx) {
     	let t0;
     	let div;
@@ -31182,7 +31209,7 @@ sprite.speed -= 1`;
     			div = element("div");
     			div.textContent = "When moving, should character rotate toward their target?";
     			attr_dev(div, "class", "help-text");
-    			add_location(div, file$c, 22, 10, 988);
+    			add_location(div, file$c, 23, 10, 1079);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -31199,14 +31226,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_7$2.name,
     		type: "slot",
-    		source: "(21:8) <FieldCheckbox name=\\\"rotate-toward-target\\\" bind:checked={input.rotateTowardTarget}>",
+    		source: "(22:8) <FieldCheckbox name=\\\"rotate-toward-target\\\" bind:checked={input.rotateTowardTarget}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (25:8) <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">
+    // (26:8) <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">
     function create_default_slot_6$2(ctx) {
     	let t;
 
@@ -31226,14 +31253,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_6$2.name,
     		type: "slot",
-    		source: "(25:8) <FieldNumber name=\\\"health\\\" bind:value={input.health} placeholder=\\\"Type a number...\\\">",
+    		source: "(26:8) <FieldNumber name=\\\"health\\\" bind:value={input.health} placeholder=\\\"Type a number...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (26:8) <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">
+    // (27:8) <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">
     function create_default_slot_5$3(ctx) {
     	let t;
 
@@ -31253,14 +31280,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_5$3.name,
     		type: "slot",
-    		source: "(26:8) <FieldNumber name=\\\"gcd\\\" bind:value={input.gcd} placeholder=\\\"Type a number...\\\">",
+    		source: "(27:8) <FieldNumber name=\\\"gcd\\\" bind:value={input.gcd} placeholder=\\\"Type a number...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
+    // (28:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
     function create_default_slot_4$3(ctx) {
     	let t;
 
@@ -31280,14 +31307,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_4$3.name,
     		type: "slot",
-    		source: "(27:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
+    		source: "(28:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (29:8) <FieldCheckbox name="layer-ability-art" bind:checked={input.layerAbilityArt}>
+    // (30:8) <FieldCheckbox name="layer-ability-art" bind:checked={input.layerAbilityArt}>
     function create_default_slot_3$4(ctx) {
     	let t;
 
@@ -31307,14 +31334,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_3$4.name,
     		type: "slot",
-    		source: "(29:8) <FieldCheckbox name=\\\"layer-ability-art\\\" bind:checked={input.layerAbilityArt}>",
+    		source: "(30:8) <FieldCheckbox name=\\\"layer-ability-art\\\" bind:checked={input.layerAbilityArt}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:8) <FieldAbilities bind:value={input.abilities} keyAssignable>
+    // (31:8) <FieldAbilities bind:value={input.abilities} keyAssignable>
     function create_default_slot_2$5(ctx) {
     	let t;
 
@@ -31334,7 +31361,7 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_2$5.name,
     		type: "slot",
-    		source: "(30:8) <FieldAbilities bind:value={input.abilities} keyAssignable>",
+    		source: "(31:8) <FieldAbilities bind:value={input.abilities} keyAssignable>",
     		ctx
     	});
 
@@ -31355,24 +31382,27 @@ sprite.speed -= 1`;
     	let fieldartpicker1;
     	let updating_value_3;
     	let t3;
+    	let fieldartpicker2;
+    	let updating_value_4;
+    	let t4;
     	let fieldcheckbox0;
     	let updating_checked;
-    	let t4;
-    	let fieldnumber1;
-    	let updating_value_4;
     	let t5;
-    	let fieldnumber2;
+    	let fieldnumber1;
     	let updating_value_5;
     	let t6;
-    	let fieldaudiopicker;
+    	let fieldnumber2;
     	let updating_value_6;
     	let t7;
+    	let fieldaudiopicker;
+    	let updating_value_7;
+    	let t8;
     	let fieldcheckbox1;
     	let updating_checked_1;
-    	let t8;
-    	let fieldabilities;
-    	let updating_value_7;
     	let t9;
+    	let fieldabilities;
+    	let updating_value_8;
+    	let t10;
     	let formbuttons;
     	let current;
 
@@ -31383,7 +31413,7 @@ sprite.speed -= 1`;
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_11$1] },
+    		$$slots: { default: [create_default_slot_12$1] },
     		$$scope: { ctx }
     	};
 
@@ -31401,7 +31431,7 @@ sprite.speed -= 1`;
     	let fieldnumber0_props = {
     		name: "speed",
     		placeholder: "Speed (pixels per frame)",
-    		$$slots: { default: [create_default_slot_10$1] },
+    		$$slots: { default: [create_default_slot_11$1] },
     		$$scope: { ctx }
     	};
 
@@ -31421,7 +31451,7 @@ sprite.speed -= 1`;
     	}
 
     	let fieldartpicker0_props = {
-    		$$slots: { default: [create_default_slot_9$1] },
+    		$$slots: { default: [create_default_slot_10$1] },
     		$$scope: { ctx }
     	};
 
@@ -31441,7 +31471,7 @@ sprite.speed -= 1`;
     	}
 
     	let fieldartpicker1_props = {
-    		$$slots: { default: [create_default_slot_8$2] },
+    		$$slots: { default: [create_default_slot_9$1] },
     		$$scope: { ctx }
     	};
 
@@ -31456,8 +31486,28 @@ sprite.speed -= 1`;
 
     	binding_callbacks.push(() => bind$1(fieldartpicker1, 'value', fieldartpicker1_value_binding));
 
+    	function fieldartpicker2_value_binding(value) {
+    		/*fieldartpicker2_value_binding*/ ctx[8](value);
+    	}
+
+    	let fieldartpicker2_props = {
+    		$$slots: { default: [create_default_slot_8$2] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[1].graphics.death !== void 0) {
+    		fieldartpicker2_props.value = /*input*/ ctx[1].graphics.death;
+    	}
+
+    	fieldartpicker2 = new FieldArtPicker({
+    			props: fieldartpicker2_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind$1(fieldartpicker2, 'value', fieldartpicker2_value_binding));
+
     	function fieldcheckbox0_checked_binding(value) {
-    		/*fieldcheckbox0_checked_binding*/ ctx[8](value);
+    		/*fieldcheckbox0_checked_binding*/ ctx[9](value);
     	}
 
     	let fieldcheckbox0_props = {
@@ -31478,7 +31528,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldcheckbox0, 'checked', fieldcheckbox0_checked_binding));
 
     	function fieldnumber1_value_binding(value) {
-    		/*fieldnumber1_value_binding*/ ctx[9](value);
+    		/*fieldnumber1_value_binding*/ ctx[10](value);
     	}
 
     	let fieldnumber1_props = {
@@ -31500,7 +31550,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldnumber1, 'value', fieldnumber1_value_binding));
 
     	function fieldnumber2_value_binding(value) {
-    		/*fieldnumber2_value_binding*/ ctx[10](value);
+    		/*fieldnumber2_value_binding*/ ctx[11](value);
     	}
 
     	let fieldnumber2_props = {
@@ -31522,7 +31572,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldnumber2, 'value', fieldnumber2_value_binding));
 
     	function fieldaudiopicker_value_binding(value) {
-    		/*fieldaudiopicker_value_binding*/ ctx[11](value);
+    		/*fieldaudiopicker_value_binding*/ ctx[12](value);
     	}
 
     	let fieldaudiopicker_props = {
@@ -31542,7 +31592,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldaudiopicker, 'value', fieldaudiopicker_value_binding));
 
     	function fieldcheckbox1_checked_binding(value) {
-    		/*fieldcheckbox1_checked_binding*/ ctx[12](value);
+    		/*fieldcheckbox1_checked_binding*/ ctx[13](value);
     	}
 
     	let fieldcheckbox1_props = {
@@ -31563,7 +31613,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldcheckbox1, 'checked', fieldcheckbox1_checked_binding));
 
     	function fieldabilities_value_binding(value) {
-    		/*fieldabilities_value_binding*/ ctx[13](value);
+    		/*fieldabilities_value_binding*/ ctx[14](value);
     	}
 
     	let fieldabilities_props = {
@@ -31585,13 +31635,13 @@ sprite.speed -= 1`;
 
     	formbuttons = new FormButtons({
     			props: {
-    				hasChanges: /*hasChanges*/ ctx[18],
-    				canDelete: !/*isAdding*/ ctx[19]
+    				hasChanges: /*hasChanges*/ ctx[19],
+    				canDelete: !/*isAdding*/ ctx[20]
     			},
     			$$inline: true
     		});
 
-    	formbuttons.$on("delete", /*delete_handler*/ ctx[14]);
+    	formbuttons.$on("delete", /*delete_handler*/ ctx[15]);
 
     	const block = {
     		c: function create() {
@@ -31603,18 +31653,20 @@ sprite.speed -= 1`;
     			t2 = space();
     			create_component(fieldartpicker1.$$.fragment);
     			t3 = space();
-    			create_component(fieldcheckbox0.$$.fragment);
+    			create_component(fieldartpicker2.$$.fragment);
     			t4 = space();
-    			create_component(fieldnumber1.$$.fragment);
+    			create_component(fieldcheckbox0.$$.fragment);
     			t5 = space();
-    			create_component(fieldnumber2.$$.fragment);
+    			create_component(fieldnumber1.$$.fragment);
     			t6 = space();
-    			create_component(fieldaudiopicker.$$.fragment);
+    			create_component(fieldnumber2.$$.fragment);
     			t7 = space();
-    			create_component(fieldcheckbox1.$$.fragment);
+    			create_component(fieldaudiopicker.$$.fragment);
     			t8 = space();
-    			create_component(fieldabilities.$$.fragment);
+    			create_component(fieldcheckbox1.$$.fragment);
     			t9 = space();
+    			create_component(fieldabilities.$$.fragment);
+    			t10 = space();
     			create_component(formbuttons.$$.fragment);
     		},
     		m: function mount(target, anchor) {
@@ -31626,25 +31678,27 @@ sprite.speed -= 1`;
     			insert_dev(target, t2, anchor);
     			mount_component(fieldartpicker1, target, anchor);
     			insert_dev(target, t3, anchor);
-    			mount_component(fieldcheckbox0, target, anchor);
+    			mount_component(fieldartpicker2, target, anchor);
     			insert_dev(target, t4, anchor);
-    			mount_component(fieldnumber1, target, anchor);
+    			mount_component(fieldcheckbox0, target, anchor);
     			insert_dev(target, t5, anchor);
-    			mount_component(fieldnumber2, target, anchor);
+    			mount_component(fieldnumber1, target, anchor);
     			insert_dev(target, t6, anchor);
-    			mount_component(fieldaudiopicker, target, anchor);
+    			mount_component(fieldnumber2, target, anchor);
     			insert_dev(target, t7, anchor);
-    			mount_component(fieldcheckbox1, target, anchor);
+    			mount_component(fieldaudiopicker, target, anchor);
     			insert_dev(target, t8, anchor);
-    			mount_component(fieldabilities, target, anchor);
+    			mount_component(fieldcheckbox1, target, anchor);
     			insert_dev(target, t9, anchor);
+    			mount_component(fieldabilities, target, anchor);
+    			insert_dev(target, t10, anchor);
     			mount_component(formbuttons, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31657,7 +31711,7 @@ sprite.speed -= 1`;
     			fieldtext.$set(fieldtext_changes);
     			const fieldnumber0_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldnumber0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31670,7 +31724,7 @@ sprite.speed -= 1`;
     			fieldnumber0.$set(fieldnumber0_changes);
     			const fieldartpicker0_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldartpicker0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31683,7 +31737,7 @@ sprite.speed -= 1`;
     			fieldartpicker0.$set(fieldartpicker0_changes);
     			const fieldartpicker1_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldartpicker1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31694,9 +31748,22 @@ sprite.speed -= 1`;
     			}
 
     			fieldartpicker1.$set(fieldartpicker1_changes);
+    			const fieldartpicker2_changes = {};
+
+    			if (dirty & /*$$scope*/ 2097152) {
+    				fieldartpicker2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_4 && dirty & /*input*/ 2) {
+    				updating_value_4 = true;
+    				fieldartpicker2_changes.value = /*input*/ ctx[1].graphics.death;
+    				add_flush_callback(() => updating_value_4 = false);
+    			}
+
+    			fieldartpicker2.$set(fieldartpicker2_changes);
     			const fieldcheckbox0_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldcheckbox0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31709,46 +31776,46 @@ sprite.speed -= 1`;
     			fieldcheckbox0.$set(fieldcheckbox0_changes);
     			const fieldnumber1_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldnumber1_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_4 && dirty & /*input*/ 2) {
-    				updating_value_4 = true;
+    			if (!updating_value_5 && dirty & /*input*/ 2) {
+    				updating_value_5 = true;
     				fieldnumber1_changes.value = /*input*/ ctx[1].health;
-    				add_flush_callback(() => updating_value_4 = false);
+    				add_flush_callback(() => updating_value_5 = false);
     			}
 
     			fieldnumber1.$set(fieldnumber1_changes);
     			const fieldnumber2_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldnumber2_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_5 && dirty & /*input*/ 2) {
-    				updating_value_5 = true;
+    			if (!updating_value_6 && dirty & /*input*/ 2) {
+    				updating_value_6 = true;
     				fieldnumber2_changes.value = /*input*/ ctx[1].gcd;
-    				add_flush_callback(() => updating_value_5 = false);
+    				add_flush_callback(() => updating_value_6 = false);
     			}
 
     			fieldnumber2.$set(fieldnumber2_changes);
     			const fieldaudiopicker_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldaudiopicker_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_6 && dirty & /*input*/ 2) {
-    				updating_value_6 = true;
+    			if (!updating_value_7 && dirty & /*input*/ 2) {
+    				updating_value_7 = true;
     				fieldaudiopicker_changes.value = /*input*/ ctx[1].audioOnDeath;
-    				add_flush_callback(() => updating_value_6 = false);
+    				add_flush_callback(() => updating_value_7 = false);
     			}
 
     			fieldaudiopicker.$set(fieldaudiopicker_changes);
     			const fieldcheckbox1_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldcheckbox1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31761,20 +31828,20 @@ sprite.speed -= 1`;
     			fieldcheckbox1.$set(fieldcheckbox1_changes);
     			const fieldabilities_changes = {};
 
-    			if (dirty & /*$$scope*/ 1048576) {
+    			if (dirty & /*$$scope*/ 2097152) {
     				fieldabilities_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_7 && dirty & /*input*/ 2) {
-    				updating_value_7 = true;
+    			if (!updating_value_8 && dirty & /*input*/ 2) {
+    				updating_value_8 = true;
     				fieldabilities_changes.value = /*input*/ ctx[1].abilities;
-    				add_flush_callback(() => updating_value_7 = false);
+    				add_flush_callback(() => updating_value_8 = false);
     			}
 
     			fieldabilities.$set(fieldabilities_changes);
     			const formbuttons_changes = {};
-    			if (dirty & /*hasChanges*/ 262144) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[18];
-    			if (dirty & /*isAdding*/ 524288) formbuttons_changes.canDelete = !/*isAdding*/ ctx[19];
+    			if (dirty & /*hasChanges*/ 524288) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[19];
+    			if (dirty & /*isAdding*/ 1048576) formbuttons_changes.canDelete = !/*isAdding*/ ctx[20];
     			formbuttons.$set(formbuttons_changes);
     		},
     		i: function intro(local) {
@@ -31783,6 +31850,7 @@ sprite.speed -= 1`;
     			transition_in(fieldnumber0.$$.fragment, local);
     			transition_in(fieldartpicker0.$$.fragment, local);
     			transition_in(fieldartpicker1.$$.fragment, local);
+    			transition_in(fieldartpicker2.$$.fragment, local);
     			transition_in(fieldcheckbox0.$$.fragment, local);
     			transition_in(fieldnumber1.$$.fragment, local);
     			transition_in(fieldnumber2.$$.fragment, local);
@@ -31797,6 +31865,7 @@ sprite.speed -= 1`;
     			transition_out(fieldnumber0.$$.fragment, local);
     			transition_out(fieldartpicker0.$$.fragment, local);
     			transition_out(fieldartpicker1.$$.fragment, local);
+    			transition_out(fieldartpicker2.$$.fragment, local);
     			transition_out(fieldcheckbox0.$$.fragment, local);
     			transition_out(fieldnumber1.$$.fragment, local);
     			transition_out(fieldnumber2.$$.fragment, local);
@@ -31815,18 +31884,20 @@ sprite.speed -= 1`;
     			if (detaching) detach_dev(t2);
     			destroy_component(fieldartpicker1, detaching);
     			if (detaching) detach_dev(t3);
-    			destroy_component(fieldcheckbox0, detaching);
+    			destroy_component(fieldartpicker2, detaching);
     			if (detaching) detach_dev(t4);
-    			destroy_component(fieldnumber1, detaching);
+    			destroy_component(fieldcheckbox0, detaching);
     			if (detaching) detach_dev(t5);
-    			destroy_component(fieldnumber2, detaching);
+    			destroy_component(fieldnumber1, detaching);
     			if (detaching) detach_dev(t6);
-    			destroy_component(fieldaudiopicker, detaching);
+    			destroy_component(fieldnumber2, detaching);
     			if (detaching) detach_dev(t7);
-    			destroy_component(fieldcheckbox1, detaching);
+    			destroy_component(fieldaudiopicker, detaching);
     			if (detaching) detach_dev(t8);
-    			destroy_component(fieldabilities, detaching);
+    			destroy_component(fieldcheckbox1, detaching);
     			if (detaching) detach_dev(t9);
+    			destroy_component(fieldabilities, detaching);
+    			if (detaching) detach_dev(t10);
     			destroy_component(formbuttons, detaching);
     		}
     	};
@@ -31914,7 +31985,7 @@ sprite.speed -= 1`;
     	let current;
 
     	function itemtypebuilder_input_binding(value) {
-    		/*itemtypebuilder_input_binding*/ ctx[17](value);
+    		/*itemtypebuilder_input_binding*/ ctx[18](value);
     	}
 
     	let itemtypebuilder_props = {
@@ -31928,8 +31999,8 @@ sprite.speed -= 1`;
     		$$slots: {
     			default: [
     				create_default_slot$8,
-    				({ hasChanges, isAdding }) => ({ 18: hasChanges, 19: isAdding }),
-    				({ hasChanges, isAdding }) => (hasChanges ? 262144 : 0) | (isAdding ? 524288 : 0)
+    				({ hasChanges, isAdding }) => ({ 19: hasChanges, 20: isAdding }),
+    				({ hasChanges, isAdding }) => (hasChanges ? 524288 : 0) | (isAdding ? 1048576 : 0)
     			]
     		},
     		$$scope: { ctx }
@@ -31944,7 +32015,7 @@ sprite.speed -= 1`;
     			$$inline: true
     		});
 
-    	/*itemtypebuilder_binding*/ ctx[16](itemtypebuilder);
+    	/*itemtypebuilder_binding*/ ctx[17](itemtypebuilder);
     	binding_callbacks.push(() => bind$1(itemtypebuilder, 'input', itemtypebuilder_input_binding));
 
     	const block = {
@@ -31962,7 +32033,7 @@ sprite.speed -= 1`;
     			const itemtypebuilder_changes = {};
     			if (dirty & /*params*/ 1) itemtypebuilder_changes.id = /*params*/ ctx[0].id;
 
-    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input*/ 1835014) {
+    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input*/ 3670022) {
     				itemtypebuilder_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31984,7 +32055,7 @@ sprite.speed -= 1`;
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			/*itemtypebuilder_binding*/ ctx[16](null);
+    			/*itemtypebuilder_binding*/ ctx[17](null);
     			destroy_component(itemtypebuilder, detaching);
     		}
     	};
@@ -32014,7 +32085,7 @@ sprite.speed -= 1`;
     	const itemTemplate = {
     		name: '',
     		speed: 5,
-    		graphics: { still: null, moving: null },
+    		graphics: { still: null, moving: null, death: null },
     		abilities: [],
     		gcd: 300,
     		health: 100,
@@ -32053,6 +32124,13 @@ sprite.speed -= 1`;
     	function fieldartpicker1_value_binding(value) {
     		if ($$self.$$.not_equal(input.graphics.moving, value)) {
     			input.graphics.moving = value;
+    			$$invalidate(1, input);
+    		}
+    	}
+
+    	function fieldartpicker2_value_binding(value) {
+    		if ($$self.$$.not_equal(input.graphics.death, value)) {
+    			input.graphics.death = value;
     			$$invalidate(1, input);
     		}
     	}
@@ -32155,6 +32233,7 @@ sprite.speed -= 1`;
     		fieldnumber0_value_binding,
     		fieldartpicker0_value_binding,
     		fieldartpicker1_value_binding,
+    		fieldartpicker2_value_binding,
     		fieldcheckbox0_checked_binding,
     		fieldnumber1_value_binding,
     		fieldnumber2_value_binding,
@@ -32207,7 +32286,7 @@ sprite.speed -= 1`;
     			$$inline: true
     		});
 
-    	form.$on("submit", /*submit_handler*/ ctx[16]);
+    	form.$on("submit", /*submit_handler*/ ctx[17]);
 
     	const block = {
     		c: function create() {
@@ -32224,7 +32303,7 @@ sprite.speed -= 1`;
     		p: function update(ctx, dirty) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input*/ 3670022) {
+    			if (dirty & /*$$scope, hasChanges, isAdding, itemTypeBuilder, input*/ 7340038) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32257,7 +32336,7 @@ sprite.speed -= 1`;
     }
 
     // (17:8) <FieldText name="name" bind:value={input.name} placeholder="Type a name...">
-    function create_default_slot_12(ctx) {
+    function create_default_slot_13(ctx) {
     	let t;
 
     	const block = {
@@ -32274,7 +32353,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_12.name,
+    		id: create_default_slot_13.name,
     		type: "slot",
     		source: "(17:8) <FieldText name=\\\"name\\\" bind:value={input.name} placeholder=\\\"Type a name...\\\">",
     		ctx
@@ -32284,7 +32363,7 @@ sprite.speed -= 1`;
     }
 
     // (18:8) <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">
-    function create_default_slot_11(ctx) {
+    function create_default_slot_12(ctx) {
     	let t;
 
     	const block = {
@@ -32301,7 +32380,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_11.name,
+    		id: create_default_slot_12.name,
     		type: "slot",
     		source: "(18:8) <FieldNumber name=\\\"speed\\\" bind:value={input.speed} placeholder=\\\"Speed (pixels per frame)\\\">",
     		ctx
@@ -32311,7 +32390,7 @@ sprite.speed -= 1`;
     }
 
     // (19:8) <FieldArtPicker bind:value={input.graphics.still}>
-    function create_default_slot_10(ctx) {
+    function create_default_slot_11(ctx) {
     	let t;
 
     	const block = {
@@ -32328,7 +32407,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_10.name,
+    		id: create_default_slot_11.name,
     		type: "slot",
     		source: "(19:8) <FieldArtPicker bind:value={input.graphics.still}>",
     		ctx
@@ -32338,7 +32417,7 @@ sprite.speed -= 1`;
     }
 
     // (20:8) <FieldArtPicker bind:value={input.graphics.moving}>
-    function create_default_slot_9(ctx) {
+    function create_default_slot_10(ctx) {
     	let t;
 
     	const block = {
@@ -32355,7 +32434,7 @@ sprite.speed -= 1`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_9.name,
+    		id: create_default_slot_10.name,
     		type: "slot",
     		source: "(20:8) <FieldArtPicker bind:value={input.graphics.moving}>",
     		ctx
@@ -32364,7 +32443,34 @@ sprite.speed -= 1`;
     	return block;
     }
 
-    // (21:8) <FieldCheckbox name="rotate-toward-target" bind:checked={input.rotateTowardTarget}>
+    // (21:8) <FieldArtPicker bind:value={input.graphics.death}>
+    function create_default_slot_9(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Death graphics");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_9.name,
+    		type: "slot",
+    		source: "(21:8) <FieldArtPicker bind:value={input.graphics.death}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (22:8) <FieldCheckbox name="rotate-toward-target" bind:checked={input.rotateTowardTarget}>
     function create_default_slot_8$1(ctx) {
     	let t0;
     	let div;
@@ -32375,7 +32481,7 @@ sprite.speed -= 1`;
     			div = element("div");
     			div.textContent = "When moving, should character rotate toward their target?";
     			attr_dev(div, "class", "help-text");
-    			add_location(div, file$b, 22, 10, 989);
+    			add_location(div, file$b, 23, 10, 1080);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -32392,14 +32498,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_8$1.name,
     		type: "slot",
-    		source: "(21:8) <FieldCheckbox name=\\\"rotate-toward-target\\\" bind:checked={input.rotateTowardTarget}>",
+    		source: "(22:8) <FieldCheckbox name=\\\"rotate-toward-target\\\" bind:checked={input.rotateTowardTarget}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (25:8) <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">
+    // (26:8) <FieldNumber name="health" bind:value={input.health} placeholder="Type a number...">
     function create_default_slot_7$1(ctx) {
     	let t;
 
@@ -32419,14 +32525,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_7$1.name,
     		type: "slot",
-    		source: "(25:8) <FieldNumber name=\\\"health\\\" bind:value={input.health} placeholder=\\\"Type a number...\\\">",
+    		source: "(26:8) <FieldNumber name=\\\"health\\\" bind:value={input.health} placeholder=\\\"Type a number...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (26:8) <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">
+    // (27:8) <FieldNumber name="gcd" bind:value={input.gcd} placeholder="Type a number...">
     function create_default_slot_6$1(ctx) {
     	let t;
 
@@ -32446,14 +32552,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_6$1.name,
     		type: "slot",
-    		source: "(26:8) <FieldNumber name=\\\"gcd\\\" bind:value={input.gcd} placeholder=\\\"Type a number...\\\">",
+    		source: "(27:8) <FieldNumber name=\\\"gcd\\\" bind:value={input.gcd} placeholder=\\\"Type a number...\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
+    // (28:8) <FieldAudioPicker bind:value={input.audioOnDeath}>
     function create_default_slot_5$2(ctx) {
     	let t;
 
@@ -32473,14 +32579,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_5$2.name,
     		type: "slot",
-    		source: "(27:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
+    		source: "(28:8) <FieldAudioPicker bind:value={input.audioOnDeath}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (28:8) <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">
+    // (29:8) <FieldNumber name="sight-radius" bind:value={input.sightRadius} placeholder="Sight radius (pixels)">
     function create_default_slot_4$2(ctx) {
     	let t;
 
@@ -32500,14 +32606,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_4$2.name,
     		type: "slot",
-    		source: "(28:8) <FieldNumber name=\\\"sight-radius\\\" bind:value={input.sightRadius} placeholder=\\\"Sight radius (pixels)\\\">",
+    		source: "(29:8) <FieldNumber name=\\\"sight-radius\\\" bind:value={input.sightRadius} placeholder=\\\"Sight radius (pixels)\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:8) <FieldCheckbox name="layer-ability-art" bind:checked={input.layerAbilityArt}>
+    // (31:8) <FieldCheckbox name="layer-ability-art" bind:checked={input.layerAbilityArt}>
     function create_default_slot_3$3(ctx) {
     	let t;
 
@@ -32527,14 +32633,14 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_3$3.name,
     		type: "slot",
-    		source: "(30:8) <FieldCheckbox name=\\\"layer-ability-art\\\" bind:checked={input.layerAbilityArt}>",
+    		source: "(31:8) <FieldCheckbox name=\\\"layer-ability-art\\\" bind:checked={input.layerAbilityArt}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (31:8) <FieldAbilities bind:value={input.abilities} keyAssignable={false}>
+    // (32:8) <FieldAbilities bind:value={input.abilities} keyAssignable={false}>
     function create_default_slot_2$4(ctx) {
     	let t;
 
@@ -32554,7 +32660,7 @@ sprite.speed -= 1`;
     		block,
     		id: create_default_slot_2$4.name,
     		type: "slot",
-    		source: "(31:8) <FieldAbilities bind:value={input.abilities} keyAssignable={false}>",
+    		source: "(32:8) <FieldAbilities bind:value={input.abilities} keyAssignable={false}>",
     		ctx
     	});
 
@@ -32575,27 +32681,30 @@ sprite.speed -= 1`;
     	let fieldartpicker1;
     	let updating_value_3;
     	let t3;
+    	let fieldartpicker2;
+    	let updating_value_4;
+    	let t4;
     	let fieldcheckbox0;
     	let updating_checked;
-    	let t4;
-    	let fieldnumber1;
-    	let updating_value_4;
     	let t5;
-    	let fieldnumber2;
+    	let fieldnumber1;
     	let updating_value_5;
     	let t6;
-    	let fieldaudiopicker;
+    	let fieldnumber2;
     	let updating_value_6;
     	let t7;
-    	let fieldnumber3;
+    	let fieldaudiopicker;
     	let updating_value_7;
     	let t8;
+    	let fieldnumber3;
+    	let updating_value_8;
+    	let t9;
     	let fieldcheckbox1;
     	let updating_checked_1;
-    	let t9;
-    	let fieldabilities;
-    	let updating_value_8;
     	let t10;
+    	let fieldabilities;
+    	let updating_value_9;
+    	let t11;
     	let formbuttons;
     	let current;
 
@@ -32606,7 +32715,7 @@ sprite.speed -= 1`;
     	let fieldtext_props = {
     		name: "name",
     		placeholder: "Type a name...",
-    		$$slots: { default: [create_default_slot_12] },
+    		$$slots: { default: [create_default_slot_13] },
     		$$scope: { ctx }
     	};
 
@@ -32624,7 +32733,7 @@ sprite.speed -= 1`;
     	let fieldnumber0_props = {
     		name: "speed",
     		placeholder: "Speed (pixels per frame)",
-    		$$slots: { default: [create_default_slot_11] },
+    		$$slots: { default: [create_default_slot_12] },
     		$$scope: { ctx }
     	};
 
@@ -32644,7 +32753,7 @@ sprite.speed -= 1`;
     	}
 
     	let fieldartpicker0_props = {
-    		$$slots: { default: [create_default_slot_10] },
+    		$$slots: { default: [create_default_slot_11] },
     		$$scope: { ctx }
     	};
 
@@ -32664,7 +32773,7 @@ sprite.speed -= 1`;
     	}
 
     	let fieldartpicker1_props = {
-    		$$slots: { default: [create_default_slot_9] },
+    		$$slots: { default: [create_default_slot_10] },
     		$$scope: { ctx }
     	};
 
@@ -32679,8 +32788,28 @@ sprite.speed -= 1`;
 
     	binding_callbacks.push(() => bind$1(fieldartpicker1, 'value', fieldartpicker1_value_binding));
 
+    	function fieldartpicker2_value_binding(value) {
+    		/*fieldartpicker2_value_binding*/ ctx[8](value);
+    	}
+
+    	let fieldartpicker2_props = {
+    		$$slots: { default: [create_default_slot_9] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*input*/ ctx[1].graphics.death !== void 0) {
+    		fieldartpicker2_props.value = /*input*/ ctx[1].graphics.death;
+    	}
+
+    	fieldartpicker2 = new FieldArtPicker({
+    			props: fieldartpicker2_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind$1(fieldartpicker2, 'value', fieldartpicker2_value_binding));
+
     	function fieldcheckbox0_checked_binding(value) {
-    		/*fieldcheckbox0_checked_binding*/ ctx[8](value);
+    		/*fieldcheckbox0_checked_binding*/ ctx[9](value);
     	}
 
     	let fieldcheckbox0_props = {
@@ -32701,7 +32830,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldcheckbox0, 'checked', fieldcheckbox0_checked_binding));
 
     	function fieldnumber1_value_binding(value) {
-    		/*fieldnumber1_value_binding*/ ctx[9](value);
+    		/*fieldnumber1_value_binding*/ ctx[10](value);
     	}
 
     	let fieldnumber1_props = {
@@ -32723,7 +32852,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldnumber1, 'value', fieldnumber1_value_binding));
 
     	function fieldnumber2_value_binding(value) {
-    		/*fieldnumber2_value_binding*/ ctx[10](value);
+    		/*fieldnumber2_value_binding*/ ctx[11](value);
     	}
 
     	let fieldnumber2_props = {
@@ -32745,7 +32874,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldnumber2, 'value', fieldnumber2_value_binding));
 
     	function fieldaudiopicker_value_binding(value) {
-    		/*fieldaudiopicker_value_binding*/ ctx[11](value);
+    		/*fieldaudiopicker_value_binding*/ ctx[12](value);
     	}
 
     	let fieldaudiopicker_props = {
@@ -32765,7 +32894,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldaudiopicker, 'value', fieldaudiopicker_value_binding));
 
     	function fieldnumber3_value_binding(value) {
-    		/*fieldnumber3_value_binding*/ ctx[12](value);
+    		/*fieldnumber3_value_binding*/ ctx[13](value);
     	}
 
     	let fieldnumber3_props = {
@@ -32787,7 +32916,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldnumber3, 'value', fieldnumber3_value_binding));
 
     	function fieldcheckbox1_checked_binding(value) {
-    		/*fieldcheckbox1_checked_binding*/ ctx[13](value);
+    		/*fieldcheckbox1_checked_binding*/ ctx[14](value);
     	}
 
     	let fieldcheckbox1_props = {
@@ -32808,7 +32937,7 @@ sprite.speed -= 1`;
     	binding_callbacks.push(() => bind$1(fieldcheckbox1, 'checked', fieldcheckbox1_checked_binding));
 
     	function fieldabilities_value_binding(value) {
-    		/*fieldabilities_value_binding*/ ctx[14](value);
+    		/*fieldabilities_value_binding*/ ctx[15](value);
     	}
 
     	let fieldabilities_props = {
@@ -32830,13 +32959,13 @@ sprite.speed -= 1`;
 
     	formbuttons = new FormButtons({
     			props: {
-    				hasChanges: /*hasChanges*/ ctx[19],
-    				canDelete: !/*isAdding*/ ctx[20]
+    				hasChanges: /*hasChanges*/ ctx[20],
+    				canDelete: !/*isAdding*/ ctx[21]
     			},
     			$$inline: true
     		});
 
-    	formbuttons.$on("delete", /*delete_handler*/ ctx[15]);
+    	formbuttons.$on("delete", /*delete_handler*/ ctx[16]);
 
     	const block = {
     		c: function create() {
@@ -32848,20 +32977,22 @@ sprite.speed -= 1`;
     			t2 = space();
     			create_component(fieldartpicker1.$$.fragment);
     			t3 = space();
-    			create_component(fieldcheckbox0.$$.fragment);
+    			create_component(fieldartpicker2.$$.fragment);
     			t4 = space();
-    			create_component(fieldnumber1.$$.fragment);
+    			create_component(fieldcheckbox0.$$.fragment);
     			t5 = space();
-    			create_component(fieldnumber2.$$.fragment);
+    			create_component(fieldnumber1.$$.fragment);
     			t6 = space();
-    			create_component(fieldaudiopicker.$$.fragment);
+    			create_component(fieldnumber2.$$.fragment);
     			t7 = space();
-    			create_component(fieldnumber3.$$.fragment);
+    			create_component(fieldaudiopicker.$$.fragment);
     			t8 = space();
-    			create_component(fieldcheckbox1.$$.fragment);
+    			create_component(fieldnumber3.$$.fragment);
     			t9 = space();
-    			create_component(fieldabilities.$$.fragment);
+    			create_component(fieldcheckbox1.$$.fragment);
     			t10 = space();
+    			create_component(fieldabilities.$$.fragment);
+    			t11 = space();
     			create_component(formbuttons.$$.fragment);
     		},
     		m: function mount(target, anchor) {
@@ -32873,27 +33004,29 @@ sprite.speed -= 1`;
     			insert_dev(target, t2, anchor);
     			mount_component(fieldartpicker1, target, anchor);
     			insert_dev(target, t3, anchor);
-    			mount_component(fieldcheckbox0, target, anchor);
+    			mount_component(fieldartpicker2, target, anchor);
     			insert_dev(target, t4, anchor);
-    			mount_component(fieldnumber1, target, anchor);
+    			mount_component(fieldcheckbox0, target, anchor);
     			insert_dev(target, t5, anchor);
-    			mount_component(fieldnumber2, target, anchor);
+    			mount_component(fieldnumber1, target, anchor);
     			insert_dev(target, t6, anchor);
-    			mount_component(fieldaudiopicker, target, anchor);
+    			mount_component(fieldnumber2, target, anchor);
     			insert_dev(target, t7, anchor);
-    			mount_component(fieldnumber3, target, anchor);
+    			mount_component(fieldaudiopicker, target, anchor);
     			insert_dev(target, t8, anchor);
-    			mount_component(fieldcheckbox1, target, anchor);
+    			mount_component(fieldnumber3, target, anchor);
     			insert_dev(target, t9, anchor);
-    			mount_component(fieldabilities, target, anchor);
+    			mount_component(fieldcheckbox1, target, anchor);
     			insert_dev(target, t10, anchor);
+    			mount_component(fieldabilities, target, anchor);
+    			insert_dev(target, t11, anchor);
     			mount_component(formbuttons, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const fieldtext_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32906,7 +33039,7 @@ sprite.speed -= 1`;
     			fieldtext.$set(fieldtext_changes);
     			const fieldnumber0_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldnumber0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32919,7 +33052,7 @@ sprite.speed -= 1`;
     			fieldnumber0.$set(fieldnumber0_changes);
     			const fieldartpicker0_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldartpicker0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32932,7 +33065,7 @@ sprite.speed -= 1`;
     			fieldartpicker0.$set(fieldartpicker0_changes);
     			const fieldartpicker1_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldartpicker1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32943,9 +33076,22 @@ sprite.speed -= 1`;
     			}
 
     			fieldartpicker1.$set(fieldartpicker1_changes);
+    			const fieldartpicker2_changes = {};
+
+    			if (dirty & /*$$scope*/ 4194304) {
+    				fieldartpicker2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_value_4 && dirty & /*input*/ 2) {
+    				updating_value_4 = true;
+    				fieldartpicker2_changes.value = /*input*/ ctx[1].graphics.death;
+    				add_flush_callback(() => updating_value_4 = false);
+    			}
+
+    			fieldartpicker2.$set(fieldartpicker2_changes);
     			const fieldcheckbox0_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldcheckbox0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32958,59 +33104,59 @@ sprite.speed -= 1`;
     			fieldcheckbox0.$set(fieldcheckbox0_changes);
     			const fieldnumber1_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldnumber1_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_4 && dirty & /*input*/ 2) {
-    				updating_value_4 = true;
+    			if (!updating_value_5 && dirty & /*input*/ 2) {
+    				updating_value_5 = true;
     				fieldnumber1_changes.value = /*input*/ ctx[1].health;
-    				add_flush_callback(() => updating_value_4 = false);
+    				add_flush_callback(() => updating_value_5 = false);
     			}
 
     			fieldnumber1.$set(fieldnumber1_changes);
     			const fieldnumber2_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldnumber2_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_5 && dirty & /*input*/ 2) {
-    				updating_value_5 = true;
+    			if (!updating_value_6 && dirty & /*input*/ 2) {
+    				updating_value_6 = true;
     				fieldnumber2_changes.value = /*input*/ ctx[1].gcd;
-    				add_flush_callback(() => updating_value_5 = false);
+    				add_flush_callback(() => updating_value_6 = false);
     			}
 
     			fieldnumber2.$set(fieldnumber2_changes);
     			const fieldaudiopicker_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldaudiopicker_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_6 && dirty & /*input*/ 2) {
-    				updating_value_6 = true;
+    			if (!updating_value_7 && dirty & /*input*/ 2) {
+    				updating_value_7 = true;
     				fieldaudiopicker_changes.value = /*input*/ ctx[1].audioOnDeath;
-    				add_flush_callback(() => updating_value_6 = false);
+    				add_flush_callback(() => updating_value_7 = false);
     			}
 
     			fieldaudiopicker.$set(fieldaudiopicker_changes);
     			const fieldnumber3_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldnumber3_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_7 && dirty & /*input*/ 2) {
-    				updating_value_7 = true;
+    			if (!updating_value_8 && dirty & /*input*/ 2) {
+    				updating_value_8 = true;
     				fieldnumber3_changes.value = /*input*/ ctx[1].sightRadius;
-    				add_flush_callback(() => updating_value_7 = false);
+    				add_flush_callback(() => updating_value_8 = false);
     			}
 
     			fieldnumber3.$set(fieldnumber3_changes);
     			const fieldcheckbox1_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldcheckbox1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33023,20 +33169,20 @@ sprite.speed -= 1`;
     			fieldcheckbox1.$set(fieldcheckbox1_changes);
     			const fieldabilities_changes = {};
 
-    			if (dirty & /*$$scope*/ 2097152) {
+    			if (dirty & /*$$scope*/ 4194304) {
     				fieldabilities_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value_8 && dirty & /*input*/ 2) {
-    				updating_value_8 = true;
+    			if (!updating_value_9 && dirty & /*input*/ 2) {
+    				updating_value_9 = true;
     				fieldabilities_changes.value = /*input*/ ctx[1].abilities;
-    				add_flush_callback(() => updating_value_8 = false);
+    				add_flush_callback(() => updating_value_9 = false);
     			}
 
     			fieldabilities.$set(fieldabilities_changes);
     			const formbuttons_changes = {};
-    			if (dirty & /*hasChanges*/ 524288) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[19];
-    			if (dirty & /*isAdding*/ 1048576) formbuttons_changes.canDelete = !/*isAdding*/ ctx[20];
+    			if (dirty & /*hasChanges*/ 1048576) formbuttons_changes.hasChanges = /*hasChanges*/ ctx[20];
+    			if (dirty & /*isAdding*/ 2097152) formbuttons_changes.canDelete = !/*isAdding*/ ctx[21];
     			formbuttons.$set(formbuttons_changes);
     		},
     		i: function intro(local) {
@@ -33045,6 +33191,7 @@ sprite.speed -= 1`;
     			transition_in(fieldnumber0.$$.fragment, local);
     			transition_in(fieldartpicker0.$$.fragment, local);
     			transition_in(fieldartpicker1.$$.fragment, local);
+    			transition_in(fieldartpicker2.$$.fragment, local);
     			transition_in(fieldcheckbox0.$$.fragment, local);
     			transition_in(fieldnumber1.$$.fragment, local);
     			transition_in(fieldnumber2.$$.fragment, local);
@@ -33060,6 +33207,7 @@ sprite.speed -= 1`;
     			transition_out(fieldnumber0.$$.fragment, local);
     			transition_out(fieldartpicker0.$$.fragment, local);
     			transition_out(fieldartpicker1.$$.fragment, local);
+    			transition_out(fieldartpicker2.$$.fragment, local);
     			transition_out(fieldcheckbox0.$$.fragment, local);
     			transition_out(fieldnumber1.$$.fragment, local);
     			transition_out(fieldnumber2.$$.fragment, local);
@@ -33079,20 +33227,22 @@ sprite.speed -= 1`;
     			if (detaching) detach_dev(t2);
     			destroy_component(fieldartpicker1, detaching);
     			if (detaching) detach_dev(t3);
-    			destroy_component(fieldcheckbox0, detaching);
+    			destroy_component(fieldartpicker2, detaching);
     			if (detaching) detach_dev(t4);
-    			destroy_component(fieldnumber1, detaching);
+    			destroy_component(fieldcheckbox0, detaching);
     			if (detaching) detach_dev(t5);
-    			destroy_component(fieldnumber2, detaching);
+    			destroy_component(fieldnumber1, detaching);
     			if (detaching) detach_dev(t6);
-    			destroy_component(fieldaudiopicker, detaching);
+    			destroy_component(fieldnumber2, detaching);
     			if (detaching) detach_dev(t7);
-    			destroy_component(fieldnumber3, detaching);
+    			destroy_component(fieldaudiopicker, detaching);
     			if (detaching) detach_dev(t8);
-    			destroy_component(fieldcheckbox1, detaching);
+    			destroy_component(fieldnumber3, detaching);
     			if (detaching) detach_dev(t9);
-    			destroy_component(fieldabilities, detaching);
+    			destroy_component(fieldcheckbox1, detaching);
     			if (detaching) detach_dev(t10);
+    			destroy_component(fieldabilities, detaching);
+    			if (detaching) detach_dev(t11);
     			destroy_component(formbuttons, detaching);
     		}
     	};
@@ -33180,7 +33330,7 @@ sprite.speed -= 1`;
     	let current;
 
     	function itemtypebuilder_input_binding(value) {
-    		/*itemtypebuilder_input_binding*/ ctx[18](value);
+    		/*itemtypebuilder_input_binding*/ ctx[19](value);
     	}
 
     	let itemtypebuilder_props = {
@@ -33194,8 +33344,8 @@ sprite.speed -= 1`;
     		$$slots: {
     			default: [
     				create_default_slot$7,
-    				({ hasChanges, isAdding }) => ({ 19: hasChanges, 20: isAdding }),
-    				({ hasChanges, isAdding }) => (hasChanges ? 524288 : 0) | (isAdding ? 1048576 : 0)
+    				({ hasChanges, isAdding }) => ({ 20: hasChanges, 21: isAdding }),
+    				({ hasChanges, isAdding }) => (hasChanges ? 1048576 : 0) | (isAdding ? 2097152 : 0)
     			]
     		},
     		$$scope: { ctx }
@@ -33210,7 +33360,7 @@ sprite.speed -= 1`;
     			$$inline: true
     		});
 
-    	/*itemtypebuilder_binding*/ ctx[17](itemtypebuilder);
+    	/*itemtypebuilder_binding*/ ctx[18](itemtypebuilder);
     	binding_callbacks.push(() => bind$1(itemtypebuilder, 'input', itemtypebuilder_input_binding));
 
     	const block = {
@@ -33228,7 +33378,7 @@ sprite.speed -= 1`;
     			const itemtypebuilder_changes = {};
     			if (dirty & /*params*/ 1) itemtypebuilder_changes.id = /*params*/ ctx[0].id;
 
-    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input*/ 3670022) {
+    			if (dirty & /*$$scope, itemTypeBuilder, hasChanges, isAdding, input*/ 7340038) {
     				itemtypebuilder_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33250,7 +33400,7 @@ sprite.speed -= 1`;
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			/*itemtypebuilder_binding*/ ctx[17](null);
+    			/*itemtypebuilder_binding*/ ctx[18](null);
     			destroy_component(itemtypebuilder, detaching);
     		}
     	};
@@ -33280,7 +33430,7 @@ sprite.speed -= 1`;
     	const itemTemplate = {
     		name: '',
     		speed: 5,
-    		graphics: { still: null, moving: null },
+    		graphics: { still: null, moving: null, death: null },
     		abilities: [],
     		gcd: 0,
     		sightRadius: 150,
@@ -33320,6 +33470,13 @@ sprite.speed -= 1`;
     	function fieldartpicker1_value_binding(value) {
     		if ($$self.$$.not_equal(input.graphics.moving, value)) {
     			input.graphics.moving = value;
+    			$$invalidate(1, input);
+    		}
+    	}
+
+    	function fieldartpicker2_value_binding(value) {
+    		if ($$self.$$.not_equal(input.graphics.death, value)) {
+    			input.graphics.death = value;
     			$$invalidate(1, input);
     		}
     	}
@@ -33429,6 +33586,7 @@ sprite.speed -= 1`;
     		fieldnumber0_value_binding,
     		fieldartpicker0_value_binding,
     		fieldartpicker1_value_binding,
+    		fieldartpicker2_value_binding,
     		fieldcheckbox0_checked_binding,
     		fieldnumber1_value_binding,
     		fieldnumber2_value_binding,
@@ -80419,16 +80577,17 @@ sprite.speed -= 1`;
         this.sprites = new Container();
         this.sprites.zIndex = 2;
         this.addChild(this.sprites);
-        this.sprites.still = makeArtSprite(graphics.still);
-        this.sprites.still.anchor.set(0.5);
-        this.sprites.addChild(this.sprites.still);
-        this.sprites.moving = makeArtSprite(graphics.moving);
-        this.sprites.moving.anchor.set(0.5);
+        this.sprites.still = this.createSpriteGraphic(graphics.still);
+        this.sprites.moving = this.createSpriteGraphic(graphics.moving);
         this.sprites.moving.visible = false;
+
+        this.deathGraphic = graphics.death;
+
         this.sprites.addChild(this.sprites.moving);
 
         this.isMoving = false;
         this.showOnlyAttackingSprite = false;
+        this.isDying = false;
 
         this.path = [];
         this.target = null;
@@ -80460,6 +80619,13 @@ sprite.speed -= 1`;
         this.healthBar.y = this.nameTag.y - 10;
 
         this.onTicks = [];
+      }
+
+      createSpriteGraphic(graphic) {
+        const sprite = makeArtSprite(graphic);
+        sprite.anchor.set(0.5);
+        this.sprites.addChild(sprite);
+        return sprite
       }
 
       bringToFront() {
@@ -80609,6 +80775,8 @@ sprite.speed -= 1`;
       }
 
       onTick() {
+        if (this.isDying) return
+
         this.onTicks.forEach(() => callback());
         this.moveTowardTarget();
         this.showCorrectSprites();
@@ -80688,14 +80856,7 @@ sprite.speed -= 1`;
       takeDamage(damage) {
         this.health = Math.max(0, this.health - damage);
         this.drawHealthBar();
-        if (this.health <= 0) {
-          this.playAudioOnDeath();
-          this.destroy();
-        }
-      }
-
-      playAudioOnDeath() {
-        if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64, this.audioOnDeath.start);
+        if (this.health <= 0) this.die();
       }
 
       heal(damage) {
@@ -80717,6 +80878,43 @@ sprite.speed -= 1`;
         this.healthBar.drawRect(0, 0, this.nameTag.width, 10);
         this.healthBar.beginFill(color);
         this.healthBar.drawRect(0, 0, this.nameTag.width * healthPercent, 10);
+      }
+
+      die() {
+        this.isDying = true;
+        this.playAudioOnDeath();
+        this.playDeathAnimation();
+      }
+
+      playAudioOnDeath() {
+        if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64, this.audioOnDeath.start);
+      }
+
+      playDeathAnimation() {
+        if (this.deathGraphic == null) {
+          this.destroy();
+          return
+        }
+
+        // hide other sprites
+        this.sprites.still.visible = false;
+        this.sprites.moving.visible = false;
+        this.nameTag.visible = false;
+        this.healthBar.visible = false;
+
+        // create death sprite
+        this.createSpriteGraphic(this.deathGraphic);
+
+        if (this.sprites.dying instanceof AnimatedSprite) {
+          // animation sprite - destroy after animation is done
+          this.sprites.dying.onComplete = () => {
+            this.sprites.dying.visible = false;
+            this.destroy();
+          };
+        } else {
+          // static sprite - destroy after 500 ms
+          setTimeout(() => this.destroy(), 500);
+        }
       }
 
       destroy() {
@@ -80745,7 +80943,6 @@ sprite.speed -= 1`;
         const spriteReset = () => {
           this.showOnlyAttackingSprite = false;
           this.sprites.removeChild(this.sprites.attacking);
-          console.log('attack sprite reset');
         };
 
         if (this.sprites.attacking instanceof AnimatedSprite) {
@@ -81077,7 +81274,7 @@ sprite.speed -= 1`;
       }
 
       getEnemies() {
-        return this.enemyContainer?.children.filter(e => e.config != null)
+        return this.enemyContainer?.children.filter(e => e.config != null && !e.isDying)
       }
 
       getAllies() {

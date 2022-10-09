@@ -153,7 +153,7 @@ export default class World extends PIXI.Container {
   }
 
   getEnemies() {
-    return this.enemyContainer?.children.filter(e => e.config != null)
+    return this.enemyContainer?.children.filter(e => e.config != null && !e.isDying)
   }
 
   getAllies() {

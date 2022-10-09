@@ -28,16 +28,17 @@ export default class LivingSprite extends PIXI.Container {
     this.sprites = new PIXI.Container()
     this.sprites.zIndex = 2
     this.addChild(this.sprites)
-    this.sprites.still = makeArtSprite(graphics.still)
-    this.sprites.still.anchor.set(0.5)
-    this.sprites.addChild(this.sprites.still)
-    this.sprites.moving = makeArtSprite(graphics.moving)
-    this.sprites.moving.anchor.set(0.5)
+    this.sprites.still = this.createSpriteGraphic(graphics.still)
+    this.sprites.moving = this.createSpriteGraphic(graphics.moving)
     this.sprites.moving.visible = false
+
+    this.deathGraphic = graphics.death
+
     this.sprites.addChild(this.sprites.moving)
 
     this.isMoving = false
     this.showOnlyAttackingSprite = false
+    this.isDying = false
 
     this.path = []
     this.target = null
@@ -69,6 +70,13 @@ export default class LivingSprite extends PIXI.Container {
     this.healthBar.y = this.nameTag.y - 10
 
     this.onTicks = []
+  }
+
+  createSpriteGraphic(graphic) {
+    const sprite = makeArtSprite(graphic)
+    sprite.anchor.set(0.5)
+    this.sprites.addChild(sprite)
+    return sprite
   }
 
   bringToFront() {
@@ -218,6 +226,8 @@ export default class LivingSprite extends PIXI.Container {
   }
 
   onTick() {
+    if (this.isDying) return
+
     this.onTicks.forEach(() => callback())
     this.moveTowardTarget()
     this.showCorrectSprites()
@@ -297,14 +307,7 @@ export default class LivingSprite extends PIXI.Container {
   takeDamage(damage) {
     this.health = Math.max(0, this.health - damage)
     this.drawHealthBar()
-    if (this.health <= 0) {
-      this.playAudioOnDeath()
-      this.destroy()
-    }
-  }
-
-  playAudioOnDeath() {
-    if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64, this.audioOnDeath.start)
+    if (this.health <= 0) this.die()
   }
 
   heal(damage) {
@@ -326,6 +329,43 @@ export default class LivingSprite extends PIXI.Container {
     this.healthBar.drawRect(0, 0, this.nameTag.width, 10)
     this.healthBar.beginFill(color)
     this.healthBar.drawRect(0, 0, this.nameTag.width * healthPercent, 10)
+  }
+
+  die() {
+    this.isDying = true
+    this.playAudioOnDeath()
+    this.playDeathAnimation()
+  }
+
+  playAudioOnDeath() {
+    if (this.audioOnDeath) audioService.play(this.audioOnDeath.data.base64, this.audioOnDeath.start)
+  }
+
+  playDeathAnimation() {
+    if (this.deathGraphic == null) {
+      this.destroy()
+      return
+    }
+
+    // hide other sprites
+    this.sprites.still.visible = false
+    this.sprites.moving.visible = false
+    this.nameTag.visible = false
+    this.healthBar.visible = false
+
+    // create death sprite
+    this.createSpriteGraphic(this.deathGraphic)
+
+    if (this.sprites.dying instanceof PIXI.AnimatedSprite) {
+      // animation sprite - destroy after animation is done
+      this.sprites.dying.onComplete = () => {
+        this.sprites.dying.visible = false
+        this.destroy()
+      }
+    } else {
+      // static sprite - destroy after 500 ms
+      setTimeout(() => this.destroy(), 500)
+    }
   }
 
   destroy() {
@@ -354,7 +394,6 @@ export default class LivingSprite extends PIXI.Container {
     const spriteReset = () => {
       this.showOnlyAttackingSprite = false
       this.sprites.removeChild(this.sprites.attacking)
-      console.log('attack sprite reset')
     }
 
     if (this.sprites.attacking instanceof PIXI.AnimatedSprite) {

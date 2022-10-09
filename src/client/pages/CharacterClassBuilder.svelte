@@ -18,6 +18,7 @@
         <FieldNumber name="speed" bind:value={input.speed} placeholder="Speed (pixels per frame)">Speed (pixels per frame)</FieldNumber>
         <FieldArtPicker bind:value={input.graphics.still}>Still graphics</FieldArtPicker>
         <FieldArtPicker bind:value={input.graphics.moving}>Moving graphics</FieldArtPicker>
+        <FieldArtPicker bind:value={input.graphics.death}>Death graphics</FieldArtPicker>
         <FieldCheckbox name="rotate-toward-target" bind:checked={input.rotateTowardTarget}>
           Rotate toward their target
           <div class="help-text">When moving, should character rotate toward their target?</div>
@@ -56,6 +57,7 @@
     graphics: {
       still: null,
       moving: null,
+      death: null,
     },
     abilities: [],
     gcd: 300,
