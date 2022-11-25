@@ -1,6 +1,8 @@
 import projectItemTypes from '../../server/project-item-types'
 import stripProjectOfItems from '../services/strip-project-of-items'
 
+const baseUrl = 'http://localhost:4999'
+
 function status(response) {
   return new Promise((resolve, reject) => {
     if (response.status >= 200 && response.status < 300) {
@@ -16,6 +18,8 @@ function json(response) {
 }
 
 function _fetch(url, options = {}) {
+  url = baseUrl + url
+
   options.headers = {
     'Content-Type': 'application/json',
     ...options.headers,

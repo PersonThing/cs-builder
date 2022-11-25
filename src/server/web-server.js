@@ -344,3 +344,5 @@ repo.connect().then(() => {
   const port = process.env.PORT || 4999
   http.listen(port, () => console.log(`Server listening on *:${port}`))
 })
+
+export const handler = app
